@@ -1,8 +1,8 @@
 .. meta::
-   :description: Using InstantSend and PrivateSend with Dash
+   :description: Using InstantSend and CoinJoin with Dash
    :keywords: dash, core, mobile, wallet, privatesend, instantsend
 
-.. _dashcore-privatesend-instantsend:
+.. _dashcore-coinjoin-instantsend:
 
 ===========================
 PrivateSend and InstantSend

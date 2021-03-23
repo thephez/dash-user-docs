@@ -61,7 +61,7 @@ Available documentation:
    dashcore/installation.rst
    dashcore/interface.rst
    dashcore/send-receive.rst
-   dashcore/privatesend-instantsend.rst
+   dashcore/coinjoin-instantsend.rst
    dashcore/backup.rst
    dashcore/cmd-rpc.rst
    dashcore/advanced.rst
