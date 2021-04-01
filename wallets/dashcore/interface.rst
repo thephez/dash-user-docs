@@ -343,7 +343,7 @@ Enable advanced PrivateSend interface
   Enabling this option changes the PrivateSend interface on the Overview
   tab of the Dash Core wallet to include more information, such as the
   remaining keys, percentage completion and current operation. See
-  :ref:`here <dashcore-privatesend-instantsend>` for a full explanation
+  :ref:`here <dashcore-coinjoin-instantsend>` for a full explanation
   of how to use PrivateSend.
 
 Show popups for PrivateSend transactions

@@ -59,7 +59,7 @@ different mechanism in the second layer network to speed up the
 transaction time. Choosing **PrivateSend** will send Dash using
 denominations that have already been processed through CoinJoin. You can
 find out more about PrivateSend and InstantSend :ref:`here
-<dashcore-privatesend-instantsend>`.
+<dashcore-coinjoin-instantsend>`.
 
 Let’s try an example. Say you have received an invoice which you now
 want to pay with Dash. The writer of the invoice has included a Dash

@@ -2,7 +2,7 @@
    :description: Using InstantSend and CoinJoin with Dash
    :keywords: dash, core, mobile, wallet, coinjoin, privatesend, instantsend
 
-.. _dashcore-privatesend-instantsend:
+.. _dashcore-coinjoin-instantsend:
 
 ========================
 CoinJoin and InstantSend
