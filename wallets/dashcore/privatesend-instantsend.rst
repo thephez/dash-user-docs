@@ -32,8 +32,8 @@ recommended (and default) number of rounds of CoinJoin is set to
 four, and some inputs may pass through additional rounds to further
 improve privacy.
 
-You can read more about PrivateSend theory and processes :ref:`here
-<privatesend>`.
+You can read more about CoinJoin theory and processes :ref:`here
+<coinjoin>`.
 
 Configuration
 -------------
@@ -157,13 +157,13 @@ the Type column of the **Transactions** tab:
 |                                    | collateral payments. This is done to       |
 |                                    | minimize traceability of collaterals.      |
 +------------------------------------+--------------------------------------------+
-| PrivateSend Create Denominations   | Wallet funds were broken into              |
-| (*CoinJoin*)                       | PrivateSend denominations (Step 1          |
-|                                    | :ref:`here <privatesend>`)                 |
+| CoinJoin Create Denominations      | Wallet funds were broken into              |
+|                                    | CoinJoin denominations (Step 1          |
+|                                    | :ref:`here <coinjoin>`)                 |
 +------------------------------------+--------------------------------------------+
-| PrivateSend Denominate             | A transaction was sent to a masternode     |
-| (*CoinJoin*)                       | in order to participate in a CoinJoin      |
-|                                    | session (Step 3 :ref:`here <privatesend>`) |
+| CoinJoin Mixing                    | A transaction was sent to a masternode     |
+|                                    | in order to participate in a CoinJoin      |
+|                                    | session (Step 3 :ref:`here <coinjoin>`) |
 +------------------------------------+--------------------------------------------+
 | CoinJoin Collateral Payment        | The CoinJoin session collateral was        |
 |                                    | claimed. This fee is charged in ~10%       |

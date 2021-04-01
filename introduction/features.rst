@@ -75,10 +75,10 @@ by 7% each year, together with the block reward. There is also the
 possibility for masternodes to earn money from fees in the future.
 
 
-.. _privatesend:
+.. _coinjoin:
 
-PrivateSend
-===========
+CoinJoin
+========
 
 PrivateSend is an implementation of decentralized, noncustodial
 CoinJoin. PrivateSend gives you consumer grade financial privacy by

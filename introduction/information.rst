@@ -916,7 +916,7 @@ Private Key
   important that these are kept secure and secret.
 
 PrivateSend
-  :ref:`PrivateSend <privatesend>` obscures the source of funds in order
+  :ref:`PrivateSend <coinjoin>` obscures the source of funds in order
   to maintain financial privacy between users. It can be turned on or 
   off at the users' discretion.
 
