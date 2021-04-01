@@ -31,7 +31,7 @@ Dash Core Wallet
 
 Dash Core Wallet is the full official release of Dash, and supports all
 Dash features as they are released, including InstantSend and
-PrivateSend, as well as an RPC console and governance features. Dash
+CoinJoin, as well as an RPC console and governance features. Dash
 Core Wallet (sometimes known as the QT wallet, due to the QT software
 framework used in development) is a professional or heavy wallet which
 downloads the full blockchain (several GB in size) and can operate as
@@ -44,8 +44,8 @@ and Windows.
 
 Features:
 
--  PrivateSend
 -  InstantSend
+-  CoinJoin
 -  Wallet encryption
 -  Coin control and fee control
 -  QR code generation and address book
@@ -82,7 +82,7 @@ computer. Transactions are verified on the Dash blockchain using a
 technique called Secure Payment Verification (SPV), which only requires
 the block headers and not the full block. This means that wallet startup
 is almost instant, while still keeping your funds secure and mobile.
-Dash Electrum also supports advanced InstantSend, PrivateSend and
+Dash Electrum also supports advanced InstantSend, CoinJoin and
 masternode features.
 
 Dash Electrum is a fork of the Electrum wallet for Bitcoin. While this
