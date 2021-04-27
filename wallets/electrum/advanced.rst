@@ -71,6 +71,8 @@ the hardware wallet to an address in this keystore will be created, and
 processing will begin. You can then spend the processed Dash, or send it
 back to your hardware wallet.
 
+.. _electrum-masternodes:
+
 Masternodes
 ===========
 
@@ -104,9 +106,8 @@ button.
 
 .. note::
 
-  If combined with Electrum's `multisig features
-  <https://docs.dash.org/en/stable/wallets/electrum/advanced.html#multisig-wallets>`_
-  the masternode collateral can be stored in a multisig wallet for increased
+  If combined with Electrum's :ref:`multisig features <electrum-multisig>` the
+  masternode collateral can be stored in a multisig wallet for increased
   security flexibility. See `this page
   <https://github.com/akhavr/electrum-dash/blob/master/docs/dip3/dip3_p2sh_howto.md>`_
   for the Dash Electrum documentation demonstrating how to configure a
@@ -359,6 +360,8 @@ successfully. Click **OK** to close the screen.
  :width: 400px
 
  Transaction sent screen showing transaction hash
+
+ .. _electrum-multisig:
 
 Multisig wallets
 ================

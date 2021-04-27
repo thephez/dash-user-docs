@@ -295,8 +295,7 @@ will describe the steps for both hardware wallets and Dash Core.
 .. note::
 
   Details of registering a masternode with Dash Electrum can be found on the
-  `Electrum - Advanced Functions page
-  <https://docs.dash.org/en/stable/wallets/electrum/advanced.html#masternodes>`__.
+  :ref:`Electrum - Advanced Functions page <electrum-masternodes>`.
 
 Option 1: Sending from a hardware wallet
 ----------------------------------------
@@ -921,12 +920,10 @@ Option 3: Registering from Dash Electrum wallet
 -----------------------------------------------
 
 Dash Electrum supports registering and managing masternodes. Details can be
-found on the `Electrum - Advanced Functions page
-<https://docs.dash.org/en/stable/wallets/electrum/advanced.html#masternodes>`__.
-If combined with Electrum's `multisig features
-<https://docs.dash.org/en/stable/wallets/electrum/advanced.html#multisig-wallets>`_
-the masternode collateral can be stored in a multisig wallet for increased
-security flexibility.
+found on the :ref:`Electrum - Advanced Functions page <electrum-masternodes>`.
+If combined with Electrum's :ref:`multisig features <electrum-multisig>` the
+masternode collateral can be stored in a multisig wallet for increased security
+flexibility.
 
 .. warning::
   Always exercise caution when using multisig accounts and verify that each
