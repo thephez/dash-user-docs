@@ -926,7 +926,7 @@ found on the `Electrum - Advanced Functions page
 If combined with Electrum's `multisig features
 <https://docs.dash.org/en/stable/wallets/electrum/advanced.html#multisig-wallets>`_
 the masternode collateral can be stored in a multisig wallet for increased
-security profile flexibility.
+security flexibility.
 
 .. warning::
   Always exercise caution when using multisig accounts and verify that each

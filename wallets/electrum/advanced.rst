@@ -96,12 +96,24 @@ The tab displays the following data about each masternode you have set up:
 
    DIP3 tab with masternode information
 
-
 Masternode setup
 ----------------
 
 To setup a masternode, navigate to the DIP3 tab and click the **Add/Import**
 button.
+
+.. note::
+
+  If combined with Electrum's `multisig features
+  <https://docs.dash.org/en/stable/wallets/electrum/advanced.html#multisig-wallets>`_
+  the masternode collateral can be stored in a multisig wallet for increased
+  security flexibility. See `this page
+  <https://github.com/akhavr/electrum-dash/blob/master/docs/dip3/dip3_p2sh_howto.md>`_
+  for the Dash Electrum documentation demonstrating how to configure a
+  masternode using a multisig collateral. 
+  
+  **Always exercise caution when using multisig accounts and verify that each
+  mnemonic is backed up appropriately.**
 
 .. figure:: img/mn-dip3-add-or-import.png
    :width: 400px
