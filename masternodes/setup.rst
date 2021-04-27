@@ -281,16 +281,22 @@ Dash, these steps are considered beyond the scope of this guide.
 Send the collateral
 ===================
 
-A Dash address with a single unspent transaction output (UTXO) of
-exactly 1000 DASH is required to operate a masternode. Once it has been
-sent, various keys regarding the transaction must be extracted for later
-entry in a configuration file and registration transaction as proof to
-write the configuration to the blockchain so the masternode can be
-included in the deterministic list. A masternode can be registered from
-a hardware wallet or the official Dash Core wallet, although a hardware
-wallet is highly recommended to enhance security and protect yourself
-against hacking. This guide will describe the steps for both hardware
-wallets and Dash Core.
+A Dash address with a single unspent transaction output (UTXO) of exactly 1000
+DASH is required to operate a masternode. Once it has been sent, various keys
+regarding the transaction must be extracted for later entry in a configuration
+file and registration transaction as proof to write the configuration to the
+blockchain so the masternode can be included in the deterministic list.
+
+A masternode can be registered from a hardware wallet, the official Dash Core
+wallet, or a Dash Electrum wallet, although a hardware wallet is highly
+recommended to enhance security and protect yourself against hacking. This guide
+will describe the steps for both hardware wallets and Dash Core.
+
+.. note::
+
+  Details of registering a masternode with Dash Electrum can be found on the
+  `Electrum - Advanced Functions page
+  <https://docs.dash.org/en/stable/wallets/electrum/advanced.html#masternodes>`__.
 
 Option 1: Sending from a hardware wallet
 ----------------------------------------
@@ -908,3 +914,24 @@ using the **Get status** function in DMT.
 
 At this point you can safely log out of your server by typing ``exit``.
 Congratulations! Your masternode is now running.
+
+.. _dashelectrum-protx:
+
+Option 3: Registering from Dash Electrum wallet
+-----------------------------------------------
+
+Dash Electrum supports registering and managing masternodes. Details can be
+found on the `Electrum - Advanced Functions page
+<https://docs.dash.org/en/stable/wallets/electrum/advanced.html#masternodes>`__.
+If combined with Electrum's `multisig features
+<https://docs.dash.org/en/stable/wallets/electrum/advanced.html#multisig-wallets>`_
+the masternode collateral can be stored in a multisig wallet for increased
+security profile flexibility.
+
+.. warning::
+  Always exercise caution when using multisig accounts and verify that each
+  mnemonic is backed up appropriately. See `this page
+  <https://github.com/akhavr/electrum-dash/blob/master/docs/dip3/dip3_p2sh_howto.md>`_
+  for the Dash Electrum documentation demonstrating how to configure a
+  masternode using a multisig collateral.
+  
