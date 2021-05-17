@@ -44,7 +44,7 @@ Configuration
    .. image:: img/options-privatesend.png
       :width: 300px
 
-2. Next to **Mixing rounds**, enter a value between 1-16.
+2. Next to **Mixing rounds**, enter a value between 2-16.
    Each round of CoinJoin performs one CoinJoin transaction, known as
    a denomination. Higher numbers of rounds increase your overall level
    of privacy while decreasing the chance of detection via node
