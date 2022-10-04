@@ -8,6 +8,8 @@
 ElectrumX Server
 ================
 
+Some stuff...
+
 ElectrumX is a lightweight Electrum server written in Python that supports a
 variety of cryptocurrencies including Dash. It provides the backend services
 necessary to support the :ref:`Dash Electrum wallet <dash-electrum-wallet>`.
