@@ -88,6 +88,7 @@ import sphinx_rtd_theme
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx_rtd_theme',
+    'sphinx_search.extension',
 ]
 
 html_theme = 'sphinx_rtd_theme'
