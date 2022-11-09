@@ -88,11 +88,14 @@ import sphinx_rtd_theme
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx_rtd_theme',
+    'sphinx_immaterial',
     'sphinx_copybutton',
 ]
 
-html_theme = 'sphinx_rtd_theme'
+# html_theme = 'sphinx_rtd_theme'
 #html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+html_theme = 'sphinx_immaterial'
 
 # Theme options
 html_theme_options = {
