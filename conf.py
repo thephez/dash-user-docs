@@ -58,7 +58,7 @@ release = u'latest'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+# language = None
 
 locale_dirs = ['locale/']
 gettext_compact = False 
@@ -80,35 +80,66 @@ todo_include_todos = False
 
 
 
-import sphinx_rtd_theme
+# import sphinx_rtd_theme
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx_rtd_theme',
-    'sphinx_immaterial',
+    # 'sphinx_rtd_theme',
+    # 'sphinx_immaterial',
     'sphinx_copybutton',
 ]
 
 # html_theme = 'sphinx_rtd_theme'
 #html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
-html_theme = 'sphinx_immaterial'
+# html_theme = 'sphinx_immaterial'
+# html_theme = 'sphinx_book_theme'
+html_theme = "pydata_sphinx_theme"
 
-# Theme options
+# # Theme options
+# html_theme_options = {
+#     # 'typekit_id': 'hiw1hhg',
+#     # 'analytics_id': '',
+#     # 'sticky_navigation': True  # Set to False to disable the sticky nav while scrolling.
+#     'logo_only': True,  # if we have a html_logo below, this shows /only/ the logo with no title text
+#     'collapse_navigation': False,  # Collapse navigation (False makes it tree-like)
+#     'display_version': False,  # Display the docs version
+#     # 'navigation_depth': 4,  # Depth of the headers shown in the navigation bar
+# }
+
+# pydata-sphinx-theme options
 html_theme_options = {
-    # 'typekit_id': 'hiw1hhg',
-    # 'analytics_id': '',
-    # 'sticky_navigation': True  # Set to False to disable the sticky nav while scrolling.
-    'logo_only': True,  # if we have a html_logo below, this shows /only/ the logo with no title text
-    'collapse_navigation': False,  # Collapse navigation (False makes it tree-like)
-    'display_version': False,  # Display the docs version
-    # 'navigation_depth': 4,  # Depth of the headers shown in the navigation bar
+    "show_nav_level": 3,
+    "navbar_start": ["navbar-logo"],
+    "navbar_center": ["navbar-nav"],
+    "navbar_end": ["navbar-icon-links"],
+    "show_toc_level": 3,
+    "external_links": [
+        {"name": "Dash.org", "url": "https://www.dash.org"},
+    ],
+    "use_edit_page_button": True,
+    "header_links_before_dropdown": 4
 }
 
-html_logo = 'img/dash_logo_white.png'
+html_context = {
+    # "github_url": "https://github.com", # or your GitHub Enterprise site
+    "github_user": "dashpay",
+    "github_repo": "docs",
+    "github_version": "18.0.0",
+    "doc_path": "",
+}
+
+# html_sidebars = {
+#      "First Steps": [
+#         "sidebar-nav-bs",
+#      ]
+# }
+
+# html_logo = 'img/dash_logo_white.png'
+html_logo = 'img/dash_logo.png'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
