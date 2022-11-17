@@ -54,12 +54,16 @@ interest.
    introduction/safety
    introduction/information
 
+.. _user-docs:   
+
 .. toctree::
    :maxdepth: 2
    :caption: Users
 
    wallets/index
    earning-spending
+
+.. _network-docs:
 
 .. toctree::
    :maxdepth: 2
@@ -72,36 +76,3 @@ interest.
    network/electrumx-server
    marketing.rst
    legal.rst
-
-.. .. toctree::
-..    :maxdepth: 3
-..    :caption: First Steps
-
-..    introduction/about
-..    introduction/features
-..    introduction/how-to-buy
-..    introduction/safety
-..    introduction/information
-
-.. .. _user-docs:
-
-.. .. toctree::
-..    :maxdepth: 3
-..    :caption: Users
-
-..    wallets/index
-..    earning-spending
-
-.. .. _network-docs:
-
-.. .. toctree::
-..    :maxdepth: 3
-..    :caption: Network
-
-..    governance/index.rst
-..    masternodes/index
-..    mining/index
-..    developers/index
-..    network/electrumx-server
-..    marketing.rst
-..    legal.rst
