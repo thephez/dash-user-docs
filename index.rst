@@ -28,7 +28,13 @@ learning about :ref:`safety <safety>` or joining one of the many
 :ref:`Dash community sites <information>`.
 
 .. toctree::
+   :hidden:
    :maxdepth: 3
    
    user-docs/index
+
+.. toctree::
+   :hidden:
+   :maxdepth: 3
+
    platform-docs/index
