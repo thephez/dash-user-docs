@@ -45,16 +45,37 @@ interest.
     </div>
     
 
-Contents
-========
+First Steps
+===========
 
 .. toctree::
-   introduction/index
+   :caption: First Steps
+   :maxdepth: 1
+
+   introduction/about
+   introduction/features
+   introduction/how-to-buy
+   introduction/safety
+   introduction/information
+
+Users
+=====
 
 .. toctree::
-   index-users
+   :caption: Users
+   :maxdepth: 2
+
+   wallets/index
+   earning-spending
+
+Network
+=======
 
 .. toctree::
+   :hidden:
+   :caption: Network
+   :maxdepth: 2
+
    index-network
 
 .. .. toctree::
