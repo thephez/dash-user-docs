@@ -43,14 +43,10 @@ interest.
     <div style="position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 1em; overflow: hidden; max-width: 70%; height: auto;">
         <iframe src="//www.youtube.com/embed/EDC1ioQ46m4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
     </div>
-    
-
-First Steps
-===========
 
 .. toctree::
+   :maxdepth: 2
    :caption: First Steps
-   :maxdepth: 1
 
    introduction/about
    introduction/features
@@ -58,25 +54,24 @@ First Steps
    introduction/safety
    introduction/information
 
-Users
-=====
-
 .. toctree::
-   :caption: Users
    :maxdepth: 2
+   :caption: Users
 
    wallets/index
    earning-spending
 
-Network
-=======
-
 .. toctree::
-   :hidden:
-   :caption: Network
    :maxdepth: 2
+   :caption: Network
 
-   index-network
+   governance/index.rst
+   masternodes/index
+   mining/index
+   developers/index
+   network/electrumx-server
+   marketing.rst
+   legal.rst
 
 .. .. toctree::
 ..    :maxdepth: 3
