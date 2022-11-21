@@ -1,3 +1,6 @@
+What is Dash Platform?
+======================
+
 Dash Platform is a technology stack for building decentralized
 applications on the Dash network. The two main architectural components,
 `Drive <explanation-drive>`__ and `DAPI <explanation-dapi>`__, turn the

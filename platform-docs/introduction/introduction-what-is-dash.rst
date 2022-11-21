@@ -1,3 +1,6 @@
+What is Dash?
+=============
+
 [block:image] { “images”: [ { “image”: [
 “https://files.readme.io/92cc368-how-it-works-2.svg”,
 “how-it-works-2.svg”, 132, 150, “#e9f8ff” ] } ] } [/block]

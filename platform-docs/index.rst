@@ -22,7 +22,7 @@ on the payments industry. Dash offers a form of money that is portable,
    :caption: Tutorials
 
    tutorials/tutorials-introduction
-   tutorials/tutorials-connect-to-testnet
+   tutorials/tutorial-connecting-to-testnet
 
 .. toctree::
    :caption: Explanations

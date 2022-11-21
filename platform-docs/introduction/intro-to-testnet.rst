@@ -1,5 +1,5 @@
-Overview
-========
+Intro to Testnet
+================
 
 Testnet is the Dash testing network used for experimentation and
 evaluation of Dash Core and Dash Platform features.

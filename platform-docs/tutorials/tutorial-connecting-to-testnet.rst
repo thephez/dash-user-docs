@@ -1,8 +1,11 @@
+Connect to a Network
+====================
+
 The purpose of this tutorial is to walk through the steps necessary to
 access the network.
 
 Overview
-========
+--------
 
 Platform services are provided via a combination of HTTP and gRPC
 connections to DAPI, and some connections to an Insight API. Although
@@ -17,16 +20,16 @@ SDK <https://github.com/dashevo/platform/tree/master/packages/js-dash-sdk>`__.
    The Dash SDK connects to testnet by default.
 
 Prerequisites
-=============
+---------------
 
 -  An installation of `NodeJS v12 or
    higher <https://nodejs.org/en/download/>`__
 
 Connect via Dash SDK
-====================
+--------------------
 
 1. Install the Dash SDK
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The JavaScript SDK package is available from npmjs.com and can be
 installed by running ``npm install dash`` from the command line:
@@ -50,7 +53,7 @@ steps. For details on all SDK options and methods, please refer to the
 `SDK documentation <https://dashevo.github.io/platform/SDK/>`__.
 
 Connect to a Devnet
-===================
+-------------------
 
 The SDK also supports connecting to development networks (devnets).
 Since devnets can be created by anyone, the client library will be
@@ -58,7 +61,7 @@ unaware of them unless connection information is provided using one of
 the options described below.
 
 Connect via Seed
-----------------
+~~~~~~~~~~~~~~~~
 
 Using a seed node is the preferred method in most cases. The client uses
 the provided seed node to a retrieve a list of available masternodes on

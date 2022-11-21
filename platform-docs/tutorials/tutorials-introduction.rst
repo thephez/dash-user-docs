@@ -1,3 +1,6 @@
+Introduction
+============
+
 The tutorials in this section walk through the steps necessary to begin
 building on Dash Platform using the Dash JavaScript SDK. As all
 communication happens via the masternode hosted decentralized API
