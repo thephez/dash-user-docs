@@ -84,10 +84,22 @@ todo_include_todos = False
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'multiproject',
     'sphinx.ext.autodoc',
     'sphinx_copybutton',
     'sphinx_design',
 ]
+
+# Define the projects that will share this configuration file.
+multiproject_projects = {
+    "user": {
+        "path": "./",
+    },
+    "core": {
+        # Set a custom path.
+        "path": "docs/core",
+    },
+}
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
