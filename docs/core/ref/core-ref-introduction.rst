@@ -1,3 +1,6 @@
+Reference
+=========
+
 The Developer Reference aims to provide technical details and API
 information to help you start building Dash-based applications, but it
 is not a specification. To make the best use of this documentation, you
@@ -15,7 +18,7 @@ wrapped: “``[...]``” indicates extra data was removed, and lines ending
 in a single backslash “\\” are continued below.
 
 Not A Specification
-===================
+-------------------
 
 This Developer Documentation describes how Dash works to help educate
 new Dash developers, but it is not a specification—and it never will be.
@@ -37,3 +40,8 @@ environments, it cannot ever be fully documented here or anywhere else.
 In addition, we also warn you that this documentation has not been
 extensively reviewed by Dash experts and so likely contains numerous
 errors.
+
+.. toctree::
+   :maxdepth: 2
+   
+   core-ref-block-chain

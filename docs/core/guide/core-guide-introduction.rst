@@ -1,3 +1,6 @@
+Guide
+=====
+
 The Developer Guide aims to provide the information you need to
 understand Dash and start building Dash-based applications, but it is
 not a specification. To make the best use of this documentation, you may
@@ -14,3 +17,9 @@ In the following documentation, some strings have been shortened or
 wrapped: “[…]” indicates extra data was removed, and lines ending in a
 single backslash “\\” are continued below. If you hover over a glossary
 term, a brief definition of the term will be displayed in a tooltip.
+
+.. toctree::
+   :maxdepth: 3
+
+   core-guide-dash-features
+   core-guide-dash-features-instantsend
