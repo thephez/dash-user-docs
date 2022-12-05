@@ -1,0 +1,5522 @@
+GetBestBlockHash
+================
+
+The ```getbestblockhash``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getbestblockhash>`__
+returns the header hash of the most recent block on the best block
+chain.
+
+*Parameters: none*
+
+*Result—hash of the tip from the best block chain*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string (hex)    | R               | The hash of the |
+|                 |                 | equired(exactly | block header    |
+|                 |                 | 1)              | from the most   |
+|                 |                 |                 | recent block on |
+|                 |                 |                 | the best block  |
+|                 |                 |                 | chain, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+.. code:: bash
+
+   dash-cli -testnet getbestblockhash
+
+Result:
+
+.. code:: text
+
+   00000bafbc94add76cb75e2ec92894837288a481e5c005f6563d91623bf8bc2c
+
+*See also*
+
+-  `GetBlock </docs/core-api-ref-remote-procedure-calls-blockchain#getblock>`__:
+   gets a block with a particular header hash from the local block
+   database either as a JSON object or as a serialized block.
+-  `GetBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhash>`__:
+   returns the header hash of a block at the given height in the local
+   best block chain.
+
+GetBestChainLock
+================
+
+The ```getbestchainlock``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getbestchainlock>`__
+returns the information about the best ChainLock.
+
+Throws an error if there is no known ChainLock yet.
+
+*Parameters: none*
+
+*Result*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object/null     | R               | An object       |
+|                 |                 | equired(exactly | containing the  |
+|                 |                 | 1)              | requested       |
+|                 |                 |                 | block, or JSON  |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The hash of the |
+| \ ``blockhash`` |                 | equired(exactly | block encoded   |
+|                 |                 | 1)              | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``height``   | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | this block on   |
+|                 |                 | 1)              | its block chain |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | **Added in Dash |
+| \ ``signature`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | BLS signature   |
+|                 |                 |                 | of the          |
+|                 |                 |                 | ChainLock       |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | boolean         | R               | True if the     |
+| ``known_block`` |                 | equired(exactly | block is known  |
+|                 |                 | 1)              | by this node    |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.17.0*
+
+.. code:: bash
+
+   dash-cli -testnet getbestchainlock
+
+Result:
+
+.. code:: json
+
+   {
+     "blockhash": "00000c0e7a866e67444813858b976886d839aff28f56dc178c92ed1390c97f4e",
+     "height": 405044,
+     "signature": "960ead08adcc3fcf5e576f9e6ad290251325db900d19d961f5ece398b5389390b8a44e8986199c201ac348a89bc8534a0f7153c61c54157a241c521131025e5054b7c4298065069e478abdaea4d6c861848061e32c0d903ddeb5ee6036e8ddcf",
+     "known_block": true
+   }
+
+*See also: none*
+
+GetBlock
+========
+
+The ```getblock``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblock>`__ gets a
+block with a particular header hash from the local block database either
+as a JSON object or as a serialized block.
+
+*Parameter #1—block hash*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Block Hash      | string (hex)    | R               | The hash of the |
+|                 |                 | equired(exactly | header of the   |
+|                 |                 | 1)              | block to get,   |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—whether to get JSON or hex output*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Verbosity       | number (int)    | Optional(0 or   | Set to one of   |
+|                 |                 | 1)              | the following   |
+|                 |                 |                 | verbosity       |
+|                 |                 |                 | levels:• ``0``  |
+|                 |                 |                 | - Get the block |
+|                 |                 |                 | in serialized   |
+|                 |                 |                 | block format;•  |
+|                 |                 |                 | ``1`` - Get the |
+|                 |                 |                 | decoded block   |
+|                 |                 |                 | as a JSON       |
+|                 |                 |                 | object          |
+|                 |                 |                 | (default)•      |
+|                 |                 |                 | ``2`` - Get the |
+|                 |                 |                 | decoded block   |
+|                 |                 |                 | as a JSON       |
+|                 |                 |                 | object with     |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | details         |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if verbosity was ``0``)—a serialized block*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string          | R               | The requested   |
+|                 | (hex)/null      | equired(exactly | block as a      |
+|                 |                 | 1)              | serialized      |
+|                 |                 |                 | block, encoded  |
+|                 |                 |                 | as hex, or JSON |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if verbosity was ``1`` or omitted)—a JSON block with
+transaction hashes*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object/null     | R               | An object       |
+|                 |                 | equired(exactly | containing the  |
+|                 |                 | 1)              | requested       |
+|                 |                 |                 | block, or JSON  |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``hash``     | string (hex)    | R               | The hash of     |
+|                 |                 | equired(exactly | this block’s    |
+|                 |                 | 1)              | block header    |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. This is  |
+|                 |                 |                 | the same as the |
+|                 |                 |                 | hash provided   |
+|                 |                 |                 | in parameter #1 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | number (int)    | R               | The number of   |
+| confirmations`` |                 | equired(exactly | confirmations   |
+|                 |                 | 1)              | the             |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | this block      |
+|                 |                 |                 | have, starting  |
+|                 |                 |                 | at 1 when this  |
+|                 |                 |                 | block is at the |
+|                 |                 |                 | tip of the best |
+|                 |                 |                 | block chain.    |
+|                 |                 |                 | This score will |
+|                 |                 |                 | be -1 if the    |
+|                 |                 |                 | the block is    |
+|                 |                 |                 | not part of the |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``size``     | number (int)    | R               | The size of     |
+|                 |                 | equired(exactly | this block in   |
+|                 |                 | 1)              | serialized      |
+|                 |                 |                 | block format,   |
+|                 |                 |                 | counted in      |
+|                 |                 |                 | bytes           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``height``   | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | this block on   |
+|                 |                 | 1)              | its block chain |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``version``  | number (int)    | R               | This block’s    |
+|                 |                 | equired(exactly | version number. |
+|                 |                 | 1)              | See `block      |
+|                 |                 |                 | version         |
+|                 |                 |                 | nu              |
+|                 |                 |                 | mbers <core-ref |
+|                 |                 |                 | -block-chain-bl |
+|                 |                 |                 | ock-headers#blo |
+|                 |                 |                 | ck-versions>`__ |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | string (hex)    | R               | *Added in       |
+|  ``versionHex`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.13.0*\ The    |
+|                 |                 |                 | block version   |
+|                 |                 |                 | formatted in    |
+|                 |                 |                 | hexadecimal     |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | string (hex)    | R               | The merkle root |
+|  ``merkleroot`` |                 | equired(exactly | for this block, |
+|                 |                 | 1)              | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``tx``       | array           | R               | An array        |
+|                 |                 | equired(exactly | containing the  |
+|                 |                 | 1)              | TXIDs of all    |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | this block. The |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | appear in the   |
+|                 |                 |                 | array in the    |
+|                 |                 |                 | same order they |
+|                 |                 |                 | appear in the   |
+|                 |                 |                 | serialized      |
+|                 |                 |                 | block           |
++-----------------+-----------------+-----------------+-----------------+
+| → →TXID         | string (hex)    | Required(1 or   | The TXID of a   |
+|                 |                 | more)           | transaction in  |
+|                 |                 |                 | this block,     |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``cbTx``     | object          | R               | Coinbase        |
+|                 |                 | equired(exactly | special         |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | details         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The version of  |
+| →\ ``version``  |                 | equired(exactly | the Coinbase    |
+|                 |                 | 1)              | special         |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | (CbTx)          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``height`` | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | this block on   |
+|                 |                 | 1)              | its block chain |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The merkle root |
+| →\ ``mer        |                 | equired(exactly | for the         |
+| kleRootMNList`` |                 | 1)              | masternode list |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The merkle root |
+| →\ ``merk       |                 | equired(exactly | for the quorum  |
+| leRootQuorums`` |                 | 1)              | list            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``time``     | number (int)    | R               | The value of    |
+|                 |                 | equired(exactly | the *time*      |
+|                 |                 | 1)              | field in the    |
+|                 |                 |                 | block header,   |
+|                 |                 |                 | indicating      |
+|                 |                 |                 | approximately   |
+|                 |                 |                 | when the block  |
+|                 |                 |                 | was created     |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (int)    | R               | *Added in       |
+|  ``mediantime`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.12.0*\ The    |
+|                 |                 |                 | median block    |
+|                 |                 |                 | time in Unix    |
+|                 |                 |                 | epoch time      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``nonce``    | number (int)    | R               | The nonce which |
+|                 |                 | equired(exactly | was successful  |
+|                 |                 | 1)              | at turning this |
+|                 |                 |                 | particular      |
+|                 |                 |                 | block into one  |
+|                 |                 |                 | that could be   |
+|                 |                 |                 | added to the    |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``bits``     | string (hex)    | R               | The value of    |
+|                 |                 | equired(exactly | the *nBits*     |
+|                 |                 | 1)              | field in the    |
+|                 |                 |                 | block header,   |
+|                 |                 |                 | indicating the  |
+|                 |                 |                 | target          |
+|                 |                 |                 | threshold this  |
+|                 |                 |                 | block’s header  |
+|                 |                 |                 | had to pass     |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (real)   | R               | The estimated   |
+|  ``difficulty`` |                 | equired(exactly | amount of work  |
+|                 |                 | 1)              | done to find    |
+|                 |                 |                 | this block      |
+|                 |                 |                 | relative to the |
+|                 |                 |                 | estimated       |
+|                 |                 |                 | amount of work  |
+|                 |                 |                 | done to find    |
+|                 |                 |                 | block 0         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The estimated   |
+| \ ``chainwork`` |                 | equired(exactly | number of block |
+|                 |                 | 1)              | header hashes   |
+|                 |                 |                 | miners had to   |
+|                 |                 |                 | check from the  |
+|                 |                 |                 | genesis block   |
+|                 |                 |                 | to this block,  |
+|                 |                 |                 | encoded as      |
+|                 |                 |                 | big-endian hex  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``nTx``      | number (int)    | R               | *Added in Dash  |
+|                 |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0*\ The    |
+|                 |                 |                 | number of       |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the block       |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``prev       | string (hex)    | Optional(0 or   | The hash of the |
+| iousblockhash`` |                 | 1)              | header of the   |
+|                 |                 |                 | previous block, |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. Not      |
+|                 |                 |                 | returned for    |
+|                 |                 |                 | genesis block   |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | string (hex)    | Optional(0 or   | The hash of the |
+| nextblockhash`` |                 | 1)              | next block on   |
+|                 |                 |                 | the best block  |
+|                 |                 |                 | chain, if       |
+|                 |                 |                 | known, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| →               | bool            | R               | *Added in Dash  |
+| \ ``chainlock`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.14            |
+|                 |                 |                 | .0*\ \ **Always |
+|                 |                 |                 | ``false``       |
+|                 |                 |                 | if**\ `lite     |
+|                 |                 |                 | mode            |
+|                 |                 |                 | <core-guide-das |
+|                 |                 |                 | h-features#lite |
+|                 |                 |                 | -mode>`__\ **is |
+|                 |                 |                 | enabled**\ If   |
+|                 |                 |                 | set to          |
+|                 |                 |                 | ``true``, this  |
+|                 |                 |                 | transaction is  |
+|                 |                 |                 | in a block that |
+|                 |                 |                 | is locked (not  |
+|                 |                 |                 | susceptible to  |
+|                 |                 |                 | a chain re-org) |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if verbosity was ``2``—a JSON block with full transaction
+details*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object/null     | R               | An object       |
+|                 |                 | equired(exactly | containing the  |
+|                 |                 | 1)              | requested       |
+|                 |                 |                 | block, or JSON  |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``hash``     | string (hex)    | R               | The hash of     |
+|                 |                 | equired(exactly | this block’s    |
+|                 |                 | 1)              | block header    |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. This is  |
+|                 |                 |                 | the same as the |
+|                 |                 |                 | hash provided   |
+|                 |                 |                 | in parameter #1 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | number (int)    | R               | The number of   |
+| confirmations`` |                 | equired(exactly | confirmations   |
+|                 |                 | 1)              | the             |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | this block      |
+|                 |                 |                 | have, starting  |
+|                 |                 |                 | at 1 when this  |
+|                 |                 |                 | block is at the |
+|                 |                 |                 | tip of the best |
+|                 |                 |                 | block chain.    |
+|                 |                 |                 | This score will |
+|                 |                 |                 | be -1 if the    |
+|                 |                 |                 | the block is    |
+|                 |                 |                 | not part of the |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``size``     | number (int)    | R               | The size of     |
+|                 |                 | equired(exactly | this block in   |
+|                 |                 | 1)              | serialized      |
+|                 |                 |                 | block format,   |
+|                 |                 |                 | counted in      |
+|                 |                 |                 | bytes           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``height``   | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | this block on   |
+|                 |                 | 1)              | its block chain |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``version``  | number (int)    | R               | This block’s    |
+|                 |                 | equired(exactly | version number. |
+|                 |                 | 1)              | See `block      |
+|                 |                 |                 | version         |
+|                 |                 |                 | nu              |
+|                 |                 |                 | mbers <core-ref |
+|                 |                 |                 | -block-chain-bl |
+|                 |                 |                 | ock-headers#blo |
+|                 |                 |                 | ck-versions>`__ |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | string (hex)    | R               | *Added in       |
+|  ``versionHex`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.13.0*\ The    |
+|                 |                 |                 | block version   |
+|                 |                 |                 | formatted in    |
+|                 |                 |                 | hexadecimal     |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | string (hex)    | R               | The merkle root |
+|  ``merkleroot`` |                 | equired(exactly | for this block, |
+|                 |                 | 1)              | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``tx``       | array           | R               | An array        |
+|                 |                 | equired(exactly | containing the  |
+|                 |                 | 1)              | TXIDs of all    |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | this block. The |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | appear in the   |
+|                 |                 |                 | array in the    |
+|                 |                 |                 | same order they |
+|                 |                 |                 | appear in the   |
+|                 |                 |                 | serialized      |
+|                 |                 |                 | block           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``txid``   | string (hex)    | R               | The             |
+|                 |                 | equired(exactly | transaction’s   |
+|                 |                 | 1)              | TXID encoded as |
+|                 |                 |                 | hex in RPC byte |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``size``   | number (int)    | R               | *Added in       |
+|                 |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.12.0*\ The    |
+|                 |                 |                 | serialized      |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | size            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The transaction |
+| →\ ``version``  |                 | equired(exactly | format version  |
+|                 |                 | 1)              | number          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``type``   | number (int)    | R               | *Added in Dash  |
+|                 |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.13.0.0*\ The  |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | format type     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The             |
+| →\ ``locktime`` |                 | equired(exactly | transaction’s   |
+|                 |                 | 1)              | locktime:       |
+|                 |                 |                 | either a Unix   |
+|                 |                 |                 | epoch date or   |
+|                 |                 |                 | block height;   |
+|                 |                 |                 | see the         |
+|                 |                 |                 | `locktime       |
+|                 |                 |                 | parsing         |
+|                 |                 |                 | rules <core     |
+|                 |                 |                 | -guide-transact |
+|                 |                 |                 | ions-locktime-a |
+|                 |                 |                 | nd-sequence-num |
+|                 |                 |                 | ber#locktime_pa |
+|                 |                 |                 | rsing_rules>`__ |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``vin``    | array           | R               | An array of     |
+|                 |                 | equired(exactly | objects with    |
+|                 |                 | 1)              | each object     |
+|                 |                 |                 | being an input  |
+|                 |                 |                 | vector (vin)    |
+|                 |                 |                 | for this        |
+|                 |                 |                 | transaction.    |
+|                 |                 |                 | Input objects   |
+|                 |                 |                 | will have the   |
+|                 |                 |                 | same order      |
+|                 |                 |                 | within the      |
+|                 |                 |                 | array as they   |
+|                 |                 |                 | have in the     |
+|                 |                 |                 | transaction, so |
+|                 |                 |                 | the first input |
+|                 |                 |                 | listed will be  |
+|                 |                 |                 | input 0         |
++-----------------+-----------------+-----------------+-----------------+
+| → → →Input      | object          | Required(1 or   | An object       |
+|                 |                 | more)           | describing one  |
+|                 |                 |                 | of this         |
+|                 |                 |                 | transaction’s   |
+|                 |                 |                 | inputs. May be  |
+|                 |                 |                 | a regular input |
+|                 |                 |                 | or a coinbase   |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | string          | Optional(0 or   | The TXID of the |
+| →\ ``txid``     |                 | 1)              | outpoint being  |
+|                 |                 |                 | spent, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order. Not |
+|                 |                 |                 | present if this |
+|                 |                 |                 | is a coinbase   |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | number (int)    | Optional(0 or   | The output      |
+| →\ ``vout``     |                 | 1)              | index number    |
+|                 |                 |                 | (vout) of the   |
+|                 |                 |                 | outpoint being  |
+|                 |                 |                 | spent. The      |
+|                 |                 |                 | first output in |
+|                 |                 |                 | a transaction   |
+|                 |                 |                 | has an index of |
+|                 |                 |                 | ``0``. Not      |
+|                 |                 |                 | present if this |
+|                 |                 |                 | is a coinbase   |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | object          | Optional(0 or   | An object       |
+| →               |                 | 1)              | describing the  |
+| \ ``scriptSig`` |                 |                 | signature       |
+|                 |                 |                 | script of this  |
+|                 |                 |                 | input. Not      |
+|                 |                 |                 | present if this |
+|                 |                 |                 | is a coinbase   |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | string          | R               | The signature   |
+| →\ ``asm``      |                 | equired(exactly | script in       |
+|                 |                 | 1)              | decoded form    |
+|                 |                 |                 | with            |
+|                 |                 |                 | n               |
+|                 |                 |                 | on-data-pushing |
+|                 |                 |                 | opcodes listed  |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | string (hex)    | R               | The signature   |
+| →\ ``hex``      |                 | equired(exactly | script encoded  |
+|                 |                 | 1)              | as hex          |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | string (hex)    | Optional(0 or   | The coinbase    |
+| →\ ``coinbase`` |                 | 1)              | (similar to the |
+|                 |                 |                 | hex field of a  |
+|                 |                 |                 | scriptSig)      |
+|                 |                 |                 | encoded as hex. |
+|                 |                 |                 | Only present if |
+|                 |                 |                 | this is a       |
+|                 |                 |                 | coinbase        |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | number (Dash)   | O               | The number of   |
+| →\ ``value``    |                 | ptional(exactly | Dash paid to    |
+|                 |                 | 1)              | this output.    |
+|                 |                 |                 | May be          |
+|                 |                 |                 | ``0``.Only      |
+|                 |                 |                 | present if      |
+|                 |                 |                 | ``spentindex``  |
+|                 |                 |                 | enabled         |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | number (duffs)  | O               | The number of   |
+| →\ ``valueSat`` |                 | ptional(exactly | duffs paid to   |
+|                 |                 | 1)              | this output.    |
+|                 |                 |                 | May be          |
+|                 |                 |                 | ``0``.Only      |
+|                 |                 |                 | present if      |
+|                 |                 |                 | ``spentindex``  |
+|                 |                 |                 | enabled         |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | string : array  | Optional(0 or   | The P2PKH or    |
+| →               |                 | 1)              | P2SH addresses  |
+| \ ``addresses`` |                 |                 | used in this    |
+|                 |                 |                 | transaction, or |
+|                 |                 |                 | the computed    |
+|                 |                 |                 | P2PKH address   |
+|                 |                 |                 | of any pubkeys  |
+|                 |                 |                 | in this         |
+|                 |                 |                 | transaction.    |
+|                 |                 |                 | This array will |
+|                 |                 |                 | not be returned |
+|                 |                 |                 | for             |
+|                 |                 |                 | ``nulldata`` or |
+|                 |                 |                 | ``nonstandard`` |
+|                 |                 |                 | script          |
+|                 |                 |                 | types.Only      |
+|                 |                 |                 | present if      |
+|                 |                 |                 | ``spentindex``  |
+|                 |                 |                 | enabled         |
++-----------------+-----------------+-----------------+-----------------+
+| → → → → →       | string          | Required(1 or   | A P2PKH or P2SH |
+| →Address        |                 | more)           | address         |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | number (int)    | R               | The input       |
+| →\ ``sequence`` |                 | equired(exactly | sequence number |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``vout``   | array           | R               | An array of     |
+|                 |                 | equired(exactly | objects each    |
+|                 |                 | 1)              | describing an   |
+|                 |                 |                 | output vector   |
+|                 |                 |                 | (vout) for this |
+|                 |                 |                 | transaction.    |
+|                 |                 |                 | Output objects  |
+|                 |                 |                 | will have the   |
+|                 |                 |                 | same order      |
+|                 |                 |                 | within the      |
+|                 |                 |                 | array as they   |
+|                 |                 |                 | have in the     |
+|                 |                 |                 | transaction, so |
+|                 |                 |                 | the first       |
+|                 |                 |                 | output listed   |
+|                 |                 |                 | will be output  |
+|                 |                 |                 | 0               |
++-----------------+-----------------+-----------------+-----------------+
+| → → →Output     | object          | Required(1 or   | An object       |
+|                 |                 | more)           | describing one  |
+|                 |                 |                 | of this         |
+|                 |                 |                 | transaction’s   |
+|                 |                 |                 | outputs         |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | number (Dash)   | R               | The number of   |
+| →\ ``value``    |                 | equired(exactly | Dash paid to    |
+|                 |                 | 1)              | this output.    |
+|                 |                 |                 | May be ``0``    |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | number (duffs)  | R               | The number of   |
+| →\ ``valueSat`` |                 | equired(exactly | duffs paid to   |
+|                 |                 | 1)              | this output.    |
+|                 |                 |                 | May be ``0``    |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →\ ``n``  | number (int)    | R               | The output      |
+|                 |                 | equired(exactly | index number of |
+|                 |                 | 1)              | this output     |
+|                 |                 |                 | within this     |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | object          | R               | An object       |
+| →\ `            |                 | equired(exactly | describing the  |
+| `scriptPubKey`` |                 | 1)              | pubkey script   |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | string          | R               | The pubkey      |
+| →\ ``asm``      |                 | equired(exactly | script in       |
+|                 |                 | 1)              | decoded form    |
+|                 |                 |                 | with            |
+|                 |                 |                 | n               |
+|                 |                 |                 | on-data-pushing |
+|                 |                 |                 | opcodes listed  |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | string (hex)    | R               | The pubkey      |
+| →\ ``hex``      |                 | equired(exactly | script encoded  |
+|                 |                 | 1)              | as hex          |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | number (int)    | Optional(0 or   | The number of   |
+| →\ ``reqSigs``  |                 | 1)              | signatures      |
+|                 |                 |                 | required; this  |
+|                 |                 |                 | is always ``1`` |
+|                 |                 |                 | for P2PK,       |
+|                 |                 |                 | P2PKH, and P2SH |
+|                 |                 |                 | (including P2SH |
+|                 |                 |                 | multisig        |
+|                 |                 |                 | because the     |
+|                 |                 |                 | redeem script   |
+|                 |                 |                 | is not          |
+|                 |                 |                 | available in    |
+|                 |                 |                 | the pubkey      |
+|                 |                 |                 | script). It may |
+|                 |                 |                 | be greater than |
+|                 |                 |                 | 1 for bare      |
+|                 |                 |                 | multisig. This  |
+|                 |                 |                 | value will not  |
+|                 |                 |                 | be returned for |
+|                 |                 |                 | ``nulldata`` or |
+|                 |                 |                 | ``nonstandard`` |
+|                 |                 |                 | script types    |
+|                 |                 |                 | (see the        |
+|                 |                 |                 | ``type`` key    |
+|                 |                 |                 | below)          |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | string          | Optional(0 or   | The type of     |
+| →\ ``type``     |                 | 1)              | script. This    |
+|                 |                 |                 | will be one of  |
+|                 |                 |                 | the following:• |
+|                 |                 |                 | ``pubkey`` for  |
+|                 |                 |                 | a P2PK script•  |
+|                 |                 |                 | ``pubkeyhash``  |
+|                 |                 |                 | for a P2PKH     |
+|                 |                 |                 | script•         |
+|                 |                 |                 | ``scripthash``  |
+|                 |                 |                 | for a P2SH      |
+|                 |                 |                 | script•         |
+|                 |                 |                 | ``multisig``    |
+|                 |                 |                 | for a bare      |
+|                 |                 |                 | multisig        |
+|                 |                 |                 | script•         |
+|                 |                 |                 | ``nulldata``    |
+|                 |                 |                 | for nulldata    |
+|                 |                 |                 | scripts•        |
+|                 |                 |                 | ``nonstandard`` |
+|                 |                 |                 | for unknown     |
+|                 |                 |                 | scripts         |
++-----------------+-----------------+-----------------+-----------------+
+| → → → →         | string : array  | Optional(0 or   | The P2PKH or    |
+| →               |                 | 1)              | P2SH addresses  |
+| \ ``addresses`` |                 |                 | used in this    |
+|                 |                 |                 | transaction, or |
+|                 |                 |                 | the computed    |
+|                 |                 |                 | P2PKH address   |
+|                 |                 |                 | of any pubkeys  |
+|                 |                 |                 | in this         |
+|                 |                 |                 | transaction.    |
+|                 |                 |                 | This array will |
+|                 |                 |                 | not be returned |
+|                 |                 |                 | for             |
+|                 |                 |                 | ``nulldata`` or |
+|                 |                 |                 | ``nonstandard`` |
+|                 |                 |                 | script types    |
++-----------------+-----------------+-----------------+-----------------+
+| → → → → →       | string          | Required(1 or   | A P2PKH or P2SH |
+| →Address        |                 | more)           | address         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | Optional(0 or   | *Added in Dash  |
+| →\ ``ext        |                 | 1)              | Core            |
+| raPayloadSize`` |                 |                 | 0.13.0.0*\ Size |
+|                 |                 |                 | of the DIP2     |
+|                 |                 |                 | extra payload.  |
+|                 |                 |                 | Only present if |
+|                 |                 |                 | it’s a DIP2     |
+|                 |                 |                 | special         |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | Optional(0 or   | *Added in Dash  |
+| →\ `            |                 | 1)              | Core            |
+| `extraPayload`` |                 |                 | 0.13.0.0*\ Hex  |
+|                 |                 |                 | encoded DIP2    |
+|                 |                 |                 | extra payload   |
+|                 |                 |                 | data. Only      |
+|                 |                 |                 | present if it’s |
+|                 |                 |                 | a DIP2 special  |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | bool            | R               | **Always        |
+| →\              |                 | equired(exactly | ``false``       |
+| ``instantlock`` |                 | 1)              | if**\ `lite     |
+|                 |                 |                 | mode            |
+|                 |                 |                 | <core-guide-das |
+|                 |                 |                 | h-features#lite |
+|                 |                 |                 | -mode>`__\ **is |
+|                 |                 |                 | enabled**\ If   |
+|                 |                 |                 | set to          |
+|                 |                 |                 | ``true``, this  |
+|                 |                 |                 | transaction is  |
+|                 |                 |                 | locked (by      |
+|                 |                 |                 | InstantSend or  |
+|                 |                 |                 | a ChainLock)    |
++-----------------+-----------------+-----------------+-----------------+
+| →               | bool            | R               | **Always        |
+| →\ ``instant    |                 | equired(exactly | ``false``       |
+| lock_internal`` |                 | 1)              | if**\ `lite     |
+|                 |                 |                 | mode            |
+|                 |                 |                 | <core-guide-das |
+|                 |                 |                 | h-features#lite |
+|                 |                 |                 | -mode>`__\ **is |
+|                 |                 |                 | enabled**\ If   |
+|                 |                 |                 | set to          |
+|                 |                 |                 | ``true``, this  |
+|                 |                 |                 | transaction has |
+|                 |                 |                 | an InstantSend  |
+|                 |                 |                 | lock            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``cbTx``     | object          | R               | Coinbase        |
+|                 |                 | equired(exactly | special         |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | details         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The version of  |
+| →\ ``version``  |                 | equired(exactly | the Coinbase    |
+|                 |                 | 1)              | special         |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | (CbTx)          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``height`` | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | this block on   |
+|                 |                 | 1)              | its block chain |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The merkle root |
+| →\ ``mer        |                 | equired(exactly | for the         |
+| kleRootMNList`` |                 | 1)              | masternode list |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The merkle root |
+| →\ ``merk       |                 | equired(exactly | for the quorum  |
+| leRootQuorums`` |                 | 1)              | list            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``time``     | number (int)    | R               | The value of    |
+|                 |                 | equired(exactly | the *time*      |
+|                 |                 | 1)              | field in the    |
+|                 |                 |                 | block header,   |
+|                 |                 |                 | indicating      |
+|                 |                 |                 | approximately   |
+|                 |                 |                 | when the block  |
+|                 |                 |                 | was created     |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (int)    | R               | *Added in       |
+|  ``mediantime`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.12.0*\ The    |
+|                 |                 |                 | median block    |
+|                 |                 |                 | time in Unix    |
+|                 |                 |                 | epoch time      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``nonce``    | number (int)    | R               | The nonce which |
+|                 |                 | equired(exactly | was successful  |
+|                 |                 | 1)              | at turning this |
+|                 |                 |                 | particular      |
+|                 |                 |                 | block into one  |
+|                 |                 |                 | that could be   |
+|                 |                 |                 | added to the    |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``bits``     | string (hex)    | R               | The value of    |
+|                 |                 | equired(exactly | the *nBits*     |
+|                 |                 | 1)              | field in the    |
+|                 |                 |                 | block header,   |
+|                 |                 |                 | indicating the  |
+|                 |                 |                 | target          |
+|                 |                 |                 | threshold this  |
+|                 |                 |                 | block’s header  |
+|                 |                 |                 | had to pass     |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (real)   | R               | The estimated   |
+|  ``difficulty`` |                 | equired(exactly | amount of work  |
+|                 |                 | 1)              | done to find    |
+|                 |                 |                 | this block      |
+|                 |                 |                 | relative to the |
+|                 |                 |                 | estimated       |
+|                 |                 |                 | amount of work  |
+|                 |                 |                 | done to find    |
+|                 |                 |                 | block 0         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The estimated   |
+| \ ``chainwork`` |                 | equired(exactly | number of block |
+|                 |                 | 1)              | header hashes   |
+|                 |                 |                 | miners had to   |
+|                 |                 |                 | check from the  |
+|                 |                 |                 | genesis block   |
+|                 |                 |                 | to this block,  |
+|                 |                 |                 | encoded as      |
+|                 |                 |                 | big-endian hex  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``nTx``      | number (int)    | R               | **Added in Dash |
+|                 |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0**\ The   |
+|                 |                 |                 | number of       |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the block       |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``prev       | string (hex)    | Optional(0 or   | The hash of the |
+| iousblockhash`` |                 | 1)              | header of the   |
+|                 |                 |                 | previous block, |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. Not      |
+|                 |                 |                 | returned for    |
+|                 |                 |                 | genesis block   |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | string (hex)    | Optional(0 or   | The hash of the |
+| nextblockhash`` |                 | 1)              | next block on   |
+|                 |                 |                 | the best block  |
+|                 |                 |                 | chain, if       |
+|                 |                 |                 | known, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| →               | bool            | R               | *Added in Dash  |
+| \ ``chainlock`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.14            |
+|                 |                 |                 | .0*\ \ **Always |
+|                 |                 |                 | ``false``       |
+|                 |                 |                 | if**\ `lite     |
+|                 |                 |                 | mode            |
+|                 |                 |                 | <core-guide-das |
+|                 |                 |                 | h-features#lite |
+|                 |                 |                 | -mode>`__\ **is |
+|                 |                 |                 | enabled**\ If   |
+|                 |                 |                 | set to          |
+|                 |                 |                 | ``true``, this  |
+|                 |                 |                 | transaction is  |
+|                 |                 |                 | in a block that |
+|                 |                 |                 | is locked (not  |
+|                 |                 |                 | susceptible to  |
+|                 |                 |                 | a chain re-org) |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.16.0*
+
+Get a block in raw hex:
+
+.. code:: bash
+
+   dash-cli -testnet getblock \
+               00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b \
+               0
+
+Result (wrapped):
+
+.. code:: text
+
+   00000020272e374a06c87a0ce0e6ee1a0754c98b9ec2493e7c0ac7ba41a07300\
+   00000000568b3c4156090db4d8db5447762e95dd1d4c921c96801a9086720ded\
+   85266325916cc05caa94001c5caf359501030005000100000000000000000000\
+   00000000000000000000000000000000000000000000ffffffff2703ae50011a\
+   4d696e656420627920416e74506f6f6c2021000b01201da9196f000000000700\
+   0000ffffffff02809e4730000000001976a914cbd7bfcc50351180132b2c0698\
+   cb90ad74c473c788ac809e4730000000001976a91488a060bc2dfe05780ae4dc\
+   b6c98b12436c35a93988ac00000000460200ae50010078e5c08b39960887bf95\
+   185c381bdb719e60b6925fa12af78a8824fade927387c757acb6bac63da84f92\
+   45e20cfd5d830382ac634d434725ca6349ab5db920a3
+
+Get the same block in JSON:
+
+.. code:: bash
+
+   dash-cli -testnet getblock \
+               00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b
+
+Result:
+
+.. code:: json
+
+   {
+     "hash": "00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b",
+     "confirmations": 212898,
+     "size": 310,
+     "height": 86190,
+     "version": 536870912,
+     "versionHex": "20000000",
+     "merkleroot": "25632685ed0d7286901a80961c924c1ddd952e764754dbd8b40d0956413c8b56",
+     "tx": [
+       "25632685ed0d7286901a80961c924c1ddd952e764754dbd8b40d0956413c8b56"
+     ],
+     "cbTx": {
+       "version": 2,
+       "height": 86190,
+       "merkleRootMNList": "877392defa24888af72aa15f92b6609e71db1b385c1895bf870896398bc0e578",
+       "merkleRootQuorums": "a320b95dab4963ca2547434d63ac8203835dfd0ce245924fa83dc6bab6ac57c7"
+     },
+     "time": 1556114577,
+     "mediantime": 1556113720,
+     "nonce": 2503323484,
+     "bits": "1c0094aa",
+     "difficulty": 440.8261075201009,
+     "chainwork": "0000000000000000000000000000000000000000000000000045ab6f9403a8e7",
+     "nTx": 1,
+     "previousblockhash": "000000000073a041bac70a7c3e49c29e8bc954071aeee6e00c7ac8064a372e27",
+     "nextblockhash": "00000000001c6c962639a1aad4cd069f315560a824d489418dc1f26b50a58aed",
+     "chainlock": true
+   }
+
+Get the same block in JSON with transaction details:
+
+.. code:: bash
+
+   dash-cli -testnet getblock \
+               00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b 2
+
+Result:
+
+.. code:: json
+
+   {
+     "hash": "00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b",
+     "confirmations": 212899,
+     "size": 310,
+     "height": 86190,
+     "version": 536870912,
+     "versionHex": "20000000",
+     "merkleroot": "25632685ed0d7286901a80961c924c1ddd952e764754dbd8b40d0956413c8b56",
+     "tx": [
+       {
+         "txid": "25632685ed0d7286901a80961c924c1ddd952e764754dbd8b40d0956413c8b56",
+         "version": 3,
+         "type": 5,
+         "size": 229,
+         "locktime": 0,
+         "vin": [
+           {
+             "coinbase": "03ae50011a4d696e656420627920416e74506f6f6c2021000b01201da9196f0000000007000000",
+             "sequence": 4294967295
+           }
+         ],
+         "vout": [
+           {
+             "value": 8.10000000,
+             "valueSat": 810000000,
+             "n": 0,
+             "scriptPubKey": {
+               "asm": "OP_DUP OP_HASH160 cbd7bfcc50351180132b2c0698cb90ad74c473c7 OP_EQUALVERIFY OP_CHECKSIG",
+               "hex": "76a914cbd7bfcc50351180132b2c0698cb90ad74c473c788ac",
+               "reqSigs": 1,
+               "type": "pubkeyhash",
+               "addresses": [
+                 "yeuGUfPMrbEqAS2Pw1wonYgEPbM4LAA9LK"
+               ]
+             }
+           },
+           {
+             "value": 8.10000000,
+             "valueSat": 810000000,
+             "n": 1,
+             "scriptPubKey": {
+               "asm": "OP_DUP OP_HASH160 88a060bc2dfe05780ae4dcb6c98b12436c35a939 OP_EQUALVERIFY OP_CHECKSIG",
+               "hex": "76a91488a060bc2dfe05780ae4dcb6c98b12436c35a93988ac",
+               "reqSigs": 1,
+               "type": "pubkeyhash",
+               "addresses": [
+                 "yYmrsYP3XYMZr1cGtha3QzmuNB1C7CfyhV"
+               ]
+             }
+           }
+         ],
+         "extraPayloadSize": 70,
+         "extraPayload": "0200ae50010078e5c08b39960887bf95185c381bdb719e60b6925fa12af78a8824fade927387c757acb6bac63da84f9245e20cfd5d830382ac634d434725ca6349ab5db920a3",
+         "cbTx": {
+           "version": 2,
+           "height": 86190,
+           "merkleRootMNList": "877392defa24888af72aa15f92b6609e71db1b385c1895bf870896398bc0e578",
+           "merkleRootQuorums": "a320b95dab4963ca2547434d63ac8203835dfd0ce245924fa83dc6bab6ac57c7"
+         },
+         "hex": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff2703ae50011a4d696e656420627920416e74506f6f6c2021000b01201da9196f0000000007000000ffffffff02809e4730000000001976a914cbd7bfcc50351180132b2c0698cb90ad74c473c788ac809e4730000000001976a91488a060bc2dfe05780ae4dcb6c98b12436c35a93988ac00000000460200ae50010078e5c08b39960887bf95185c381bdb719e60b6925fa12af78a8824fade927387c757acb6bac63da84f9245e20cfd5d830382ac634d434725ca6349ab5db920a3",
+         "instantlock": true,
+         "instantlock_internal": false
+       }
+     ],
+     "cbTx": {
+       "version": 2,
+       "height": 86190,
+       "merkleRootMNList": "877392defa24888af72aa15f92b6609e71db1b385c1895bf870896398bc0e578",
+       "merkleRootQuorums": "a320b95dab4963ca2547434d63ac8203835dfd0ce245924fa83dc6bab6ac57c7"
+     },
+     "time": 1556114577,
+     "mediantime": 1556113720,
+     "nonce": 2503323484,
+     "bits": "1c0094aa",
+     "difficulty": 440.8261075201009,
+     "chainwork": "0000000000000000000000000000000000000000000000000045ab6f9403a8e7",
+     "nTx": 1,
+     "previousblockhash": "000000000073a041bac70a7c3e49c29e8bc954071aeee6e00c7ac8064a372e27",
+     "nextblockhash": "00000000001c6c962639a1aad4cd069f315560a824d489418dc1f26b50a58aed",
+     "chainlock": true
+   }
+
+*See also*
+
+-  `GetBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhash>`__:
+   returns the header hash of a block at the given height in the local
+   best block chain.
+-  `GetBestBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getbestblockhash>`__:
+   returns the header hash of the most recent block on the best block
+   chain.
+
+GetBlockChainInfo
+=================
+
+The ```getblockchaininfo``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockchaininfo>`__
+provides information about the current state of the block chain.
+
+*Parameters: none*
+
+*Result—A JSON object providing information about the block chain*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | Information     |
+|                 |                 | equired(exactly | about the       |
+|                 |                 | 1)              | current state   |
+|                 |                 |                 | of the local    |
+|                 |                 |                 | block chain     |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``chain``    | string          | R               | The name of the |
+|                 |                 | equired(exactly | block chain.    |
+|                 |                 | 1)              | Either ``main`` |
+|                 |                 |                 | for mainnet,    |
+|                 |                 |                 | ``test`` for    |
+|                 |                 |                 | testnet,        |
+|                 |                 |                 | ``regtest`` for |
+|                 |                 |                 | regtest, or     |
+|                 |                 |                 | ``              |
+|                 |                 |                 | devnet-<name>`` |
+|                 |                 |                 | for devnets     |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``blocks``   | number (int)    | R               | The number of   |
+|                 |                 | equired(exactly | validated       |
+|                 |                 | 1)              | blocks in the   |
+|                 |                 |                 | local best      |
+|                 |                 |                 | block chain.    |
+|                 |                 |                 | For a new node  |
+|                 |                 |                 | with just the   |
+|                 |                 |                 | hardcoded       |
+|                 |                 |                 | genesis block,  |
+|                 |                 |                 | this will be 0  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``headers``  | number (int)    | R               | The number of   |
+|                 |                 | equired(exactly | validated       |
+|                 |                 | 1)              | headers in the  |
+|                 |                 |                 | local best      |
+|                 |                 |                 | headers chain.  |
+|                 |                 |                 | For a new node  |
+|                 |                 |                 | with just the   |
+|                 |                 |                 | hardcoded       |
+|                 |                 |                 | genesis block,  |
+|                 |                 |                 | this will be    |
+|                 |                 |                 | zero. This      |
+|                 |                 |                 | number may be   |
+|                 |                 |                 | higher than the |
+|                 |                 |                 | number of       |
+|                 |                 |                 | *blocks*        |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | string (hex)    | R               | The hash of the |
+| bestblockhash`` |                 | equired(exactly | header of the   |
+|                 |                 | 1)              | highest         |
+|                 |                 |                 | validated block |
+|                 |                 |                 | in the best     |
+|                 |                 |                 | block chain,    |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. This is  |
+|                 |                 |                 | identical to    |
+|                 |                 |                 | the string      |
+|                 |                 |                 | returned by the |
+|                 |                 |                 | ```get          |
+|                 |                 |                 | bestblockhash`` |
+|                 |                 |                 | RPC <core-ap    |
+|                 |                 |                 | i-ref-remote-pr |
+|                 |                 |                 | ocedure-calls-b |
+|                 |                 |                 | lockchain#getbe |
+|                 |                 |                 | stblockhash>`__ |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (real)   | R               | The difficulty  |
+|  ``difficulty`` |                 | equired(exactly | of the          |
+|                 |                 | 1)              | highest-height  |
+|                 |                 |                 | block in the    |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (int)    | R               | *Added in       |
+|  ``mediantime`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.12.0*\ The    |
+|                 |                 |                 | median time of  |
+|                 |                 |                 | the 11 blocks   |
+|                 |                 |                 | before the most |
+|                 |                 |                 | recent block on |
+|                 |                 |                 | the blockchain. |
+|                 |                 |                 | Used for        |
+|                 |                 |                 | validating      |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | locktime under  |
+|                 |                 |                 | BIP113          |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``verific    | number (real)   | R               | Estimate of     |
+| ationprogress`` |                 | equired(exactly | what percentage |
+|                 |                 | 1)              | of the block    |
+|                 |                 |                 | chain           |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | have been       |
+|                 |                 |                 | verified so     |
+|                 |                 |                 | far, starting   |
+|                 |                 |                 | at 0.0 and      |
+|                 |                 |                 | increasing to   |
+|                 |                 |                 | 1.0 for fully   |
+|                 |                 |                 | verified. May   |
+|                 |                 |                 | slightly exceed |
+|                 |                 |                 | 1.0 when fully  |
+|                 |                 |                 | synced to       |
+|                 |                 |                 | account for     |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the memory pool |
+|                 |                 |                 | which have been |
+|                 |                 |                 | verified before |
+|                 |                 |                 | being included  |
+|                 |                 |                 | in a block      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``initial    | boolean         | R               | *Added in Dash  |
+| blockdownload`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0*\ An     |
+|                 |                 |                 | estimate of     |
+|                 |                 |                 | whether this    |
+|                 |                 |                 | node is in      |
+|                 |                 |                 | `Initial Block  |
+|                 |                 |                 | Download <core  |
+|                 |                 |                 | -guide-p2p-netw |
+|                 |                 |                 | ork-initial-blo |
+|                 |                 |                 | ck-download>`__ |
+|                 |                 |                 | mode (*debug    |
+|                 |                 |                 | information*)   |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The estimated   |
+| \ ``chainwork`` |                 | equired(exactly | number of block |
+|                 |                 | 1)              | header hashes   |
+|                 |                 |                 | checked from    |
+|                 |                 |                 | the genesis     |
+|                 |                 |                 | block to this   |
+|                 |                 |                 | block, encoded  |
+|                 |                 |                 | as big-endian   |
+|                 |                 |                 | hex             |
++-----------------+-----------------+-----------------+-----------------+
+| →\ `            | number (int)    | R               | *Added in Dash  |
+| `size_on_disk`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0*\ The    |
+|                 |                 |                 | estimated size  |
+|                 |                 |                 | of the block    |
+|                 |                 |                 | and undo files  |
+|                 |                 |                 | on disk         |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``pruned``   | bool            | R               | *Added in       |
+|                 |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.1             |
+|                 |                 |                 | 1.0*\ Indicates |
+|                 |                 |                 | if the blocks   |
+|                 |                 |                 | are subject to  |
+|                 |                 |                 | pruning         |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (int)    | Optional(0 or   | *Added in       |
+| ``pruneheight`` |                 | 1)              | Bitcoin Core    |
+|                 |                 |                 | 0.11.0*\ The    |
+|                 |                 |                 | lowest-height   |
+|                 |                 |                 | complete block  |
+|                 |                 |                 | stored if       |
+|                 |                 |                 | pruning is      |
+|                 |                 |                 | activated       |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``auto       | bool            | R               | *Added in Dash  |
+| matic_pruning`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0               |
+|                 |                 |                 | .16.0*\ Whether |
+|                 |                 |                 | automatic       |
+|                 |                 |                 | pruning is      |
+|                 |                 |                 | enabled (only   |
+|                 |                 |                 | present if      |
+|                 |                 |                 | pruning is      |
+|                 |                 |                 | enabled)        |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``prun       | number (int)    | Optional(0 or   | *Added in Dash  |
+| e_target_size`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.16.0*\ The    |
+|                 |                 |                 | target size     |
+|                 |                 |                 | used by pruning |
+|                 |                 |                 | (only present   |
+|                 |                 |                 | if automatic    |
+|                 |                 |                 | pruning is      |
+|                 |                 |                 | enabled)        |
++-----------------+-----------------+-----------------+-----------------+
+| →               | array           | R               | *Added in       |
+| \ ``softforks`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.12.0*\ An     |
+|                 |                 |                 | array of        |
+|                 |                 |                 | objects each    |
+|                 |                 |                 | describing a    |
+|                 |                 |                 | current or      |
+|                 |                 |                 | previous soft   |
+|                 |                 |                 | fork            |
++-----------------+-----------------+-----------------+-----------------+
+| → →Softfork     | object          | Required(0 or   | A specific      |
+|                 |                 | more)           | softfork        |
++-----------------+-----------------+-----------------+-----------------+
+| → → →\ ``id``   | string          | R               | The name of the |
+|                 |                 | equired(exactly | softfork        |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric(int)    | R               | The block       |
+| →\ ``version``  |                 | equired(exactly | version used    |
+|                 |                 | 1)              | for the         |
+|                 |                 |                 | softfork        |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | string : object | Optional(0 or   | The progress    |
+| →\ ``enforce``  |                 | 1)              | toward          |
+|                 |                 |                 | enforcing the   |
+|                 |                 |                 | softfork rules  |
+|                 |                 |                 | for new-version |
+|                 |                 |                 | blocks          |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | bool            | R               | Indicates if    |
+| →\ ``status``   |                 | equired(exactly | the threshold   |
+|                 |                 | 1)              | was reached     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | Number of       |
+| →\ ``found``    |                 | 1)              | blocks that     |
+|                 |                 |                 | support the     |
+|                 |                 |                 | softfork        |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | Number of       |
+| →\ ``required`` |                 | 1)              | blocks that are |
+|                 |                 |                 | required to     |
+|                 |                 |                 | reach the       |
+|                 |                 |                 | threshold       |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | The maximum     |
+| →\ ``window``   |                 | 1)              | size of         |
+|                 |                 |                 | examined window |
+|                 |                 |                 | of recent       |
+|                 |                 |                 | blocks          |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | object          | Optional(0 or   | The progress    |
+| →\ ``reject``   |                 | 1)              | toward          |
+|                 |                 |                 | enforcing the   |
+|                 |                 |                 | softfork rules  |
+|                 |                 |                 | for new-version |
+|                 |                 |                 | blocks          |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | bool            | Optional(0 or   | Indicates if    |
+| →\ ``status``   |                 | 1)              | the threshold   |
+|                 |                 |                 | was reached     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | Number of       |
+| →\ ``found``    |                 | 1)              | blocks that     |
+|                 |                 |                 | support the     |
+|                 |                 |                 | softfork        |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | Number of       |
+| →\ ``required`` |                 | 1)              | blocks that are |
+|                 |                 |                 | required to     |
+|                 |                 |                 | reach the       |
+|                 |                 |                 | threshold       |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | The maximum     |
+| →\ ``window``   |                 | 1)              | size of         |
+|                 |                 |                 | examined window |
+|                 |                 |                 | of recent       |
+|                 |                 |                 | blocks          |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``b          | object          | R               | *Added in       |
+| ip9_softforks`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.12.1*\ The    |
+|                 |                 |                 | status of BIP9  |
+|                 |                 |                 | softforks in    |
+|                 |                 |                 | progress        |
++-----------------+-----------------+-----------------+-----------------+
+| → →Name         | string : object | Required(0 or   | A specific BIP9 |
+|                 |                 | more)           | softfork        |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | string          | R               | Set to one of   |
+| →\ ``status``   |                 | equired(exactly | the following   |
+|                 |                 | 1)              | reasons:•       |
+|                 |                 |                 | ``defined`` if  |
+|                 |                 |                 | voting hasn’t   |
+|                 |                 |                 | started yet•    |
+|                 |                 |                 | ``started`` if  |
+|                 |                 |                 | the voting has  |
+|                 |                 |                 | started •       |
+|                 |                 |                 | ``locked_in``   |
+|                 |                 |                 | if the voting   |
+|                 |                 |                 | was successful  |
+|                 |                 |                 | but the         |
+|                 |                 |                 | softfork hasn’t |
+|                 |                 |                 | been activated  |
+|                 |                 |                 | yet• ``active`` |
+|                 |                 |                 | if the softfork |
+|                 |                 |                 | was activated•  |
+|                 |                 |                 | ``failed`` if   |
+|                 |                 |                 | the softfork    |
+|                 |                 |                 | has not         |
+|                 |                 |                 | receieved       |
+|                 |                 |                 | enough votes    |
++-----------------+-----------------+-----------------+-----------------+
+| → → →\ ``bit``  | numeric(int)    | Optional(0 or   | The bit (0-28)  |
+|                 |                 | 1)              | in the block    |
+|                 |                 |                 | version field   |
+|                 |                 |                 | used to signal  |
+|                 |                 |                 | this softfork.  |
+|                 |                 |                 | Field is only   |
+|                 |                 |                 | shown when      |
+|                 |                 |                 | status is       |
+|                 |                 |                 | ``started``     |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric(int)    | R               | The Unix epoch  |
+| →               |                 | equired(exactly | time when the   |
+| \ ``startTime`` |                 | 1)              | softfork voting |
+|                 |                 |                 | begins          |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric(int)    | R               | The Unix epoch  |
+| →\ ``timeout``  |                 | equired(exactly | time at which   |
+|                 |                 | 1)              | the deployment  |
+|                 |                 |                 | is considered   |
+|                 |                 |                 | failed if not   |
+|                 |                 |                 | yet locked in   |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric(int)    | R               | *Added in       |
+| →\ ``since``    |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.14.0*\ The    |
+|                 |                 |                 | height of the   |
+|                 |                 |                 | first block to  |
+|                 |                 |                 | which the       |
+|                 |                 |                 | status applies  |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | string : object | R               | *Added in Dash  |
+| →\              |                 | equired(exactly | Core            |
+|  ``statistics`` |                 | 1)              | 0               |
+|                 |                 |                 | .15.0*\ Numeric |
+|                 |                 |                 | statistics      |
+|                 |                 |                 | about BIP9      |
+|                 |                 |                 | signaling for a |
+|                 |                 |                 | softfork (only  |
+|                 |                 |                 | for             |
+|                 |                 |                 | :raw-la         |
+|                 |                 |                 | tex:`\started`" |
+|                 |                 |                 | status)"        |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | *Added in Dash  |
+| →\ ``period``   |                 | 1)              | Core            |
+|                 |                 |                 | 0.15.0*\ The    |
+|                 |                 |                 | length in       |
+|                 |                 |                 | blocks of the   |
+|                 |                 |                 | BIP9 signaling  |
+|                 |                 |                 | period. Field   |
+|                 |                 |                 | is only shown   |
+|                 |                 |                 | when status is  |
+|                 |                 |                 | ``started``     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | *Added in Dash  |
+| →               |                 | 1)              | Core            |
+| \ ``threshold`` |                 |                 | 0.15.0*\ The    |
+|                 |                 |                 | number of       |
+|                 |                 |                 | blocks with the |
+|                 |                 |                 | version bit set |
+|                 |                 |                 | required to     |
+|                 |                 |                 | activate the    |
+|                 |                 |                 | feature. Field  |
+|                 |                 |                 | is only shown   |
+|                 |                 |                 | when status is  |
+|                 |                 |                 | ``started``     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | *Added in Dash  |
+| →\ ``elapsed``  |                 | 1)              | Core            |
+|                 |                 |                 | 0.15.0*\ The    |
+|                 |                 |                 | number of       |
+|                 |                 |                 | blocks elapsed  |
+|                 |                 |                 | since the       |
+|                 |                 |                 | beginning of    |
+|                 |                 |                 | the current     |
+|                 |                 |                 | period. Field   |
+|                 |                 |                 | is only shown   |
+|                 |                 |                 | when status is  |
+|                 |                 |                 | ``started``     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →           | numeric(int)    | Optional(0 or   | *Added in Dash  |
+| →\ ``count``    |                 | 1)              | Core            |
+|                 |                 |                 | 0.15.0*\ The    |
+|                 |                 |                 | number of       |
+|                 |                 |                 | blocks with the |
+|                 |                 |                 | version bit set |
+|                 |                 |                 | in the current  |
+|                 |                 |                 | period. Field   |
+|                 |                 |                 | is only shown   |
+|                 |                 |                 | when status is  |
+|                 |                 |                 | ``started``     |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | bool            | Optional(0 or   | *Added in       |
+| →\ ``possible`` |                 | 1)              | Bitcoin Core    |
+|                 |                 |                 | 0               |
+|                 |                 |                 | .11.0*\ Returns |
+|                 |                 |                 | false if there  |
+|                 |                 |                 | are not enough  |
+|                 |                 |                 | blocks left in  |
+|                 |                 |                 | this period to  |
+|                 |                 |                 | pass activation |
+|                 |                 |                 | threshold.      |
+|                 |                 |                 | Field is only   |
+|                 |                 |                 | shown when      |
+|                 |                 |                 | status is       |
+|                 |                 |                 | ``started``     |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``warnings`` | bool            | Optional(0 or   | *Added in Dash  |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0               |
+|                 |                 |                 | .16.0*\ Returns |
+|                 |                 |                 | any network and |
+|                 |                 |                 | blockchain      |
+|                 |                 |                 | warnings        |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.16.0*
+
+.. code:: bash
+
+   dash-cli -testnet getblockchaininfo
+
+Result:
+
+.. code:: json
+
+   {
+     "chain": "test",
+     "blocks": 292973,
+     "headers": 292973,
+     "bestblockhash": "0000020029bcac549a6e7b7e488d9ca8af518d4c0aae8073cd364c70ca29be6e",
+     "difficulty": 0.0002441371325370145,
+     "mediantime": 1586975225,
+     "verificationprogress": 0.9999983278651547,
+     "initialblockdownload": false,
+     "chainwork": "00000000000000000000000000000000000000000000000001e6f68a064798f8",
+     "size_on_disk": 1186147401,
+     "pruned": false,
+     "softforks": [
+       {
+         "id": "bip34",
+         "version": 2,
+         "reject": {
+           "status": true
+         }
+       },
+       {
+         "id": "bip66",
+         "version": 3,
+         "reject": {
+           "status": true
+         }
+       },
+       {
+         "id": "bip65",
+         "version": 4,
+         "reject": {
+           "status": true
+         }
+       }
+     ],
+     "bip9_softforks": {
+       "csv": {
+         "status": "active",
+         "startTime": 1544655600,
+         "timeout": 1576191600,
+         "since": 8064
+       },
+       "dip0001": {
+         "status": "active",
+         "startTime": 1544655600,
+         "timeout": 1576191600,
+         "since": 4400
+       },
+       "bip147": {
+         "status": "active",
+         "startTime": 1544655600,
+         "timeout": 1576191600,
+         "since": 4300
+       },
+       "dip0003": {
+         "status": "active",
+         "startTime": 1544655600,
+         "timeout": 1576191600,
+         "since": 7000
+       },
+       "dip0008": {
+         "status": "active",
+         "startTime": 1553126400,
+         "timeout": 1584748800,
+         "since": 78800
+       }
+     },
+     "warnings": "Warning: unknown new rules activated (versionbit 3)"
+   }
+
+*See also*
+
+-  `GetMiningInfo </docs/core-api-ref-remote-procedure-calls-mining#getmininginfo>`__:
+   returns various mining-related information.
+-  `GetNetworkInfo </docs/core-api-ref-remote-procedure-calls-network#getnetworkinfo>`__:
+   returns information about the node’s connection to the network.
+-  `GetWalletInfo </docs/core-api-ref-remote-procedure-calls-wallet#getwalletinfo>`__:
+   provides information about the wallet.
+
+GetBlockCount
+=============
+
+The ```getblockcount``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockcount>`__
+returns the number of blocks in the local best block chain.
+
+*Parameters: none*
+
+*Result—the number of blocks in the local best block chain*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | number (int)    | R               | The number of   |
+|                 |                 | equired(exactly | blocks in the   |
+|                 |                 | 1)              | local best      |
+|                 |                 |                 | block chain.    |
+|                 |                 |                 | For a new node  |
+|                 |                 |                 | with only the   |
+|                 |                 |                 | hardcoded       |
+|                 |                 |                 | genesis block,  |
+|                 |                 |                 | this number     |
+|                 |                 |                 | will be 0       |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+.. code:: bash
+
+   dash-cli -testnet getblockcount
+
+Result:
+
+.. code:: text
+
+   4627
+
+*See also*
+
+-  `GetBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhash>`__:
+   returns the header hash of a block at the given height in the local
+   best block chain.
+-  `GetBlock </docs/core-api-ref-remote-procedure-calls-blockchain#getblock>`__:
+   gets a block with a particular header hash from the local block
+   database either as a JSON object or as a serialized block.
+
+GetBlockHash
+============
+
+The ```getblockhash``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockhash>`__
+returns the header hash of a block at the given height in the local best
+block chain.
+
+*Parameter—a block height*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Block Height    | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | the block whose |
+|                 |                 | 1)              | header hash     |
+|                 |                 |                 | should be       |
+|                 |                 |                 | returned. The   |
+|                 |                 |                 | height of the   |
+|                 |                 |                 | hardcoded       |
+|                 |                 |                 | genesis block   |
+|                 |                 |                 | is 0            |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—the block header hash*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string          | R               | The hash of the |
+|                 | (hex)/null      | equired(exactly | block at the    |
+|                 |                 | 1)              | requested       |
+|                 |                 |                 | height, encoded |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order, or  |
+|                 |                 |                 | JSON ``null``   |
+|                 |                 |                 | if an error     |
+|                 |                 |                 | occurred        |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+.. code:: bash
+
+   dash-cli -testnet getblockhash 4000
+
+Result:
+
+.. code:: text
+
+   00000ce22113f3eb8636e225d6a1691e132fdd587aed993e1bc9b07a0235eea4
+
+*See also*
+
+-  `GetBlock </docs/core-api-ref-remote-procedure-calls-blockchain#getblock>`__:
+   gets a block with a particular header hash from the local block
+   database either as a JSON object or as a serialized block.
+-  `GetBestBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getbestblockhash>`__:
+   returns the header hash of the most recent block on the best block
+   chain.
+
+GetBlockFilter
+==============
+
+*Added in Dash Core 18.0.0*
+
+The ```getblockfilter``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockfilter>`__
+retrieves a `BIP157 <https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki>`__ content filter for a particular block.
+[block:callout] { “type”: “info”, “body”: “Requires -blockfilterindex
+Dash Core command-line/configuration-file parameter to be enabled.” }
+[/block] *Parameter #1—blockhash*
+
+==== ====== =================== =====================
+Name Type   Presence            Description
+==== ====== =================== =====================
+Hash string Required(exactly 1) The hash of the block
+==== ====== =================== =====================
+
+*Parameter #2—filtertype*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Filter type     | string          | Optional(0 or   | The type name   |
+|                 |                 | 1)              | of the filter   |
+|                 |                 |                 | (default:       |
+|                 |                 |                 | basic).         |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—A JSON object with the encoded filter data*
+
++---------------+--------------+-----------------+-----------------+
+| Name          | Type         | Presence        | Description     |
++===============+==============+=================+=================+
+| ``result``    | object       | R               | The hex-encod   |
+|               |              | equired(exactly | ed filter data. |
+|               |              | 1)              |                 |
++---------------+--------------+-----------------+-----------------+
+| →\ ``filter`` | string (hex) | R               | The hex-enco    |
+|               |              | equired(exactly | ded filter data |
+|               |              | 1)              |                 |
++---------------+--------------+-----------------+-----------------+
+| →\ ``header`` | string (hex) | R               | The hex-encode  |
+|               |              | equired(exactly | d filter header |
+|               |              | 1)              |                 |
++---------------+--------------+-----------------+-----------------+
+
+*Example from Dash Core 18.0.0*
+
+.. code:: bash
+
+   dash-cli -testnet getblockfilter 0000004bb972bddf8d5b2bce517db07ff4c69a04e74e9c0bd2caa11ee23d0323 basic
+
+Result:
+
+.. code:: json
+
+   {
+     "filter": "038c72a18c696aca7a",
+     "header": "f80b699589d1bfb1b269f948e9114034686c110273b01b6e4c0026ade1d6b968"
+   }
+
+GetBlockHashes
+==============
+
+[block:callout] { “type”: “info”, “body”: “Requires ``timestampindex``
+Dash Core command-line/configuration-file parameter to be enabled.”,
+“title”: "" } [/block]
+
+*Added in Dash Core 0.12.1*
+
+The ```getblockhashes``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockhashes>`__
+returns array of hashes of blocks within the timestamp range provided
+(requires ``timestampindex`` to be enabled).
+
+*Parameter #1—high block timestamp*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Block Timestamp | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | timestamp for   |
+|                 |                 | 1)              | the newest      |
+|                 |                 |                 | block hash that |
+|                 |                 |                 | should be       |
+|                 |                 |                 | returned.       |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—low block timestamp*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Block Timestamp | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | timestamp for   |
+|                 |                 | 1)              | the oldest      |
+|                 |                 |                 | block hash that |
+|                 |                 |                 | should be       |
+|                 |                 |                 | returned.       |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—the block header hashes in the give time range*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | The hashes of   |
+|                 |                 | equired(exactly | the blocks in   |
+|                 |                 | 1)              | the requested   |
+|                 |                 |                 | time range      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``hash``     | string (hex)    | Required(1 or   | The hash of a   |
+|                 |                 | more)           | block in the    |
+|                 |                 |                 | chain, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+.. code:: bash
+
+   dash-cli -testnet getblockhashes 1507555793 1507554793
+
+Result:
+
+.. code:: json
+
+   [
+     "0000000010a16c6fbc6bd5cdc238c2beabcda334e97fde1500d59be4e6fc4b89",
+     "000000009910885e811230c403e55aac6547d6df04ee671b2e8348524f73cab8",
+     "000000004bbb3828db1c4d4491760336cec215087819ab656336f30d4095e3d2",
+     "00000000ad2df2149aca2261a9a87c41e139dfe8f73d91db7ec0c1837fee21a0",
+     "0000000074068a9e3a271d165da3deb28bc3f8c751dde97f460d8078d92a9d06"
+   ]
+
+*See also*
+
+-  `GetBlock </docs/core-api-ref-remote-procedure-calls-blockchain#getblock>`__:
+   gets a block with a particular header hash from the local block
+   database either as a JSON object or as a serialized block.
+-  `GetBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhash>`__:
+   returns the header hash of a block at the given height in the local
+   best block chain.
+-  `GetBestBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getbestblockhash>`__:
+   returns the header hash of the most recent block on the best block
+   chain.
+
+GetBlockHeader
+==============
+
+*Added in Bitcoin Core 0.12.0*
+
+The ```getblockheader``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockheader>`__
+gets a block header with a particular header hash from the local block
+database either as a JSON object or as a serialized block header.
+
+*Parameter #1—header hash*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Header Hash     | string (hex)    | R               | The hash of the |
+|                 |                 | equired(exactly | block header to |
+|                 |                 | 1)              | get, encoded as |
+|                 |                 |                 | hex in RPC byte |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—JSON or hex output*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Format          | bool            | Optional(0 or   | Set to          |
+|                 |                 | 1)              | ``false`` to    |
+|                 |                 |                 | get the block   |
+|                 |                 |                 | header in       |
+|                 |                 |                 | serialized      |
+|                 |                 |                 | block format;   |
+|                 |                 |                 | set to ``true`` |
+|                 |                 |                 | (the default)   |
+|                 |                 |                 | to get the      |
+|                 |                 |                 | decoded block   |
+|                 |                 |                 | header as a     |
+|                 |                 |                 | JSON object     |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if format was ``false``)—a serialized block header*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string          | R               | The requested   |
+|                 | (hex)/null      | equired(exactly | block header as |
+|                 |                 | 1)              | a serialized    |
+|                 |                 |                 | block, encoded  |
+|                 |                 |                 | as hex, or JSON |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if format was ``true`` or omitted)—a JSON block header*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object/null     | R               | An object       |
+|                 |                 | equired(exactly | containing the  |
+|                 |                 | 1)              | requested       |
+|                 |                 |                 | block, or JSON  |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``hash``     | string (hex)    | R               | The hash of     |
+|                 |                 | equired(exactly | this block’s    |
+|                 |                 | 1)              | block header    |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. This is  |
+|                 |                 |                 | the same as the |
+|                 |                 |                 | hash provided   |
+|                 |                 |                 | in parameter #1 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | number (int)    | R               | The number of   |
+| confirmations`` |                 | equired(exactly | confirmations   |
+|                 |                 | 1)              | the             |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | this block      |
+|                 |                 |                 | have, starting  |
+|                 |                 |                 | at 1 when this  |
+|                 |                 |                 | block is at the |
+|                 |                 |                 | tip of the best |
+|                 |                 |                 | block chain.    |
+|                 |                 |                 | This score will |
+|                 |                 |                 | be -1 if the    |
+|                 |                 |                 | the block is    |
+|                 |                 |                 | not part of the |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``height``   | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | this block on   |
+|                 |                 | 1)              | its block chain |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``version``  | number (int)    | R               | This block’s    |
+|                 |                 | equired(exactly | version number. |
+|                 |                 | 1)              | See `block      |
+|                 |                 |                 | version         |
+|                 |                 |                 | nu              |
+|                 |                 |                 | mbers <core-ref |
+|                 |                 |                 | -block-chain-bl |
+|                 |                 |                 | ock-headers#blo |
+|                 |                 |                 | ck-versions>`__ |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | string (hex)    | R               | The merkle root |
+|  ``merkleroot`` |                 | equired(exactly | for this block, |
+|                 |                 | 1)              | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``time``     | number (int)    | R               | The time of the |
+|                 |                 | equired(exactly | block           |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (int)    | R               | The computed    |
+|  ``mediantime`` |                 | equired(exactly | median time of  |
+|                 |                 | 1)              | the previous 11 |
+|                 |                 |                 | blocks. Used    |
+|                 |                 |                 | for validating  |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | locktime under  |
+|                 |                 |                 | BIP113          |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``nonce``    | number (int)    | R               | The nonce which |
+|                 |                 | equired(exactly | was successful  |
+|                 |                 | 1)              | at turning this |
+|                 |                 |                 | particular      |
+|                 |                 |                 | block into one  |
+|                 |                 |                 | that could be   |
+|                 |                 |                 | added to the    |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``bits``     | string (hex)    | R               | The value of    |
+|                 |                 | equired(exactly | the *nBits*     |
+|                 |                 | 1)              | field in the    |
+|                 |                 |                 | block header,   |
+|                 |                 |                 | indicating the  |
+|                 |                 |                 | target          |
+|                 |                 |                 | threshold this  |
+|                 |                 |                 | block’s header  |
+|                 |                 |                 | had to pass     |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (real)   | R               | The estimated   |
+|  ``difficulty`` |                 | equired(exactly | amount of work  |
+|                 |                 | 1)              | done to find    |
+|                 |                 |                 | this block      |
+|                 |                 |                 | relative to the |
+|                 |                 |                 | estimated       |
+|                 |                 |                 | amount of work  |
+|                 |                 |                 | done to find    |
+|                 |                 |                 | block 0         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The estimated   |
+| \ ``chainwork`` |                 | equired(exactly | number of block |
+|                 |                 | 1)              | header hashes   |
+|                 |                 |                 | miners had to   |
+|                 |                 |                 | check from the  |
+|                 |                 |                 | genesis block   |
+|                 |                 |                 | to this block,  |
+|                 |                 |                 | encoded as      |
+|                 |                 |                 | big-endian hex  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``nTx``      | number (int)    | R               | **Added in Dash |
+|                 |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0**\ The   |
+|                 |                 |                 | number of       |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the block       |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``prev       | string (hex)    | Optional(0 or   | The hash of the |
+| iousblockhash`` |                 | 1)              | header of the   |
+|                 |                 |                 | previous block, |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. Not      |
+|                 |                 |                 | returned for    |
+|                 |                 |                 | genesis block   |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | string (hex)    | Optional(0 or   | The hash of the |
+| nextblockhash`` |                 | 1)              | next block on   |
+|                 |                 |                 | the best block  |
+|                 |                 |                 | chain, if       |
+|                 |                 |                 | known, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Changes from Bitcoin - Following items not present in Dash result*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| →\              | number (hex)    | R               | This block’s    |
+|  ``versionHex`` |                 | equired(exactly | hex version     |
+|                 |                 | 1)              | number. See     |
+|                 |                 |                 | `block version  |
+|                 |                 |                 | nu              |
+|                 |                 |                 | mbers <core-ref |
+|                 |                 |                 | -block-chain-bl |
+|                 |                 |                 | ock-headers#blo |
+|                 |                 |                 | ck-versions>`__ |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.16.0*
+
+Get a block header in raw hex:
+
+.. code:: bash
+
+   dash-cli -testnet getblockheader \
+               00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b \
+               false
+
+Result (wrapped):
+
+.. code:: text
+
+   00000020272e374a06c87a0ce0e6ee1a0754c98b9ec2493e7c0ac7ba41a0\
+   730000000000568b3c4156090db4d8db5447762e95dd1d4c921c96801a9\
+   086720ded85266325916cc05caa94001c5caf3595
+
+Get the same block in JSON:
+
+.. code:: bash
+
+   dash-cli -testnet getblockheader \
+               00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b
+
+Result:
+
+.. code:: json
+
+   {
+     "hash": "00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b",
+     "confirmations": 212900,
+     "height": 86190,
+     "version": 536870912,
+     "versionHex": "20000000",
+     "merkleroot": "25632685ed0d7286901a80961c924c1ddd952e764754dbd8b40d0956413c8b56",
+     "time": 1556114577,
+     "mediantime": 1556113720,
+     "nonce": 2503323484,
+     "bits": "1c0094aa",
+     "difficulty": 440.8261075201009,
+     "chainwork": "0000000000000000000000000000000000000000000000000045ab6f9403a8e7",
+     "nTx": 1,
+     "previousblockhash": "000000000073a041bac70a7c3e49c29e8bc954071aeee6e00c7ac8064a372e27",
+     "nextblockhash": "00000000001c6c962639a1aad4cd069f315560a824d489418dc1f26b50a58aed",
+     "chainlock": true
+   }
+
+*See also*
+
+-  `GetBlock </docs/core-api-ref-remote-procedure-calls-blockchain#getblock>`__:
+   gets a block with a particular header hash from the local block
+   database either as a JSON object or as a serialized block.
+-  `GetBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhash>`__:
+   returns the header hash of a block at the given height in the local
+   best block chain.
+-  `GetBlockHashes </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhashes>`__:
+   returns array of hashes of blocks within the timestamp range provided
+   (requires ``timestampindex`` to be enabled).
+-  `GetBlockHeaders </docs/core-api-ref-remote-procedure-calls-blockchain#getblockheaders>`__:
+   returns an array of items with information about the requested number
+   of blockheaders starting from the requested hash.
+-  `GetBestBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getbestblockhash>`__:
+   returns the header hash of the most recent block on the best block
+   chain.
+
+GetBlockHeaders
+===============
+
+*Added in Dash Core 0.12.1*
+
+The ```getblockheaders``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockheaders>`__
+returns an array of items with information about the requested number of
+blockheaders starting from the requested hash.
+
+*Parameter #1—header hash*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Header Hash     | string (hex)    | R               | The hash of the |
+|                 |                 | equired(exactly | block header to |
+|                 |                 | 1)              | get, encoded as |
+|                 |                 |                 | hex in RPC byte |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—number of headers to return*
+
+===== ====== =================== ==================================
+Name  Type   Presence            Description
+===== ====== =================== ==================================
+Count number Optional(exactly 1) The number of block headers to get
+===== ====== =================== ==================================
+
+*Parameter #3—JSON or hex output*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Verbose         | bool            | Optional(0 or   | Set to          |
+|                 |                 | 1)              | ``false`` to    |
+|                 |                 |                 | get the block   |
+|                 |                 |                 | headers in      |
+|                 |                 |                 | serialized      |
+|                 |                 |                 | block format;   |
+|                 |                 |                 | set to ``true`` |
+|                 |                 |                 | (the default)   |
+|                 |                 |                 | to get the      |
+|                 |                 |                 | decoded block   |
+|                 |                 |                 | headers as a    |
+|                 |                 |                 | JSON object     |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if format was ``false``)—a serialized block header*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | The requested   |
+|                 |                 | equired(exactly | block header(s) |
+|                 |                 | 1)              | as a serialized |
+|                 |                 |                 | block           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``header``   | string (hex)    | Required(1 or   | The block       |
+|                 |                 | more)           | header encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if format was ``true`` or omitted)—a JSON block header*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | An array of     |
+|                 |                 | equired(exactly | objects each    |
+|                 |                 | 1)              | containing a    |
+|                 |                 |                 | block header,   |
+|                 |                 |                 | or JSON         |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+| →Block Header   | object/null     | R               | An object       |
+|                 |                 | equired(exactly | containing a    |
+|                 |                 | 1)              | block header    |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``hash``   | string (hex)    | R               | The hash of     |
+|                 |                 | equired(exactly | this block’s    |
+|                 |                 | 1)              | block header    |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. This is  |
+|                 |                 |                 | the same as the |
+|                 |                 |                 | hash provided   |
+|                 |                 |                 | in parameter #1 |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The number of   |
+| →\ ``           |                 | equired(exactly | confirmations   |
+| confirmations`` |                 | 1)              | the             |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | this block      |
+|                 |                 |                 | have, starting  |
+|                 |                 |                 | at 1 when this  |
+|                 |                 |                 | block is at the |
+|                 |                 |                 | tip of the best |
+|                 |                 |                 | block chain.    |
+|                 |                 |                 | This score will |
+|                 |                 |                 | be -1 if the    |
+|                 |                 |                 | the block is    |
+|                 |                 |                 | not part of the |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``height`` | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | this block on   |
+|                 |                 | 1)              | its block chain |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | This block’s    |
+| →\ ``version``  |                 | equired(exactly | version number. |
+|                 |                 | 1)              | See `block      |
+|                 |                 |                 | version         |
+|                 |                 |                 | nu              |
+|                 |                 |                 | mbers <core-ref |
+|                 |                 |                 | -block-chain-bl |
+|                 |                 |                 | ock-headers#blo |
+|                 |                 |                 | ck-versions>`__ |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The merkle root |
+| →\              |                 | equired(exactly | for this block, |
+|  ``merkleroot`` |                 | 1)              | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``time``   | number (int)    | R               | The time of the |
+|                 |                 | equired(exactly | block           |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The computed    |
+| →\              |                 | equired(exactly | median time of  |
+|  ``mediantime`` |                 | 1)              | the previous 11 |
+|                 |                 |                 | blocks. Used    |
+|                 |                 |                 | for validating  |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | locktime under  |
+|                 |                 |                 | BIP113          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``nonce``  | number (int)    | R               | The nonce which |
+|                 |                 | equired(exactly | was successful  |
+|                 |                 | 1)              | at turning this |
+|                 |                 |                 | particular      |
+|                 |                 |                 | block into one  |
+|                 |                 |                 | that could be   |
+|                 |                 |                 | added to the    |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``bits``   | string (hex)    | R               | The value of    |
+|                 |                 | equired(exactly | the *nBits*     |
+|                 |                 | 1)              | field in the    |
+|                 |                 |                 | block header,   |
+|                 |                 |                 | indicating the  |
+|                 |                 |                 | target          |
+|                 |                 |                 | threshold this  |
+|                 |                 |                 | block’s header  |
+|                 |                 |                 | had to pass     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (real)   | R               | The estimated   |
+| →\              |                 | equired(exactly | amount of work  |
+|  ``difficulty`` |                 | 1)              | done to find    |
+|                 |                 |                 | this block      |
+|                 |                 |                 | relative to the |
+|                 |                 |                 | estimated       |
+|                 |                 |                 | amount of work  |
+|                 |                 |                 | done to find    |
+|                 |                 |                 | block 0         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The estimated   |
+| \ ``chainwork`` |                 | equired(exactly | number of block |
+|                 |                 | 1)              | header hashes   |
+|                 |                 |                 | miners had to   |
+|                 |                 |                 | check from the  |
+|                 |                 |                 | genesis block   |
+|                 |                 |                 | to this block,  |
+|                 |                 |                 | encoded as      |
+|                 |                 |                 | big-endian hex  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``nTx``      | number (int)    | R               | **Added in Dash |
+|                 |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0**\ The   |
+|                 |                 |                 | number of       |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the block       |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | Optional(0 or   | The hash of the |
+| →\ ``prev       |                 | 1)              | header of the   |
+| iousblockhash`` |                 |                 | previous block, |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. Not      |
+|                 |                 |                 | returned for    |
+|                 |                 |                 | genesis block   |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | Optional(0 or   | The hash of the |
+| →\ ``           |                 | 1)              | next block on   |
+| nextblockhash`` |                 |                 | the best block  |
+|                 |                 |                 | chain, if       |
+|                 |                 |                 | known, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.16.0*
+
+Get two block headers in raw hex:
+
+.. code:: bash
+
+   dash-cli -testnet getblockheaders \
+               00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b \
+               2 false
+
+Result (wrapped):
+
+.. code:: text
+
+   [
+     "00000020272e374a06c87a0ce0e6ee1a0754c98b9ec2493e7c0ac7ba41a0730000000\
+      000568b3c4156090db4d8db5447762e95dd1d4c921c96801a9086720ded8526632591\
+      6cc05caa94001c5caf3595",
+     "000000202be60663802ead0740cb6d6e49ee7824481280f03c71369eb90f7b00000000\
+      006abd277facc8cf02886d88662dbcc2adb6d8de7a491915e74bed4d835656a4f1f26d\
+      c05ced93001ccf81cabc"
+   ]
+
+Get the same two block headers in JSON:
+
+.. code:: bash
+
+   dash-cli -testnet getblockheader \
+               00000000eb0af5aec7b673975a22593dc0cc763f71ba8de26292410273437078 \
+               2 true
+
+Result:
+
+.. code:: json
+
+   [
+     {
+       "hash": "00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b",
+       "confirmations": 212910,
+       "height": 86190,
+       "version": 536870912,
+       "versionHex": "20000000",
+       "merkleroot": "25632685ed0d7286901a80961c924c1ddd952e764754dbd8b40d0956413c8b56",
+       "time": 1556114577,
+       "mediantime": 1556113720,
+       "nonce": 2503323484,
+       "bits": "1c0094aa",
+       "difficulty": 440.8261075201009,
+       "chainwork": "0000000000000000000000000000000000000000000000000045ab6f9403a8e7",
+       "nTx": 1,
+       "previousblockhash": "000000000073a041bac70a7c3e49c29e8bc954071aeee6e00c7ac8064a372e27",
+       "nextblockhash": "00000000001c6c962639a1aad4cd069f315560a824d489418dc1f26b50a58aed",
+       "chainlock": true
+     },
+     {
+       "hash": "00000000001c6c962639a1aad4cd069f315560a824d489418dc1f26b50a58aed",
+       "confirmations": 212909,
+       "height": 86191,
+       "version": 536870912,
+       "versionHex": "20000000",
+       "merkleroot": "f1a45656834ded4be71519497aded8b6adc2bc2d66886d8802cfc8ac7f27bd6a",
+       "time": 1556114930,
+       "mediantime": 1556113903,
+       "nonce": 3167388111,
+       "bits": "1c0093ed",
+       "difficulty": 443.0262219757585,
+       "chainwork": "0000000000000000000000000000000000000000000000000045ad2a9c752d18",
+       "nTx": 1,
+       "previousblockhash": "00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b",
+       "nextblockhash": "000000000076a17beb1bb56e6ec53579f8a604d2363c9a4f8ca3f63e6aca3423",
+       "chainlock": true
+     }
+   ]
+
+*See also*
+
+-  `GetBlock </docs/core-api-ref-remote-procedure-calls-blockchain#getblock>`__:
+   gets a block with a particular header hash from the local block
+   database either as a JSON object or as a serialized block.
+-  `GetBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhash>`__:
+   returns the header hash of a block at the given height in the local
+   best block chain.
+-  `GetBlockHashes </docs/core-api-ref-remote-procedure-calls-blockchain#getblockhashes>`__:
+   returns array of hashes of blocks within the timestamp range provided
+   (requires ``timestampindex`` to be enabled).
+-  `GetBlockHeader </docs/core-api-ref-remote-procedure-calls-blockchain#getblockheader>`__:
+   gets a block header with a particular header hash from the local
+   block database either as a JSON object or as a serialized block
+   header.
+-  `GetBestBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getbestblockhash>`__:
+   returns the header hash of the most recent block on the best block
+   chain.
+
+GetBlockStats
+=============
+
+The ```getblockstats``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getblockstats>`__
+computes per block statistics for a given window. [block:callout] {
+“type”: “danger”, “body”: “Breaking change(s) in Dash Core 18.0. See
+parameter and/or response information for details.” } [/block] All
+amounts are in duffs.
+
+It won’t work for some heights with pruning. It won’t work without
+``-txindex`` for ``utxo_size_inc``, ``*fee`` or ``*feerate`` stats.
+
+*Parameter #1—hash_or_height*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| hash_or_height  | string or       | R               | The block hash  |
+|                 | numeric         | equired(exactly | or height of    |
+|                 |                 | 1)              | the target      |
+|                 |                 |                 | block           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—stats*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| stats           | array           | optional        | Values to plot, |
+|                 |                 |                 | by default all  |
+|                 |                 |                 | values (see     |
+|                 |                 |                 | result below)   |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—a JSON object containing the requested statistics*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object/null     | R               | An object       |
+|                 |                 | equired(exactly | containing      |
+|                 |                 | 1)              | stats for the   |
+|                 |                 |                 | requested       |
+|                 |                 |                 | block, or JSON  |
+|                 |                 |                 | ``null`` if an  |
+|                 |                 |                 | error occurred  |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``avgfee``   | numeric         | R               | Average fee in  |
+|                 |                 | equired(exactly | the block       |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | numeric         | R               | Average feerate |
+|  ``avgfeerate`` |                 | equired(exactly | (in duffs per   |
+|                 |                 | 1)              | byte)           |
++-----------------+-----------------+-----------------+-----------------+
+| →               | numeric         | R               | Average         |
+| \ ``avgtxsize`` |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | size            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The block hash  |
+| \ ``blockhash`` |                 | equired(exactly | (to check for   |
+|                 |                 | 1)              | potential       |
+|                 |                 |                 | reorgs)         |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``feerat     | array (num)     | R               | **Added in Dash |
+| e_percentiles`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 1               |
+|                 |                 |                 | 8.0**\ Feerates |
+|                 |                 |                 | at the 10th,    |
+|                 |                 |                 | 25th, 50th,     |
+|                 |                 |                 | 75th, and 90th  |
+|                 |                 |                 | percentile      |
+|                 |                 |                 | weight unit,    |
+|                 |                 |                 | which are in    |
+|                 |                 |                 | duffs per byte. |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric         | R               | The 10th        |
+| \ ``10th_perce  |                 | equired(exactly | percentile      |
+| ntile_feerate`` |                 | 1)              | feerate         |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric         | R               | The 25th        |
+| \ ``25th_perce  |                 | equired(exactly | percentile      |
+| ntile_feerate`` |                 | 1)              | feerate         |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric         | R               | The 50th        |
+| \ ``50th_perce  |                 | equired(exactly | percentile      |
+| ntile_feerate`` |                 | 1)              | feerate         |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric         | R               | The 75th        |
+| \ ``75th_perce  |                 | equired(exactly | percentile      |
+| ntile_feerate`` |                 | 1)              | feerate         |
++-----------------+-----------------+-----------------+-----------------+
+| → →             | numeric         | R               | The 90th        |
+| \ ``90th_perce  |                 | equired(exactly | percentile      |
+| ntile_feerate`` |                 | 1)              | feerate         |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``height``   | numeric         | R               | The height of   |
+|                 |                 | equired(exactly | the block       |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``ins``      | numeric         | R               | The number of   |
+|                 |                 | equired(exactly | inputs          |
+|                 |                 | 1)              | (excluding      |
+|                 |                 |                 | coinbase)       |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``maxfee``   | numeric         | R               | Maximum fee in  |
+|                 |                 | equired(exactly | the block       |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | numeric         | R               | Maximum feerate |
+|  ``maxfeerate`` |                 | equired(exactly | (in duffs per   |
+|                 |                 | 1)              | byte)           |
++-----------------+-----------------+-----------------+-----------------+
+| →               | numeric         | R               | Maximum         |
+| \ ``maxtxsize`` |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | size            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | numeric         | R               | Truncated       |
+| \ ``medianfee`` |                 | equired(exactly | median fee in   |
+|                 |                 | 1)              | the block       |
++-----------------+-----------------+-----------------+-----------------+
+| →\ [STRIKEOUT   | [STR            | [STR            | **Removed in    |
+| :medianfeerate] | IKEOUT:numeric] | IKEOUT:Required | Dash Core       |
+|                 |                 | (exactly 1)]    | 18              |
+|                 |                 |                 | .0.0**\ \ [STRI |
+|                 |                 |                 | KEOUT:Truncated |
+|                 |                 |                 | median feerate  |
+|                 |                 |                 | (in duffs per   |
+|                 |                 |                 | byte)]          |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | numeric         | R               | The block       |
+|  ``mediantime`` |                 | equired(exactly | median time     |
+|                 |                 | 1)              | past            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ `            | numeric         | R               | Truncated       |
+| `mediantxsize`` |                 | equired(exactly | median          |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | size            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``minfee``   | numeric         | R               | Minimum fee in  |
+|                 |                 | equired(exactly | the block       |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | numeric         | R               | Minimum feerate |
+|  ``minfeerate`` |                 | equired(exactly | (in duffs per   |
+|                 |                 | 1)              | byte)           |
++-----------------+-----------------+-----------------+-----------------+
+| →               | numeric         | R               | Minimum         |
+| \ ``mintxsize`` |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | size            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``outs``     | numeric         | R               | The number of   |
+|                 |                 | equired(exactly | outputs         |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``subsidy``  | numeric         | R               | The block       |
+|                 |                 | equired(exactly | subsidy         |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``time``     | number (real)   | R               | The block time  |
+|                 |                 | equired(exactly |                 |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →               | numeric         | R               | Total amount in |
+| \ ``total_out`` |                 | equired(exactly | all outputs     |
+|                 |                 | 1)              | (excluding      |
+|                 |                 |                 | coinbase and    |
+|                 |                 |                 | thus reward     |
+|                 |                 |                 | [i.e. subsidy + |
+|                 |                 |                 | totalfee])      |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | numeric         | R               | Total size of   |
+|  ``total_size`` |                 | equired(exactly | all             |
+|                 |                 | 1)              | non-coinbase    |
+|                 |                 |                 | transactions    |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``totalfee`` | numeric         | R               | The fee total   |
+|                 |                 | equired(exactly |                 |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``txs``      | numeric         | R               | The number of   |
+|                 |                 | equired(exactly | transactions    |
+|                 |                 | 1)              | (including      |
+|                 |                 |                 | coinbase)       |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | numeric         | R               | The             |
+| utxo_increase`` |                 | equired(exactly | in              |
+|                 |                 | 1)              | crease/decrease |
+|                 |                 |                 | in the number   |
+|                 |                 |                 | of unspent      |
+|                 |                 |                 | outputs         |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | numeric         | R               | The             |
+| utxo_size_inc`` |                 | equired(exactly | in              |
+|                 |                 | 1)              | crease/decrease |
+|                 |                 |                 | in size for the |
+|                 |                 |                 | utxo index (not |
+|                 |                 |                 | discounting     |
+|                 |                 |                 | op_return and   |
+|                 |                 |                 | similar)        |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 18.0.0*
+
+.. code:: bash
+
+   dash-cli getblockstats 1000 '["minfeerate","avgfeerate"]'
+
+Result:
+
+.. code:: json
+
+   {
+     "avgfeerate": 0,
+     "minfeerate": 0
+   }
+
+*See also: none*
+
+GetChainTips
+============
+
+The ```getchaintips``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getchaintips>`__
+returns information about the highest-height block (tip) of each local
+block chain.
+
+*Parameters: none*
+
+*Result—an array of block chain tips*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | An array of     |
+|                 |                 | equired(exactly | JSON objects,   |
+|                 |                 | 1)              | with each       |
+|                 |                 |                 | object          |
+|                 |                 |                 | describing a    |
+|                 |                 |                 | chain tip. At   |
+|                 |                 |                 | least one       |
+|                 |                 |                 | tip—the local   |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain—will      |
+|                 |                 |                 | always be       |
+|                 |                 |                 | present         |
++-----------------+-----------------+-----------------+-----------------+
+| →Tip            | object          | Required(1 or   | An object       |
+|                 |                 | more)           | describing a    |
+|                 |                 |                 | particular      |
+|                 |                 |                 | chain tip. The  |
+|                 |                 |                 | first object    |
+|                 |                 |                 | will always     |
+|                 |                 |                 | describe the    |
+|                 |                 |                 | active chain    |
+|                 |                 |                 | (the local best |
+|                 |                 |                 | block chain)    |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``height`` | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | the highest     |
+|                 |                 | 1)              | block in the    |
+|                 |                 |                 | chain. A new    |
+|                 |                 |                 | node with only  |
+|                 |                 |                 | the genesis     |
+|                 |                 |                 | block will have |
+|                 |                 |                 | a single tip    |
+|                 |                 |                 | with height of  |
+|                 |                 |                 | 0               |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``hash``   | string (hex)    | R               | The hash of the |
+|                 |                 | equired(exactly | highest block   |
+|                 |                 | 1)              | in the chain,   |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (real)   | R               | The difficulty  |
+|  ``difficulty`` |                 | equired(exactly | of the          |
+|                 |                 | 1)              | highest-height  |
+|                 |                 |                 | block in the    |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain (Added in |
+|                 |                 |                 | Dash Core       |
+|                 |                 |                 | 0.12.1)         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The estimated   |
+| \ ``chainwork`` |                 | equired(exactly | number of block |
+|                 |                 | 1)              | header hashes   |
+|                 |                 |                 | checked from    |
+|                 |                 |                 | the genesis     |
+|                 |                 |                 | block to this   |
+|                 |                 |                 | block, encoded  |
+|                 |                 |                 | as big-endian   |
+|                 |                 |                 | hex (Added in   |
+|                 |                 |                 | Dash Core       |
+|                 |                 |                 | 0.12.1)         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The number of   |
+| →               |                 | equired(exactly | blocks that are |
+| \ ``branchlen`` |                 | 1)              | on this chain   |
+|                 |                 |                 | but not on the  |
+|                 |                 |                 | main chain. For |
+|                 |                 |                 | the local best  |
+|                 |                 |                 | block chain,    |
+|                 |                 |                 | this will be    |
+|                 |                 |                 | ``0``; for all  |
+|                 |                 |                 | other chains,   |
+|                 |                 |                 | it will be at   |
+|                 |                 |                 | least ``1``     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | *Added in Dash  |
+| →               |                 | equired(exactly | Core            |
+| \ ``forkpoint`` |                 | 1)              | 0.12.3*\ Block  |
+|                 |                 |                 | hash of the     |
+|                 |                 |                 | last common     |
+|                 |                 |                 | block between   |
+|                 |                 |                 | this tip and    |
+|                 |                 |                 | the main chain  |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``status`` | string          | R               | The status of   |
+|                 |                 | equired(exactly | this chain.     |
+|                 |                 | 1)              | Valid values    |
+|                 |                 |                 | are:•           |
+|                 |                 |                 | ``active`` for  |
+|                 |                 |                 | the local best  |
+|                 |                 |                 | block chain•    |
+|                 |                 |                 | ``invalid`` for |
+|                 |                 |                 | a chain that    |
+|                 |                 |                 | contains one or |
+|                 |                 |                 | more invalid    |
+|                 |                 |                 | blocks•         |
+|                 |                 |                 | `               |
+|                 |                 |                 | `headers-only`` |
+|                 |                 |                 | for a chain     |
+|                 |                 |                 | with valid      |
+|                 |                 |                 | headers whose   |
+|                 |                 |                 | corresponding   |
+|                 |                 |                 | blocks both     |
+|                 |                 |                 | haven’t been    |
+|                 |                 |                 | validated and   |
+|                 |                 |                 | aren’t stored   |
+|                 |                 |                 | locally•        |
+|                 |                 |                 | ``              |
+|                 |                 |                 | valid-headers`` |
+|                 |                 |                 | for a chain     |
+|                 |                 |                 | with valid      |
+|                 |                 |                 | headers whose   |
+|                 |                 |                 | corresponding   |
+|                 |                 |                 | blocks are      |
+|                 |                 |                 | stored locally, |
+|                 |                 |                 | but which       |
+|                 |                 |                 | haven’t been    |
+|                 |                 |                 | fully           |
+|                 |                 |                 | validated•      |
+|                 |                 |                 | ``valid-fork``  |
+|                 |                 |                 | for a chain     |
+|                 |                 |                 | which is fully  |
+|                 |                 |                 | validated but   |
+|                 |                 |                 | which isn’t     |
+|                 |                 |                 | part of the     |
+|                 |                 |                 | local best      |
+|                 |                 |                 | block chain (it |
+|                 |                 |                 | was probably    |
+|                 |                 |                 | the local best  |
+|                 |                 |                 | block chain at  |
+|                 |                 |                 | some point)•    |
+|                 |                 |                 | ``unknown`` for |
+|                 |                 |                 | a chain whose   |
+|                 |                 |                 | reason for not  |
+|                 |                 |                 | being the       |
+|                 |                 |                 | active chain is |
+|                 |                 |                 | unknown         |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.3*
+
+.. code:: bash
+
+   dash-cli -testnet getchaintips
+
+.. code:: json
+
+   [
+     {
+       "height": 110192,
+       "hash": "000000000c6007f40c3b68a77b0e1319a89c0504ae1b391d071cf49fa7591dee",
+       "difficulty": 18.38631407059958,
+       "chainwork": "000000000000000000000000000000000000000000000000002cbd2546718747",
+       "branchlen": 0,
+       "forkpoint": "000000000c6007f40c3b68a77b0e1319a89c0504ae1b391d071cf49fa7591dee",
+       "status": "active"
+     }
+   ]
+
+*See also*
+
+-  `GetBestBlockHash </docs/core-api-ref-remote-procedure-calls-blockchain#getbestblockhash>`__:
+   returns the header hash of the most recent block on the best block
+   chain.
+-  `GetBlock </docs/core-api-ref-remote-procedure-calls-blockchain#getblock>`__:
+   gets a block with a particular header hash from the local block
+   database either as a JSON object or as a serialized block.
+-  `GetBlockChainInfo </docs/core-api-ref-remote-procedure-calls-blockchain#getblockchaininfo>`__:
+   provides information about the current state of the block chain.
+
+GetChainTxStats
+===============
+
+The ```getchaintxstats``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getchaintxstats>`__
+compute statistics about the total number and rate of transactions in
+the chain.
+
+*Parameter #1—nblocks*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| nblocks         | number (int)    | Optional        | Size of the     |
+|                 |                 |                 | window in       |
+|                 |                 |                 | number of       |
+|                 |                 |                 | blocks          |
+|                 |                 |                 | (default: one   |
+|                 |                 |                 | month).         |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—blockhash*
+
+========= ====== ======== ===========================================
+Name      Type   Presence Description
+========= ====== ======== ===========================================
+blockhash string Optional The hash of the block that ends the window.
+========= ====== ======== ===========================================
+
+*Result–statistics about transactions*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | Object          |
+|                 |                 | equired(exactly | containing      |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | statistics      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``time``     | number (int)    | R               | The timestamp   |
+|                 |                 | equired(exactly | for the         |
+|                 |                 | 1)              | statistics in   |
+|                 |                 |                 | UNIX format     |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``txcount``  | number (int)    | R               | The total       |
+|                 |                 | equired(exactly | number of       |
+|                 |                 | 1)              | transactions in |
+|                 |                 |                 | the chain up to |
+|                 |                 |                 | that point      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``window_fin | string (hex)    | R               | *Added in Dash  |
+| al_block_hash`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.17.0*\ The    |
+|                 |                 |                 | hash of the     |
+|                 |                 |                 | final block in  |
+|                 |                 |                 | the window      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``windo      | number (int)    | R               | *Added in Dash  |
+| w_block_count`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0*\ Size   |
+|                 |                 |                 | of the window   |
+|                 |                 |                 | in number of    |
+|                 |                 |                 | blocks          |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (int)    | R               | **Added in Dash |
+|  ``window_final |                 | equired(exactly | Core            |
+| _block_height`` |                 | 1)              | 1               |
+|                 |                 |                 | 8.0.0**\ Height |
+|                 |                 |                 | of the final    |
+|                 |                 |                 | block in window |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``wi         | number (int)    | Optional(0 or   | *Added in Dash  |
+| ndow_tx_count`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.16.0*\ The    |
+|                 |                 |                 | number of       |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the window.     |
+|                 |                 |                 | Only returned   |
+|                 |                 |                 | if              |
+|                 |                 |                 | ``windo         |
+|                 |                 |                 | w_block_count`` |
+|                 |                 |                 | is > 0          |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``wi         | number (int)    | Optional(0 or   | *Added in Dash  |
+| ndow_interval`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.16.0*\ The    |
+|                 |                 |                 | elapsed time in |
+|                 |                 |                 | the window in   |
+|                 |                 |                 | seconds. Only   |
+|                 |                 |                 | returned if     |
+|                 |                 |                 | ``windo         |
+|                 |                 |                 | w_block_count`` |
+|                 |                 |                 | is > 0          |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``txrate``   | number (int)    | Optional(0 or   | The average     |
+|                 |                 | 1)              | rate of         |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | per second in   |
+|                 |                 |                 | the window.     |
+|                 |                 |                 | Only returned   |
+|                 |                 |                 | if              |
+|                 |                 |                 | ``wi            |
+|                 |                 |                 | ndow_interval`` |
+|                 |                 |                 | is > 0          |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 18.0.0*
+
+.. code:: bash
+
+   dash-cli -testnet getchaintxstats
+
+Result:
+
+.. code:: json
+
+   {
+     "time": 1634200935,
+     "txcount": 5255650,
+     "window_final_block_hash": "0000013524141f0e54137d266088c3d042cca340eabc4393414d7d0560866239",
+     "window_final_block_height": 593815,
+     "window_block_count": 17280,
+     "window_tx_count": 33384,
+     "window_interval": 2417430,
+     "txrate": 0.0138097070028915
+   }
+
+*See also: none*
+
+GetDifficulty
+=============
+
+The ```getdifficulty``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getdifficulty>`__
+returns the proof-of-work difficulty as a multiple of the minimum
+difficulty.
+
+*Parameters: none*
+
+*Result—the current difficulty*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | number (real)   | R               | The difficulty  |
+|                 |                 | equired(exactly | of creating a   |
+|                 |                 | 1)              | block with the  |
+|                 |                 |                 | same target     |
+|                 |                 |                 | threshold       |
+|                 |                 |                 | (nBits) as the  |
+|                 |                 |                 | highest-height  |
+|                 |                 |                 | block in the    |
+|                 |                 |                 | local best      |
+|                 |                 |                 | block chain.    |
+|                 |                 |                 | The number is a |
+|                 |                 |                 | a multiple of   |
+|                 |                 |                 | the minimum     |
+|                 |                 |                 | difficulty      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+.. code:: bash
+
+   dash-cli -testnet getdifficulty
+
+Result:
+
+.. code:: text
+
+   1.069156225528583
+
+*See also*
+
+-  `GetNetworkHashPS </docs/core-api-ref-remote-procedure-calls-mining#getnetworkhashps>`__:
+   returns the estimated network hashes per second based on the last n
+   blocks.
+-  `GetMiningInfo </docs/core-api-ref-remote-procedure-calls-mining#getmininginfo>`__:
+   returns various mining-related information.
+
+GetMemPoolAncestors
+===================
+
+*Added in Dash Core 0.12.3*
+
+The ```getmempoolancestors``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getmempoolancestors>`__
+returns all in-mempool ancestors for a transaction in the mempool.
+
+*Parameter #1—a transaction identifier (TXID)*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| TXID            | string (hex)    | R               | The TXID of a   |
+|                 |                 | equired(exactly | transaction in  |
+|                 |                 | 1)              | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—desired output format*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Format          | bool            | Optional(0 or   | Set to ``true`` |
+|                 |                 | 1)              | to get json     |
+|                 |                 |                 | objects         |
+|                 |                 |                 | describing each |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool; set to    |
+|                 |                 |                 | ``false`` (the  |
+|                 |                 |                 | default) to     |
+|                 |                 |                 | only get an     |
+|                 |                 |                 | array of TXIDs  |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—list of ancestor transactions*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | An array of     |
+|                 |                 | equired(exactly | TXIDs belonging |
+|                 |                 | 1)              | to transactions |
+|                 |                 |                 | in the memory   |
+|                 |                 |                 | pool. The array |
+|                 |                 |                 | may be empty if |
+|                 |                 |                 | there are no    |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the memory pool |
++-----------------+-----------------+-----------------+-----------------+
+| →TXID           | string          | Optional(0 or   | The TXID of a   |
+|                 |                 | more)           | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (format: ``true``)—a JSON object describing each transaction*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | A object        |
+|                 |                 | equired(exactly | containing      |
+|                 |                 | 1)              | transactions    |
+|                 |                 |                 | currently in    |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool. May be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| →TXID           | string : object | Optional(0 or   | The TXID of a   |
+|                 |                 | more)           | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``size``   | number (int)    | R               | The size of the |
+|                 |                 | equired(exactly | serialized      |
+|                 |                 | 1)              | transaction in  |
+|                 |                 |                 | bytes           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``fee``    | number          | R               | **Deprecated in |
+|                 | (bitcoins)      | equired(exactly | Dash Core       |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | paid by the     |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | decimal         |
+|                 |                 |                 | bitcoins        |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number          | R               | **Deprecated in |
+| →\              | (bitcoins)      | equired(exactly | Dash Core       |
+| ``modifiedfee`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | with fee deltas |
+|                 |                 |                 | used for mining |
+|                 |                 |                 | priority in     |
+|                 |                 |                 | decimal         |
+|                 |                 |                 | bitcoins        |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``time``   | number (int)    | R               | The time the    |
+|                 |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | entered the     |
+|                 |                 |                 | memory pool,    |
+|                 |                 |                 | Unix epoch time |
+|                 |                 |                 | format          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``height`` | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | height when the |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | entered the     |
+|                 |                 |                 | memory pool     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The number of   |
+| →\ ``de         |                 | equired(exactly | in-mempool      |
+| scendantcount`` |                 | 1)              | descendant      |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The size of     |
+| →\ ``d          |                 | equired(exactly | in-mempool      |
+| escendantsize`` |                 | 1)              | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | **Deprecated in |
+| →\ ``d          |                 | equired(exactly | Dash Core       |
+| escendantfees`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The number of   |
+| →\ ``           |                 | equired(exactly | in-mempool      |
+| ancestorcount`` |                 | 1)              | ancestor        |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The size of     |
+| →\ `            |                 | equired(exactly | in-mempool      |
+| `ancestorsize`` |                 | 1)              | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | **Deprecated in |
+| →\ `            |                 | equired(exactly | Dash Core       |
+| `ancestorfees`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``fees``   | object          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0               |
+|                 |                 |                 | .17.0**\ Object |
+|                 |                 |                 | containing fee  |
+|                 |                 |                 | information     |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\ ``base``   | number          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee in DASH     |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``modified`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee with fee    |
+|                 |                 |                 | deltas used for |
+|                 |                 |                 | mining priority |
+|                 |                 |                 | in DASH         |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``ancestor`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\            | number          | Optional(0 or   | **Added in Dash |
+|  ``descendent`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →               | array           | R               | An array        |
+| →\ ``depends``  |                 | equired(exactly | holding TXIDs   |
+|                 |                 | 1)              | of unconfirmed  |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon    |
+|                 |                 |                 | (parent         |
+|                 |                 |                 | transactions).  |
+|                 |                 |                 | Those           |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | must be part of |
+|                 |                 |                 | a block before  |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction can |
+|                 |                 |                 | be added to a   |
+|                 |                 |                 | block, although |
+|                 |                 |                 | all             |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | may be included |
+|                 |                 |                 | in the same     |
+|                 |                 |                 | block. The      |
+|                 |                 |                 | array may be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| → → →Depends    | string          | Optional (0 or  | The TXIDs of    |
+| TXID            |                 | more)           | any unconfirmed |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon,   |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Examples from Dash Core 0.17.0*
+
+The default (``false``):
+
+.. code:: bash
+
+   dash-cli getmempoolancestors dc63e7f6929658feade06fec1eeaf43b\
+   3160095d66a9b59f57e77e56c20241fc 
+
+Result:
+
+.. code:: json
+
+   [
+     "d64eb30e5435e7a4564df9d06525a8ab48858fdaf111661d1e7874a72cebc132"
+   ]
+
+Verbose output (``true``):
+
+.. code:: bash
+
+   dash-cli getmempoolancestors dc63e7f6929658feade06fec1eeaf43b\
+   3160095d66a9b59f57e77e56c20241fc true
+
+Result:
+
+.. code:: json
+
+   {
+     "d64eb30e5435e7a4564df9d06525a8ab48858fdaf111661d1e7874a72cebc132": {
+       "fees": {
+         "base": 0.00000374,
+         "modified": 0.00000374,
+         "ancestor": 0.00000374,
+         "descendant": 0.00000600
+       },
+       "size": 373,
+       "fee": 0.00000374,
+       "modifiedfee": 0.00000374,
+       "time": 1610552403,
+       "height": 425538,
+       "descendantcount": 2,
+       "descendantsize": 599,
+       "descendantfees": 600,
+       "ancestorcount": 1,
+       "ancestorsize": 373,
+       "ancestorfees": 374,
+       "depends": [
+       ],
+       "spentby": [
+         "dc63e7f6929658feade06fec1eeaf43b3160095d66a9b59f57e77e56c20241fc"
+       ],
+       "instantlock": true
+     }
+   }
+
+*See also*
+
+-  `GetMemPoolDescendants </docs/core-api-ref-remote-procedure-calls-blockchain#getmempooldescendants>`__:
+   returns all in-mempool descendants for a transaction in the mempool.
+-  `GetRawMemPool </docs/core-api-ref-remote-procedure-calls-blockchain#getrawmempool>`__:
+   returns all transaction identifiers (TXIDs) in the memory pool as a
+   JSON array, or detailed information about each transaction in the
+   memory pool as a JSON object.
+
+GetMemPoolDescendants
+=====================
+
+*Added in Dash Core 0.12.3*
+
+The ```getmempooldescendants``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getmempooldescendants>`__
+returns all in-mempool descendants for a transaction in the mempool.
+
+*Parameter #1—a transaction identifier (TXID)*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| TXID            | string (hex)    | R               | The TXID of a   |
+|                 |                 | equired(exactly | transaction in  |
+|                 |                 | 1)              | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—desired output format*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Format          | bool            | Optional(0 or   | Set to ``true`` |
+|                 |                 | 1)              | to get json     |
+|                 |                 |                 | objects         |
+|                 |                 |                 | describing each |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool; set to    |
+|                 |                 |                 | ``false`` (the  |
+|                 |                 |                 | default) to     |
+|                 |                 |                 | only get an     |
+|                 |                 |                 | array of TXIDs  |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—list of descendant transactions*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | An array of     |
+|                 |                 | equired(exactly | TXIDs belonging |
+|                 |                 | 1)              | to transactions |
+|                 |                 |                 | in the memory   |
+|                 |                 |                 | pool. The array |
+|                 |                 |                 | may be empty if |
+|                 |                 |                 | there are no    |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the memory pool |
++-----------------+-----------------+-----------------+-----------------+
+| →TXID           | string          | Optional(0 or   | The TXID of a   |
+|                 |                 | more)           | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (format: ``true``)—a JSON object describing each transaction*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | A object        |
+|                 |                 | equired(exactly | containing      |
+|                 |                 | 1)              | transactions    |
+|                 |                 |                 | currently in    |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool. May be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| →TXID           | string : object | Optional(0 or   | The TXID of a   |
+|                 |                 | more)           | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``size``   | number (int)    | R               | The size of the |
+|                 |                 | equired(exactly | serialized      |
+|                 |                 | 1)              | transaction in  |
+|                 |                 |                 | bytes           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``fee``    | number          | R               | **Deprecated in |
+|                 | (bitcoins)      | equired(exactly | Dash Core       |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | paid by the     |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | decimal         |
+|                 |                 |                 | bitcoins        |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number          | R               | **Deprecated in |
+| →\              | (bitcoins)      | equired(exactly | Dash Core       |
+| ``modifiedfee`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | with fee deltas |
+|                 |                 |                 | used for mining |
+|                 |                 |                 | priority in     |
+|                 |                 |                 | decimal         |
+|                 |                 |                 | bitcoins        |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``time``   | number (int)    | R               | The time the    |
+|                 |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | entered the     |
+|                 |                 |                 | memory pool,    |
+|                 |                 |                 | Unix epoch time |
+|                 |                 |                 | format          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``height`` | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | height when the |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | entered the     |
+|                 |                 |                 | memory pool     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The number of   |
+| →\ ``de         |                 | equired(exactly | in-mempool      |
+| scendantcount`` |                 | 1)              | descendant      |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The size of     |
+| →\ ``d          |                 | equired(exactly | in-mempool      |
+| escendantsize`` |                 | 1)              | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | **Deprecated in |
+| →\ ``d          |                 | equired(exactly | Dash Core       |
+| escendantfees`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The number of   |
+| →\ ``           |                 | equired(exactly | in-mempool      |
+| ancestorcount`` |                 | 1)              | ancestor        |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The size of     |
+| →\ `            |                 | equired(exactly | in-mempool      |
+| `ancestorsize`` |                 | 1)              | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | **Deprecated in |
+| →\ `            |                 | equired(exactly | Dash Core       |
+| `ancestorfees`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``fees``   | object          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0               |
+|                 |                 |                 | .17.0**\ Object |
+|                 |                 |                 | containing fee  |
+|                 |                 |                 | information     |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\ ``base``   | number          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee in DASH     |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``modified`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee with fee    |
+|                 |                 |                 | deltas used for |
+|                 |                 |                 | mining priority |
+|                 |                 |                 | in DASH         |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``ancestor`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\            | number          | Optional(0 or   | **Added in Dash |
+|  ``descendent`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →               | array           | R               | An array        |
+| →\ ``depends``  |                 | equired(exactly | holding TXIDs   |
+|                 |                 | 1)              | of unconfirmed  |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon    |
+|                 |                 |                 | (parent         |
+|                 |                 |                 | transactions).  |
+|                 |                 |                 | Those           |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | must be part of |
+|                 |                 |                 | a block before  |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction can |
+|                 |                 |                 | be added to a   |
+|                 |                 |                 | block, although |
+|                 |                 |                 | all             |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | may be included |
+|                 |                 |                 | in the same     |
+|                 |                 |                 | block. The      |
+|                 |                 |                 | array may be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| → → →Depends    | string          | Optional (0 or  | The TXIDs of    |
+| TXID            |                 | more)           | any unconfirmed |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon,   |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Examples from Dash Core 0.17.0*
+
+The default (``false``):
+
+.. code:: bash
+
+   dash-cli getmempooldescendants d64eb30e5435e7a4564df9d06525a8ab\
+   48858fdaf111661d1e7874a72cebc132
+
+Result:
+
+.. code:: json
+
+   [
+     "dc63e7f6929658feade06fec1eeaf43b3160095d66a9b59f57e77e56c20241fc"
+   ]
+
+Verbose output (``true``):
+
+.. code:: bash
+
+   dash-cli getmempooldescendants d64eb30e5435e7a4564df9d06525a8ab\
+   48858fdaf111661d1e7874a72cebc132 true
+
+Result:
+
+.. code:: json
+
+   {
+     "dc63e7f6929658feade06fec1eeaf43b3160095d66a9b59f57e77e56c20241fc": {
+       "fees": {
+         "base": 0.00000226,
+         "modified": 0.00000226,
+         "ancestor": 0.00000600,
+         "descendant": 0.00000226
+       },
+       "size": 226,
+       "fee": 0.00000226,
+       "modifiedfee": 0.00000226,
+       "time": 1610552427,
+       "height": 425538,
+       "descendantcount": 1,
+       "descendantsize": 226,
+       "descendantfees": 226,
+       "ancestorcount": 2,
+       "ancestorsize": 599,
+       "ancestorfees": 600,
+       "depends": [
+         "d64eb30e5435e7a4564df9d06525a8ab48858fdaf111661d1e7874a72cebc132"
+       ],
+       "spentby": [
+       ],
+       "instantlock": true
+     }
+   }
+
+*See also*
+
+-  `GetMemPoolAncestors </docs/core-api-ref-remote-procedure-calls-blockchain#getmempoolancestors>`__:
+   returns all in-mempool ancestors for a transaction in the mempool.
+-  `GetRawMemPool </docs/core-api-ref-remote-procedure-calls-blockchain#getrawmempool>`__:
+   returns all transaction identifiers (TXIDs) in the memory pool as a
+   JSON array, or detailed information about each transaction in the
+   memory pool as a JSON object.
+
+GetMemPoolEntry
+===============
+
+*Added in Dash Core 0.14.0*
+
+The ```getmempoolentry``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getmempoolentry>`__
+returns mempool data for given transaction (must be in mempool).
+
+*Parameter #1—a transaction identifier (TXID)*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| TXID            | string (hex)    | R               | The TXID of a   |
+|                 |                 | equired(exactly | transaction in  |
+|                 |                 | 1)              | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result —a JSON object describing the transaction*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | A object        |
+|                 |                 | equired(exactly | containing      |
+|                 |                 | 1)              | transactions    |
+|                 |                 |                 | currently in    |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool. May be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``size``     | number (int)    | R               | The size of the |
+|                 |                 | equired(exactly | serialized      |
+|                 |                 | 1)              | transaction in  |
+|                 |                 |                 | bytes           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``fee``      | number          | R               | **Deprecated in |
+|                 | (bitcoins)      | equired(exactly | Dash Core       |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | paid by the     |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | decimal         |
+|                 |                 |                 | bitcoins        |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number          | R               | **Deprecated in |
+| ``modifiedfee`` | (bitcoins)      | equired(exactly | Dash Core       |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | with fee deltas |
+|                 |                 |                 | used for mining |
+|                 |                 |                 | priority in     |
+|                 |                 |                 | decimal         |
+|                 |                 |                 | bitcoins        |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``time``     | number (int)    | R               | The time the    |
+|                 |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | entered the     |
+|                 |                 |                 | memory pool,    |
+|                 |                 |                 | Unix epoch time |
+|                 |                 |                 | format          |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``height``   | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | height when the |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | entered the     |
+|                 |                 |                 | memory pool     |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``de         | number (int)    | R               | The number of   |
+| scendantcount`` |                 | equired(exactly | in-mempool      |
+|                 |                 | 1)              | descendant      |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``d          | number (int)    | R               | The size of     |
+| escendantsize`` |                 | equired(exactly | in-mempool      |
+|                 |                 | 1)              | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``d          | number (int)    | R               | **Deprecated in |
+| escendantfees`` |                 | equired(exactly | Dash Core       |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | number (int)    | R               | The number of   |
+| ancestorcount`` |                 | equired(exactly | in-mempool      |
+|                 |                 | 1)              | ancestor        |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ `            | number (int)    | R               | The size of     |
+| `ancestorsize`` |                 | equired(exactly | in-mempool      |
+|                 |                 | 1)              | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ `            | number (int)    | R               | **Deprecated in |
+| `ancestorfees`` |                 | equired(exactly | Dash Core       |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``fees``   | object          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0               |
+|                 |                 |                 | .17.0**\ Object |
+|                 |                 |                 | containing fee  |
+|                 |                 |                 | information     |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\ ``base``   | number          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee in DASH     |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``modified`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee with fee    |
+|                 |                 |                 | deltas used for |
+|                 |                 |                 | mining priority |
+|                 |                 |                 | in DASH         |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``ancestor`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\            | number          | Optional(0 or   | **Added in Dash |
+|  ``descendent`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``depends``  | array           | R               | An array        |
+|                 |                 | equired(exactly | holding TXIDs   |
+|                 |                 | 1)              | of unconfirmed  |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon    |
+|                 |                 |                 | (parent         |
+|                 |                 |                 | transactions).  |
+|                 |                 |                 | Those           |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | must be part of |
+|                 |                 |                 | a block before  |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction can |
+|                 |                 |                 | be added to a   |
+|                 |                 |                 | block, although |
+|                 |                 |                 | all             |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | may be included |
+|                 |                 |                 | in the same     |
+|                 |                 |                 | block. The      |
+|                 |                 |                 | array may be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| → →Depends TXID | string          | Optional (0 or  | The TXIDs of    |
+|                 |                 | more)           | any unconfirmed |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon,   |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | bool            | R               | **Always        |
+| ``instantlock`` |                 | equired(exactly | ``false``       |
+|                 |                 | 1)              | if**\ `lite     |
+|                 |                 |                 | mode            |
+|                 |                 |                 | <core-guide-das |
+|                 |                 |                 | h-features#lite |
+|                 |                 |                 | -mode>`__\ **is |
+|                 |                 |                 | enabled**\ True |
+|                 |                 |                 | if this         |
+|                 |                 |                 | transaction was |
+|                 |                 |                 | locked via      |
+|                 |                 |                 | InstantSend     |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.17.0*
+
+.. code:: bash
+
+   dash-cli getmempoolentry  d64eb30e5435e7a4564df9d06525a8ab\
+   48858fdaf111661d1e7874a72cebc132
+
+Result:
+
+.. code:: json
+
+   {
+     "fees": {
+       "base": 0.00000374,
+       "modified": 0.00000374,
+       "ancestor": 0.00000374,
+       "descendant": 0.00000600
+     },
+     "size": 373,
+     "fee": 0.00000374,
+     "modifiedfee": 0.00000374,
+     "time": 1610552403,
+     "height": 425538,
+     "descendantcount": 2,
+     "descendantsize": 599,
+     "descendantfees": 600,
+     "ancestorcount": 1,
+     "ancestorsize": 373,
+     "ancestorfees": 374,
+     "depends": [
+     ],
+     "spentby": [
+       "dc63e7f6929658feade06fec1eeaf43b3160095d66a9b59f57e77e56c20241fc"
+     ],
+     "instantlock": true
+   }
+
+*See also*
+
+-  `GetMemPoolAncestors </docs/core-api-ref-remote-procedure-calls-blockchain#getmempoolancestors>`__:
+   returns all in-mempool ancestors for a transaction in the mempool.
+-  `GetMemPoolDescendants </docs/core-api-ref-remote-procedure-calls-blockchain#getmempooldescendants>`__:
+   returns all in-mempool descendants for a transaction in the mempool.
+-  `GetRawMemPool </docs/core-api-ref-remote-procedure-calls-blockchain#getrawmempool>`__:
+   returns all transaction identifiers (TXIDs) in the memory pool as a
+   JSON array, or detailed information about each transaction in the
+   memory pool as a JSON object.
+
+GetMemPoolInfo
+==============
+
+The ```getmempoolinfo``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getmempoolinfo>`__
+returns information about the node’s current transaction memory pool.
+
+*Parameters: none*
+
+*Result—information about the transaction memory pool*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | A object        |
+|                 |                 | equired(exactly | containing      |
+|                 |                 | 1)              | information     |
+|                 |                 |                 | about the       |
+|                 |                 |                 | memory pool     |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``size``     | number (int)    | R               | The number of   |
+|                 |                 | equired(exactly | transactions    |
+|                 |                 | 1)              | currently in    |
+|                 |                 |                 | the memory pool |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``bytes``    | number (int)    | R               | The total       |
+|                 |                 | equired(exactly | number of bytes |
+|                 |                 | 1)              | in the          |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the memory pool |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``usage``    | number (int)    | R               | *Added in       |
+|                 |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.11.0*\ Total  |
+|                 |                 |                 | memory usage    |
+|                 |                 |                 | for the mempool |
+|                 |                 |                 | in bytes        |
++-----------------+-----------------+-----------------+-----------------+
+| →\              | number (int)    | R               | *Added in       |
+|  ``maxmempool`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0               |
+|                 |                 |                 | .12.0*\ Maximum |
+|                 |                 |                 | memory usage    |
+|                 |                 |                 | for the mempool |
+|                 |                 |                 | in bytes        |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | number          | R               | *Added in       |
+| mempoolminfee`` |                 | equired(exactly | Bitcoin Core    |
+|                 |                 | 1)              | 0.12.0*\ The    |
+|                 |                 |                 | lowest fee per  |
+|                 |                 |                 | kilobyte paid   |
+|                 |                 |                 | by any          |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | the memory pool |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | number          | R               | *Added in Dash  |
+| mempoolminfee`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.16.0*\ The    |
+|                 |                 |                 | current minimum |
+|                 |                 |                 | relay fee for   |
+|                 |                 |                 | transactions    |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``ins        | number (int)    | R               | *Added in Dash  |
+| tantsendlocks`` |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.15.0*\ Number |
+|                 |                 |                 | of unconfirmed  |
+|                 |                 |                 | InstantSend     |
+|                 |                 |                 | locks           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.16.0*
+
+.. code:: bash
+
+   dash-cli -testnet getmempoolinfo
+
+Result:
+
+.. code:: json
+
+   {
+     "size": 3,
+     "bytes": 1857,
+     "usage": 5536,
+     "maxmempool": 300000000,
+     "mempoolminfee": 0.00001000,
+     "minrelaytxfee": 0.00001000,
+     "instantsendlocks": 2
+   }
+
+*See also*
+
+-  `GetBlockChainInfo </docs/core-api-ref-remote-procedure-calls-blockchain#getblockchaininfo>`__:
+   provides information about the current state of the block chain.
+-  `GetRawMemPool </docs/core-api-ref-remote-procedure-calls-blockchain#getrawmempool>`__:
+   returns all transaction identifiers (TXIDs) in the memory pool as a
+   JSON array, or detailed information about each transaction in the
+   memory pool as a JSON object.
+-  `GetTxOutSetInfo </docs/core-api-ref-remote-procedure-calls-blockchain#gettxoutsetinfo>`__:
+   returns statistics about the confirmed unspent transaction output
+   (UTXO) set. Note that this call may take some time and that it only
+   counts outputs from confirmed transactions—it does not count outputs
+   from the memory pool.
+
+GetRawMemPool
+=============
+
+The ```getrawmempool``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getrawmempool>`__
+returns all transaction identifiers (TXIDs) in the memory pool as a JSON
+array, or detailed information about each transaction in the memory pool
+as a JSON object.
+
+*Parameter—desired output format*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Format          | bool            | Optional(0 or   | Set to ``true`` |
+|                 |                 | 1)              | to get verbose  |
+|                 |                 |                 | output          |
+|                 |                 |                 | describing each |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool; set to    |
+|                 |                 |                 | ``false`` (the  |
+|                 |                 |                 | default) to     |
+|                 |                 |                 | only get an     |
+|                 |                 |                 | array of TXIDs  |
+|                 |                 |                 | for             |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the memory pool |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (format ``false``)—an array of TXIDs*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | An array of     |
+|                 |                 | equired(exactly | TXIDs belonging |
+|                 |                 | 1)              | to transactions |
+|                 |                 |                 | in the memory   |
+|                 |                 |                 | pool. The array |
+|                 |                 |                 | may be empty if |
+|                 |                 |                 | there are no    |
+|                 |                 |                 | transactions in |
+|                 |                 |                 | the memory pool |
++-----------------+-----------------+-----------------+-----------------+
+| →TXID           | string          | Optional(0 or   | The TXID of a   |
+|                 |                 | more)           | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (format: ``true``)—a JSON object describing each transaction*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | A object        |
+|                 |                 | equired(exactly | containing      |
+|                 |                 | 1)              | transactions    |
+|                 |                 |                 | currently in    |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool. May be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| →TXID           | string : object | Optional(0 or   | The TXID of a   |
+|                 |                 | more)           | transaction in  |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool, encoded   |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``size``   | number (int)    | R               | The size of the |
+|                 |                 | equired(exactly | serialized      |
+|                 |                 | 1)              | transaction in  |
+|                 |                 |                 | bytes           |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``fee``    | amount (Dash)   | R               | **Deprecated in |
+|                 |                 | equired(exactly | Dash Core       |
+|                 |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | paid by the     |
+|                 |                 |                 | transaction in  |
+|                 |                 |                 | decimal Dash    |
++-----------------+-----------------+-----------------+-----------------+
+| →               | amount (Dash)   | R               | **Deprecated in |
+| →\              |                 | equired(exactly | Dash Core       |
+| ``modifiedfee`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | transaction fee |
+|                 |                 |                 | with fee deltas |
+|                 |                 |                 | used for mining |
+|                 |                 |                 | priority in     |
+|                 |                 |                 | decimal Dash    |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``time``   | number (int)    | R               | The time the    |
+|                 |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | entered the     |
+|                 |                 |                 | memory pool,    |
+|                 |                 |                 | Unix epoch time |
+|                 |                 |                 | format          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``height`` | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | height when the |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | entered the     |
+|                 |                 |                 | memory pool     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | *Added in       |
+| →\ ``de         |                 | equired(exactly | Bitcoin Core    |
+| scendantcount`` |                 | 1)              | 0.12.0*\ The    |
+|                 |                 |                 | number of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendant      |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | *Added in       |
+| →\ ``d          |                 | equired(exactly | Bitcoin Core    |
+| escendantsize`` |                 | 1)              | 0.12.0*\ The    |
+|                 |                 |                 | size of         |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | **Deprecated in |
+| →\ ``d          |                 | equired(exactly | Dash Core       |
+| escendantfees`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | *Added in Dash  |
+| →\ ``           |                 | equired(exactly | Core 0.12.3 /   |
+| ancestorcount`` |                 | 1)              | Bitcoin Core    |
+|                 |                 |                 | 0.13.0*\ The    |
+|                 |                 |                 | number of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestor        |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | *Added in Dash  |
+| →\ `            |                 | equired(exactly | Core 0.12.3 /   |
+| `ancestorsize`` |                 | 1)              | Bitcoin Core    |
+|                 |                 |                 | 0.13.0*\ The    |
+|                 |                 |                 | size of         |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | **Deprecated in |
+| →\ `            |                 | equired(exactly | Dash Core       |
+| `ancestorfees`` |                 | 1)              | 0.17.0**\ The   |
+|                 |                 |                 | modified fees   |
+|                 |                 |                 | (see            |
+|                 |                 |                 | ``modifiedfee`` |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one)            |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``fees``   | object          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0               |
+|                 |                 |                 | .17.0**\ Object |
+|                 |                 |                 | containing fee  |
+|                 |                 |                 | information     |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\ ``base``   | number          | Optional(0 or   | **Added in Dash |
+|                 |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee in DASH     |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``modified`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.17.0          |
+|                 |                 |                 | **\ Transaction |
+|                 |                 |                 | fee with fee    |
+|                 |                 |                 | deltas used for |
+|                 |                 |                 | mining priority |
+|                 |                 |                 | in DASH         |
++-----------------+-----------------+-----------------+-----------------+
+| →→              | number          | Optional(0 or   | **Added in Dash |
+| →\ ``ancestor`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | ancestors       |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →→→\            | number          | Optional(0 or   | **Added in Dash |
+|  ``descendent`` |                 | 1)              | Core            |
+|                 |                 |                 | 0.1             |
+|                 |                 |                 | 7.0**\ Modified |
+|                 |                 |                 | fees (see       |
+|                 |                 |                 | above) of       |
+|                 |                 |                 | in-mempool      |
+|                 |                 |                 | descendants     |
+|                 |                 |                 | (including this |
+|                 |                 |                 | one) in DASH    |
++-----------------+-----------------+-----------------+-----------------+
+| →               | array           | R               | An array        |
+| →\ ``depends``  |                 | equired(exactly | holding TXIDs   |
+|                 |                 | 1)              | of unconfirmed  |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon    |
+|                 |                 |                 | (parent         |
+|                 |                 |                 | transactions).  |
+|                 |                 |                 | Those           |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | must be part of |
+|                 |                 |                 | a block before  |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction can |
+|                 |                 |                 | be added to a   |
+|                 |                 |                 | block, although |
+|                 |                 |                 | all             |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | may be included |
+|                 |                 |                 | in the same     |
+|                 |                 |                 | block. The      |
+|                 |                 |                 | array may be    |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| → → →Depends    | string          | Optional (0 or  | The TXIDs of    |
+| TXID            |                 | more)           | any unconfirmed |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | depends upon,   |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+| →               | array           | R               | **Added in Dash |
+| →\ ``spentby``  |                 | equired(exactly | Core            |
+|                 |                 | 1)              | 0.17.0**\ An    |
+|                 |                 |                 | array of        |
+|                 |                 |                 | unconfirmed     |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | spending        |
+|                 |                 |                 | outputs from    |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| → → →TXID       | string          | Optional (0 or  | The TXIDs of    |
+|                 |                 | more)           | any unconfirmed |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | spending from   |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | bool            | R               | *Added in Dash  |
+| →\              |                 | equired(exactly | Core            |
+| ``instantlock`` |                 | 1)              | 0.12            |
+|                 |                 |                 | .3*\ \ **Always |
+|                 |                 |                 | ``false``       |
+|                 |                 |                 | if**\ `lite     |
+|                 |                 |                 | mode            |
+|                 |                 |                 | <core-guide-das |
+|                 |                 |                 | h-features#lite |
+|                 |                 |                 | -mode>`__\ **is |
+|                 |                 |                 | enabled**\ Set  |
+|                 |                 |                 | to ``true`` for |
+|                 |                 |                 | locked          |
+|                 |                 |                 | InstantSend     |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | (masternode     |
+|                 |                 |                 | quorum has      |
+|                 |                 |                 | locked the      |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | inputs via      |
+|                 |                 |                 | ``islock``      |
+|                 |                 |                 | message). Set   |
+|                 |                 |                 | to ``false`` if |
+|                 |                 |                 | the masternodes |
+|                 |                 |                 | have not        |
+|                 |                 |                 | approved the    |
+|                 |                 |                 | InstantSend     |
+|                 |                 |                 | transaction     |
++-----------------+-----------------+-----------------+-----------------+
+
+*Examples from Dash Core 0.17.0*
+
+The default (``false``):
+
+.. code:: bash
+
+   dash-cli getrawmempool
+
+Result:
+
+.. code:: json
+
+   [
+     "9bf373838dd68dfb7d670af15a7414fba400a7db91b7a0ac390b6f190daeb462"
+   ]
+
+Verbose output (``true``):
+
+.. code:: bash
+
+   dash-cli getrawmempool true
+
+Result:
+
+.. code:: json
+
+   {
+     "9bf373838dd68dfb7d670af15a7414fba400a7db91b7a0ac390b6f190daeb462": {
+       "fees": {
+         "base": 0.00000374,
+         "modified": 0.00000374,
+         "ancestor": 0.00000374,
+         "descendant": 0.00000374
+       },
+       "size": 373,
+       "fee": 0.00000374,
+       "modifiedfee": 0.00000374,
+       "time": 1610551773,
+       "height": 425536,
+       "descendantcount": 1,
+       "descendantsize": 373,
+       "descendantfees": 374,
+       "ancestorcount": 1,
+       "ancestorsize": 373,
+       "ancestorfees": 374,
+       "depends": [
+       ],
+       "spentby": [
+       ],
+       "instantlock": true
+     }
+   }
+
+*See also*
+
+-  `GetMemPoolInfo </docs/core-api-ref-remote-procedure-calls-blockchain#getmempoolinfo>`__:
+   returns information about the node’s current transaction memory pool.
+-  `GetMemPoolEntry </docs/core-api-ref-remote-procedure-calls-blockchain#getmempoolentry>`__:
+   returns mempool data for given transaction (must be in mempool).
+-  `GetTxOutSetInfo </docs/core-api-ref-remote-procedure-calls-blockchain#gettxoutsetinfo>`__:
+   returns statistics about the confirmed unspent transaction output
+   (UTXO) set. Note that this call may take some time and that it only
+   counts outputs from confirmed transactions—it does not count outputs
+   from the memory pool.
+
+GetMerkleBlocks
+===============
+
+*Added in Dash Core 0.15.0*
+
+The ```getmerkleblocks``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getmerkleblocks>`__
+returns an array of hex-encoded merkleblocks for blocks starting from
+which match .
+
+*Parameter #1—filter*
+
+====== ====== =================== ============================
+Name   Type   Presence            Description
+====== ====== =================== ============================
+filter string Required(exactly 1) The hex encoded bloom filter
+====== ====== =================== ============================
+
+*Parameter #2—hash*
+
+==== ====== =================== ==============
+Name Type   Presence            Description
+==== ====== =================== ==============
+hash string Required(exactly 1) The block hash
+==== ====== =================== ==============
+
+*Parameter #3—count*
+
+===== ============ ======================== ===========
+Name  Type         Presence                 Description
+===== ============ ======================== ===========
+count number (int) OptionalDefault/max=2000 
+===== ============ ======================== ===========
+
+*Result—the list of merkleblocks*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | array           | R               | An array of     |
+|                 |                 | equired(exactly | merkleblocks    |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →Merkle Block   | string (hex)    | Optional(1 or   | A serialized,   |
+|                 |                 | more)           | hex-encoded     |
+|                 |                 |                 | merkleblock     |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.15.0*
+
+.. code:: bash
+
+   dash-cli getmerkleblocks \
+       "2303028005802040100040000008008400048141010000f8400420800080025004000004130000000000000001" \
+       "00000000007e1432d2af52e8463278bf556b55cf5049262f25634557e2e91202"
+       2000
+
+Result (truncated):
+
+.. code:: json
+
+   [
+     "000000202c...aefc440107",
+     "0000002058...9a17830103"
+   ]
+
+*See also: none*
+
+GetSpecialTxes
+==============
+
+*Added in Dash Core 0.13.1*
+
+The ```getspecialtxes``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getspecialtxes>`__
+returns an array of special transactions found in the specified block
+
+*Parameter #1—Block hash*
+
+============= ====== =================== ===============
+Name          Type   Presence            Description
+============= ====== =================== ===============
+``blockhash`` string Required(exactly 1) The block hash.
+============= ====== =================== ===============
+
+*Parameter #2—Special transaction type*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| type            | int             | Optional(0 or   | Filter special  |
+|                 |                 | 1)              | txes by type,   |
+|                 |                 |                 | -1 means all    |
+|                 |                 |                 | types (default: |
+|                 |                 |                 | -1)             |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #3—Result limit*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| count           | int             | Optional(0 or   | The number of   |
+|                 |                 | 1)              | transactions to |
+|                 |                 |                 | return          |
+|                 |                 |                 | (default: 10)   |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #4—Results to skip*
+
++------+------+------------------+-------------------------------------------------+
+| Name | Type | Presence         | Description                                     |
++======+======+==================+=================================================+
+| skip | int  | Optional(0 or 1) | The number of transactions to skip (default: 0) |
++------+------+------------------+-------------------------------------------------+
+
+*Parameter #5—Verbosity*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| verbosity       | int             | Optional(0 or   | 0 for hashes, 1 |
+|                 |                 | 1)              | for hex-encoded |
+|                 |                 |                 | data, and 2 for |
+|                 |                 |                 | JSON            |
+|                 |                 |                 | object(default: |
+|                 |                 |                 | 0)              |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if ``verbosity`` was ``0``)—An array of transaction IDs*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string (hex):   | R               | Array of        |
+|                 | array           | equired(exactly | special         |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | hashes          |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if ``verbosity`` was ``1``)—An array of serialized
+transactions*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string (hex):   | R               | Array of        |
+|                 | array           | equired(exactly | serialized,     |
+|                 |                 | 1)              | hex-encoded     |
+|                 |                 |                 | data for the    |
+|                 |                 |                 | special         |
+|                 |                 |                 | transaction(s)  |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result (if ``verbosity`` was ``2``)—An array of JSON objects*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string (hex):   | R               | Array of        |
+|                 | array of        | equired(exactly | special         |
+|                 | ojbects         | 1)              | transaction     |
+|                 |                 |                 | objects in the  |
+|                 |                 |                 | format of the   |
+|                 |                 |                 | ```getr         |
+|                 |                 |                 | awtransaction`` |
+|                 |                 |                 | RPC             |
+|                 |                 |                 | <core-api-ref-r |
+|                 |                 |                 | emote-procedure |
+|                 |                 |                 | -calls-raw-tran |
+|                 |                 |                 | sactions#getraw |
+|                 |                 |                 | transaction>`__ |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.13.1*
+
+List of Special Transactions hashes.
+
+.. code:: bash
+
+   dash-cli -testnet getspecialtxes \
+   0000003db0006ecaccdf5ae2cfa9d94406ef40ff65b9ec34668b87fca3da9226
+
+Result:
+
+.. code:: json
+
+   [
+     "1572a15f56307e413afe3cb7ea0017a1a3fd6d89c6c5f258cc17b2888a8e7fff",
+     "89a6dc42063e4a792ec225db64dd9426742a5d1738e8821625d2ab920a6187b2",
+     "fa3b3b0d3522becb02ddd15dd075f3d6ecc6a5a50b43c6c9f6d4703a9a8509d5"
+   ]
+
+List of Provider Registration Special Transactions (type: 1) in
+serialized, hex-encoded format.
+
+.. code:: bash
+
+   dash-cli -testnet getspecialtxes \
+   0000003db0006ecaccdf5ae2cfa9d94406ef40ff65b9ec34668b87fca3da9226 1 10 0 1
+
+Result:
+
+.. code:: json
+
+   [
+     "0300010001ea721d7420a9b58025894d08f9fecc73b7b87ed09277fa99dad5aa028ea357e1000000006b48304502210093c409672eed335f80630d7108c108d0b85ebe4d8be0758f8a3745f617c4b57302203175063605552c89f6de7f3dadc1773d5ef773b7cc0ccf98e6c5555ea75ba307012102b21d19fec95d9863c5b12fafeb60530e1cfc51d83f49ea9bca7192abb8b83e46feffffff01c4bb609a010000001976a9142efe9f9d3b36b133364d3cccbd27db75a0fbdcb788ac00000000fd120101000000000031567fbaf591ae9d2d0e9050bebce6a311cfd900616f851a3a630aa65e53f6940000000000000000000000000000ffffad3d1ee74a43c1ad3af209f75deaeb9216fc8339fd48d376f9b007ffa44583c9908f4aaca8dd97990c56043e475723f90940ef5fd7d493152540f25f58fb8c965ee5e1be4f850a661476c1ad3af209f75deaeb9216fc8339fd48d376f9b0e8031976a91454bbd7bd7c21553612d60ab16579e51efbcb135288acc281e8bf5a0dd22dfc9f1edeef9ef248f965a79210d997da37fb3e1dec76d1a4412096809bc005c860a0215cb008e3044b972688443b0b7a31ac5a04b728e63b1b5c5489e33dd666435f93c646523ad8a1d935a58957026749cbd0a9bf7e09a77388",
+     "03000100012354b77c0f261f3d5b8424cbe67c2f27130f01c531732a08b8ae3f28aaa1b1fb000000006a473044022058323d3d9114492a7a7d350d5e3127d2dc550563968319987079c98f19ed519202204160cfe81adf1f41301136a3cbe03697baa1b14c3103b66bd839ace503dbf2630121026f83a8dad6b4695b136c399405b31d4031fd6631c469673d71eda479157ef9dcfeffffff0106b8609a010000001976a9142a855dc127bfdd5cc0ab73b71ff126e49aa409c488ac00000000fd1201010000000000b60dcb8bab5aba47435942c36ca4ee74ea5b662f4d7c7b528ce341915b2d5aec0100000000000000000000000000ffffad3d1ee74a428d3433cb6b9a1a29fdf07613172bbfdab744889689e308c9d2d8a3cb35f9d7bb7220b1eca82c952b82111119670dacae18a509628c775287e4e796128cd6379b80dffd7d8d3433cb6b9a1a29fdf07613172bbfdab744889610271976a91454bbd7bd7c21553612d60ab16579e51efbcb135288ac512010a2b992d7d5c1e1f999852855cc55162800025cfdf3b56c74e4734a2d97411f858532607cbd8848452dab1f216650def1d11a5abf3fa464c9ffcc7fec894a012a4b70ee5d3b983b5fe640f04a7f3e4fe67fbb5b7cccb71afa37888ad6cca48e"
+   ]
+
+List of Coinbase Special Transactions (type: 5) in JSON format.
+
+.. code:: bash
+
+   dash-cli -testnet getspecialtxes \
+   00000000007b0fb99e36713cf08012482478ee496e6dcb4007ad2e806306e62b 5 10 0 2
+
+Result:
+
+.. code:: json
+
+   [
+     {
+       "txid": "25632685ed0d7286901a80961c924c1ddd952e764754dbd8b40d0956413c8b56",
+       "size": 229,
+       "version": 3,
+       "type": 5,
+       "locktime": 0,
+       "vin": [
+         {
+           "coinbase": "03ae50011a4d696e656420627920416e74506f6f6c2021000b01201da9196f0000000007000000",
+           "sequence": 4294967295
+         }
+       ],
+       "vout": [
+         {
+           "value": 8.10000000,
+           "valueSat": 810000000,
+           "n": 0,
+           "scriptPubKey": {
+             "asm": "OP_DUP OP_HASH160 cbd7bfcc50351180132b2c0698cb90ad74c473c7 OP_EQUALVERIFY OP_CHECKSIG",
+             "hex": "76a914cbd7bfcc50351180132b2c0698cb90ad74c473c788ac",
+             "reqSigs": 1,
+             "type": "pubkeyhash",
+             "addresses": [
+               "yeuGUfPMrbEqAS2Pw1wonYgEPbM4LAA9LK"
+             ]
+           }
+         },
+         {
+           "value": 8.10000000,
+           "valueSat": 810000000,
+           "n": 1,
+           "scriptPubKey": {
+             "asm": "OP_DUP OP_HASH160 88a060bc2dfe05780ae4dcb6c98b12436c35a939 OP_EQUALVERIFY OP_CHECKSIG",
+             "hex": "76a91488a060bc2dfe05780ae4dcb6c98b12436c35a93988ac",
+             "reqSigs": 1,
+             "type": "pubkeyhash",
+             "addresses": [
+               "yYmrsYP3XYMZr1cGtha3QzmuNB1C7CfyhV"
+             ]
+           }
+         }
+       ],
+       "extraPayloadSize": 70,
+       "extraPayload": "0200ae50010078e5c08b39960887bf95185c381bdb719e60b6925fa12af78a8824fade927387c757acb6bac63da84f9245e20cfd5d830382ac634d434725ca6349ab5db920a3",
+       "cbTx": {
+         "version": 2,
+         "height": 86190,
+         "merkleRootMNList": "877392defa24888af72aa15f92b6609e71db1b385c1895bf870896398bc0e578",
+         "merkleRootQuorums": "a320b95dab4963ca2547434d63ac8203835dfd0ce245924fa83dc6bab6ac57c7"
+       },
+       "instantlock": false,
+       "chainlock": false
+     }
+   ]
+
+*See also:*
+
+-  `GetRawTransaction </docs/core-api-ref-remote-procedure-calls-raw-transactions#getrawtransaction>`__:
+   gets a hex-encoded serialized transaction or a JSON object describing
+   the transaction. By default, Dash Core only stores complete
+   transaction data for UTXOs and your own transactions, so the RPC may
+   fail on historic transactions unless you use the non-default
+   ``txindex=1`` in your Dash Core startup settings.
+
+GetSpentInfo
+============
+
+[block:callout] { “type”: “info”, “body”: “Requires ``spentindex`` Dash
+Core command-line/configuration-file parameter to be enabled.”, “title”:
+"" } [/block] *Added in Dash Core 0.12.1*
+
+The ```getspentinfo``
+RPC <core-api-ref-remote-procedure-calls-blockchain#getspentinfo>`__
+returns the txid and index where an output is spent (requires
+``spentindex`` to be enabled).
+
+*Parameter #1—the TXID of the output*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| TXID            | string (hex)    | R               | The TXID of the |
+|                 |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | containing the  |
+|                 |                 |                 | relevant        |
+|                 |                 |                 | output, encoded |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—the start block height*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Index           | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | height to begin |
+|                 |                 | 1)              | looking in      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—the TXID and spending input index*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object/null     | R               | Information     |
+|                 |                 | equired(exactly | about the spent |
+|                 |                 | 1)              | output. If      |
+|                 |                 |                 | output wasn’t   |
+|                 |                 |                 | found or if an  |
+|                 |                 |                 | error occurred, |
+|                 |                 |                 | this will be    |
+|                 |                 |                 | JSON ``null``   |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``txid``     | string          | R               | The output txid |
+|                 |                 | equired(exactly |                 |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``index``    | number          | R               | The spending    |
+|                 |                 | equired(exactly | input index     |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+Get the txid and index where an output is spent:
+
+.. code:: bash
+
+   dash-cli getspentinfo \
+     '''
+       {
+         "txid": "0456aaf51a8df21dd47c2a06ede046a5bf7403bcb95d14d1d71b178c189fb933", \
+         "index": 0
+       }
+     '''
+
+Result:
+
+.. code:: json
+
+   {
+     "txid": "14e874421350840e9d43965967c5a989e7d41ad361ef37484ee67d01d433ecfa",
+     "index": 1,
+     "height": 7742
+   }
+
+*See also: none*
+
+GetTxOut
+========
+
+The ```gettxout``
+RPC <core-api-ref-remote-procedure-calls-blockchain#gettxout>`__ returns
+details about an unspent transaction output (UTXO).
+
+*Parameter #1—the TXID of the output to get*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| TXID            | string (hex)    | R               | The TXID of the |
+|                 |                 | equired(exactly | transaction     |
+|                 |                 | 1)              | containing the  |
+|                 |                 |                 | output to get,  |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—the output index number (vout) of the output to get*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Vout            | number (int)    | R               | The output      |
+|                 |                 | equired(exactly | index number    |
+|                 |                 | 1)              | (vout) of the   |
+|                 |                 |                 | output within   |
+|                 |                 |                 | the             |
+|                 |                 |                 | transaction;    |
+|                 |                 |                 | the first       |
+|                 |                 |                 | output in a     |
+|                 |                 |                 | transaction is  |
+|                 |                 |                 | vout 0          |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #3—whether to display unconfirmed outputs from the memory
+pool*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Unconfirmed     | bool            | Optional(0 or   | Set to ``true`` |
+|                 |                 | 1)              | to display      |
+|                 |                 |                 | unconfirmed     |
+|                 |                 |                 | outputs from    |
+|                 |                 |                 | the memory      |
+|                 |                 |                 | pool; set to    |
+|                 |                 |                 | ``false`` (the  |
+|                 |                 |                 | default) to     |
+|                 |                 |                 | only display    |
+|                 |                 |                 | outputs from    |
+|                 |                 |                 | confirmed       |
+|                 |                 |                 | transactions    |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—a description of the output*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object/null     | R               | Information     |
+|                 |                 | equired(exactly | about the       |
+|                 |                 | 1)              | output. If      |
+|                 |                 |                 | output wasn’t   |
+|                 |                 |                 | found, if it    |
+|                 |                 |                 | was spent, or   |
+|                 |                 |                 | if an error     |
+|                 |                 |                 | occurred, this  |
+|                 |                 |                 | will be JSON    |
+|                 |                 |                 | ``null``        |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The hash of the |
+| \ ``bestblock`` |                 | equired(exactly | header of the   |
+|                 |                 | 1)              | block on the    |
+|                 |                 |                 | local best      |
+|                 |                 |                 | block chain     |
+|                 |                 |                 | which includes  |
+|                 |                 |                 | this            |
+|                 |                 |                 | transaction.    |
+|                 |                 |                 | The hash will   |
+|                 |                 |                 | encoded as hex  |
+|                 |                 |                 | in RPC byte     |
+|                 |                 |                 | order. If the   |
+|                 |                 |                 | transaction is  |
+|                 |                 |                 | not part of a   |
+|                 |                 |                 | block, the      |
+|                 |                 |                 | string will be  |
+|                 |                 |                 | empty           |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``           | number (int)    | R               | The number of   |
+| confirmations`` |                 | equired(exactly | confirmations   |
+|                 |                 | 1)              | received for    |
+|                 |                 |                 | the transaction |
+|                 |                 |                 | containing this |
+|                 |                 |                 | output or ``0`` |
+|                 |                 |                 | if the          |
+|                 |                 |                 | transaction     |
+|                 |                 |                 | hasn’t been     |
+|                 |                 |                 | confirmed yet   |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``value``    | number (Dash)   | R               | The amount of   |
+|                 |                 | equired(exactly | Dash spent to   |
+|                 |                 | 1)              | this output.    |
+|                 |                 |                 | May be ``0``    |
++-----------------+-----------------+-----------------+-----------------+
+| →\ `            | string : object | Optional(0 or   | An object with  |
+| `scriptPubKey`` |                 | 1)              | information     |
+|                 |                 |                 | about the       |
+|                 |                 |                 | pubkey script.  |
+|                 |                 |                 | This may be     |
+|                 |                 |                 | ``null`` if     |
+|                 |                 |                 | there was no    |
+|                 |                 |                 | pubkey script   |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``asm``    | string          | R               | The pubkey      |
+|                 |                 | equired(exactly | script in       |
+|                 |                 | 1)              | decoded form    |
+|                 |                 |                 | with            |
+|                 |                 |                 | n               |
+|                 |                 |                 | on-data-pushing |
+|                 |                 |                 | opcodes listed  |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``hex``    | string (hex)    | R               | The pubkey      |
+|                 |                 | equired(exactly | script encoded  |
+|                 |                 | 1)              | as hex          |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | Optional(0 or   | The number of   |
+| →\ ``reqSigs``  |                 | 1)              | signatures      |
+|                 |                 |                 | required; this  |
+|                 |                 |                 | is always ``1`` |
+|                 |                 |                 | for P2PK,       |
+|                 |                 |                 | P2PKH, and P2SH |
+|                 |                 |                 | (including P2SH |
+|                 |                 |                 | multisig        |
+|                 |                 |                 | because the     |
+|                 |                 |                 | redeem script   |
+|                 |                 |                 | is not          |
+|                 |                 |                 | available in    |
+|                 |                 |                 | the pubkey      |
+|                 |                 |                 | script). It may |
+|                 |                 |                 | be greater than |
+|                 |                 |                 | 1 for bare      |
+|                 |                 |                 | multisig. This  |
+|                 |                 |                 | value will not  |
+|                 |                 |                 | be returned for |
+|                 |                 |                 | ``nulldata`` or |
+|                 |                 |                 | ``nonstandard`` |
+|                 |                 |                 | script types    |
+|                 |                 |                 | (see the        |
+|                 |                 |                 | ``type`` key    |
+|                 |                 |                 | below)          |
++-----------------+-----------------+-----------------+-----------------+
+| → →\ ``type``   | string          | Optional(0 or   | The type of     |
+|                 |                 | 1)              | script. This    |
+|                 |                 |                 | will be one of  |
+|                 |                 |                 | the following:• |
+|                 |                 |                 | ``pubkey`` for  |
+|                 |                 |                 | a P2PK script•  |
+|                 |                 |                 | ``pubkeyhash``  |
+|                 |                 |                 | for a P2PKH     |
+|                 |                 |                 | script•         |
+|                 |                 |                 | ``scripthash``  |
+|                 |                 |                 | for a P2SH      |
+|                 |                 |                 | script•         |
+|                 |                 |                 | ``multisig``    |
+|                 |                 |                 | for a bare      |
+|                 |                 |                 | multisig        |
+|                 |                 |                 | script•         |
+|                 |                 |                 | ``nulldata``    |
+|                 |                 |                 | for nulldata    |
+|                 |                 |                 | scripts•        |
+|                 |                 |                 | ``nonstandard`` |
+|                 |                 |                 | for unknown     |
+|                 |                 |                 | scripts         |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string : array  | Optional(0 or   | The P2PKH or    |
+| →               |                 | 1)              | P2SH addresses  |
+| \ ``addresses`` |                 |                 | used in this    |
+|                 |                 |                 | transaction, or |
+|                 |                 |                 | the computed    |
+|                 |                 |                 | P2PKH address   |
+|                 |                 |                 | of any pubkeys  |
+|                 |                 |                 | in this         |
+|                 |                 |                 | transaction.    |
+|                 |                 |                 | This array will |
+|                 |                 |                 | not be returned |
+|                 |                 |                 | for             |
+|                 |                 |                 | ``nulldata`` or |
+|                 |                 |                 | ``nonstandard`` |
+|                 |                 |                 | script types    |
++-----------------+-----------------+-----------------+-----------------+
+| → → →Address    | string          | Required(1 or   | A P2PKH or P2SH |
+|                 |                 | more)           | address         |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``coinbase`` | bool            | R               | Set to ``true`` |
+|                 |                 | equired(exactly | if the          |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | output belonged |
+|                 |                 |                 | to a coinbase   |
+|                 |                 |                 | transaction;    |
+|                 |                 |                 | set to          |
+|                 |                 |                 | ``false`` for   |
+|                 |                 |                 | all other       |
+|                 |                 |                 | transactions.   |
+|                 |                 |                 | Coinbase        |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | need to have    |
+|                 |                 |                 | 101             |
+|                 |                 |                 | confirmations   |
+|                 |                 |                 | before their    |
+|                 |                 |                 | outputs can be  |
+|                 |                 |                 | spent           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.15.0*
+
+Get the UTXO from the following transaction from the first output index
+(“0”), searching the memory pool if necessary.
+
+.. code:: bash
+
+   dash-cli -testnet gettxout \
+     e0a06b47f0de6f3851a228d5ac377ac38b495adf04298c43e951e679c5b0aa8f \
+     0 true
+
+Result:
+
+.. code:: json
+
+   {
+     "bestblock": "000000005651f6d7859793dee07d476a2f2a7338e66bbb41caf4b544c5b0318d",
+     "confirmations": 2,
+     "value": 25.00000000,
+     "scriptPubKey": {
+       "asm": "OP_DUP OP_HASH160 b66266c5017a759817f3bb99e8d9124bf5bb2e74 OP_EQUALVERIFY OP_CHECKSIG",
+       "hex": "76a914b66266c5017a759817f3bb99e8d9124bf5bb2e7488ac",
+       "reqSigs": 1,
+       "type": "pubkeyhash",
+       "addresses": [
+         "ycwoiAibTjpwnoCZSX7S4kiB2H8wULw9qo"
+       ]
+     },
+     "coinbase": false
+   }
+
+*See also*
+
+-  `GetRawTransaction </docs/core-api-ref-remote-procedure-calls-raw-transactions#getrawtransaction>`__:
+   gets a hex-encoded serialized transaction or a JSON object describing
+   the transaction. By default, Dash Core only stores complete
+   transaction data for UTXOs and your own transactions, so the RPC may
+   fail on historic transactions unless you use the non-default
+   ``txindex=1`` in your Dash Core startup settings.
+-  `GetTransaction </docs/core-api-ref-remote-procedure-calls-wallet#gettransaction>`__:
+   gets detailed information about an in-wallet transaction.
+
+GetTxOutProof
+=============
+
+The ```gettxoutproof``
+RPC <core-api-ref-remote-procedure-calls-blockchain#gettxoutproof>`__
+returns a hex-encoded proof that one or more specified transactions were
+included in a block.
+
+NOTE: By default this function only works when there is an unspent
+output in the UTXO set for this transaction. To make it always work, you
+need to maintain a transaction index, using the ``-txindex`` command
+line option, or specify the block in which the transaction is included
+in manually (by block header hash).
+
+*Parameter #1—the transaction hashes to prove*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| TXIDs           | array           | R               | A JSON array of |
+|                 |                 | equired(exactly | txids to filter |
+|                 |                 | 1)              |                 |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``txid``     | string          | Required(1 or   | TXIDs of the    |
+|                 |                 | more)           | transactions to |
+|                 |                 |                 | generate proof  |
+|                 |                 |                 | for. All        |
+|                 |                 |                 | transactions    |
+|                 |                 |                 | must be in the  |
+|                 |                 |                 | same block      |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—the block to look for txids in*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Header hash     | string          | Optional(0 or   | If specified,   |
+|                 |                 | 1)              | looks for txid  |
+|                 |                 |                 | in the block    |
+|                 |                 |                 | with this hash  |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—serialized, hex-encoded data for the proof*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string          | R               | A string that   |
+|                 |                 | equired(exactly | is a            |
+|                 |                 | 1)              | serialized,     |
+|                 |                 |                 | hex-encoded     |
+|                 |                 |                 | data for the    |
+|                 |                 |                 | proof           |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+Get the hex-encoded proof that “txid” was included in block
+000000012d774f3c7668f32bc448efeb93b317f312dd863679de3a007d47817f:
+
+.. code:: bash
+
+   dash-cli gettxoutproof \
+     '''
+       [
+         "e0a06b47f0de6f3851a228d5ac377ac38b495adf04298c43e951e679c5b0aa8f"
+       ]
+     ''' \
+     '000000012d774f3c7668f32bc448efeb93b317f312dd863679de3a007d47817f'
+
+Result (wrapped):
+
+.. code:: text
+
+   01000020ed72cc6a7294782a7711d8fa7ef74716ef062dc50bb0820f7eec923801000000\
+   aa5d17c5128043803b67c7ab03e4d3ffbc9604b54f877f1c5cf9ed3adeaa19b2cd7ed659\
+   f838011d10a70a480200000002033c89c2baecba9fc983c85dcf365c2d9cc93aca1dee2e\
+   5ac18124464056542e8faab0c579e651e9438c2904df5a498bc37a37acd528a251386fde\
+   f0476ba0e00105
+
+*See also*
+
+-  `VerifyTxOutProof </docs/core-api-ref-remote-procedure-calls-blockchain#verifytxoutproof>`__:
+   verifies that a proof points to one or more transactions in a block,
+   returning the transactions the proof commits to and throwing an RPC
+   error if the block is not in our best block chain.
+-  ```merkleblock``
+   message <core-ref-p2p-network-data-messages#merkleblock>`__: A
+   description of the format used for the proof.
+
+GetTxOutSetInfo
+===============
+
+The ```gettxoutsetinfo``
+RPC <core-api-ref-remote-procedure-calls-blockchain#gettxoutsetinfo>`__
+returns statistics about the confirmed unspent transaction output (UTXO)
+set. Note that this call may take some time and that it only counts
+outputs from confirmed transactions—it does not count outputs from the
+memory pool.
+
+*Parameters: none*
+
+*Result—statistics about the UTXO set*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | object          | R               | Information     |
+|                 |                 | equired(exactly | about the UTXO  |
+|                 |                 | 1)              | set             |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``height``   | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | the local best  |
+|                 |                 | 1)              | block chain. A  |
+|                 |                 |                 | new node with   |
+|                 |                 |                 | only the        |
+|                 |                 |                 | hardcoded       |
+|                 |                 |                 | genesis block   |
+|                 |                 |                 | will have a     |
+|                 |                 |                 | height of 0     |
++-----------------+-----------------+-----------------+-----------------+
+| →               | string (hex)    | R               | The hash of the |
+| \ ``bestblock`` |                 | equired(exactly | header of the   |
+|                 |                 | 1)              | highest block   |
+|                 |                 |                 | on the local    |
+|                 |                 |                 | best block      |
+|                 |                 |                 | chain, encoded  |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| →\ `            | number (int)    | R               | The number of   |
+| `transactions`` |                 | equired(exactly | transactions    |
+|                 |                 | 1)              | with unspent    |
+|                 |                 |                 | outputs         |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``txouts``   | number (int)    | R               | The number of   |
+|                 |                 | equired(exactly | unspent         |
+|                 |                 | 1)              | transaction     |
+|                 |                 |                 | outputs         |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``bogosize`` | number (int)    | R               | A meaningless   |
+|                 |                 | equired(exactly | metric for UTXO |
+|                 |                 | 1)              | set size        |
++-----------------+-----------------+-----------------+-----------------+
+| →\ ``hash       | string (hex)    | R               | A               |
+| _serialized_2`` |                 | equired(exactly | S               |
+|                 |                 | 1)              | HA256(SHA256()) |
+|                 |                 |                 | hash of the     |
+|                 |                 |                 | serialized UTXO |
+|                 |                 |                 | set; useful for |
+|                 |                 |                 | comparing two   |
+|                 |                 |                 | nodes to see if |
+|                 |                 |                 | they have the   |
+|                 |                 |                 | same set (they  |
+|                 |                 |                 | should, if they |
+|                 |                 |                 | always used the |
+|                 |                 |                 | same            |
+|                 |                 |                 | serialization   |
+|                 |                 |                 | format and      |
+|                 |                 |                 | currently have  |
+|                 |                 |                 | the same best   |
+|                 |                 |                 | block). The     |
+|                 |                 |                 | hash is encoded |
+|                 |                 |                 | as hex in RPC   |
+|                 |                 |                 | byte order      |
++-----------------+-----------------+-----------------+-----------------+
+| →               | number (int)    | R               | The estimated   |
+| \ ``disk_size`` |                 | equired(exactly | size of the     |
+|                 |                 | 1)              | chainstate on   |
+|                 |                 |                 | disk            |
++-----------------+-----------------+-----------------+-----------------+
+| →\ `            | number (Dash)   | R               | The total       |
+| `total_amount`` |                 | equired(exactly | amount of Dash  |
+|                 |                 | 1)              | in the UTXO set |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.15.0*
+
+.. code:: bash
+
+   dash-cli -testnet gettxoutsetinfo
+
+Result:
+
+.. code:: json
+
+   {
+     "height": 159358,
+     "bestblock": "0000000000a705ef74a1fc134ea1eba49af8eead40b3df1fc4fb40f5940a0d60",
+     "transactions": 187542,
+     "txouts": 366996,
+     "bogosize": 28344374,
+     "hash_serialized_2": "d7326bdc2d9cb7d91580bfd47d6c2972ab1776c2c33c787873a5fd01986c9377",
+     "disk_size": 21513509,
+     "total_amount": 7517185.08574437
+   }
+
+*See also*
+
+-  `GetBlockChainInfo </docs/core-api-ref-remote-procedure-calls-blockchain#getblockchaininfo>`__:
+   provides information about the current state of the block chain.
+-  `GetMemPoolInfo </docs/core-api-ref-remote-procedure-calls-blockchain#getmempoolinfo>`__:
+   returns information about the node’s current transaction memory pool.
+
+PreciousBlock
+=============
+
+*Added in Dash Core 0.12.3 / Bitcoin Core 0.14.0*
+
+The ```preciousblock``
+RPC <core-api-ref-remote-procedure-calls-blockchain#preciousblock>`__
+treats a block as if it were received before others with the same work.
+A later ``preciousblock`` call can override the effect of an earlier
+one. The effects of ``preciousblock`` are not retained across restarts.
+
+*Parameter #1—the block hash*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Header Hash     | string (hex)    | R               | The hash of the |
+|                 |                 | equired(exactly | block to mark   |
+|                 |                 | 1)              | as precious     |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—``null`` or error on failure*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | null            | R               | JSON ``null``.  |
+|                 |                 | equired(exactly | The JSON-RPC    |
+|                 |                 | 1)              | error field     |
+|                 |                 |                 | will be set     |
+|                 |                 |                 | only if you     |
+|                 |                 |                 | entered an      |
+|                 |                 |                 | invalid block   |
+|                 |                 |                 | hash            |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.3*
+
+.. code:: bash
+
+   dash-cli preciousblock 00000000034d77e287b63922a94f12e8c4ab9e\
+   1d8056060fd51f6153ea5dc757
+
+Result (no output from ``dash-cli`` because result is set to ``null``).
+
+PruneBlockChain
+===============
+
+*Added in Dash Core 0.12.3 / Bitcoin Core 0.14.0*
+
+The ```pruneblockchain``
+RPC <core-api-ref-remote-procedure-calls-blockchain#pruneblockchain>`__
+prunes the blockchain up to a specified height or timestamp. The
+``-prune`` option needs to be enabled (disabled by default).
+
+*Parameter #1—the block height or timestamp*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Height          | number (int)    | R               | The block       |
+|                 |                 | equired(exactly | height to prune |
+|                 |                 | 1)              | up to. May be   |
+|                 |                 |                 | set to a        |
+|                 |                 |                 | particular      |
+|                 |                 |                 | height, or a    |
+|                 |                 |                 | unix timestamp  |
+|                 |                 |                 | to prune blocks |
+|                 |                 |                 | whose block     |
+|                 |                 |                 | time is at      |
+|                 |                 |                 | least 2 hours   |
+|                 |                 |                 | older than the  |
+|                 |                 |                 | provided        |
+|                 |                 |                 | timestamp       |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—the height of the last block pruned*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | number (int)    | R               | The height of   |
+|                 |                 | equired(exactly | the last block  |
+|                 |                 | 1)              | pruned          |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.3*
+
+.. code:: bash
+
+   dash-cli pruneblockchain 413555
+
+Result:
+
+.. code:: text
+
+   413555
+
+*See also*
+
+-  `ImportPrunedFunds </docs/core-api-ref-remote-procedure-calls-wallet#importprunedfunds>`__:
+   imports funds without the need of a rescan. Meant for use with pruned
+   wallets.
+
+SaveMemPool
+===========
+
+The ```savemempool``
+RPC <core-api-ref-remote-procedure-calls-blockchain#savemempool>`__
+dumps the mempool to disk.
+
+*Parameters: none*
+
+*Example from Dash Core 0.16.0*
+
+.. code:: bash
+
+   dash-cli savemempool
+
+Result (no output from dash-cli).
+
+*See also: none*
+
+VerifyChain
+===========
+
+The ```verifychain``
+RPC <core-api-ref-remote-procedure-calls-blockchain#verifychain>`__
+verifies each entry in the local block chain database.
+
+*Parameter #1—how thoroughly to check each block*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Check Level     | number (int)    | Optional(0 or   | How thoroughly  |
+|                 |                 | 1)              | to check each   |
+|                 |                 |                 | block, from 0   |
+|                 |                 |                 | to 4. Default   |
+|                 |                 |                 | is the level    |
+|                 |                 |                 | set with the    |
+|                 |                 |                 | ``-checklevel`` |
+|                 |                 |                 | command line    |
+|                 |                 |                 | argument; if    |
+|                 |                 |                 | that isn’t set, |
+|                 |                 |                 | the default is  |
+|                 |                 |                 | ``3``. Each     |
+|                 |                 |                 | higher level    |
+|                 |                 |                 | includes the    |
+|                 |                 |                 | tests from the  |
+|                 |                 |                 | lower           |
+|                 |                 |                 | levelsLevels    |
+|                 |                 |                 | are:\ **0.**    |
+|                 |                 |                 | Read from disk  |
+|                 |                 |                 | to ensure the   |
+|                 |                 |                 | files are       |
+|                 |                 |                 | acc             |
+|                 |                 |                 | essible\ **1.** |
+|                 |                 |                 | Ensure each     |
+|                 |                 |                 | block is        |
+|                 |                 |                 | valid\ **2.**   |
+|                 |                 |                 | Make sure undo  |
+|                 |                 |                 | files can be    |
+|                 |                 |                 | read from disk  |
+|                 |                 |                 | and are in a    |
+|                 |                 |                 | valid           |
+|                 |                 |                 | format\ **3.**  |
+|                 |                 |                 | Test each block |
+|                 |                 |                 | undo to ensure  |
+|                 |                 |                 | it results in   |
+|                 |                 |                 | correct         |
+|                 |                 |                 | state\ **4.**   |
+|                 |                 |                 | After undoing   |
+|                 |                 |                 | blocks,         |
+|                 |                 |                 | reconnect them  |
+|                 |                 |                 | to ensure they  |
+|                 |                 |                 | reconnect       |
+|                 |                 |                 | correctly       |
++-----------------+-----------------+-----------------+-----------------+
+
+*Parameter #2—the number of blocks to check*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| Number Of       | number (int)    | Optional(0 or   | The number of   |
+| Blocks          |                 | 1)              | blocks to       |
+|                 |                 |                 | verify. Set to  |
+|                 |                 |                 | ``0`` to check  |
+|                 |                 |                 | all blocks.     |
+|                 |                 |                 | Defaults to the |
+|                 |                 |                 | value of the    |
+|                 |                 |                 | `               |
+|                 |                 |                 | `-checkblocks`` |
+|                 |                 |                 | command-line    |
+|                 |                 |                 | argument; if    |
+|                 |                 |                 | that isn’t set, |
+|                 |                 |                 | the default is  |
+|                 |                 |                 | ``288``         |
++-----------------+-----------------+-----------------+-----------------+
+
+*Result—verification results*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | bool            | R               | Set to ``true`` |
+|                 |                 | equired(exactly | if verified;    |
+|                 |                 | 1)              | set to          |
+|                 |                 |                 | ``false`` if    |
+|                 |                 |                 | verification    |
+|                 |                 |                 | failed for any  |
+|                 |                 |                 | reason          |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+Verify the most recent 400 blocks in the most through way:
+
+.. code:: bash
+
+   dash-cli -testnet verifychain 4 400
+
+Result (took < 1 second on a mobile workstation; it would’ve taken much
+longer on mainnet):
+
+.. code:: json
+
+   true
+
+*See also*
+
+-  `GetBlockChainInfo </docs/core-api-ref-remote-procedure-calls-blockchain#getblockchaininfo>`__:
+   provides information about the current state of the block chain.
+-  `GetTxOutSetInfo </docs/core-api-ref-remote-procedure-calls-blockchain#gettxoutsetinfo>`__:
+   returns statistics about the confirmed unspent transaction output
+   (UTXO) set. Note that this call may take some time and that it only
+   counts outputs from confirmed transactions—it does not count outputs
+   from the memory pool.
+
+VerifyTxOutProof
+================
+
+The ```verifytxoutproof``
+RPC <core-api-ref-remote-procedure-calls-blockchain#verifytxoutproof>`__
+verifies that a proof points to one or more transactions in a block,
+returning the transactions the proof commits to and throwing an RPC
+error if the block is not in our best block chain.
+
+*Parameter #1—The hex-encoded proof generated by gettxoutproof*
+
+========= ====== ======== ===================
+Name      Type   Presence Description
+========= ====== ======== ===================
+``proof`` string Required A hex-encoded proof
+========= ====== ======== ===================
+
+*Result—txid(s) which the proof commits to*
+
++-----------------+-----------------+-----------------+-----------------+
+| Name            | Type            | Presence        | Description     |
++=================+=================+=================+=================+
+| ``result``      | string          | R               | The txid(s)     |
+|                 |                 | equired(exactly | which the proof |
+|                 |                 | 1)              | commits to, or  |
+|                 |                 |                 | empty array if  |
+|                 |                 |                 | the proof       |
+|                 |                 |                 | cannot be       |
+|                 |                 |                 | validated       |
++-----------------+-----------------+-----------------+-----------------+
+
+*Example from Dash Core 0.12.2*
+
+Verify a proof:
+
+.. code:: bash
+
+   dash-cli verifytxoutproof \
+   01000020ed72cc6a7294782a7711d8fa7ef74716ef062dc50bb0820f7eec923801000000\
+   aa5d17c5128043803b67c7ab03e4d3ffbc9604b54f877f1c5cf9ed3adeaa19b2cd7ed659\
+   f838011d10a70a480200000002033c89c2baecba9fc983c85dcf365c2d9cc93aca1dee2e\
+   5ac18124464056542e8faab0c579e651e9438c2904df5a498bc37a37acd528a251386fde\
+   f0476ba0e00105
+
+Result:
+
+.. code:: json
+
+   [
+   "e0a06b47f0de6f3851a228d5ac377ac38b495adf04298c43e951e679c5b0aa8f"
+   ]
+
+*See also*
+
+-  `GetTxOutProof </docs/core-api-ref-remote-procedure-calls-blockchain#gettxoutproof>`__:
+   returns a hex-encoded proof that one or more specified transactions
+   were included in a block.
+-  ```merkleblock``
+   message <core-ref-p2p-network-data-messages#merkleblock>`__: A
+   description of the format used for the proof.
