@@ -1,3 +1,6 @@
+InstantSend
+===========
+
 Dash Core’s <> feature provides a way to lock transaction <> and enable
 secure, instantaneous <>. The <> automatically attempts to upgrade any
 qualifying transaction to InstantSend without a need for the sending <>
@@ -39,7 +42,7 @@ message contains all the information necessary to verify a successful
 transaction lock.
 
 Management via Spork
-====================
+--------------------
 
 Spork 2 (``SPORK_2_INSTANTSEND_ENABLED``) is used to manage InstantSend.
 <> 2 enables or disables the entire InstantSend feature. As of Dash Core
@@ -56,7 +59,7 @@ then be disabled by setting the spork value to ``0`` without disrupting
 ChainLocks.
 
 Mining Considerations
-=====================
+---------------------
 
 Note: A transaction will **not** be included in the block template (from
 the ```getblocktemplate``
@@ -73,12 +76,12 @@ faster. This is desirable to miners since it prevents any blockchain
 reorganizations that might orphan their block.
 
 InstantSend Data Flow
-=====================
+---------------------
 
 +--------------+------------------------+--------------+--------------+
-| *            | **Direction**          | **Peers**    | **D          |
-| *InstantSend |                        |              | escription** |
-| Client**     |                        |              |              |
+|              | **Direction**          | **Peers**    | **D          |
+| InstantSend  |                        |              | escription** |
+| Client       |                        |              |              |
 +==============+========================+==============+==============+
 | ```tx``      | →                      |              | Client sends |
 | me           |                        |              | InstantSend  |
@@ -137,7 +140,7 @@ InstantSend Data Flow
 +--------------+------------------------+--------------+--------------+
 | ```getdata`` | →                      |              | Client       |
 | message      |                        |              | requests     |
-|  <core-ref-p |                        |              | lock message |
+| <core-ref-p  |                        |              | lock message |
 | 2p-network-d |                        |              |              |
 | ata-messages |                        |              |              |
 | #getdata>`__ |                        |              |              |
