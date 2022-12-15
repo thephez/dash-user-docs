@@ -1,8 +1,11 @@
+Testing Applications
+====================
+
 Dash Core provides several network options designed to let developers
 test their applications with reduced risks and limitations.
 
 Testnet
-=======
+-------
 
 When run with no arguments, all Dash Core programs default to Dash’s
 main network (<>). However, for development, it’s safer and cheaper to
@@ -27,7 +30,7 @@ Testnet is a public resource provided for free by Dash Core Group and
 members of the community, so please don’t abuse it.
 
 Regtest mode
-============
+------------
 
 For situations where interaction with random <> and <> is unnecessary or
 unwanted, Dash Core’s <> (regtest mode) lets you instantly create a
@@ -83,10 +86,10 @@ The complete set of regtest-specific arguments can be found on the
 page <dash-core-wallet-arguments-and-commands-dashd#regtest-options>`__.
 
 Devnet mode
-===========
+-----------
 
 Overview
---------
+~~~~~~~~
 
 Developer networks (devnets) have some aspects of testnet and some
 aspects of regtest. Unlike testnet, multiple independent devnets can be
@@ -107,7 +110,7 @@ This starts the devnet with a very low <>, allowing quick generation of
 a sufficient balance to create a <>.
 
 Configuration
--------------
+~~~~~~~~~~~~~
 
 To use devnet, use the argument ``-devnet=<name>`` with ``dash-cli``,
 ``dashd``\ or ``dash-qt`` or add ``devnet=<name>`` to your ``dash.conf``
@@ -125,7 +128,7 @@ Example devnet start command:
    Dash Core server starting
 
 Devnet-specific options
-~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Devnets can use 3 devnet-specific options to enable quickly mining large
 amounts of Dash. This enables quick establishment of test masternodes,
@@ -146,7 +149,7 @@ The complete set of devnet-specific arguments can be found on the
 page <dash-core-wallet-arguments-and-commands-dashd#devnet-options>`__.
 
 Management
-----------
+~~~~~~~~~~
 
 Devnet wallets and block chain state (chainstate) are saved in the
 ``devnet-<name>`` subdirectory of the Dash Core configuration directory.
@@ -165,14 +168,14 @@ Deploy <https://github.com/dashevo/dash-network-deploy>`__ tool provides
 a way to do this.
 
 Network type comparison
-=======================
+-----------------------
 
 Each network type has some unique characteristics to support development
 and testing. The tables below summarize some of the significant
 differences between the 4 network types.
 
 Network characteristics
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 +--------------+---------+--------------+--------------+--------------+
 |              | Mainnet | `Testnet <   | `Re          | `            |
@@ -203,7 +206,7 @@ Network characteristics
    RPC <core-api-ref-remote-procedure-calls-wallet#dumpprivkey>`__.
 
 Mining characteristics
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 +-----------------+-----------------+-----------------+-----------------+
 | Network Type    | Difficulty      |                 |                 |
