@@ -1,3 +1,6 @@
+Examples
+========
+
 The following guide aims to provide examples to help you start building
 Dash-based applications. To make the best use of this document, you may
 want to install the current version of Dash Core, either from
@@ -17,3 +20,10 @@ Once installed, you’ll have access to three programs: ``dashd``,
 
 -  ``dash-cli`` allows you to send RPC commands to ``dashd`` from the
    command line. For example, ``dash-cli help``
+
+
+.. toctree::
+   :maxdepth: 3
+
+   core-examples-configuration-file
+   core-examples-testing-applications
