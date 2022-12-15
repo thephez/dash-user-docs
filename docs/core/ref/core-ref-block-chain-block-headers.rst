@@ -1,3 +1,6 @@
+Block Headers
+*************
+
 <> are serialized in the 80-byte format described below and then hashed
 as part of the proof-of-work algorithm, making the serialized header
 format part of the <>.
