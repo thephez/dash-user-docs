@@ -1,3 +1,6 @@
+Raw Transaction Format
+**********************
+
 Dash transactions are broadcast between <> in a serialized byte format,
 called <>. It is this form of a transaction which is SHA256(SHA256())
 hashed to create the <> and, ultimately, the <> of a <> containing the
