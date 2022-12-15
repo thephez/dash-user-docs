@@ -46,15 +46,18 @@ Welcome to the Dash Core developer documentation. You'll find guides and documen
 
 .. toctree::
    :maxdepth: 2
+   :titlesonly:
 
    ref/core-ref-introduction
 
 .. toctree::
-   :maxdepth: 2 
+   :maxdepth: 2
+   :titlesonly: 
 
    guide/core-guide-introduction
 
 .. toctree::
-   :maxdepth: 2 
+   :maxdepth: 2
+   :titlesonly: 
 
    examples/core-examples-introduction
