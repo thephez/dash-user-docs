@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dash latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 09:35-0500\n"
+"POT-Creation-Date: 2022-08-22 09:30-0400\n"
 "PO-Revision-Date: 2018-05-07 04:43+0000\n"
 "Last-Translator: Hasna Brania <hasna.brania19@gmail.com>, 2018\n"
 "Language-Team: Arabic (https://www.transifex.com/dash/teams/37570/ar/)\n"
@@ -231,14 +231,11 @@ msgstr "بعض النقاط الإضافية:"
 
 #: ../../governance/eight-steps.rst:118
 msgid ""
-"It is currently not possible to pay a budget proposal to a multisig address,"
-" or to change the payment address after the proposal is posted to the "
-"blockchain."
+"It is currently not possible to change the payment address after the "
+"proposal is posted to the blockchain."
 msgstr ""
-"ليس من الممكن حاليًا دفع عرض ميزانية إلى عنوان متعدد المهام ، أو لتغيير "
-"عنوان الدفع بعد نشر الاقتراح إلى بلوكشين."
 
-#: ../../governance/eight-steps.rst:122
+#: ../../governance/eight-steps.rst:121
 msgid ""
 "To avoid accusations of favouritism and inside trading, Dash Core cannot "
 "promote your proposal for you. If your proposal is an integration, reach out"
@@ -249,7 +246,7 @@ msgstr ""
 "كان اقتراحك يمثل تكاملاً ، فيمكنك التواصل مع فريق تطوير الأعمال مقدمًا. "
 "بمجرد أن يتم بث منتجك ، قد يكون من الممكن الإعلان عنه من قنوات داش كور."
 
-#: ../../governance/eight-steps.rst:128
+#: ../../governance/eight-steps.rst:127
 msgid ""
 "If your proposal is for news, promotion or marketing, make sure you "
 "synchronise your efforts with major existing organisations such as Dash "
@@ -259,7 +256,7 @@ msgstr ""
 "المؤسسات الرئيسية القائمة مثل أخبار داش أو شركات التسويق المتعاقد معها "
 "بواسطة داش كور."
 
-#: ../../governance/eight-steps.rst:132
+#: ../../governance/eight-steps.rst:131
 msgid ""
 "You are responsible for your own planning to hedge against price volatility."
 " If your proposal involves significant payments to third parties in fiat "
@@ -268,7 +265,7 @@ msgid ""
 "maintenance, converting currencies and hedging against volatility."
 msgstr ""
 
-#: ../../governance/eight-steps.rst:138
+#: ../../governance/eight-steps.rst:137
 msgid ""
 "For the same reason, it is not recommended to request funding for period of "
 "longer than three months. Masternodes don't want to see and vote on the same"
@@ -279,7 +276,7 @@ msgstr ""
 " أن يرى ويصوت على نفس الاقتراح دون تحديثات عدة أشهر متتالية ، وتقلب الأسعار "
 "يجعله عرضًا محفوفًا بالمخاطر على الشبكة ونفسك."
 
-#: ../../governance/eight-steps.rst:144
+#: ../../governance/eight-steps.rst:143
 msgid ""
 "Before entering your budget proposal on the blockchain, check how many "
 "proposals already exist for the current budget cycle. If it is likely to "

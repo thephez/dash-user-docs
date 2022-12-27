@@ -6,7 +6,7 @@
 # Translators:
 # Damian Walker <damianwalkerstrauss@gmail.com>, 2021
 # Alejandro Echeverria <alejem93@gmail.com>, 2021
-# Jahlexis Tafari <ras.alexislugo.i@gmail.com>, 2021
+# Jahlexis Lugo <ras.alexislugo.i@gmail.com>, 2021
 # Tomas Alfaro <talfarod@gmail.com>, 2021
 # Ivan SIerraalta <ivansierraalta@gmail.com>, 2021
 # 

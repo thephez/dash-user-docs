@@ -5,7 +5,7 @@
 # 
 # Translators:
 # Ivan SIerraalta <ivansierraalta@gmail.com>, 2018
-# Jahlexis Tafari <ras.alexislugo.i@gmail.com>, 2018
+# Jahlexis Lugo <ras.alexislugo.i@gmail.com>, 2018
 # Damian Walker <damianwalkerstrauss@gmail.com>, 2019
 # Leon White <leon.white@dash.org>, 2019
 # JZA <jza@oooes.org>, 2019

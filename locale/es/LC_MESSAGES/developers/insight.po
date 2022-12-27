@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jahlexis Tafari <ras.alexislugo.i@gmail.com>, 2019
+# Jahlexis Lugo <ras.alexislugo.i@gmail.com>, 2019
 # JZA <jza@oooes.org>, 2019
 # 
 #, fuzzy

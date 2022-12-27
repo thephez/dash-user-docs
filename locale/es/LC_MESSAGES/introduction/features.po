@@ -6,7 +6,7 @@
 # Translators:
 # Damian Walker <damianwalkerstrauss@gmail.com>, 2018
 # Tomas Alfaro <talfarod@gmail.com>, 2018
-# Jahlexis Tafari <ras.alexislugo.i@gmail.com>, 2018
+# Jahlexis Lugo <ras.alexislugo.i@gmail.com>, 2018
 # Leon White <leon.white@dash.org>, 2018
 # JZA <jza@oooes.org>, 2021
 # Ivan SIerraalta <ivansierraalta@gmail.com>, 2022
