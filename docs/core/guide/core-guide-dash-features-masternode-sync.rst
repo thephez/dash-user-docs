@@ -1,3 +1,6 @@
+Masternode Sync
+***************
+
 Dash Core performs full <> synchronization as required. There are
 several conditions that initiate a start/restart the sync process:
 

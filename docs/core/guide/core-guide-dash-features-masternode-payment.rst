@@ -1,3 +1,6 @@
+Masternode Payment
+******************
+
 Since `DIP3 <https://github.com/dashpay/dips/blob/master/dip-0003.md>`__
 (introduced in Dash Core 0.13.0), <> reward payments are based on the
 deterministic masternode list information found on-chain in each <>.

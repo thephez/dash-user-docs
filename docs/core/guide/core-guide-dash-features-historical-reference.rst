@@ -1,3 +1,6 @@
+Historical Reference
+********************
+
 [block:callout] { “type”: “danger”, “body”: “**The following information
 is deprecated and for historical reference only. It describes features
 that have been redesigned and no longer operate as described below.**”,

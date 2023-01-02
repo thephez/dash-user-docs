@@ -1,3 +1,6 @@
+Proof of Service
+****************
+
 The Proof of Service (PoSe) scoring system helps incentivize <> to
 provide <> services. Masternodes that neglect to participate receive an
 increased PoSe score which eventually results in them being excluded

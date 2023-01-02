@@ -20,6 +20,6 @@ term, a brief definition of the term will be displayed in a tooltip.
 
 .. toctree::
    :maxdepth: 3
+   :titlesonly:
 
    core-guide-dash-features
-   core-guide-dash-features-instantsend

@@ -1,3 +1,6 @@
+Dash Features
+*************
+
 Overview
 ========
 
@@ -82,3 +85,16 @@ responses
 [/block] Lite mode is enable by setting ``litemode=1`` in the
 ``dash.conf`` file or by running Dash Core with the command line
 parameter ``-litemode=1``.
+
+.. toctree::
+   :maxdepth: 3
+
+   core-guide-dash-features-instantsend
+   core-guide-dash-features-chainlocks
+   core-guide-dash-features-governance
+   core-guide-dash-features-coinjoin
+   core-guide-dash-features-masternode-quorums
+   core-guide-dash-features-proof-of-service
+   core-guide-dash-features-masternode-payment
+   core-guide-dash-features-masternode-sync
+   core-guide-dash-features-historical-reference

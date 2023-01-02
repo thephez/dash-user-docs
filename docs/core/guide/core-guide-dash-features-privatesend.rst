@@ -1,3 +1,6 @@
+CoinJoin
+********
+
 Dash Core’s mixing feature provides a way to improve privacy by
 performing non-custodial CoinJoin. For additional details, reference
 this `Official Documentation

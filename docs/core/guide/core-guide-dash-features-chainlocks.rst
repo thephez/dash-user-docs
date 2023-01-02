@@ -1,3 +1,6 @@
+ChainLocks
+**********
+
 Dash’s <> feature leverages <> Signing Requests/Sessions to reduce
 uncertainty when receiving funds and remove the possibility of 51%
 mining attacks.

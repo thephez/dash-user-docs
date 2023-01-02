@@ -1,3 +1,6 @@
+Masternode Quorums
+******************
+
 Dash’s <> quorums are used to facilitate the operation of masternode
 provided features in a decentralized, deterministic way. The original
 quorums (used largely for <> and masternode payments) were ephemeral and
