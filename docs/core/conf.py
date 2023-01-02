@@ -94,7 +94,6 @@ todo_include_todos = False
 html_theme_options = {
     "external_links": [
         {"name": "User docs", "url": "https://dash-user-docs.readthedocs.io/en/latest/docs/user/index.html"},
-        {"name": "Core docs", "url": "https://dash-user-docs.readthedocs.io/projects/core/en/latest/index.html"},
         {"name": "Platform docs", "url": "https://dashplatform.readme.io"},
         {"name": "Dash.org", "url": "https://www.dash.org"},
     ],
