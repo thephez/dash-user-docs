@@ -1,3 +1,8 @@
+```{eval-rst}
+Bloom Filter Script
+*******************
+```
+
 Complete Python script demonstrating the [Creating](core-examples-p2p-network-creating-a-bloom-filter)/[Evaluating](core-examples-p2p-network-evaluating-a-bloom-filter) bloom filter examples (available [here](https://gist.github.com/dash-docs/5d63f095352a717f90d41a5e7fbbdac1#file-bloom_filter_example-py)):
 [block:code]
 {

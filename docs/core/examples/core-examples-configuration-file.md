@@ -1,3 +1,8 @@
+```{eval-rst}
+Configuration File
+******************
+```
+
 All three programs get settings from `dash.conf` in the `DashCore` application directory:
 
 * Windows: `%APPDATA%\DashCore\`

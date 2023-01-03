@@ -1,3 +1,8 @@
+```{eval-rst}
+Simple Raw Transaction
+**********************
+```
+
 The [raw transaction RPCs](core-api-ref-remote-procedure-calls-raw-transactions) allow users to create custom <<glossary:transactions>> and delay broadcasting those transactions. However, mistakes made in <<glossary:raw transactions>> may not be detected by Dash Core, and a number of raw transaction users have permanently lost large numbers of <<glossary:duffs>>, so please be careful using raw transactions on <<glossary:mainnet>>.
 
 This subsection covers one of the simplest possible raw transactions.

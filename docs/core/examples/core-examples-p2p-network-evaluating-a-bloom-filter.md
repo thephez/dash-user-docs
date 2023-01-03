@@ -1,3 +1,8 @@
+```{eval-rst}
+Evaluating a Bloom Filter
+*************************
+```
+
 Using a <<glossary:bloom filter>> to find matching data is nearly identical to constructing a bloom filter---except that at each step we check to see if the calculated index bit is set in the existing filter.
 
 ``` python

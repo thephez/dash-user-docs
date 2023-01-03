@@ -23,7 +23,10 @@ Once installed, you’ll have access to three programs: ``dashd``,
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    core-examples-configuration-file
    core-examples-testing-applications
+   core-examples-transaction-tutorial
+   core-examples-p2p-network
+   core-examples-receiving-zmq-notifications

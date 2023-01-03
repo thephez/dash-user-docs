@@ -1,3 +1,8 @@
+```{eval-rst}
+Complex Raw Transaction
+***********************
+```
+
 In this example, we'll create a <<glossary:transaction>> with two <<glossary:inputs>> and two <<glossary:outputs>>.  We'll sign each of the inputs separately, as might happen if the two inputs belonged to different people who agreed to create a transaction together (such as a CoinJoin transaction).
 
 # 1. List unspent outputs

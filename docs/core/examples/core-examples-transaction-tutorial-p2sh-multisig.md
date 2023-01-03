@@ -1,3 +1,8 @@
+```{eval-rst}
+P2SH Multisig
+*************
+```
+
 In this subsection, we will create a <<glossary:P2SH multisig>> address, spend <<glossary:duffs>> to it, and then spend those duffs from it to another <<glossary:address>>.
 
 Creating a <<glossary:multisig>> address is easy. Multisig <<glossary:outputs>> have two parameters, the *minimum* number of signatures required (*m*) and the *number* of <<glossary:public keys>> to use to validate those signatures. This is called m-of-n, and in this case we'll be using 2-of-3.

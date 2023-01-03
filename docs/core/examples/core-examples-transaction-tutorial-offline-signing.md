@@ -1,3 +1,8 @@
+```{eval-rst}
+Offline Signing
+***************
+```
+
 We will now spend the <<glossary:transaction>> created in the [Complex Raw Transaction subsection](core-examples-transaction-tutorial-complex-raw-transaction) without sending it to the local <<glossary:node>> first. This is the same basic process used by <<glossary:wallet>> programs for offline signing---which generally means signing a transaction without access to the current UTXO set.
 
 Offline signing is safe. However, in this example we will also be spending an <<glossary:output>> which is not part of the <<glossary:block chain>> because the transaction containing it has never been broadcast. That can be unsafe:

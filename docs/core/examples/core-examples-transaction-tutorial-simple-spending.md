@@ -1,6 +1,11 @@
+```{eval-rst}
+Simple Spending
+***************
+```
+
 Dash Core provides several RPCs which handle all the details of spending, including creating a <<glossary:change output>> and paying an appropriate <<glossary:transaction fee>>. Even advanced users should use these RPCs whenever possible to decrease the chance that <<glossary:duffs>> will be lost by mistake.
 
-# 1. Get new address
+## 1. Get new address
 
 Get a new Dash <<glossary:address>> and save it in the shell variable `$NEW_ADDRESS`.
 
@@ -11,7 +16,7 @@ yLp6ZJueuigiF4s9E1Pv8tEunDPEsjyQfd
 > NEW_ADDRESS=yLp6ZJueuigiF4s9E1Pv8tEunDPEsjyQfd
 ```
 
-#2. Send to address
+## 2. Send to address
 
 Send 10 dash to the address using the [`sendtoaddress` RPC](core-api-ref-remote-procedure-calls-wallet#sendtoaddress).  The returned hex string is the transaction identifier (<<glossary:TXID>>).
 
@@ -22,9 +27,9 @@ The [`sendtoaddress` RPC](core-api-ref-remote-procedure-calls-wallet#sendtoaddre
 c7e5ae1240fdd83bb94c94a93816ed2ab7bcb56ec3ff8a9725c5c1e0482684ea
 ```
 
-# 3. List unspent outputs
+## 3. List unspent outputs
 
-# 3a. Confirmed outputs only
+### 3a. Confirmed outputs only
 
 Use the [`listunspent` RPC](core-api-ref-remote-procedure-calls-wallet#listunspent) to display the UTXOs belonging to this <<glossary:wallet>>. The list is empty because it defaults to only showing confirmed UTXOs and we just spent our only confirmed UTXO.
 
@@ -34,7 +39,7 @@ Use the [`listunspent` RPC](core-api-ref-remote-procedure-calls-wallet#listunspe
 ]
 ```
 
-# 3b. All outputs
+### 3b. All outputs
 
 Re-running the [`listunspent` RPC](core-api-ref-remote-procedure-calls-wallet#listunspent) with the argument "0" to also display each <<glossary:unconfirmed transaction>> shows that we have two UTXOs, both with the same <<glossary:TXID>>. The first UTXO shown is a change output that `sendtoaddress` created using a new address from the key pool. The second UTXO shown is the spend to the address we provided. If we had spent those duffs to someone else, that second transaction would not be displayed in our list of UTXOs.
 
@@ -70,7 +75,7 @@ Re-running the [`listunspent` RPC](core-api-ref-remote-procedure-calls-wallet#li
 ]
 ```
 
-# 4. Mine block
+## 4. Mine block
 
 Create a new block to confirm the transaction above (takes less than a second) and clear the shell variable.
 
@@ -80,7 +85,7 @@ Create a new block to confirm the transaction above (takes less than a second) a
 > unset NEW_ADDRESS
 ```
 
-# Simple Spending Script
+## Simple Spending Script
 
 Shell script to run the previous example (available [here](https://gist.github.com/dash-docs/f40bddfc0844ec0d66d196720dc936f8#file-regtest_transaction_simple_spending_example-sh)):
 

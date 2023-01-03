@@ -1,3 +1,8 @@
+```{eval-rst}
+Parsing a MerkleBlock
+*********************
+```
+
 In the section above, we retrieved a <<glossary:merkle block>> from the network; now we will parse it. Most of the <<glossary:block header>> has been omitted. For a more complete hexdump, see the example in the [`merkleblock` message section](core-ref-p2p-network-data-messages#merkleblock).
 
 ``` text

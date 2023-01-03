@@ -1,3 +1,8 @@
+```{eval-rst}
+Receiving ZMQ Notifications
+***************************
+```
+
 # Overview
 
 Receiving notifications from Dash Core is important for a variety of use-cases. Although polling [RPCs](core-api-ref-remote-procedure-calls) can be useful, in some scenarios it may be more desirable to have publish-subscribe functionality. Dash Core's built-in ZeroMQ (ZMQ) support provides the ability to subscribe to block, transaction, and governance related messages.
