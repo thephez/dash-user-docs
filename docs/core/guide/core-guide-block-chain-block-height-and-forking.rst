@@ -1,3 +1,6 @@
+Block Height and Forking
+************************
+
 Any Dash <> who successfully hashes a <> to a value below the <> can add
 the entire <> to the <> (assuming the block is otherwise valid). These
 blocks are commonly addressed by their <>—the number of blocks between

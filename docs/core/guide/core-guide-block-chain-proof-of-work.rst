@@ -1,3 +1,6 @@
+Proof of Work
+*************
+
 The <> is collaboratively maintained by anonymous <> on the <>, so Dash
 requires that each <> prove a significant amount of work was invested in
 its creation to ensure that untrustworthy peers who want to modify past

@@ -1,3 +1,6 @@
+Consensus Rule Changes
+**********************
+
 To maintain <>, all full <> validate <> using the same <>. However,
 sometimes the consensus rules are changed to introduce new features or
 prevent network abuse. When the new rules are implemented, there will

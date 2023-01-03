@@ -1,3 +1,6 @@
+Transaction Data
+****************
+
 Every <> must include one or more <>. The first one of these
 transactions must be a <>, also called a generation transaction, which
 should collect and spend the <> (comprised of a block subsidy and any

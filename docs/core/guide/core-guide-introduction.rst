@@ -23,3 +23,4 @@ term, a brief definition of the term will be displayed in a tooltip.
    :titlesonly:
 
    core-guide-dash-features
+   core-guide-block-chain
