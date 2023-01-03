@@ -85,6 +85,7 @@ todo_include_todos = False
 # ones.
 extensions = [
     'multiproject',
+    'myst_parser',
     'sphinx.ext.autodoc',
     'sphinx_copybutton',
     'sphinx_design',
