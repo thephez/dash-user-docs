@@ -1,3 +1,6 @@
+Arguments and Commands
+**********************
+
 Overview
 ========
 
@@ -110,3 +113,13 @@ option details.
    Usage:
      dash-tx [options] <hex-tx> [commands]  Update hex-encoded dash transaction
      dash-tx [options] -create [commands]   Create hex-encoded dash transaction
+
+.. toctree::
+   :maxdepth: 2
+   :titlesonly: 
+
+   dash-core-wallet-arguments-and-commands-dashd
+   dash-core-wallet-arguments-and-commands-dash-qt
+   dash-core-wallet-arguments-and-commands-dash-cli
+   dash-core-wallet-arguments-and-commands-dash-tx
+   dash-core-wallet-arguments-and-commands-dash-wallet

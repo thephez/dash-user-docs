@@ -1,3 +1,6 @@
+Configuration Files
+*******************
+
 To use ``dashd`` and ``dash-cli``, you will need to add a RPC password
 to your ``dash.conf`` file. Both programs will read from the same file
 if both run on the same system as the same user, so any long random

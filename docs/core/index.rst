@@ -52,7 +52,7 @@ Welcome to the Dash Core developer documentation. You'll find guides and documen
 
 .. toctree::
    :maxdepth: 2
-   :titlesonly: 
+   :titlesonly:
 
    guide/core-guide-introduction
 
@@ -61,3 +61,9 @@ Welcome to the Dash Core developer documentation. You'll find guides and documen
    :titlesonly: 
 
    examples/core-examples-introduction
+
+.. toctree::
+   :maxdepth: 2
+   :titlesonly: 
+
+   dash-core/dash-core-wallet-introduction
