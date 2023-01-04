@@ -52,6 +52,12 @@ Welcome to the Dash Core developer documentation. You'll find guides and documen
 
 .. toctree::
    :maxdepth: 2
+   :titlesonly: 
+
+   api-ref/core-api-ref-introduction
+
+.. toctree::
+   :maxdepth: 2
    :titlesonly:
 
    guide/core-guide-introduction

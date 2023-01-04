@@ -1,3 +1,6 @@
+HTTP REST
+*********
+
 [block:callout] { “type”: “danger”, “body”: “**Warning:** A web browser
 can access a HTTP REST interface running on localhost, possibly allowing
 third parties to use cross-site scripting attacks to download your
@@ -17,3 +20,10 @@ The interface is not intended for public access and is only accessible
 from localhost by default. The interface uses standard `HTTP status
 codes <https://en.wikipedia.org/wiki/List_of_HTTP_status_codes>`__ and
 returns a plain-text description of errors for debugging.
+
+.. toctree::
+   :maxdepth: 3
+   :titlesonly:
+
+   core-api-ref-http-rest-quick-reference
+   core-api-ref-http-rest-requests

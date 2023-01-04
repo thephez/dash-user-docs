@@ -1,3 +1,6 @@
+Remote Procedure Calls
+**********************
+
 Overview
 ========
 
@@ -449,3 +452,24 @@ high-precision real numbers correctly. See the `Proper Money
 Handling <https://en.bitcoin.it/wiki/Proper_Money_Handling_%28JSON-RPC%29>`__
 Bitcoin Wiki article for details and example code.”, “title”:
 “High-precision real numbers” } [/block]
+
+
+.. toctree::
+   :maxdepth: 3
+   :titlesonly:
+
+   core-api-ref-remote-procedure-call-quick-reference
+   core-api-ref-remote-procedure-calls-address-index
+   core-api-ref-remote-procedure-calls-blockchain
+   core-api-ref-remote-procedure-calls-control
+   core-api-ref-remote-procedure-calls-dash
+   core-api-ref-remote-procedure-calls-evo
+   core-api-ref-remote-procedure-calls-generating
+   core-api-ref-remote-procedure-calls-mining
+   core-api-ref-remote-procedure-calls-network
+   core-api-ref-remote-procedure-calls-raw-transactions
+   core-api-ref-remote-procedure-calls-util
+   core-api-ref-remote-procedure-calls-wallet
+   core-api-ref-remote-procedure-calls-wallet-deprecated
+   core-api-ref-remote-procedure-calls-removed
+   core-api-ref-remote-procedure-calls-zmq
