@@ -1,12 +1,14 @@
+# Quorum Messages
+
 The following network messages enable the long-living masternode quorum (<<glossary:LLMQ>>) features built in to Dash.
 
-# Distributed Key Generation
+## Distributed Key Generation
 
 The following network messages enable the creation of long living masternode quorums (LLMQs) as described in [DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md).
 
 With the exception of the [`qfcommit` message](core-ref-p2p-network-quorum-messages#qfcommit), these messages are for intra-quorum communication only and are not propagated on the Dash network.
 
-## qcontrib
+### qcontrib
 
 *Added in protocol version 70214 of Dash Core*
 [block:callout]
@@ -88,7 +90,7 @@ Contributions
 e000da1aeda5f98ec9e64b801681bfc1 ........... BLS signature (Operator Key)
 ```
 
-## qcomplaint
+### qcomplaint
 
 *Added in protocol version 70214 of Dash Core*
 [block:callout]
@@ -142,7 +144,7 @@ bb632eeb60f29e351963032a673abd61
 0efe3fcb8d7042da624f7298876cc98e ........... BLS signature (Operator Key)
 ```
 
-## qdata
+### qdata
 
 *Added in protocol version 70219 of Dash Core*
 
@@ -184,7 +186,7 @@ The [`qdata` message](core-ref-p2p-network-quorum-messages#qdata) is used to sen
 | 1-9 | dataSize | compactSize uint | The size of the data
 | Variable | data | unsigned char[] | Encrypted data
 
-### Possible Error Codes
+#### Possible Error Codes
 
 | Value | Name | Description |
 | - | - | - |
@@ -226,7 +228,7 @@ Data (Verification Vectors)
 | a1064d8d6782b8be7de610b37308a715 ......... Verification vector 67
 ```
 
-## qgetdata
+### qgetdata
 
 *Added in protocol version 70219 of Dash Core*
 
@@ -260,7 +262,7 @@ The following annotated hexdump shows a [`qgetdata` message](core-ref-p2p-networ
 c7ccb13df0c0e950b4d1b737808c2c72 ........... ProRegTx hash
 ```
 
-## qjustify
+### qjustify
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -325,7 +327,7 @@ Contribution #2
 051edf1b3b1f0e1b1d55d185d25e0ed7 ........... BLS signature (Operator Key)
 ```
 
-## qpcommit
+### qpcommit
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -387,7 +389,7 @@ b6a5077267fdc61cdb192faffa27bed9
 2883559bab2ab81cef6253452622b30c ........... BLS signature (Operator Key)
 ```
 
-## qfcommit
+### qfcommit
 
 The [`qfcommit` message](core-ref-p2p-network-quorum-messages#qfcommit) is used to finalize a <<glossary:Long-Living Masternode Quorum>> setup by aggregating the information necessary to mine the on-chain [QcTx](core-ref-transactions-special-transactions#qctx) special transaction. The message contains all the necessary information required to validate the long-living masternode quorum's signing results.
 
@@ -492,13 +494,13 @@ f33100bfba8f60342fd3a0cac17af370
 5ee9bc60d59b3aad2eea15dea15d8093 ........... Quorum Aggregate BLS Sig
 ```
 
-# Signing Sessions
+## Signing Sessions
 
 The following network messages enable the long living masternode quorum (LLMQ) message signing sessions described in [DIP7](https://github.com/dashpay/dips/blob/master/dip-0007.md).
 
 With the exception of the [`qsendrecsigs` message](core-ref-p2p-network-quorum-messages#qsendrecsigs) and the [`qsigrec` message](core-ref-p2p-network-quorum-messages#qsigrec), these messages are for intra-quorum communication only and are not propagated on the Dash network.
 
-## qbsigs
+### qbsigs
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -566,7 +568,7 @@ Signature Share Batch 2
 | | c3cac4033098297d2aaee098db5bfe2f ....... BLS Signature share
 ```
 
-## qgetsigs
+### qgetsigs
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -606,7 +608,7 @@ Signature share request 2
 | 012900 ................................... Inventory
 ```
 
-## qsendrecsigs
+### qsendrecsigs
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -627,7 +629,7 @@ The following annotated hexdump shows a [`qsendrecsigs` message](core-ref-p2p-ne
 01 ................................. Request recovered signatures: Enabled (1)
 ```
 
-## qsigrec
+### qsigrec
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -667,7 +669,7 @@ f429c10eabd4ab9289e9a8f80f6989b7
 a11e5e7930deccc3e11a931fc9524f06 ........... LLMQ BLS Signature (96 bytes)
 ```
 
-## qsigsesann
+### qsigsesann
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -728,7 +730,7 @@ Session Announcement 2
 | 90a3c0300ce39177d0d31be5b47c2361 ......... Message Hash
 ```
 
-## qsigshare
+### qsigshare
 
 *Added in protocol version 70217 of Dash Core*
 [block:callout]
@@ -781,7 +783,7 @@ cd4b9bd93ebb83069eaab77dff30ca48 ........... Message Hash
 a277386b48a7ae627d075da826aab694 ......... Signature Share
 ```
 
-## qsigsinv
+### qsigsinv
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -821,9 +823,9 @@ The following annotated hexdump shows a [`qsigsinv` message](core-ref-p2p-networ
 011a0700 ................................... Inventory
 ```
 
-# Debugging
+## Debugging
 
-## qwatch
+### qwatch
 
 *Added in protocol version 70214 of Dash Core*
 

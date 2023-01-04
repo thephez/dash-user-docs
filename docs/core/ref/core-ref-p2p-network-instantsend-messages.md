@@ -1,6 +1,8 @@
+# InstantSend Messages
+
 The following network messages all help control the InstantSend feature of Dash. InstantSend uses the masternode network to lock transaction inputs and enable secure, instantaneous transactions. For additional details, refer to the Developer Guide [InstantSend section](core-guide-dash-features-instantsend).
 
-# clsig
+## clsig
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -30,7 +32,7 @@ dcd5497d105932e609016dac075f02df
 005574710c3aabc2f8670959cf8bc9b5 ........... LLMQ BLS Signature
 ```
 
-# islock
+## islock
 
 *Added in protocol version 70214 of Dash Core*
 [block:callout]
@@ -75,7 +77,7 @@ f429c10eabd4ab9289e9a8f80f6989b7
 a11e5e7930deccc3e11a931fc9524f06 ........... LLMQ BLS Signature (96 bytes)
 ```
 
-# isdlock
+## isdlock
 [block:callout]
 {
   "type": "info",

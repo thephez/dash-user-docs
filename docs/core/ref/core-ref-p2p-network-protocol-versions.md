@@ -1,4 +1,6 @@
-# Dash Protocol Versions
+# Protocol Versions
+
+## Dash Protocol Versions
 The table below lists some notable versions of the P2P network protocol, with the most recent versions listed first.
 
 As of Dash Core 18.2.0, the most recent protocol version is 70224.
@@ -25,7 +27,7 @@ As of Dash Core 18.2.0, the most recent protocol version is 70224.
 | 70002  | Dash Core 0.9.0.x <br>(Mar 2014)   | • Masternode implementation<br>• Rebrand to Darkcoin
 | 70002  | Dash Core 0.8.7 <br>(Jan 2014)     | Initial release of Dash (branded XCoin) as a fork of Litecoin 0.8
 
-# Bitcoin Protocol Versions
+## Bitcoin Protocol Versions
 
 Historical Bitcoin protocol versions for reference shown below since Dash is a <<glossary:fork>> of Bitcoin Core.
 

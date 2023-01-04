@@ -1,10 +1,12 @@
+# Governance Messages
+
 The following <<glossary:network>> messages enable the Governance features built in to Dash. For additional details on the governance system, see this [Budget System page](https://docs.dash.org/en/stable/governance/index.html).
 
 ![Overview Of P2P Protocol Governance Request And Reply Messages](https://dash-docs.github.io/img/dev/en-p2p-governance-messages.svg)
 
 For additional details, refer to the Developer Guide [Governance section](core-guide-dash-features-governance).
 
-# govobj
+## govobj
 
 The [`govobj` message](core-ref-p2p-network-governance-messages#govobj) contains a governance object that is generally a proposal, contract, or setting. <<glossary:Masternodes>> ignore this request if they are not fully synced.
 
@@ -84,7 +86,7 @@ cf028b1cdb2f7240e33981b16d1270e9
 d289fca20905fd453620238a505582fa ..... Masternode BLS Signature
 ```
 
-# govobjvote
+## govobjvote
 
 The [`govobjvote` message](core-ref-p2p-network-governance-messages#govobjvote) is used to indicate the voting status of a governance object.  Voting status is comprised of the vote outcome (how the <<glossary:masternode>> voted) and the vote signal (the network support status). A sufficient number of yes votes results in the proposed funding being payed out in the next <<glossary:superblock>> (assuming their are sufficient funds available in the budget).
 
@@ -142,7 +144,7 @@ cf028b1cdb2f7240e33981b16d1270e9
 d289fca20905fd453620238a505582fa ..... Masternode BLS Signature
 ```
 
-# govsync
+## govsync
 
 The [`govsync` message](core-ref-p2p-network-governance-messages#govsync) is used to request syncing of governance objects (`govobj` message and [`govobjvote` message](core-ref-p2p-network-governance-messages#govobjvote)) with peers. <<glossary:Masternodes>> ignore this request if they are not fully synced.
 

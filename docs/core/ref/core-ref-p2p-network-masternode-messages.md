@@ -1,10 +1,12 @@
+# Masternode Messages
+
 The following network messages enable the <<glossary:masternode>> features built in to Dash.
 
 ![Overview Of P2P Protocol Masternode Request And Reply Messages](https://dash-docs.github.io/img/dev/en-p2p-masternode-messages.svg)
 
 For additional details, refer to the Developer Guide [Masternode Sync](core-guide-dash-features-masternode-sync) and [Masternode Payment](core-guide-dash-features-masternode-payment) sections.
 
-# ssc
+## ssc
 
 The [`ssc` message](core-ref-p2p-network-masternode-messages#ssc) is used to track the sync status of masternode objects. This message is sent in response to sync requests for the list of governance objects (`govsync` message), and governance object votes (`govsync` message).
 
@@ -29,7 +31,7 @@ The following annotated hexdump shows a [`ssc` message](core-ref-p2p-network-mas
 bf110000 ................................... Count: 4543
 ```
 
-# mnauth
+## mnauth
 
 *Added in protocol version 70214*
 

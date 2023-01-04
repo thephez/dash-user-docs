@@ -1,3 +1,5 @@
+# Data Messages
+
 The following network messages all request or provide data related to transactions and blocks.
 
 ![Overview Of P2P Protocol Data Request And Reply Messages](https://dash-docs.github.io/img/dev/en-p2p-data-messages.svg)
@@ -43,7 +45,7 @@ The following type identifiers have been deprecated recently. To see type identi
 
 Type identifier zero and type identifiers greater than those shown in the table above are reserved for future implementations. Dash Core ignores all inventories with one of these unknown types.
 
-# block
+## block
 
 The [`block` message](core-ref-p2p-network-data-messages#block) transmits a single <<glossary:serialized block>> in the format described in the [serialized blocks section](core-ref-block-chain-serialized-blocks). See that section for an example hexdump.  It can be sent for two different reasons:
 
@@ -51,7 +53,7 @@ The [`block` message](core-ref-p2p-network-data-messages#block) transmits a sing
 
 2. **Unsolicited:** Some miners will send unsolicited [`block` messages](core-ref-p2p-network-data-messages#block) broadcasting their newly-mined blocks to all of their <<glossary:peers>>. Many <<glossary:mining>> pools do the same thing, although some may be misconfigured to send the block from multiple nodes, possibly sending the same block to some peers more than once.
 
-# blocktxn
+## blocktxn
 
 *Added in protocol version 70209 of Dash Core as described by BIP152*
 
@@ -123,7 +125,7 @@ Transaction(s)
 | | 00000000 ............................... locktime: 0 (a block height)
 ```
 
-# cfcheckpt
+## cfcheckpt
 
 *Added in protocol version 70223 of Dash Core as described by [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki).*
 
@@ -136,7 +138,7 @@ The [`cfcheckpt` message](core-ref-p2p-network-data-messages#cfcheckpt)  is sent
 | 1-3 | filter_headers<br>_length | CompactSize | The length of the following vector of filter headers
 | `filter_headers`<br>`_length` * 32 | filter_hashes | [][32]byte | The filter headers at intervals of 1,000
 
-# cfheaders
+## cfheaders
 
 *Added in protocol version 70223 of Dash Core as described by [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki).*
 
@@ -150,7 +152,7 @@ The [`cfheaders` message](core-ref-p2p-network-data-messages#cfheaders)  is sent
 | 1-3 | filter_hashes<br>_length | CompactSize | The length of the following vector of filter hashes. Must not be > 2000.
 | `filter_hashes`<br>`_length` * 32 | filter_hashes | [][32]byte | The filter hashes for each block in the requested range
 
-# cfilter
+## cfilter
 
 *Added in protocol version 70223 of Dash Core as described by [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki).*
 
@@ -164,7 +166,7 @@ The [`cfilter` message](core-ref-p2p-network-data-messages#cfilter)  is sent in 
 | `num_filter_bytes` | filter_bytes |  []bytes | The  serialized compact filter for this block
 
 
-# cmpctblock
+## cmpctblock
 
 *Added in protocol version 70209 of Dash Core as described by BIP152*
 
@@ -194,7 +196,7 @@ The [`cmpctblock` message](core-ref-p2p-network-data-messages#cmpctblock) is com
 | 1 or 3   | prefilledtxn<br>_length | CompactSize       | As used to encode array lengths elsewhere | The number of prefilled transactions in `prefilledtxn` (i.e. block tx count - `shortids`<br>`_length`)
 | *Varies* | prefilledtxn     | List of Prefilled<br>Transactions | As defined by `Prefilled`<br>`Transaction` definition below | Used to provide the coinbase transaction and a select few which we expect a peer may be missing
 
-## **Short Transaction ID calculation**
+### **Short Transaction ID calculation**
 
 Short transaction IDs are used to represent a transaction without sending a full 256-bit hash. They are calculated as follows,
 
@@ -254,7 +256,7 @@ Prefilled Transactions
 | | 00000000 ............................... locktime: 0 (a block height)
 ```
 
-# getblocks
+## getblocks
 
 The [`getblocks` message](core-ref-p2p-network-data-messages#getblocks) requests an [`inv` message](core-ref-p2p-network-data-messages#inv) that provides <<glossary:block header>> hashes starting from a particular point in the <<glossary:block chain>>. It allows a <<glossary:peer>> which has been disconnected or started for the first time to get the data it needs to request the blocks it hasn't seen.
 
@@ -287,7 +289,7 @@ d39f608a7775b537729884d4e6633bb2
 00000000000000000000000000000000 ... Stop hash
 ```
 
-# getblocktxn
+## getblocktxn
 
 *Added in protocol version 70209 of Dash Core as described by BIP152*
 
@@ -313,7 +315,7 @@ b0509e79c8cd3d654cdf3a0100000000 ... Block Hash
 01 ................................. Index: 1
 ```
 
-# getcfcheckpt
+## getcfcheckpt
 
 *Added in protocol version 70223 of Dash Core as described by [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki).*
 
@@ -324,7 +326,7 @@ The [`getcfcheckpt` message](core-ref-p2p-network-data-messages#getcfcheckpt) re
 | 1 | filter_type | uint8_t | Filter type for which headers are requested
 | 32 | stop_hash | uint256 | The hash of the last block in the requested range
 
-# getcfheaders
+## getcfheaders
 
 *Added in protocol version 70223 of Dash Core as described by [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki).*
 
@@ -337,7 +339,7 @@ The [`getcfheaders` message](core-ref-p2p-network-data-messages#getcfheaders) re
 | 32 | stop_hash | uint256 | The hash of the last block in the requested range. Must be >= `start_height` and the difference between them must be less than 2000.
 
 
-# getcfilters
+## getcfilters
 
 *Added in protocol version 70223 of Dash Core as described by [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki).*
 
@@ -349,7 +351,7 @@ The [`getcfilters` message](core-ref-p2p-network-data-messages#getcfilters) requ
 | 4 | start_height | uint32_t | The height of the first block in the requested range
 | 32 | stop_hash | uint256 | The hash of the last block in the requested range
 
-# getdata
+## getdata
 
 The [`getdata` message](core-ref-p2p-network-data-messages#getdata) requests one or more data objects from another <<glossary:node>>. The objects are requested by an inventory, which the requesting node typically previously received by way of an [`inv` message](core-ref-p2p-network-data-messages#inv).
 
@@ -359,7 +361,7 @@ This message cannot be used to request arbitrary data, such as historic transact
 
 The format and maximum size limitations of the [`getdata` message](core-ref-p2p-network-data-messages#getdata) are identical to the [`inv` message](core-ref-p2p-network-data-messages#inv); only the message header differs.
 
-# getheaders
+## getheaders
 
 *Added in protocol version 70077.*
 
@@ -375,7 +377,7 @@ The [`getheaders` message](core-ref-p2p-network-data-messages#getheaders) is nea
 | *Varies* | block header hashes  | char[32]         | One or more block header hashes (32 bytes each) in internal byte order.  Hashes should be provided in reverse order of block height, so highest-height hashes are listed first and lowest-height hashes are listed last.
 | 32       | stop hash            | char[32]         | The header hash of the last header hash being requested; set to all zeroes to request as many blocks as possible (2000).
 
-# getheaders2
+## getheaders2
 
 *Added in protocol version 70223 of Dash Core.*
 
@@ -383,7 +385,7 @@ The [`getheaders2` message](core-ref-p2p-network-data-messages#getheaders2) requ
 
 The [`getheaders2` message](core-ref-p2p-network-data-messages#getheaders2) contains the same fields as the [`getheaders` message](core-ref-p2p-network-data-messages#getheaders).
 
-# getmnlistd
+## getmnlistd
 
 *Added in protocol version 70213*
 
@@ -407,7 +409,7 @@ The following annotated hexdump shows a [`getmnlistd` message](core-ref-p2p-netw
 db3fe368976296fd3b6d73fdaf898cc0 ........... Block hash
 ```
 
-# getqrinfo
+## getqrinfo
 
 *Added in protocol version 70222 of Dash Core.*
 
@@ -444,7 +446,7 @@ d7b9d67da4a3016c62fcc37157032126
 ```
 
 
-# headers
+## headers
 
 *Added in protocol version 31800 (of Bitcoin).*
 
@@ -472,7 +474,7 @@ fe9f0864 ........................... Nonce
 00 ................................. Transaction count (0x00)
 ```
 
-# headers2
+## headers2
 
 *Added in protocol version 70223 of Dash Core.*
 
@@ -523,7 +525,7 @@ Header 3 (block version, previous header, time, and bits compressed)
 ... Remaining headers truncated
 ```
 
-# inv
+## inv
 
 The [`inv` message](core-ref-p2p-network-data-messages#inv) (inventory message) transmits one or more <<glossary:inventories>> of objects known to the transmitting <<glossary:peer>>.  It can be sent unsolicited to announce new <<glossary:transactions>> or <<glossary:blocks>>, or it can be sent in reply to a [`getblocks` message](core-ref-p2p-network-data-messages#getblocks) or [`mempool` message](core-ref-p2p-network-data-messages#mempool).
 
@@ -548,7 +550,7 @@ afc5b2f418f8c06c477a7d071240f5ee
 ab17057f9ce4b50c2aef4fadf3729a2e ... Hash (txlvote)
 ```
 
-# mempool
+## mempool
 
 *Added in protocol version 60002 (of Bitcoin).*
 
@@ -568,7 +570,7 @@ The `inv` response to the [`mempool` message](core-ref-p2p-network-data-messages
 
 There is no payload in a [`mempool` message](core-ref-p2p-network-data-messages#mempool).  See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
 
-# merkleblock
+## merkleblock
 
 *Added in protocol version 70001 as described by BIP37.*
 
@@ -620,7 +622,7 @@ bb3183301d7a1fb3bd174fcfa40a2b65 ... Hash #2
 
 Note: when fully decoded, the above [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock) provided the TXID for a single transaction that matched the filter. In the <<glossary:network>> traffic dump this output was taken from, the full transaction belonging to that TXID was sent immediately after the [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock) as a [`tx` message](core-ref-p2p-network-data-messages#tx).
 
-## Parsing A MerkleBlock Message
+### Parsing A MerkleBlock Message
 
 As seen in the annotated hexdump above, the [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock) provides three special data types: a transaction count, a list of hashes, and a list of one-bit flags.
 
@@ -657,7 +659,7 @@ Continue descending and ascending until you have enough information to obtain th
 
 For a detailed example of parsing a [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock), please see the corresponding [merkle block examples section](core-example-p2p-network-parsing-a-merkleblock).
 
-## Creating A MerkleBlock Message
+### Creating A MerkleBlock Message
 
 It's easier to understand how to create a [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock) after you understand how to parse an already-created message, so we recommend you read the parsing section above first.
 
@@ -680,7 +682,7 @@ After you process a TXID node or a node which is neither a TXID nor a match ance
 
 After you fully process the merkle root node according to the instructions in the table above, processing is complete.  Pad your flag list to a byte boundary and construct the [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock) using the template near the beginning of this subsection.
 
-# mnlistdiff
+## mnlistdiff
 
 *Added in protocol version 70213*
 
@@ -787,7 +789,7 @@ Masternode List
 | | 1 ...................................... Valid (1 - Yes)
 ```
 
-# notfound
+## notfound
 
 *Added in protocol version 70001.*
 
@@ -795,7 +797,7 @@ The [`notfound` message](core-ref-p2p-network-data-messages#notfound) is a reply
 
 The format and maximum size limitations of the [`notfound` message](core-ref-p2p-network-data-messages#notfound) are identical to the [`inv` message](core-ref-p2p-network-data-messages#inv); only the message header differs.
 
-# qrinfo
+## qrinfo
 
 *Added in protocol version 70222 of Dash Core.*
 
@@ -916,7 +918,7 @@ Last quorum hash per index
 ```
 
 
-# tx
+## tx
 
 The [`tx` message](core-ref-p2p-network-data-messages#tx) transmits a single transaction in the <<glossary:raw transaction>> format. It can be sent in a variety of situations;
 

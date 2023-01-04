@@ -29,6 +29,6 @@ transmitted in little-endian order.” } [/block]
    core-ref-p2p-network-governance-messages
    core-ref-p2p-network-instantsend-messages
    core-ref-p2p-network-masternode-messages
-   core-ref-p2p-network-coinjoin-messages
+   core-ref-p2p-network-privatesend-messages
    core-ref-p2p-network-quorum-messages
    core-ref-p2p-network-deprecated-messages

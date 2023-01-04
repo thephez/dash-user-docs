@@ -1,10 +1,12 @@
+# Control Messages
+
 The following <<glossary:network>> messages all help control the connection between two <<glossary:peers>> or allow them to advise each other about the rest of the network.
 
 ![Overview Of P2P Protocol Control And Advisory Messages](https://dash-docs.github.io/img/dev/en-p2p-control-messages.svg)
 
 Note that almost none of the control messages are authenticated in any way, meaning they can contain incorrect or intentionally harmful information.
 
-# addr
+## addr
 
 The `addr` (IP address) message relays connection information for peers on the network. Each peer which wants to accept incoming connections creates an [`addr` message](core-ref-p2p-network-control-messages#addr) providing its connection information and then sends that message to its peers unsolicited. Some of its peers send that information to their peers (also unsolicited), some of which further distribute it, allowing decentralized peer discovery for any program already on the network.
 
@@ -37,7 +39,7 @@ d91f4854 ........................... Epoch time: 1414012889
 [...] .............................. (999 more addresses omitted)
 ```
 
-# addrv2
+## addrv2
 
 *Added in protocol version 70220 of Dash Core*
 
@@ -72,7 +74,7 @@ Peer address details
 | 4a37 ............................. Port: 18999
 ```
 
-# filteradd
+## filteradd
 
 *Added in protocol version 70001 as described by BIP37.*
 
@@ -95,7 +97,7 @@ fdacf9b3eb077412e7a968d2e4f11b9a
 9dee312d666187ed77ee7d26af16cb0b ... Element (A TXID)
 ```
 
-# filterclear
+## filterclear
 
 *Added in protocol version 70001 as described by BIP37.*
 
@@ -105,7 +107,7 @@ Dash Core does not require a [`filterclear` message](core-ref-p2p-network-contro
 
 There is no payload in a [`filterclear` message](core-ref-p2p-network-control-messages#filterclear).  See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
 
-# filterload
+## filterload
 
 *Added in protocol version 70001 as described by BIP37.*
 
@@ -129,7 +131,7 @@ b50f ....... Filter: 1010 1101 1111 0000
 00 ......... nFlags: BLOOM_UPDATE_NONE
 ```
 
-## Initializing A Bloom Filter
+### Initializing A Bloom Filter
 
 Filters have two core parameters: the size of the bit field and the number of hash functions to run against each data element. The following formulas from BIP37 will allow you to automatically select appropriate values based on the number of elements you plan to insert into the filter (*n*) and the false positive rate (*p*) you desire to maintain plausible deniability.
 
@@ -144,7 +146,7 @@ According to BIP37, the formulas and limits described above provide support for 
 
 Once the size of the bit field is known, the bit field should be initialized as all zeroes.
 
-## Populating A Bloom Filter
+### Populating A Bloom Filter
 
 The bloom filter is populated using between 1 and 50 unique hash functions (the number specified per filter by the *nHashFuncs* field). Instead of using up to 50 different hash function implementations, a single implementation is used with a unique seed value for each function.
 
@@ -180,7 +182,7 @@ It is expected that sometimes the same index number will be returned more than o
 
 After all data elements have been added to the filter, each set of eight bits is converted into a little-endian byte. These bytes are the value of the *filter* field.
 
-## Comparing Transaction Elements To A Bloom Filter
+### Comparing Transaction Elements To A Bloom Filter
 
 To compare an arbitrary data element against the bloom filter, it is hashed using the same parameters used to create the bloom filter. Specifically, it is hashed *nHashFuncs* times, each time using the same
 *nTweak* provided in the filter, and the resulting <<glossary:output>> is modulo the size of the bit field provided in the *filter* field.  After each hash is performed, the filter is checked to see if the bit at that indexed location is set.  For example if the result of a hash is `5` and the filter is `01001110`, the bit is considered set.
@@ -234,7 +236,7 @@ The following annotated hexdump of a transaction is from the [raw transaction fo
 00000000 ................................... locktime: 0 (a block height)
 </code></pre>
 
-## Updating A Bloom Filter
+### Updating A Bloom Filter
 
 Clients will often want to track <<glossary:inputs>> that spend <<glossary:outputs>> (outpoints) relevant to their wallet, so the filterload field *nFlags* can be set to allow the filtering <<glossary:node>> to update the filter when a match is found. When the filtering node sees a <<glossary:pubkey script>> that pays a pubkey, <<glossary:address>>, or other data element matching the filter, the filtering node immediately updates the filter with the <<glossary:outpoint>> corresponding to that pubkey script.
 
@@ -252,19 +254,19 @@ The *nFlags* field has three allowed values:
 
 In addition, because the filter size stays the same even though additional elements are being added to it, the false positive rate increases. Each false positive can result in another element being added to the filter, creating a feedback loop that can (after a certain point) make the filter useless. For this reason, clients using automatic filter updates need to monitor the actual false positive rate and send a new filter when the rate gets too high.
 
-# getaddr
+## getaddr
 
 The [`getaddr` message](core-ref-p2p-network-control-messages#getaddr) requests an [`addr` message](core-ref-p2p-network-control-messages#addr) from the receiving <<glossary:node>>, preferably one with lots of IP addresses of other receiving nodes. The transmitting node can use those IP addresses to quickly update its database of available nodes rather than waiting for unsolicited [`addr` messages](core-ref-p2p-network-control-messages#addr) to arrive over time.
 
 There is no payload in a [`getaddr` message](core-ref-p2p-network-control-messages#getaddr).  See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
 
-# getsporks
+## getsporks
 
 The [`getsporks` message](core-ref-p2p-network-control-messages#getsporks) requests [`spork` messages](core-ref-p2p-network-control-messages#spork) from the receiving node.
 
 There is no payload in a [`getsporks` message](core-ref-p2p-network-control-messages#getsporks).  See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
 
-# ping
+## ping
 
 The [`ping` message](core-ref-p2p-network-control-messages#ping) helps confirm that the receiving <<glossary:peer>> is still connected. If a TCP/IP error is encountered when sending the [`ping` message](core-ref-p2p-network-control-messages#ping) (such as a connection timeout), the transmitting node can assume that the receiving node is disconnected. The response to a [`ping` message](core-ref-p2p-network-control-messages#ping) is the [`pong` message](core-ref-p2p-network-control-messages#pong).
 
@@ -280,7 +282,7 @@ The annotated hexdump below shows a [`ping` message](core-ref-p2p-network-contro
 0094102111e2af4d ... Nonce
 ```
 
-# pong
+## pong
 
 *Added in protocol version 60001 as described by BIP31.*
 
@@ -290,7 +292,7 @@ To allow nodes to keep track of latency, the [`pong` message](core-ref-p2p-netwo
 
 The format of the [`pong` message](core-ref-p2p-network-control-messages#pong) is identical to the [`ping` message](core-ref-p2p-network-control-messages#ping); only the message header differs.
 
-# reject
+## reject
 
 *Added in protocol version 70002 as described by BIP61.*
 
@@ -360,7 +362,7 @@ The annotated hexdump below shows a [`reject` message](core-ref-p2p-network-cont
 947baf86a31017939575fb2354222821 ... TXID
 ```
 
-# sendaddrv2
+## sendaddrv2
 
 *Added in protocol version 70220 of Dash Core*
 
@@ -368,7 +370,7 @@ The `sendaddrv2` message signals support for receiving [`addrv2` messages](#addr
 
 There is no payload in a `sendaddrv2` message. See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
 
-# sendcmpct
+## sendcmpct
 
 *Added in protocol version 70209 of Dash Core as described by BIP152*
 
@@ -396,7 +398,7 @@ The annotated hexdump below shows a [`sendcmpct` message](core-ref-p2p-network-c
 0100000000000000 ................... Compact block version: 1
 ```
 
-# senddsq
+## senddsq
 
 *Added in protocol version 70214 of Dash Core*
 
@@ -412,13 +414,13 @@ The following annotated hexdump shows a [`senddsq` message](core-ref-p2p-network
 01 ................................. CoinJoin participation: Enabled (1)
 ```
 
-# sendheaders
+## sendheaders
 
 The [`sendheaders` message](core-ref-p2p-network-control-messages#sendheaders) tells the receiving <<glossary:peer>> to send new <<glossary:block>> announcements using a [`headers` message](core-ref-p2p-network-data-messages#headers) rather than an [`inv` message](core-ref-p2p-network-data-messages#inv).
 
 There is no payload in a [`sendheaders` message](core-ref-p2p-network-control-messages#sendheaders).  See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
 
-# sendheaders2
+## sendheaders2
 
 *Added in protocol version 70223 of Dash Core.*
 
@@ -426,7 +428,7 @@ The [`sendheaders2` message](core-ref-p2p-network-control-messages#sendheaders2)
 
 There is no payload in a [`sendheaders2` message](core-ref-p2p-network-control-messages#sendheaders2).  See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
 
-# spork
+## spork
 
 Sporks are a mechanism by which updated code is released to the network, but not immediately made active (or “enforced”). Enforcement of the updated code can be activated remotely. Should problems arise, the code can be deactivated in the same manner, without the need for a network-wide rollback or client update.
 
@@ -515,11 +517,11 @@ d32020c827a89f8128a00acd210f4ea4
 45 .......................................... Masternode Signature
 ```
 
-# verack
+## verack
 
 The [`verack` message](core-ref-p2p-network-control-messages#verack) acknowledges a previously-received [`version` message](core-ref-p2p-network-control-messages#version), informing the connecting <<glossary:node>> that it can begin to send other messages. The [`verack` message](core-ref-p2p-network-control-messages#verack) has no payload; for an example of a message with no payload, see the [message headers section](core-ref-p2p-network-message-headers).
 
-# version
+## version
 
 The [`version` message](core-ref-p2p-network-control-messages#version) provides information about the transmitting <<glossary:node>> to the receiving node at the beginning of a connection. Until both <<glossary:peers>> have exchanged [`version` messages](core-ref-p2p-network-control-messages#version), no other messages will be accepted.
 

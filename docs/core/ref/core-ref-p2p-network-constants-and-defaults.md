@@ -1,3 +1,5 @@
+# Constants and Defaults
+
 The following constants and defaults are taken from Dash Core's [chainparams.cpp](https://github.com/dashpay/dash/blob/master/src/chainparams.cpp) source code file.
 
 | Network | Default Port | Magic Value | <<glossary:Start String>> | Max nBits

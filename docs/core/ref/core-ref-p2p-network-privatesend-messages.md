@@ -1,10 +1,12 @@
+# CoinJoin Messages
+
 The following network messages all help control the CoinJoin features built into Dash and facilitated by the <<glossary:masternode>> network.
 
 Since the messages are all related to a single process, this diagram shows them sequentially numbered. The [`dssu` message](core-ref-p2p-network-privatesend-messages#dssu) (not shown) is sent by the masternode in conjunction with some responses. For additional details, refer to the Developer Guide [CoinJoin section](core-guide-dash-features-privatesend).
 
 ![Overview Of P2P Protocol PrivateSend Request And Reply Messages](https://dash-docs.github.io/img/dev/en-p2p-privatesend-messages.svg)
 
-# dsa
+## dsa
 
 The [`dsa` message](core-ref-p2p-network-privatesend-messages#dsa) allows a <<glossary:node>> to join a CoinJoin pool. A collateral fee is required and may be forfeited if the client acts maliciously. The message operates in two ways:
 
@@ -44,7 +46,7 @@ Collateral Transaction
 | 6a4eb0e5 ................................. Sequence number: 3853536874
 ```
 
-# dsc
+## dsc
 
 The [`dsc` message](core-ref-p2p-network-privatesend-messages#dsc) indicates a CoinJoin session is complete.
 
@@ -62,7 +64,7 @@ d9070700 ............................. Session ID: 791686
 14000000 ............................. Message ID: MSG_SUCCESS (20)
 ```
 
-# dsf
+## dsf
 
 The [`dsf` message](core-ref-p2p-network-privatesend-messages#dsf) is sent by the masternode as the final transaction in a CoinJoin session. The <<glossary:masternode>> expects <<glossary:nodes>> in the session to respond with a [`dss` message](core-ref-p2p-network-privatesend-messages#dss).
 
@@ -169,7 +171,7 @@ Transaction Message
 | 00000000 ................................... locktime: 0 (a block height)
 ```
 
-# dsi
+## dsi
 
 The [`dsi` message](core-ref-p2p-network-privatesend-messages#dsi) replies to a [`dsq` message](core-ref-p2p-network-privatesend-messages#dsq) that has the Ready field set to 0x01. The [`dsi` message](core-ref-p2p-network-privatesend-messages#dsi) contains user <<glossary:inputs>> for processing along with the <<glossary:outputs>> and a collateral. Once the <<glossary:masternode>> receives [`dsi` messages](core-ref-p2p-network-privatesend-messages#dsi) from all members of the pool, it responds with a [`dsf` message](core-ref-p2p-network-privatesend-messages#dsf).
 
@@ -295,7 +297,7 @@ User outputs
 | | | ac ..................................... OP_CHECKSIG
 ```
 
-# dsq
+## dsq
 
 The [`dsq` message](core-ref-p2p-network-privatesend-messages#dsq) provides <<glossary:nodes>> with queue details and notifies them when to sign final transaction messages.
 
@@ -345,7 +347,7 @@ Masternode Outpoint
 0d1401e2264071a74fc01d51e943ce9f ..... Masternode BLS Signature
 ```
 
-# dss
+## dss
 
 The [`dss` message](core-ref-p2p-network-privatesend-messages#dss) replies to a [`dsf` message](core-ref-p2p-network-privatesend-messages#dsf) sent by the <<glossary:masternode>> managing the session.  The [`dsf` message](core-ref-p2p-network-privatesend-messages#dsf) provides the unsigned transaction <<glossary:inputs>> for all members of the pool. Each <<glossary:node>> verifies that the final transaction matches what is expected. They then sign any transaction inputs belonging to them and then relay them to the masternode via this [`dss` message](core-ref-p2p-network-privatesend-messages#dss).
 
@@ -410,7 +412,7 @@ User inputs
 | | ffffffff ................................. Sequence number: UINT32_MAX
 ```
 
-# dssu
+## dssu
 
 The [`dssu` message](core-ref-p2p-network-privatesend-messages#dssu) provides a pool status update.
 
@@ -477,7 +479,7 @@ The following annotated hexdump shows a [`dssu` message](core-ref-p2p-network-pr
 13000000 ............................. Message ID: MSG_NOERR (0x13)
 ```
 
-# dstx
+## dstx
 
 The [`dstx` message](core-ref-p2p-network-privatesend-messages#dstx) allows <<glossary:masternodes>> to broadcast subsidized transactions without fees (to provide security in processing).
 

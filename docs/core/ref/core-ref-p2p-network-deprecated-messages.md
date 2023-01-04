@@ -1,3 +1,5 @@
+# Deprecated Messages
+
 [block:callout]
 {
   "type": "danger",
@@ -5,7 +7,7 @@
   "title": "Deprecated Messages"
 }
 [/block]
-# Alert
+## Alert
 [block:callout]
 {
   "type": "danger",
@@ -87,7 +89,7 @@ c42c13810ffcae14995bb648340219e3
 
 **Alert key compromise:** Dash Core's source code defines a particular set of alert parameters that can be used to notify users that the alert signing key has been compromised and that they should upgrade to get a new alert public key. Once a signed alert containing those parameters has been received, no other alerts can cancel or override it.
 
-# ix
+## ix
 [block:callout]
 {
   "type": "danger",
@@ -96,7 +98,7 @@ c42c13810ffcae14995bb648340219e3
 [/block]
 The `ix` message (transaction lock request) has the same structure as the [`tx` message](core-ref-p2p-network-data-messages#tx). The masternode network responds with `txlvote` messages if the transaction inputs can be locked.
 
-# txlvote
+## txlvote
 [block:callout]
 {
   "type": "danger",
