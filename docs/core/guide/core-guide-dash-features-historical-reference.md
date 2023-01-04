@@ -1,3 +1,5 @@
+# Historical Reference
+
 [block:callout]
 {
   "type": "danger",
@@ -5,7 +7,7 @@
   "title": "Deprecated Content"
 }
 [/block]
-# InstantSend (original)
+## InstantSend (original)
 [block:callout]
 {
   "type": "warning",
