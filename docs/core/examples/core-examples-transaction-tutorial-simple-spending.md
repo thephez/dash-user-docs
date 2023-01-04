@@ -1,7 +1,4 @@
-```{eval-rst}
-Simple Spending
-***************
-```
+# Simple Spending
 
 Dash Core provides several RPCs which handle all the details of spending, including creating a <<glossary:change output>> and paying an appropriate <<glossary:transaction fee>>. Even advanced users should use these RPCs whenever possible to decrease the chance that <<glossary:duffs>> will be lost by mistake.
 

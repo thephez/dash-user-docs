@@ -1,9 +1,6 @@
-```{eval-rst}
-dash-qt
-********
-```
+# dash-qt
 
-# Usage
+## Usage
 
 ```bash
 dash-qt [command-line options]     
@@ -17,7 +14,7 @@ dash-qt [command-line options]
 [/block]
 Dash Core QT GUI includes all the same command line options as [dashd](dash-core-wallet-arguments-and-commands-dashd) with the exception of `-daemon`. It also provides additional options for UI as described below.
 
-## UI Options:
+### UI Options:
 
 ```text
   -allowselfsignedrootcertificates

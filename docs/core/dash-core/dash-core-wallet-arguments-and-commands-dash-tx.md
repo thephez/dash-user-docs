@@ -1,11 +1,8 @@
-```{eval-rst}
-dash-tx
-*******
-```
+# dash-tx
 
 The `dash-tx` application provides a command-line option for creating, parsing, or modifying transactions.
 
-# Usage
+## Usage
 
 ```bash
 Usage:
@@ -13,7 +10,7 @@ Usage:
   dash-tx [options] -create [commands]   Create hex-encoded dash transaction
 ```
 
-## Options:
+### Options:
 
 ```
   -?
@@ -29,7 +26,7 @@ Usage:
        Output only the hex-encoded transaction id of the resultant transaction.
 ```
 
-## Chain selection options:
+### Chain selection options:
 ```
   -devnet=<name>
        Use devnet chain with provided name
@@ -71,7 +68,7 @@ Usage:
        Use the test chain
 ```
 
-## Commands:
+### Commands:
 ```
   delin=N
        Delete input N from TX
@@ -114,7 +111,7 @@ Usage:
        objects.
 ```
 
-## Register Commands:
+### Register Commands:
 ```
   load=NAME:FILENAME
        Load JSON file FILENAME into register NAME

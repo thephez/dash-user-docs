@@ -1,7 +1,4 @@
-```{eval-rst}
-Simple Raw Transaction
-**********************
-```
+# Simple Raw Transaction
 
 The [raw transaction RPCs](core-api-ref-remote-procedure-calls-raw-transactions) allow users to create custom <<glossary:transactions>> and delay broadcasting those transactions. However, mistakes made in <<glossary:raw transactions>> may not be detected by Dash Core, and a number of raw transaction users have permanently lost large numbers of <<glossary:duffs>>, so please be careful using raw transactions on <<glossary:mainnet>>.
 
@@ -12,7 +9,7 @@ This subsection covers one of the simplest possible raw transactions.
   "body": "Note: the following steps pick up where the [Simple Spending Tutorial](core-examples-transaction-tutorial-simple-spending) left off"
 }
 [/block]
-# 1. List unspent outputs
+## 1. List unspent outputs
 
 Re-rerun `listunspent`. We now have three UTXOs: the two transactions we created before plus the <<glossary:coinbase transaction>> from block #2. We save the <<glossary:TXID>> and <<glossary:output index>> number (vout) of that <<glossary:coinbase>> UTXO to shell variables.
 [block:code]
@@ -71,7 +68,7 @@ Re-rerun `listunspent`. We now have three UTXOs: the two transactions we created
 > UTXO_VOUT=0
 ```
 
-# 2. Get new address
+## 2. Get new address
 [block:code]
 {
   "codes": [
@@ -88,7 +85,7 @@ yfV9Wirf5RkYHgNDttjpBz8Wdi8BavLHcP
 > NEW_ADDRESS=yfV9Wirf5RkYHgNDttjpBz8Wdi8BavLHcP
 ```
 
-# 3. Create raw transaction
+## 3. Create raw transaction
 
 Using two arguments to the [`createrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#createrawtransaction), we create a new raw format transaction. The first argument (a JSON array) references the txid of the coinbase transaction from block #2 and the <<glossary:index>> number (0) of the <<glossary:output>> from that transaction we want to spend. The second argument (a JSON object) creates the output with the address ( <<glossary:public key>> hash) and number of DASH we want to transfer. We save the resulting raw format transaction to a shell variable.
 [block:callout]
@@ -117,7 +114,7 @@ In this example, our input had 500.0000 DASH and our output (`$NEW_ADDRESS`) is 
 > RAW_TX=0100000001a8364935baa9ef11de59a7ee3d956934d75297724fcd5[...]
 ```
 
-# 4. Decode raw transaction
+## 4. Decode raw transaction
 
 Use the [`decoderawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#decoderawtransaction) to see exactly what the transaction we just created does.
 [block:code]
@@ -167,7 +164,7 @@ Use the [`decoderawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-tra
 }
 ```
 
-# 5. Sign transaction
+## 5. Sign transaction
 
 Use the [`signrawtransactionwithwallet` RPC](core-api-ref-remote-procedure-calls-raw-transactions#signrawtransactionwithwallet) to sign the transaction created by `createrawtransaction` and save the returned "hex" raw format signed transaction to a shell variable.
 [block:code]
@@ -198,7 +195,7 @@ Use the [`signrawtransactionwithwallet` RPC](core-api-ref-remote-procedure-calls
 
 Even though the transaction is now complete, the Dash Core <<glossary:node>> we're connected to doesn't know anything about the transaction, nor does any other part of the <<glossary:network>>. We've created a spend, but we haven't actually spent anything because we could simply unset the `$SIGNED_RAW_TX` variable to eliminate the transaction.
 
-# 6. Send raw transaction
+## 6. Send raw transaction
 
 Send the signed transaction to the connected node using the [`sendrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#sendrawtransaction). After accepting the transaction, the node would usually then broadcast it to other <<glossary:peers>>, but we're not currently connected to other peers because we started in <<glossary:regression test mode>>.
 [block:code]
@@ -215,7 +212,7 @@ Send the signed transaction to the connected node using the [`sendrawtransaction
 fa0f4105b0a2b2706d65581c5e6411d3970253c7f231944fa2f978b4a3d9010d
 ```
 
-# 7. Mine a block
+## 7. Mine a block
 
 Generate a block to confirm the transaction and then clear our shell variables.
 [block:code]

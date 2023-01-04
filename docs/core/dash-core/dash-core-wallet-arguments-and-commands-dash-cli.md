@@ -1,11 +1,8 @@
-```{eval-rst}
-dash-cli
-********
-```
+# dash-cli
 
 The `dash-cli` application provides a command-line option for accessing Dash Core RPCs.
 
-# Usage
+## Usage
 
 ```bash Send command
 dash-cli [options] <command> [params]
@@ -26,7 +23,7 @@ dash-cli [options] help <command>
   "body": "The list of RPCs can be found [here](core-api-ref-remote-procedure-call-quick-reference) with links to more detailed information. Using dash-cli, this information is available using the `dash-cli [options] help` and `dash-cli [options] help <command>` commands."
 }
 [/block]
-## Options:
+### Options:
 
 ```text
   -?
@@ -100,7 +97,7 @@ dash-cli [options] help <command>
        Print version and exit
 ```
 
-## Chain selection options:
+### Chain selection options:
 
 ```text
   -devnet=<name>

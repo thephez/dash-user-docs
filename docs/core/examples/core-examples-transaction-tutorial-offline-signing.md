@@ -1,7 +1,4 @@
-```{eval-rst}
-Offline Signing
-***************
-```
+# Offline Signing
 
 We will now spend the <<glossary:transaction>> created in the [Complex Raw Transaction subsection](core-examples-transaction-tutorial-complex-raw-transaction) without sending it to the local <<glossary:node>> first. This is the same basic process used by <<glossary:wallet>> programs for offline signing---which generally means signing a transaction without access to the current UTXO set.
 
@@ -25,7 +22,7 @@ Put the previously signed (but not sent) transaction into a shell variable.
 }
 [/block]
 
-# 1. Decode signed transaction
+## 1. Decode signed transaction
 
 Decode the signed <<glossary:raw transaction>> so we can get its <<glossary:TXID>>. Also, choose a specific one of its UTXOs to spend and save that UTXO's <<glossary:output index>> number (vout) and hex <<glossary:pubkey script>> (scriptPubKey) into shell variables.
 [block:code]
@@ -117,7 +114,7 @@ Decode the signed <<glossary:raw transaction>> so we can get its <<glossary:TXID
 > UTXO_OUTPUT_SCRIPT=76a914cb7a56b046479f8c247875d672d3e1aed18c33f488ac
 ```
 
-# 2. Get new address
+## 2. Get new address
 
 Get a new <<glossary:address>> to spend the <<glossary:duffs>> to.
 
@@ -128,12 +125,12 @@ yfijhy7gYY34J2U77xFKdMwfA8k5mVnSRa
 > NEW_ADDRESS=yfijhy7gYY34J2U77xFKdMwfA8k5mVnSRa
 ```
 
-# 3. Create raw transaction
+## 3. Create raw transaction
 
 Create the raw transaction the same way we've done in the previous subsections.
 
 ``` bash
-## Outputs - inputs = transaction fee, so always double-check your math!
+#Outputs - inputs = transaction fee, so always double-check your math!
 > dash-cli -regtest createrawtransaction '''
     [
       {
@@ -152,7 +149,7 @@ a9eea0ca9368d1c99c097279b8081f88ac00000000
 > RAW_TX=0100000001771078cb769f4a8fdb20c7a560a7b2e992e1d1c427666[...]
 ```
 
-# 4. Sign raw transaction
+## 4. Sign raw transaction
 
 Attempt to sign the <<glossary:raw transaction>> without any special arguments, the way we successfully signed the the raw transaction in the [Simple Raw Transaction subsection](core-examples-transaction-tutorial-simple-raw-transaction). If you've read the [Transaction section](core-guide-transactions) of the guide, you may know why the call fails and leaves the raw transaction hex unchanged.
 
@@ -162,7 +159,7 @@ As illustrated above, the data that gets signed includes the <<glossary:TXID>> a
 
 In the other raw transaction subsections above, the previous <<glossary:output>> was part of the UTXO set known to the wallet, so the wallet was able to use the TXID and <<glossary:output index>> number to find the previous <<glossary:pubkey script>> and insert it automatically.
 
-## 4a. Without Pubkey Script
+### 4a. Without Pubkey Script
 [block:callout]
 {
   "type": "warning",
@@ -193,7 +190,7 @@ In this case, you're spending an <<glossary:output>> which is unknown to the wal
 }
 ```
 
-## 4b. With Pubkey Script
+### 4b. With Pubkey Script
 
 Successfully sign the transaction by providing the previous pubkey script and other required input data.
 
@@ -225,9 +222,9 @@ This specific operation is typically what offline signing wallets do. The online
 > SIGNED_RAW_TX=0100000001771078cb769f4a8fdb20c7a560a7b2e992e1d1[...]
 ```
 
-# 5. Send raw transaction
+## 5. Send raw transaction
 
-## 5a. Second transaction
+### 5a. Second transaction
 
 Attempt to broadcast the second transaction before we've broadcast the first transaction.  The <<glossary:node>> rejects this attempt because the second transaction spends an <<glossary:output>> which is not a UTXO the node knows about.
 
@@ -242,7 +239,7 @@ Missing inputs
 error: {"code":-22,"message":"TX rejected"}
 ```
 
-## 5b. First transaction
+### 5b. First transaction
 
 Broadcast the first transaction, which succeeds, and then broadcast the second transaction---which also now succeeds because the node now sees the UTXO.
 
@@ -253,7 +250,7 @@ Broadcast the first transaction, which succeeds, and then broadcast the second t
 f89deefb927fbd03c5acab194de2ba8f98ab160b9c4b3f57bde63073c4b5f060
 ```
 
-# 6. Check mempool
+## 6. Check mempool
 
 We have once again not generated an additional block, so the transactions above have not yet become part of the regtest block chain.  However, they are part of the local node's memory pool.
 
