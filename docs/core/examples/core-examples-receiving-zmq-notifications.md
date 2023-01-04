@@ -1,15 +1,12 @@
-```{eval-rst}
-Receiving ZMQ Notifications
-***************************
-```
+# Receiving ZMQ Notifications
 
-# Overview
+## Overview
 
 Receiving notifications from Dash Core is important for a variety of use-cases. Although polling [RPCs](core-api-ref-remote-procedure-calls) can be useful, in some scenarios it may be more desirable to have publish-subscribe functionality. Dash Core's built-in ZeroMQ (ZMQ) support provides the ability to subscribe to block, transaction, and governance related messages.
 
 Further information regarding ZMQ support may be found in the [ZMQ API Reference](core-api-ref-zmq).
 
-# Enabling Dash Core ZMQ Notifications
+## Enabling Dash Core ZMQ Notifications
 [block:callout]
 {
   "type": "info",
@@ -19,7 +16,7 @@ Further information regarding ZMQ support may be found in the [ZMQ API Reference
 In the [`dash.conf` configuration file](core-examples-configuration-file), add the following [ZMQ notifications](core-api-ref-zmq#available-notifications) and assign the address that Dash Core should listen on. The notifications selected here relate to InstantSend and ChainLocks.
 
 ```
-# ZMQ
+## ZMQ
 zmqpubhashchainlock=tcp://0.0.0.0:20009
 zmqpubhashtx=tcp://0.0.0.0:20009
 zmqpubhashtxlock=tcp://0.0.0.0:20009
@@ -29,11 +26,11 @@ zmqpubrawtxlock=tcp://0.0.0.0:20009
 
 Restart the Dash Core node once the configuration file has been updated.
 
-# JavaScript Example
+## JavaScript Example
 
 Requires an installation of [NodeJS](https://nodejs.org/en/download/)
 
-## 1. Install ZeroMq
+### 1. Install ZeroMq
 
 The JavaScript zeromq package is available from [npmjs.com](https://www.npmjs.com/package/zeromq) and can be installed from the command line by running:
 
@@ -47,7 +44,7 @@ npm install zeromq@5
   "body": "Version 5 of the zeromq package should be used for compatibility reasons."
 }
 [/block]
-## 2. Subscribe to ZeroMQ Messages
+### 2. Subscribe to ZeroMQ Messages
 
 Create a file with the following contents. Then run it by typing `node <your-filename.js>` from the command line:
 [block:code]
