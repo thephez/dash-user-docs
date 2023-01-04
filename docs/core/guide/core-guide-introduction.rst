@@ -24,3 +24,9 @@ term, a brief definition of the term will be displayed in a tooltip.
 
    core-guide-dash-features
    core-guide-block-chain
+   core-guide-transactions
+   core-guide-contracts
+   core-guide-wallets
+   core-guide-operating-modes
+   core-guide-p2p-network
+   core-guide-mining

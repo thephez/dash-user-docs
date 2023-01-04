@@ -1,3 +1,6 @@
+Transactions
+************
+
 Transactions let users spend <>. Each <> is constructed out of several
 parts which enable both simple direct payments and complex transactions.
 This section will describe each part and demonstrate how to use them
@@ -138,3 +141,17 @@ broadcasts the transaction to Dash miners through the peer-to-peer
 network. Each peer and miner independently validates the transaction
 before broadcasting it further or attempting to include it in a new
 block of transactions.
+
+.. toctree::
+   :maxdepth: 3
+   :titlesonly:
+
+   core-guide-transactions-p2pkh-script-validation
+   core-guide-transactions-p2sh-scripts
+   core-guide-transactions-standard-transactions
+   core-guide-transactions-non-standard-transactions
+   core-guide-transactions-signature-hash-types
+   core-guide-transactions-locktime-and-sequence-number
+   core-guide-transactions-transaction-fees-and-change
+   core-guide-transactions-avoiding-key-reuse
+   core-guide-transactions-transaction-malleability

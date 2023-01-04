@@ -1,3 +1,5 @@
+# P2SH Scripts
+
 Pubkey scripts are created by spenders who have little interest what that script does. Receivers do care about the script conditions and, if they want, they can ask spenders to use a particular <<glossary:pubkey script>>. Unfortunately, custom pubkey scripts are less convenient than short Dash <<glossary:addresses>> and there was no standard way to communicate them between programs prior to widespread implementation of the BIP70 Payment Protocol discussed later.
 
 To solve these problems, pay-to-script-hash (<<glossary:P2SH>>) transactions were created in 2012 to let a spender create a pubkey script containing a hash of a second script, the <<glossary:redeem script>>.

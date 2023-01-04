@@ -1,3 +1,5 @@
+# Standard Transactions
+
 After the discovery of several dangerous bugs in early versions of Bitcoin, a test was added which only accepted <<glossary:transactions>> from the <<glossary:network>> if their pubkey scripts and signature scripts matched a small set of believed-to-be-safe templates, and if the rest of the transaction didn't violate another small set of rules enforcing good network behavior. This is the `IsStandard()` test, and transactions which pass it are called standard transactions.
 
 Non-standard transactions---those that fail the test---may be accepted by <<glossary:nodes>> not using the default Dash Core settings. If they are included in blocks, they will also avoid the IsStandard test and be processed.

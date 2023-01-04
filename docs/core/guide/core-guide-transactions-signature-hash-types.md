@@ -1,3 +1,5 @@
+# Signature Hash Types
+
 `OP_CHECKSIG` extracts a non-stack argument from each <<glossary:signature>> it evaluates, allowing the signer to decide which parts of the <<glossary:transaction>> to sign. Since the signature protects those parts of the transaction from modification, this lets signers selectively choose to let other people modify their transactions.
 
 The various options for what to sign are called <<glossary:signature hash>> types. There are three base SIGHASH types currently available:

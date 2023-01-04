@@ -1,3 +1,5 @@
+# Locktime and Sequence Number
+
 One thing all signature hash types sign is the transaction's <<glossary:locktime>>. (Called nLockTime in the Dash Core source code.) The locktime indicates the earliest time a <<glossary:transaction>> can be added to the <<glossary:block chain>>.
 
 Locktime allows signers to create time-locked transactions which will only become valid in the future, giving the signers a chance to change their minds.

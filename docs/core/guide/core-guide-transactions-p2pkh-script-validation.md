@@ -1,3 +1,5 @@
+# P2PKH Script Validation
+
 The validation procedure requires evaluation of the <<glossary:signature script>> and <<glossary:pubkey script>>. In a <<glossary:P2PKH>> <<glossary:output>>, the pubkey script is:
 
 ```

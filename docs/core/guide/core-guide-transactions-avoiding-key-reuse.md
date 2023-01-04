@@ -1,3 +1,5 @@
+# Avoiding Key Reuse
+
 In a <<glossary:transaction>>, the spender and receiver each reveal to each other all <<glossary:public keys>> or <<glossary:addresses>> used in the transaction. This allows either person to use the public <<glossary:block chain>> to track past and future transactions involving the other person's same public keys or addresses.
 
 If the same public key is reused often, as happens when people use Dash addresses (hashed public keys) as static payment addresses, other people can easily track the receiving and spending habits of that person, including how many <<glossary:duffs>> they control in known addresses.
