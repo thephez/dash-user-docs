@@ -1,3 +1,5 @@
+# Simplified Payment Verification (SPV)
+
 An alternative approach detailed in the [original Bitcoin paper](https://bitcoin.org/en/bitcoin-paper) is a client that only downloads the <<glossary:headers>> of <<glossary:blocks>> during the initial syncing process and then requests <<glossary:transactions>> from full <<glossary:nodes>> as needed. This scales linearly with the height of the <<glossary:block chain>> at only 80 bytes per block header, or up to 16.8MB per year, regardless of total block size.
 
 As described in the white paper, the <<glossary:merkle root>> in the block header along with a merkle branch can prove to the SPV client that the transaction in question is embedded in a block in the block chain. This does not guarantee validity of the transactions that are embedded. Instead it demonstrates the amount of work required to perform a double-spend attack.

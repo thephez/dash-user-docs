@@ -1,10 +1,12 @@
+# Initial Block Download
+
 Before a full <<glossary:node>> can validate unconfirmed transactions and recently-mined <<glossary:blocks>>, it must download and validate all blocks from block 1 (the block after the hardcoded <<glossary:genesis block>>) to the current tip of the best <<glossary:block chain>>. This is the <<glossary:initial block download>> (IBD) or initial sync.
 
 Although the word "initial" implies this method is only used once, it can also be used any time a large number of blocks need to be downloaded, such as when a previously-caught-up node has been offline for a long time. In this case, a node can use the IBD method to download all the blocks which were produced since the last time it was online.
 
 Dash Core uses the IBD method any time the last block on its local best block chain has a <<glossary:block header>> time more than 24 hours in the past. Dash Core will also perform IBD if its local best block chain is more than 144 blocks lower than its local best <<glossary:header chain>> (that is, the local block chain is more than about 6 hours in the past).
 
-# Blocks-First
+## Blocks-First
 
 Dash Core (up until version 0.12.0.x) uses a simple initial block download (IBD) method we'll call *blocks-first*. The goal is to download the blocks from the best block chain in sequence.
 
@@ -44,7 +46,7 @@ This repeated search allows the sync node to send useful inventories even if the
 
 When the IBD node receives the second [`inv` message](core-ref-p2p-network-data-messages#inv), it will request those blocks using [`getdata` messages](core-ref-p2p-network-data-messages#getdata).  The sync node will respond with [`block` messages](core-ref-p2p-network-data-messages#block).  Then the IBD node will request more inventories with another [`getblocks` message](core-ref-p2p-network-data-messages#getblocks)---and the cycle will repeat until the IBD node is synced to the tip of the block chain.  At that point, the node will accept blocks sent through the regular block broadcasting described in a later subsection.
 
-## Blocks-First Advantages & Disadvantages
+### Blocks-First Advantages & Disadvantages
 
 The primary advantage of <<glossary:blocks-first>> <<glossary:IBD>> is its simplicity. The primary disadvantage is that the IBD node relies on a single sync node for all of its downloading. This has several implications:
 
@@ -65,7 +67,7 @@ All of these problems are addressed in part or in full by the headers-first IBD 
 | **From→To** | IBD→Sync                         | Sync→IBD                                         | IBD→Sync                      | Sync→IBD
 | **Payload** | One or more header hashes        | Up to 500 block inventories (unique identifiers) | One or more block inventories | One serialized block
 
-# Headers-First
+## Headers-First
 
 Dash Core 0.12.0+ uses an <<glossary:initial block download>> (IBD) method called *<<glossary:headers-first>>*. The goal is to download the <<glossary:headers>> for the best <<glossary:header chain>>, partially validate them as best as possible, and then download the corresponding <<glossary:blocks>> in parallel.  This solves several problems with the older <<glossary:blocks-first>> IBD method.
 

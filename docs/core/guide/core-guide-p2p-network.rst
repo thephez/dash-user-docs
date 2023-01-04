@@ -1,3 +1,6 @@
+P2P Network
+***********
+
 The Dash network protocol allows full <> (peers) to collaboratively
 maintain a peer-to-peer <> for <> and <> exchange. Full nodes download
 and verify every block and transaction prior to relaying them to other
@@ -20,3 +23,14 @@ SPV client. Both programs are flexible, so only default behavior is
 described. Also, for privacy, actual IP addresses in the example output
 below have been replaced with
 `RFC5737 <http://tools.ietf.org/html/rfc5737>`__ reserved IP addresses.
+
+.. toctree::
+   :maxdepth: 3
+   :titlesonly:
+
+   core-guide-p2p-network-peer-discovery
+   core-guide-p2p-network-connecting-to-peers
+   core-guide-p2p-network-initial-block-download
+   core-guide-p2p-network-block-broadcasting
+   core-guide-p2p-network-transaction-broadcasting
+   core-guide-p2p-network-misbehaving-nodes

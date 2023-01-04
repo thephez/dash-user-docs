@@ -1,3 +1,5 @@
+# Block Broadcasting
+
 When a <<glossary:miner>> discovers a new <<glossary:block>>, it broadcasts the new block to its <<glossary:peers>> using one of the following methods:
 
 * **<<glossary:Unsolicited Block Push>>:**
@@ -26,7 +28,7 @@ Full nodes validate the received block and then advertise it to their peers usin
 | **From→To** | Relay→BF/HF                                            | Relay→SPV                                  | Relay→SPV                                                              |
 | **Payload** | The new block in [serialized format](core-ref-block-chain-serialized-blocks) | The new block filtered into a merkle block | Serialized transactions from the new block that match the bloom filter |
 
-# Orphan Blocks
+## Orphan Blocks
 
 Blocks-first nodes may download <<glossary:orphan blocks>>---blocks whose previous <<glossary:block header>> hash field refers to a block header this node hasn't seen yet. In other words, orphan blocks have no known parent (unlike <<glossary:stale blocks>>, which have known parents but which aren't part of the best <<glossary:block chain>>).
 

@@ -1,6 +1,8 @@
+# Transaction Broadcasting
+
 In order to send a <<glossary:transaction>> to a <<glossary:peer>>, an [`inv` message](core-ref-p2p-network-data-messages#inv) is sent. If a [`getdata` message](core-ref-p2p-network-data-messages#getdata) is received in reply, the transaction is sent using a [`tx` message](core-ref-p2p-network-data-messages#tx). If it is a valid transaction, the peer receiving the transaction also forwards the transaction to its peers.
 
-# Memory Pool
+## Memory Pool
 
 Full peers may keep track of unconfirmed transactions which are eligible to be included in the next <<glossary:block>>. This is essential for miners who will actually mine some or all of those transactions, but it's also useful for any peer who wants to keep track of unconfirmed transactions, such as peers serving unconfirmed transaction information to SPV clients.
 
