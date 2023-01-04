@@ -1,3 +1,6 @@
+Mining
+******
+
 Mining adds new <> to the <>, making transaction history hard to modify.
 Mining today takes on two forms:
 
@@ -11,3 +14,10 @@ Mining today takes on two forms:
    miners in rough correlation to the amount of hashing power they each
    contributed, allowing the miner to receive small payments with a
    lower variance (shorter time between payments).
+
+.. toctree::
+   :maxdepth: 3
+
+   core-guide-mining-solo-mining
+   core-guide-mining-pool-mining
+   core-guide-mining-block-prototypes

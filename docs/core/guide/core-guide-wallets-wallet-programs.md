@@ -1,3 +1,5 @@
+# Wallet Programs
+
 Permitting receiving and spending of <<glossary:duffs>> is the only essential feature of <<glossary:wallet>> software---but a particular wallet program doesn't need to do both things.  Two wallet programs can work together, one program distributing <<glossary:public keys>> in order to receive duffs and another program signing <<glossary:transactions>> spending those duffs.
 
 Wallet programs also need to interact with the peer-to-peer <<glossary:network>> to get information from the <<glossary:block chain>> and to broadcast new transactions. However, the programs which distribute public keys or sign transactions don't need to interact with the peer-to-peer network themselves.
@@ -9,7 +11,7 @@ This leaves us with three necessary, but separable, parts of a wallet system: a 
   "body": "Note: we speak about distributing public keys generically. In many cases, P2PKH or P2SH hashes will be distributed instead of public keys, with the actual public keys only being distributed when the outputs they control are spent."
 }
 [/block]
-# Full-Service Wallets
+## Full-Service Wallets
 
 The simplest wallet is a program which performs all three functions: it generates <<glossary:private keys>>, derives the corresponding <<glossary:public keys>>, helps distribute those public keys as necessary, monitors for outputs spent to those public keys, creates and signs transactions spending those outputs, and broadcasts the signed transactions.
 
@@ -23,7 +25,7 @@ The main disadvantage of full-service wallets is that they store the private key
 
 To help protect against theft, many wallet programs offer users the option of encrypting the wallet files which contain the private keys. This protects the private keys when they aren't being used, but it cannot protect against an attack designed to capture the encryption key or to read the decrypted keys from memory.
 
-# Signing-Only Wallets
+## Signing-Only Wallets
 
 To increase security, private keys can be generated and stored by a separate wallet program operating in a more secure environment. These signing-only wallets work in conjunction with a networked wallet which interacts with the peer-to-peer network.
 
@@ -43,7 +45,7 @@ The networked wallet then broadcasts the signed transactions to the peer-to-peer
 
 The following subsections describe the two most common variants of signing-only wallets: offline wallets and hardware wallets.
 
-## Offline Wallets
+### Offline Wallets
 
 Several full-service wallets programs will also operate as two separate wallets: one program instance acting as a signing-only wallet (often called an "offline wallet") and the other program instance acting as the networked wallet (often called an "online wallet" or "watching-only wallet").
 
@@ -61,7 +63,7 @@ The primary advantage of offline wallets is their possibility for greatly improv
 
 The primary disadvantage of offline wallets is hassle. For maximum security, they require the user dedicate a device to only offline tasks. The offline device must be booted up whenever funds are to be spent, and the user must physically copy data from the online device to the offline device and back.
 
-## Hardware Wallets
+### Hardware Wallets
 
 Hardware wallets are devices dedicated to running a signing-only wallet. Their dedication lets them eliminate many of the vulnerabilities present in operating systems designed for general use, allowing them to safely communicate directly with other devices so users don't need to transfer data manually.  The user's workflow is something like:
 
@@ -77,7 +79,7 @@ The primary advantage of hardware wallets is their possibility for greatly impro
 
 The primary disadvantage of hardware wallets is their hassle. Even though the hassle is less than that of offline wallets, the user must still purchase a hardware wallet device and carry it with them whenever they need to make a transaction using the signing-only wallet. An additional disadvantage is that not all wallet programs support hardware wallets.
 
-# Distributing-Only Wallets
+## Distributing-Only Wallets
 
 Wallet programs which run in difficult-to-secure environments, such as webservers, can be designed to distribute public keys (including P2PKH or P2SH addresses) and nothing more.  There are two common ways to design these minimalist wallets:
 

@@ -1,3 +1,5 @@
+# Pool Mining
+
 Pool miners follow a similar workflow, illustrated below, which allows mining pool operators to pay miners based on their share of the work done. The mining pool gets new <<glossary:transactions>> from the network using `dashd`. Using one of the methods discussed later, each miner's mining software connects to the pool and requests the information it needs to construct block headers.
 
 ![Pooled Bitcoin Mining](https://dash-docs.github.io/img/dev/en-pooled-mining-overview.svg)

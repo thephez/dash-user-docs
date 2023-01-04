@@ -1,3 +1,5 @@
+# Escrow and Arbitration
+
 Charlie-the-customer wants to buy a product from Bob-the-businessman, but neither of them trusts the other person, so they use a contract to help ensure Charlie gets his merchandise and Bob gets his payment.
 
 A simple contract could say that Charlie will spend <<glossary:duffs>> to an <<glossary:output>> which can only be spent if Charlie and Bob both sign the <<glossary:input>> spending it. That means Bob won't get paid unless Charlie gets his merchandise, but Charlie can't get the merchandise and keep his payment.

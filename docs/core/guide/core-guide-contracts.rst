@@ -1,3 +1,6 @@
+Contracts
+*********
+
 Contracts are <> which use the decentralized Dash system to enforce
 financial agreements. Dash contracts can often be crafted to minimize
 dependency on outside agents, such as the court system, which
@@ -11,3 +14,9 @@ transactions, they are framed below in story format.
 Besides the contract types described below, many other contract types
 have been proposed. Several of them are collected on the `Contracts
 page <https://en.bitcoin.it/wiki/Contracts>`__ of the Bitcoin Wiki.
+
+.. toctree::
+   :maxdepth: 3
+
+   core-guide-contracts-escrow-and-arbitration
+   core-guide-contracts-micropayment-channel

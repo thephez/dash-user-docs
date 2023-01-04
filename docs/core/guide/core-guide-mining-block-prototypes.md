@@ -1,10 +1,12 @@
+# Block Prototypes
+
 In both solo and pool mining, the mining software needs to get the information necessary to construct block headers. This subsection describes, in a linear way, how that information is transmitted and used. However, in actual implementations, parallel threads and queuing are used to keep ASIC hashers working at maximum capacity,
 
-# getwork RPC
+## getwork RPC
 
 The simplest and earliest method was the now-deprecated Dash Core `getwork` RPC, which constructed a <<glossary:header>> for the miner directly. Since a header only contains a single 4-byte nonce good for about 4 gigahashes, many modern miners need to make dozens or hundreds of `getwork` requests a second.
 
-# getblocktemplate RPC
+## getblocktemplate RPC
 
 An improved method is the Dash Core [`getblocktemplate` RPC](core-api-ref-remote-procedure-calls-mining#getblocktemplate). This provides the mining software with much more information:
 
@@ -20,7 +22,7 @@ Using the transactions received, the mining software adds a nonce to the coinbas
 
 Like all `dashd` RPCs, `getblocktemplate` is sent over HTTP. To ensure they get the most recent work, most miners use [HTTP longpoll](https://en.wikipedia.org/wiki/Push_technology#Long_polling) to leave a `getblocktemplate` request open at all times. This allows the mining pool to push a new `getblocktemplate` to the miner as soon as any <<glossary:miner>> on the peer-to-peer <<glossary:network>> publishes a new block or the pool wants to send more transactions to the mining software.
 
-# Stratum
+## Stratum
 
 A widely used alternative to `getblocktemplate` is the [Stratum mining protocol](http://mining.bitcoin.cz/stratum-mining). Stratum focuses on giving miners the minimal information they need to construct block headers on their own:
 

@@ -1,12 +1,14 @@
+# Wallet Files
+
 Dash wallets at their core are a collection of <<glossary:private keys>>. These collections are stored digitally in a file, or can even be physically stored on pieces of paper.
 
-# Private Key Formats
+## Private Key Formats
 
 Private keys are what are used to unlock <<glossary:duffs>> from a particular <<glossary:address>>. In Dash, a private key in standard format is simply a 256-bit number, between the values:
 
 `0x01` and `0xFFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFE BAAE DCE6 AF48 A03B BFD2 5E8C D036 4140`, representing nearly the entire range of 2<sup>256</sup>-1 values. The range is governed by the secp256k1 ECDSA encryption standard used by Dash.
 
-## Wallet Import Format (WIF)
+### Wallet Import Format (WIF)
 
 In order to make copying of private keys less prone to error, <<glossary:Wallet Import Format>> may be utilized. WIF uses <<glossary:base58check>> encoding on a private key, greatly decreasing the chance of copying error, much like standard Dash <<glossary:addresses>>.
 
@@ -28,7 +30,7 @@ In order to make copying of private keys less prone to error, <<glossary:Wallet 
 
 The process is easily reversible, using the Base58 decoding function, and removing the padding.
 
-## Mini Private Key Format
+### Mini Private Key Format
 
 Mini private key format is a method for encoding a private key in under 30 characters, enabling keys to be embedded in a small physical space and more damage-resistant QR codes.
 
@@ -44,7 +46,7 @@ Many implementations disallow the character '1' in the mini private key due to i
 
 **Resource:** A common tool to create and redeem these keys is the [Casascius Bitcoin Address Utility](https://github.com/casascius/Bitcoin-Address-Utility). Note: this tool is no longer actively developed.
 
-# Public Key Formats
+## Public Key Formats
 
 Dash ECDSA public keys represent a point on a particular Elliptic Curve (EC) defined in secp256k1. In their traditional uncompressed form, public keys contain an identification byte, a 32-byte X coordinate, and a 32-byte Y coordinate. The extremely simplified illustration below shows such a point on the elliptic curve used by Dash, y<sup>2</sup>&nbsp;=&nbsp;x<sup>3</sup>&nbsp;+&nbsp;7, over a field of contiguous numbers.
 
@@ -66,7 +68,7 @@ For this reason, Bitcoin Core (and Dash Core) uses several different identifier 
 
 * Uncompressed public keys start with 0x04; compressed public keys begin with 0x03 or 0x02 depending on whether they're greater or less than the midpoint of the curve.  These prefix bytes are all used in official secp256k1 documentation.
 
-# Hierarchical Deterministic Key Creation
+## Hierarchical Deterministic Key Creation
 
 The hierarchical deterministic key creation and transfer protocol (<<glossary:HD protocol>>) greatly simplifies wallet backups, eliminates the need for repeated communication between multiple programs using the same wallet, permits creation of child accounts which can operate independently, gives each parent account the ability to monitor or control its children even if the child account is compromised, and divides each account into full-access and restricted-access parts so untrusted users or programs can be allowed to receive or monitor payments without being able to spend them.
 
@@ -122,7 +124,7 @@ A <<glossary:root seed>> is created from either 128 bits, 256 bits, or 512 bits 
 [/block]
 The root seed is hashed to create 512 bits of seemingly-random data, from which the master private key and master chain code are created (together, the master extended private key). The master public key is derived from the master private key using `point()`, which, together with the master chain code, is the master extended public key. The master extended keys are functionally equivalent to other extended keys; it is only their location at the top of the hierarchy which makes them special.
 
-## Hardened Keys
+### Hardened Keys
 
 Hardened extended keys fix a potential problem with normal extended keys. If an attacker gets a normal parent chain code and parent public key, he can brute-force all chain codes deriving from it. If the attacker also obtains a child, grandchild, or further-descended private key, he can use the chain code to generate all of the extended private keys descending from that private key, as shown in the grandchild and great-grandchild generations of the illustration below.
 
@@ -157,7 +159,7 @@ Wallets following the <<glossary:BIP32>> <<glossary:HD protocol>> only create ha
 
 The HD protocol also describes a serialization format for extended public keys and extended private keys.  For details, please see the [wallet section in the developer reference](core-ref-wallets) or [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) for the full HD protocol specification.
 
-## Storing Root Seeds
+### Storing Root Seeds
 
 Root seeds in the HD protocol are 128, 256, or 512 bits of random data which must be backed up precisely. To make it more convenient to use non-digital backup methods, such as memorization or hand-copying, [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) defines a method for creating a 512-bit root seed from a pseudo-sentence (mnemonic) of common natural-language words which was itself created from 128 to 256 bits of entropy and optionally protected by a password.
 
@@ -175,7 +177,7 @@ The passphrase can be of any length.  It is simply appended to the mnemonic pseu
 
 For implementation details, please see [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki).
 
-# Loose-Key Wallets
+## Loose-Key Wallets
 
 Loose-Key wallets, also called "Just a Bunch Of Keys (JBOK)", are a form of wallet that originated from the Bitcoin Core client wallet. The Dash Core client wallet creates 1000 private key/public key pairs automatically via a Pseudo-Random-Number Generator (PRNG) for later use.
 
