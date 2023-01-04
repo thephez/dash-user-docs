@@ -1,7 +1,4 @@
-```{eval-rst}
-Creating a Bloom Filter
-***********************
-```
+# Creating a Bloom Filter
 
 In this section, we'll use variable names that correspond to the field names in the [`filterload` message documentation](core-ref-p2p-network-control-messages#filterload). Each code block precedes the paragraph describing it.
 

@@ -1,11 +1,8 @@
-```{eval-rst}
-Testing Applications
-********************
-```
+# Testing Applications
 
 Dash Core provides several network options designed to let developers test their applications with reduced risks and limitations.
 
-# Testnet
+## Testnet
 
 When run with no arguments, all Dash Core programs default to Dash's main network (<<glossary:mainnet>>). However, for development, it's safer and cheaper to use Dash's test network (<<glossary:testnet>>) where the <<glossary:duffs>> spent have no real-world value. Testnet also relaxes some restrictions (such as standard transaction checks) so you can test functions which might currently be disabled by default on <<glossary:mainnet>>.
 
@@ -16,7 +13,7 @@ To use testnet, use the argument `-testnet` with `dash-cli`, `dashd` or `dash-qt
 
 Testnet is a public resource provided for free by Dash Core Group and members of the community, so please don't abuse it.
 
-# Regtest mode
+## Regtest mode
 
 For situations where interaction with random <<glossary:peers>> and <<glossary:blocks>> is unnecessary or unwanted, Dash Core's <<glossary:regression test mode>> (regtest mode) lets you instantly create a brand-new private <<glossary:block chain>> with the same basic rules as testnet---but one major difference: you choose when to create new blocks, so you have complete control over the environment.
 
@@ -49,9 +46,9 @@ Regtest wallets and block chain state (chainstate) are saved in the `regtest` su
 
 The complete set of regtest-specific arguments can be found on the [`dashd` Arguments and  Commands page](dash-core-wallet-arguments-and-commands-dashd#regtest-options).
 
-# Devnet mode
+## Devnet mode
 
-## Overview
+### Overview
 
 Developer networks (devnets) have some aspects of testnet and some aspects of regtest. Unlike testnet, multiple independent devnets can be created and coexist without interference. Devnets can consist of nodes running on the same computer, on a small private network, or distributed across the internet.
 
@@ -59,7 +56,7 @@ Each devnet is identified by a name which is hardened into a "devnet genesis" bl
 
 The genesis block of the devnet is the same as the one from regtest. This starts the devnet with a very low <<glossary:difficulty>>, allowing quick generation of a sufficient balance to create a <<glossary:masternode>>.
 
-## Configuration
+### Configuration
 
 To use devnet, use the argument `-devnet=<name>` with `dash-cli`, `dashd`or `dash-qt` or add `devnet=<name>` to your `dash.conf` file as [described earlier](core-examples-configuration-file).
 
@@ -72,7 +69,7 @@ Example devnet start command:
 Dash Core server starting
 ```
 
-### Devnet-specific options
+#### Devnet-specific options
 
 Devnets can use 3 devnet-specific options to enable quickly mining large amounts of Dash. This enables quick establishment of test masternodes, etc. The following `dash.conf` excerpt shows these configuration options in use:
 
@@ -87,17 +84,17 @@ highsubsidyfactor=10
 
 The complete set of devnet-specific arguments can be found on the [`dashd` Arguments and  Commands page](dash-core-wallet-arguments-and-commands-dashd#devnet-options).
 
-## Management
+### Management
 
 Devnet wallets and block chain state (chainstate) are saved in the `devnet-<name>` subdirectory of the Dash Core configuration directory. You can safely delete the `devnet-<name>` subdirectory and restart Dash Core to start a new devnet. (See the [Developer Examples Introduction](core-examples-introduction) for default configuration directory locations on various operating systems. **Always back up mainnet wallets before performing dangerous operations such as deleting.**)
 
 An old devnet can be easily dropped and a new one started just by destroying all nodes and recreating them with a new devnet name. This works best in combination with an automated deployment using something like Ansible and Terraform. The [Dash Network Deploy](https://github.com/dashevo/dash-network-deploy) tool provides a way to do this.
 
-# Network type comparison
+## Network type comparison
 
 Each network type has some unique characteristics to support development and testing. The tables below summarize some of the significant differences between the 4 network types.
 
-## Network characteristics
+### Network characteristics
 
 |  | Mainnet | [Testnet](#testnet) | [Regtest](#regtest-mode) | [Devnet](#devnet-mode) |
 |-|-|-|-|-|
@@ -109,7 +106,7 @@ Each network type has some unique characteristics to support development and tes
 >
 > To enable or disable sporks on a regtest or devnet, set `sporkaddr` and `sporkkey` in the `dash.conf` config file. Any valid Dash address / private key can be used. You can get an address using the [`getnewaddress` RPC](core-api-ref-remote-procedure-calls-wallet#getnewaddress) and retrieve its private key using the [`dumpprivkey` RPC](core-api-ref-remote-procedure-calls-wallet#dumpprivkey).
 
-## Mining characteristics
+### Mining characteristics
 
 | Network Type | Difficulty adjustment algorithm |
 |-|-|-|-|

@@ -1,7 +1,4 @@
-```{eval-rst}
-Configuration File
-******************
-```
+# Configuration File
 
 All three programs get settings from `dash.conf` in the `DashCore` application directory:
 

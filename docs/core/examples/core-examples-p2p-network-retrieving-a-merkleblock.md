@@ -1,7 +1,4 @@
-```{eval-rst}
-Retrieving a MerkleBlock
-************************
-```
+# Retrieving a MerkleBlock
 
 For the [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock) documentation on the reference page, an actual <<glossary:merkle block>> was retrieved from the <<glossary:network>> and manually processed.  This section walks through each step of the process, demonstrating basic network communication and merkle block processing.
 [block:code]
