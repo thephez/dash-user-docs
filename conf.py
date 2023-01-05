@@ -91,6 +91,9 @@ extensions = [
     'sphinx_design',
 ]
 
+# Auto-generate header anchors for md headings
+myst_heading_anchors = 5
+
 # Define the projects that will share this configuration file.
 multiproject_projects = {
     "user": {
