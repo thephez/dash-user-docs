@@ -5,21 +5,16 @@
 ```bash
 dash-qt [command-line options]     
 ```
-[block:callout]
-{
-  "type": "warning",
-  "body": "The following sections show all available options including debug options that are not normally displayed. To see only regular options, run dash-qt --help.",
-  "title": "Debug Options"
-}
-[/block]
+
+> 🚧 Debug Options
+>
+> The following sections show all available options including debug options that are not normally displayed. To see only regular options, run dash-qt --help.
+
 Dash Core QT GUI includes all the same command line options as [dashd](dash-core-wallet-arguments-and-commands-dashd) with the exception of `-daemon`. It also provides additional options for UI as described below.
 
 ### UI Options:
 
 ```text
-  -allowselfsignedrootcertificates
-       Allow self signed root certificates (default: 0)
-
   -choosedatadir
        Choose data directory on startup (default: 0)
 
@@ -55,9 +50,6 @@ Dash Core QT GUI includes all the same command line options as [dashd](dash-core
 
   -resetguisettings
        Reset all settings changed in the GUI
-
-  -rootcertificates=<file>
-       Set SSL root certificates for payment request (default: -system-)
 
   -splash
        Show splash screen on startup (default: 1)

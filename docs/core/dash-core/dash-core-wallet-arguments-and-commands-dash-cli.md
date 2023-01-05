@@ -16,18 +16,16 @@ dash-cli [options] help
 ```bash Get help for command
 dash-cli [options] help <command>
 ```
-[block:callout]
-{
-  "type": "info",
-  "title": "RPC Details",
-  "body": "The list of RPCs can be found [here](core-api-ref-remote-procedure-call-quick-reference) with links to more detailed information. Using dash-cli, this information is available using the `dash-cli [options] help` and `dash-cli [options] help <command>` commands."
-}
-[/block]
+
+> 📘 RPC Details
+>
+> The list of RPCs can be found [here](core-api-ref-remote-procedure-call-quick-reference) with links to more detailed information. Using dash-cli, this information is available using the `dash-cli [options] help` and `dash-cli [options] help <command>` commands.
+
 ### Options:
 
 ```text
   -?
-       This help message
+       Print this help message and exit
 
   -conf=<file>
        Specify configuration file. Relative paths will be prefixed by datadir
