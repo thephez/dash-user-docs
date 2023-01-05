@@ -92,7 +92,7 @@ parameter ``-litemode=1``.
    core-guide-dash-features-instantsend
    core-guide-dash-features-chainlocks
    core-guide-dash-features-governance
-   core-guide-dash-features-coinjoin
+   core-guide-dash-features-privatesend
    core-guide-dash-features-masternode-quorums
    core-guide-dash-features-proof-of-service
    core-guide-dash-features-masternode-payment
