@@ -67,8 +67,8 @@ Create a file with the following contents. Then run it by typing `node <your-fil
 The following response demonstrates the notification provided by Dash Core when it receives a transaction and then receives the associated InstantSend lock. The four notifications represent:
   1. The TXID of the transaction is received (`HASHTX`) - at this point the transaction is not locked
   2. The TXID of a locked transaction is received (`HASHTXLOCK`). Since this is the same value as the `HASHTX` already received, we know that the transaction has now received an InstantSend lock.
-  3. The raw transaction (`RAWTXLOCK`) (this could be decoded using the [`decoderawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#decoderawtransaction) for example)
-  4. A combination of the raw transaction and the InstantSend [lock signature](core-ref-p2p-network-instantsend-messages#islock) (`RAWTXLOCKSIG`)
+  3. The raw transaction (`RAWTXLOCK`) (this could be decoded using the [`decoderawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#decoderawtransaction) for example)
+  4. A combination of the raw transaction and the InstantSend [lock signature](../ref/core-ref-p2p-network-instantsend-messages.md#islock) (`RAWTXLOCKSIG`)
 
 ```
 Received HASHTX containing:

@@ -8,7 +8,7 @@
   "body": "Since Dash Core 0.14, this RPC is not available in the official Windows/Mac binaries. The Linux binary and binaries self-compiled (with the appropriate options) continue to support this feature. See [PR #2778](https://github.com/dashpay/dash/pull/2778) for additional details.\n\n**_Requires wallet support (unavailable on masternodes)._**"
 }
 [/block]
-The [`generate` RPC](core-api-ref-remote-procedure-calls-generating#generate) mines blocks immediately (before the RPC call returns).
+The [`generate` RPC](../api-ref/core-api-ref-remote-procedure-calls-generating.md#generate) mines blocks immediately (before the RPC call returns).
 
 *Parameter #1---the number of blocks to generate*
 
@@ -65,7 +65,7 @@ Result:
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.13.0*
 
-The [`generatetoaddress` RPC](core-api-ref-remote-procedure-calls-generating#generatetoaddress) mines blocks immediately to a specified address.
+The [`generatetoaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-generating.md#generatetoaddress) mines blocks immediately to a specified address.
 
 *Parameter #1---the number of blocks to generate*
 

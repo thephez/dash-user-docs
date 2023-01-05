@@ -1,7 +1,7 @@
 # Connecting to Peers
 
-Connecting to a <<glossary:peer>> is done by sending a [`version` message](core-ref-p2p-network-control-messages#version), which contains your version number, block, and current time to the remote node. The remote node responds with its own [`version` message](core-ref-p2p-network-control-messages#version). Then both nodes send a [`verack` message](core-ref-p2p-network-control-messages#verack) to the other node to indicate the connection has been established.
+Connecting to a <<glossary:peer>> is done by sending a [`version` message](../ref/core-ref-p2p-network-control-messages.md#version), which contains your version number, block, and current time to the remote node. The remote node responds with its own [`version` message](../ref/core-ref-p2p-network-control-messages.md#version). Then both nodes send a [`verack` message](../ref/core-ref-p2p-network-control-messages.md#verack) to the other node to indicate the connection has been established.
 
-Once connected, the client can send to the remote node `getaddr` and [`addr` messages](core-ref-p2p-network-control-messages#addr) to gather additional peers.
+Once connected, the client can send to the remote node `getaddr` and [`addr` messages](../ref/core-ref-p2p-network-control-messages.md#addr) to gather additional peers.
 
 In order to maintain a connection with a peer, nodes by default will send a message to peers before 30 minutes of inactivity. If 90 minutes pass without a message being received by a peer, the client will assume that connection has closed.

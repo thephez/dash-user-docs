@@ -2,7 +2,7 @@
 
 ## GetBestBlockHash
 
-The [`getbestblockhash` RPC](core-api-ref-remote-procedure-calls-blockchain#getbestblockhash) returns the header hash of the most recent block on the best block chain.
+The [`getbestblockhash` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getbestblockhash) returns the header hash of the most recent block on the best block chain.
 
 *Parameters: none*
 
@@ -31,7 +31,7 @@ Result:
 
 ## GetBestChainLock
 
-The [`getbestchainlock` RPC](core-api-ref-remote-procedure-calls-blockchain#getbestchainlock) returns the information about the best ChainLock.
+The [`getbestchainlock` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getbestchainlock) returns the information about the best ChainLock.
 
 Throws an error if there is no known ChainLock yet.
 
@@ -67,7 +67,7 @@ Result:
 
 ## GetBlock
 
-The [`getblock` RPC](core-api-ref-remote-procedure-calls-blockchain#getblock) gets a block with a particular header hash from the local block database either as a JSON object or as a serialized block.
+The [`getblock` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblock) gets a block with a particular header hash from the local block database either as a JSON object or as a serialized block.
 
 *Parameter #1---block hash*
 
@@ -115,7 +115,7 @@ Name | Type | Presence | Description
 →<br>`nTx` | number (int) | Required<br>(exactly 1) | *Added in Dash Core 0.16.0*<br><br>The number of transactions in the block
 →<br>`previousblockhash` | string (hex) | Optional<br>(0 or 1) | The hash of the header of the previous block, encoded as hex in RPC byte order.  Not returned for genesis block
 →<br>`nextblockhash` | string (hex) | Optional<br>(0 or 1) | The hash of the next block on the best block chain, if known, encoded as hex in RPC byte order
-→<br>`chainlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.14.0*<br><br>**Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>If set to `true`, this transaction is in a block that is locked (not susceptible to a chain re-org)
+→<br>`chainlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.14.0*<br><br>**Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>If set to `true`, this transaction is in a block that is locked (not susceptible to a chain re-org)
 
 
 
@@ -164,8 +164,8 @@ Name | Type | Presence | Description
 → → → → → →<br>Address | string | Required<br>(1 or more) | A P2PKH or P2SH address
 → →<br>`extraPayloadSize` | number (int) | Optional<br>(0 or 1) | *Added in Dash Core 0.13.0.0*<br><br>Size of the DIP2 extra payload. Only present if it's a DIP2 special transaction
 → →<br>`extraPayload` | string (hex) | Optional<br>(0 or 1) | *Added in Dash Core 0.13.0.0*<br><br>Hex encoded DIP2 extra payload data. Only present if it's a DIP2 special transaction
-→ →<br>`instantlock` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>If set to `true`, this transaction is locked (by InstantSend or a ChainLock)
-→ →<br>`instantlock_internal` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>If set to `true`, this transaction has an InstantSend lock
+→ →<br>`instantlock` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>If set to `true`, this transaction is locked (by InstantSend or a ChainLock)
+→ →<br>`instantlock_internal` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>If set to `true`, this transaction has an InstantSend lock
 →<br>`cbTx` | object | Required<br>(exactly 1) | Coinbase special transaction details
 → →<br>`version` | number (int) | Required<br>(exactly 1) | The version of the Coinbase special transaction (CbTx)
 → →<br>`height` | number (int) | Required<br>(exactly 1) | The height of this block on its block chain
@@ -180,7 +180,7 @@ Name | Type | Presence | Description
 →<br>`nTx` | number (int) | Required<br>(exactly 1) | **Added in Dash Core 0.16.0**<br><br>The number of transactions in the block
 →<br>`previousblockhash` | string (hex) | Optional<br>(0 or 1) | The hash of the header of the previous block, encoded as hex in RPC byte order.  Not returned for genesis block
 →<br>`nextblockhash` | string (hex) | Optional<br>(0 or 1) | The hash of the next block on the best block chain, if known, encoded as hex in RPC byte order
-→<br>`chainlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.14.0*<br><br>**Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>If set to `true`, this transaction is in a block that is locked (not susceptible to a chain re-org)
+→<br>`chainlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.14.0*<br><br>**Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>If set to `true`, this transaction is in a block that is locked (not susceptible to a chain re-org)
 
 *Example from Dash Core 0.16.0*
 
@@ -347,7 +347,7 @@ Result:
 
 ## GetBlockChainInfo
 
-The [`getblockchaininfo` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockchaininfo) provides information about the current state of the block chain.
+The [`getblockchaininfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockchaininfo) provides information about the current state of the block chain.
 
 *Parameters: none*
 
@@ -359,7 +359,7 @@ Name | Type | Presence | Description
 →<br>`chain` | string | Required<br>(exactly 1) | The name of the block chain. Either `main` for mainnet, `test` for testnet, `regtest` for regtest, or `devnet-<name>` for devnets
 →<br>`blocks` | number (int) | Required<br>(exactly 1) | The number of validated blocks in the local best block chain.  For a new node with just the hardcoded genesis block, this will be 0
 →<br>`headers` | number (int) | Required<br>(exactly 1) | The number of validated headers in the local best headers chain.  For a new node with just the hardcoded genesis block, this will be zero.  This number may be higher than the number of *blocks*
-→<br>`bestblockhash` | string (hex) | Required<br>(exactly 1) | The hash of the header of the highest validated block in the best block chain, encoded as hex in RPC byte order.  This is identical to the string returned by the [`getbestblockhash` RPC](core-api-ref-remote-procedure-calls-blockchain#getbestblockhash)
+→<br>`bestblockhash` | string (hex) | Required<br>(exactly 1) | The hash of the header of the highest validated block in the best block chain, encoded as hex in RPC byte order.  This is identical to the string returned by the [`getbestblockhash` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getbestblockhash)
 →<br>`difficulty` | number (real) | Required<br>(exactly 1) | The difficulty of the highest-height block in the best block chain
 →<br>`mediantime` | number (int) | Required<br>(exactly 1) | *Added in Bitcoin Core 0.12.0*<br><br>The median time of the 11 blocks before the most recent block on the blockchain.  Used for validating transaction locktime under BIP113
 →<br>`verificationprogress` | number (real) | Required<br>(exactly 1) | Estimate of what percentage of the block chain transactions have been verified so far, starting at 0.0 and increasing to 1.0 for fully verified.  May slightly exceed 1.0 when fully synced to account for transactions in the memory pool which have been verified before being included in a block
@@ -487,7 +487,7 @@ Result:
 
 ## GetBlockCount
 
-The [`getblockcount` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockcount) returns the number of blocks in the local best block chain.
+The [`getblockcount` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockcount) returns the number of blocks in the local best block chain.
 
 *Parameters: none*
 
@@ -516,7 +516,7 @@ Result:
 
 ## GetBlockHash
 
-The [`getblockhash` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockhash) returns the header hash of a block at the given height in the local best block chain.
+The [`getblockhash` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockhash) returns the header hash of a block at the given height in the local best block chain.
 
 *Parameter---a block height*
 
@@ -551,7 +551,7 @@ Result:
 
 *Added in Dash Core 18.0.0*
 
-The [`getblockfilter` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockfilter) retrieves a [BIP157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki) content filter for a particular block.
+The [`getblockfilter` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockfilter) retrieves a [BIP157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki) content filter for a particular block.
 [block:callout]
 {
   "type": "info",
@@ -604,7 +604,7 @@ Result:
 
 *Added in Dash Core 0.12.1*
 
-The [`getblockhashes` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockhashes) returns array of hashes of blocks within the timestamp range provided (requires `timestampindex` to be enabled).
+The [`getblockhashes` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockhashes) returns array of hashes of blocks within the timestamp range provided (requires `timestampindex` to be enabled).
 
 *Parameter #1---high block timestamp*
 
@@ -653,7 +653,7 @@ Result:
 
 *Added in Bitcoin Core 0.12.0*
 
-The [`getblockheader` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockheader) gets a block header with a particular header hash from the local block database either as a JSON object or as a serialized block header.
+The [`getblockheader` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockheader) gets a block header with a particular header hash from the local block database either as a JSON object or as a serialized block header.
 
 *Parameter #1---header hash*
 
@@ -759,7 +759,7 @@ Result:
 
 *Added in Dash Core 0.12.1*
 
-The [`getblockheaders` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockheaders) returns an array of items with information about the requested number of blockheaders starting from the requested hash.
+The [`getblockheaders` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockheaders) returns an array of items with information about the requested number of blockheaders starting from the requested hash.
 
 *Parameter #1---header hash*
 
@@ -891,7 +891,7 @@ Result:
 
 ## GetBlockStats
 
-The [`getblockstats` RPC](core-api-ref-remote-procedure-calls-blockchain#getblockstats) computes per block statistics for a given window.
+The [`getblockstats` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockstats) computes per block statistics for a given window.
 [block:callout]
 {
   "type": "danger",
@@ -970,7 +970,7 @@ Result:
 
 ## GetChainTips
 
-The [`getchaintips` RPC](core-api-ref-remote-procedure-calls-blockchain#getchaintips) returns information about the highest-height block (tip) of each local block chain.
+The [`getchaintips` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getchaintips) returns information about the highest-height block (tip) of each local block chain.
 
 *Parameters: none*
 
@@ -1016,7 +1016,7 @@ dash-cli -testnet getchaintips
 
 ## GetChainTxStats
 
-The [`getchaintxstats` RPC](core-api-ref-remote-procedure-calls-blockchain#getchaintxstats) compute statistics about the total number and rate of transactions in the chain.
+The [`getchaintxstats` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getchaintxstats) compute statistics about the total number and rate of transactions in the chain.
 
 *Parameter #1---nblocks*
 
@@ -1069,7 +1069,7 @@ Result:
 
 ## GetDifficulty
 
-The [`getdifficulty` RPC](core-api-ref-remote-procedure-calls-blockchain#getdifficulty) returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+The [`getdifficulty` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getdifficulty) returns the proof-of-work difficulty as a multiple of the minimum difficulty.
 
 *Parameters: none*
 
@@ -1100,7 +1100,7 @@ Result:
 
 *Added in Dash Core 0.12.3*
 
-The [`getmempoolancestors` RPC](core-api-ref-remote-procedure-calls-blockchain#getmempoolancestors) returns all in-mempool ancestors for a transaction in the mempool.
+The [`getmempoolancestors` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getmempoolancestors) returns all in-mempool ancestors for a transaction in the mempool.
 
 *Parameter #1---a transaction identifier (TXID)*
 
@@ -1211,7 +1211,7 @@ Result:
 
 *Added in Dash Core 0.12.3*
 
-The [`getmempooldescendants` RPC](core-api-ref-remote-procedure-calls-blockchain#getmempooldescendants) returns all in-mempool descendants for a transaction in the mempool.
+The [`getmempooldescendants` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getmempooldescendants) returns all in-mempool descendants for a transaction in the mempool.
 
 *Parameter #1---a transaction identifier (TXID)*
 
@@ -1322,7 +1322,7 @@ Result:
 
 *Added in Dash Core 0.14.0*
 
-The [`getmempoolentry` RPC](core-api-ref-remote-procedure-calls-blockchain#getmempoolentry) returns mempool data for given transaction (must be in mempool).
+The [`getmempoolentry` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getmempoolentry) returns mempool data for given transaction (must be in mempool).
 
 *Parameter #1---a transaction identifier (TXID)*
 
@@ -1353,7 +1353,7 @@ Name | Type | Presence | Description
 →→→<br>`descendent` | number | Optional<br>(0 or 1) | **Added in Dash Core 0.17.0**<br>Modified fees (see above) of in-mempool descendants (including this one) in DASH
 →<br>`depends` | array | Required<br>(exactly 1) | An array holding TXIDs of unconfirmed transactions this transaction depends upon (parent transactions).  Those transactions must be part of a block before this transaction can be added to a block, although all transactions may be included in the same block.  The array may be empty
 → →<br>Depends TXID | string | Optional (0 or more) | The TXIDs of any unconfirmed transactions this transaction depends upon, encoded as hex in RPC byte order
-→<br>`instantlock` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>True if this transaction was locked via InstantSend
+→<br>`instantlock` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>True if this transaction was locked via InstantSend
 
 *Example from Dash Core 0.17.0*
 
@@ -1400,7 +1400,7 @@ Result:
 
 ## GetMemPoolInfo
 
-The [`getmempoolinfo` RPC](core-api-ref-remote-procedure-calls-blockchain#getmempoolinfo) returns information about the node's current transaction memory pool.
+The [`getmempoolinfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getmempoolinfo) returns information about the node's current transaction memory pool.
 
 *Parameters: none*
 
@@ -1445,7 +1445,7 @@ Result:
 
 ## GetRawMemPool
 
-The [`getrawmempool` RPC](core-api-ref-remote-procedure-calls-blockchain#getrawmempool) returns all transaction identifiers (TXIDs) in the memory pool as a JSON array, or detailed information about each transaction in the memory pool as a JSON object.
+The [`getrawmempool` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getrawmempool) returns all transaction identifiers (TXIDs) in the memory pool as a JSON array, or detailed information about each transaction in the memory pool as a JSON object.
 
 *Parameter---desired output format*
 
@@ -1486,7 +1486,7 @@ Name | Type | Presence | Description
 → → →<br>Depends TXID | string | Optional (0 or more) | The TXIDs of any unconfirmed transactions this transaction depends upon, encoded as hex in RPC byte order
 → →<br>`spentby` | array | Required<br>(exactly 1) | **Added in Dash Core 0.17.0**<br>An array of unconfirmed transactions spending outputs from this transaction
 → → →<br>TXID | string | Optional (0 or more) | The TXIDs of any unconfirmed transactions spending from this transaction
-→ →<br>`instantlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.12.3*<br><br>**Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>Set to `true` for locked InstantSend transactions (masternode quorum has locked the transaction inputs via `islock` message). Set to `false` if the masternodes have not approved the InstantSend transaction
+→ →<br>`instantlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.12.3*<br><br>**Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>Set to `true` for locked InstantSend transactions (masternode quorum has locked the transaction inputs via `islock` message). Set to `false` if the masternodes have not approved the InstantSend transaction
 
 *Examples from Dash Core 0.17.0*
 
@@ -1551,7 +1551,7 @@ Result:
 
 *Added in Dash Core 0.15.0*
 
-The [`getmerkleblocks` RPC](core-api-ref-remote-procedure-calls-blockchain#getmerkleblocks) returns an array of hex-encoded merkleblocks for <count> blocks starting from <hash> which match <filter>.
+The [`getmerkleblocks` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getmerkleblocks) returns an array of hex-encoded merkleblocks for <count> blocks starting from <hash> which match <filter>.
 
 *Parameter #1---filter*
 
@@ -1601,7 +1601,7 @@ Result (truncated):
 
 *Added in Dash Core 0.13.1*
 
-The [`getspecialtxes` RPC](core-api-ref-remote-procedure-calls-blockchain#getspecialtxes) returns an array of special transactions found in the specified block
+The [`getspecialtxes` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getspecialtxes) returns an array of special transactions found in the specified block
 
 *Parameter #1---Block hash*
 
@@ -1649,7 +1649,7 @@ Name | Type | Presence | Description
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`result` | string (hex): array of ojbects | Required<br>(exactly 1) | Array of special transaction objects in the format of the [`getrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#getrawtransaction)
+`result` | string (hex): array of ojbects | Required<br>(exactly 1) | Array of special transaction objects in the format of the [`getrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#getrawtransaction)
 
 *Example from Dash Core 0.13.1*
 
@@ -1764,7 +1764,7 @@ Result:
 [/block]
 *Added in Dash Core 0.12.1*
 
-The [`getspentinfo` RPC](core-api-ref-remote-procedure-calls-blockchain#getspentinfo) returns the txid and index where an output is spent (requires `spentindex` to be enabled).
+The [`getspentinfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getspentinfo) returns the txid and index where an output is spent (requires `spentindex` to be enabled).
 
 *Parameter #1---the TXID of the output*
 
@@ -1814,7 +1814,7 @@ Result:
 
 ## GetTxOut
 
-The [`gettxout` RPC](core-api-ref-remote-procedure-calls-blockchain#gettxout) returns details about an unspent transaction output (UTXO).
+The [`gettxout` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#gettxout) returns details about an unspent transaction output (UTXO).
 
 *Parameter #1---the TXID of the output to get*
 
@@ -1889,7 +1889,7 @@ Result:
 
 ## GetTxOutProof
 
-The [`gettxoutproof` RPC](core-api-ref-remote-procedure-calls-blockchain#gettxoutproof) returns a hex-encoded proof that one or more specified transactions were included in a block.
+The [`gettxoutproof` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#gettxoutproof) returns a hex-encoded proof that one or more specified transactions were included in a block.
 
 NOTE: By default this function only works when there is an
 unspent output in the UTXO set for this transaction. To make it always work,
@@ -1942,12 +1942,12 @@ f0476ba0e00105
 *See also*
 
 * [VerifyTxOutProof](/docs/core-api-ref-remote-procedure-calls-blockchain#verifytxoutproof): verifies that a proof points to one or more transactions in a block, returning the transactions the proof commits to and throwing an RPC error if the block is not in our best block chain.
-* [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock): A description of the
+* [`merkleblock` message](../ref/core-ref-p2p-network-data-messages.md#merkleblock): A description of the
   format used for the proof.
 
 ## GetTxOutSetInfo
 
-The [`gettxoutsetinfo` RPC](core-api-ref-remote-procedure-calls-blockchain#gettxoutsetinfo) returns statistics about the confirmed unspent transaction output (UTXO) set. Note that this call may take some time and that it only counts outputs from confirmed transactions---it does not count outputs from the memory pool.
+The [`gettxoutsetinfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#gettxoutsetinfo) returns statistics about the confirmed unspent transaction output (UTXO) set. Note that this call may take some time and that it only counts outputs from confirmed transactions---it does not count outputs from the memory pool.
 
 *Parameters: none*
 
@@ -1995,7 +1995,7 @@ Result:
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.14.0*
 
-The [`preciousblock` RPC](core-api-ref-remote-procedure-calls-blockchain#preciousblock) treats a block as if it were received before others with the same work. A later `preciousblock` call can override the effect of an earlier one. The effects of `preciousblock` are not retained across restarts.
+The [`preciousblock` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#preciousblock) treats a block as if it were received before others with the same work. A later `preciousblock` call can override the effect of an earlier one. The effects of `preciousblock` are not retained across restarts.
 
 *Parameter #1---the block hash*
 
@@ -2022,7 +2022,7 @@ Result (no output from `dash-cli` because result is set to `null`).
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.14.0*
 
-The [`pruneblockchain` RPC](core-api-ref-remote-procedure-calls-blockchain#pruneblockchain) prunes the blockchain up to a specified height or timestamp. The `-prune` option needs to be enabled (disabled by default).
+The [`pruneblockchain` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#pruneblockchain) prunes the blockchain up to a specified height or timestamp. The `-prune` option needs to be enabled (disabled by default).
 
 *Parameter #1---the block height or timestamp*
 
@@ -2054,7 +2054,7 @@ Result:
 
 ## SaveMemPool
 
-The [`savemempool` RPC](core-api-ref-remote-procedure-calls-blockchain#savemempool) dumps the mempool to disk.
+The [`savemempool` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#savemempool) dumps the mempool to disk.
 
 _Parameters: none_
 
@@ -2070,7 +2070,7 @@ Result (no output from dash-cli).
 
 ## VerifyChain
 
-The [`verifychain` RPC](core-api-ref-remote-procedure-calls-blockchain#verifychain) verifies each entry in the local block chain database.
+The [`verifychain` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#verifychain) verifies each entry in the local block chain database.
 
 *Parameter #1---how thoroughly to check each block*
 
@@ -2111,7 +2111,7 @@ true
 
 ## VerifyTxOutProof
 
-The [`verifytxoutproof` RPC](core-api-ref-remote-procedure-calls-blockchain#verifytxoutproof) verifies that a proof points to one or more transactions in a block, returning the transactions the proof commits to and throwing an RPC error if the block is not in our best block chain.
+The [`verifytxoutproof` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#verifytxoutproof) verifies that a proof points to one or more transactions in a block, returning the transactions the proof commits to and throwing an RPC error if the block is not in our best block chain.
 
 *Parameter #1---The hex-encoded proof generated by gettxoutproof*
 
@@ -2149,4 +2149,4 @@ Result:
 *See also*
 
 * [GetTxOutProof](/docs/core-api-ref-remote-procedure-calls-blockchain#gettxoutproof): returns a hex-encoded proof that one or more specified transactions were included in a block.
-* [`merkleblock` message](core-ref-p2p-network-data-messages#merkleblock): A description of the format used for the proof.
+* [`merkleblock` message](../ref/core-ref-p2p-network-data-messages.md#merkleblock): A description of the format used for the proof.
