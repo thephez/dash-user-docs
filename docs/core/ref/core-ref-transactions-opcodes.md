@@ -1,4 +1,6 @@
-# Base Opcodes
+# Opcodes
+
+## Base Opcodes
 
 The <<glossary:opcodes>> used in the pubkey scripts of standard <<glossary:transactions>> are:
 
@@ -31,7 +33,7 @@ The <<glossary:opcodes>> used in the pubkey scripts of standard <<glossary:trans
 
 A complete list of Bitcoin opcodes can be found on the Bitcoin Wiki [Script Page](https://en.bitcoin.it/wiki/Script), with an authoritative list in the `opcodetype` enum of the Dash Core [script header file](https://github.com/dashpay/dash/blob/master/src/script/script.h).
 
-# Expanded Opcodes
+## Expanded Opcodes
 
 Several opcodes were disabled in the Bitcoin scripting system due to the discovery of a series of bugs in the early days of Bitcoin. [Dash Improvement Proposal 20](https://github.com/dashpay/dips/blob/master/dip-0020.md) reintroduced a number of these opcodes based on work done by Bitcoin Cash developers. Many of the disabled opcodes have been enabled and several of them re-designed to replace the original ones. 
 
@@ -61,7 +63,7 @@ Several opcodes were disabled in the Bitcoin scripting system due to the discove
 
 * `OP_CHECKDATASIGVERIFY` (0xbb) `OP_CHECKDATASIGVERIFY` is equivalent to `OP_CHECKDATASIG` followed by `OP_VERIFY`. It leaves nothing on the stack and will cause the script to fail immediately if the signature check does not pass.
 
-# Signature Scripts
+## Signature Scripts
 
 ![Warning icon](https://dash-docs.github.io/img/icons/icon_warning.svg) **<span id="signature_script_modification_warning">Signature script modification warning</span>:** <<glossary:Signature scripts>> are not signed, so anyone can modify them. This means signature scripts should only contain data and <<glossary:data-pushing opcode>> which can't be modified without causing the pubkey script to fail. Placing non-data-pushing opcodes in the signature script currently makes a transaction non-standard, and future consensus rules may forbid such transactions altogether. (Non-data-pushing opcodes are already forbidden in signature scripts when spending a <<glossary:P2SH pubkey script>>.)
 

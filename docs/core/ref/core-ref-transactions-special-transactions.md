@@ -1,3 +1,5 @@
+# Special Transactions
+
 The <<glossary:Special Transactions>> framework established by [DIP2](https://github.com/dashpay/dips/blob/master/dip-0002.md) enabled the implementation of new on-chain features and <<glossary:consensus>> mechanisms. These transactions provide the flexibility to expand beyond the financial uses of classical transactions. DIP2 transactions modified classical transactions by:
 
 1. Splitting the 32 bit `version` field into two 16 bit fields (`version` and `type`)
@@ -8,7 +10,7 @@ Classical (financial) transactions have a `type` of 0 while special transactions
 **Implemented Special Transactions**
 
 | Release | Tx Version | Tx Type | Payload JSON | Tx Purpose | Payload | Payload Size |
-| - | - | - | - | - | - |
+| - | - | - | - | - | - | - |
 | 0.12.3 | 2 | - | n/a | n/a | n/a |
 | 0.13.0 | 3 | 0 | n/a | Standard (Classical) Transaction |  n/a | n/a |
 | 0.13.0 | 3 | 1 | [ProRegTx](#proregtx) | Masternode Registration | hex | compactSize uint |
@@ -19,7 +21,7 @@ Classical (financial) transactions have a `type` of 0 while special transactions
 | 0.13.0 | 3 | 6 | [QcTx](#qctx) | Long-Living Masternode Quorum Commitment | hex | compactSize uint |
 | 18.0.0 | 3 | 7 | [MnHfTx](#mnhftx) | Masternode hard fork signal | hex |  |
 
-# ProRegTx
+## ProRegTx
 
 *Added in protocol version 70213 of Dash Core as described by [DIP3](https://github.com/dashpay/dips/blob/master/dip-0003.md)*
 
@@ -162,7 +164,7 @@ ProRegTx Payload
 | .......................................... Signature (Empty)
 ```
 
-# ProUpServTx
+## ProUpServTx
 
 *Added in protocol version 70213 of Dash Core as described by [DIP3](https://github.com/dashpay/dips/blob/master/dip-0003.md)*
 
@@ -224,7 +226,7 @@ ProUpServTx Payload
 | 789beed8ef7e8839695a334c2e1bd37c ......... BLS Signature (96 bytes)
 ```
 
-# ProUpRegTx
+## ProUpRegTx
 
 *Added in protocol version 70213 of Dash Core as described by [DIP3](https://github.com/dashpay/dips/blob/master/dip-0003.md)*
 
@@ -295,7 +297,7 @@ ProRegTx Payload
 | a73d347841a58768b94c771819dc2bbce3 ....... Signature
 ```
 
-# ProUpRevTx
+## ProUpRevTx
 
 *Added in protocol version 70213 of Dash Core as described by [DIP3](https://github.com/dashpay/dips/blob/master/dip-0003.md)*
 
@@ -347,7 +349,7 @@ ProUpRevTx Payload
 | 05877d82ff7d1af00ae2d303dea5eb3b ......... BLS Signature (96 bytes)
 ```
 
-# CbTx
+## CbTx
 
 *Added in protocol version 70213 of Dash Core as described by [DIP4](https://github.com/dashpay/dips/blob/master/dip-0004.md)*
 
@@ -417,7 +419,7 @@ Coinbase Transaction Payload
 | fb0bd72a47ecfe0e8aa6f660fb96396e ......... Active LLMQ merkle root
 ```
 
-# QcTx
+## QcTx
 
 *Added in protocol version 70213 of Dash Core as described by [DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md)*
 
@@ -497,7 +499,7 @@ Quorum Commitment Transaction Payload
 | | e0d4f461a2ba0e32a711197ca559dacf ....... BLS Signature (96 bytes)
 ```
 
-# MnHfTx
+## MnHfTx
 
 *Added in protocol version 70222 of Dash Core as described by [DIP23](https://github.com/dashpay/dips/blob/master/dip-0023.md)*
 

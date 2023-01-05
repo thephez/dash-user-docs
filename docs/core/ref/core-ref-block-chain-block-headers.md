@@ -1,3 +1,5 @@
+# Block Headers
+
 <<glossary:Block headers>> are serialized in the 80-byte format described below and then hashed as part of the proof-of-work algorithm, making the serialized header format part of the <<glossary:consensus rules>>.
 
 | Bytes | Name                | Data Type | Description
@@ -26,7 +28,7 @@ b6ff0b1b1680a2862a30ca44d346d9e8
 fe9f0864 ........................... Nonce
 ```
 
-# Block Versions
+## Block Versions
 
 * **Version 1** was used by Dash for the <<glossary:genesis block>> only.
 
@@ -43,7 +45,7 @@ The mechanism used for the version 2, 3, and 4 upgrades is commonly called IsSup
 
 As of this writing, a newer method called *version bits* is being designed to manage future soft forking changes, although it's not known whether version 4 will be the last soft fork to use the IsSuperMajority() function. Draft [BIP9](https://github.com/bitcoin/bips/blob/master/bip-0009.mediawiki) describes the version bits design as of this writing, although it is still being actively edited and may substantially change while in the draft state.
 
-# Merkle Trees
+## Merkle Trees
 
 The <<glossary:merkle root>> is constructed using all the <<glossary:TXIDs>> of transactions in this block, but first the TXIDs are placed in order as required by the <<glossary:consensus rules>>:
 
@@ -61,7 +63,7 @@ If a block has three or more transactions, intermediate <<glossary:merkle tree>>
 
 TXIDs and intermediate hashes are always in <<glossary:internal byte order>> when they're concatenated, and the resulting merkle root is also in internal byte order when it's placed in the <<glossary:block header>>.
 
-# Target nBits
+## Target nBits
 
 The <<glossary:target threshold>> is a 256-bit unsigned integer which a <<glossary:header>> hash must be equal to or below in order for that header to be a valid part of the <<glossary:block chain>>. However, the header field *<<glossary:nBits>>* provides only 32 bits of space, so the <<glossary:target>> number uses a less precise format called "compact" which works like a base-256 version of scientific notation:
 

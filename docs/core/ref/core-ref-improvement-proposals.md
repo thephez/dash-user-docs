@@ -1,8 +1,10 @@
-# Dash (DIPs)
+# Improvement Proposals
+
+## Dash (DIPs)
 
 Similar to Bitcoin's BIPs, a Dash Improvement Proposal ([DIP](https://github.com/dashpay/dips)) is a design document for providing information to the Dash community, or describing a new feature for Dash processes/environment. The DIP should provide a concise technical specification of the feature and a rationale for the feature. Please refer to the <a href="https://github.com/dashpay/dips/blob/master/README.md" target="_blank">Dash DIP repository</a> for details on the status of existing DIPs.
 
-# Bitcoin (BIPs)
+## Bitcoin (BIPs)
 
 A Bitcoin Improvement Proposal (BIP) is a design document providing information to the Bitcoin community, or describing a new feature for Bitcoin or its processes or environment.
 

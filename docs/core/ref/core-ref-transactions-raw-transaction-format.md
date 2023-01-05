@@ -1,3 +1,5 @@
+# Raw Transaction Format
+
 Dash transactions are broadcast between <<glossary:peers>> in a serialized byte format, called <<glossary:raw format>>. It is this form of a transaction which is SHA256(SHA256()) hashed to create the <<glossary:TXID>> and, ultimately, the <<glossary:merkle root>> of a <<glossary:block>> containing the transaction---making the transaction format part of the <<glossary:consensus rules>>.
 
 Dash Core and many other tools print and accept <<glossary:raw transactions>> encoded as hex.
@@ -22,7 +24,7 @@ A raw transaction has the following top-level format:
 
 A transaction may have multiple <<glossary:inputs>> and <<glossary:outputs>>, so the txIn and txOut structures may recur within a transaction. <<glossary:CompactSize unsigned integers>> are a form of variable-length integers; they are described in the [CompactSize section](core-ref-transactions-compactsize-unsigned-integers).
 
-# JSON-RPC Responses
+## JSON-RPC Responses
 
 When retrieving transaction data via Dash Core RPCs (e.g. the [`getrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#getrawtransaction)), the transaction data is returned in the following format.
 
@@ -87,7 +89,7 @@ The sample transaction below shows the response for a quorum commitment special 
 ```
 
 **<span id="txin"></span>**
-# TxIn: A Transaction Input (Non-Coinbase)
+## TxIn: A Transaction Input (Non-Coinbase)
 
 Each non- <<glossary:coinbase>> <<glossary:input>> spends an outpoint from a previous transaction. (Coinbase inputs are described separately after the example section below.)
 
@@ -99,7 +101,7 @@ Each non- <<glossary:coinbase>> <<glossary:input>> spends an outpoint from a pre
 | 4        | sequence         | uint32_t             | Sequence number.  Default for Dash Core and almost all other programs is 0xffffffff.
 
 **<span id="outpoint"></span>**
-# Outpoint: The Specific Part Of A Specific Output
+## Outpoint: The Specific Part Of A Specific Output
 
 Because a single transaction can include multiple <<glossary:outputs>>, the <<glossary:outpoint>> structure includes both a <<glossary:TXID>> and an output index number to refer to specific output.
 
@@ -109,7 +111,7 @@ Because a single transaction can include multiple <<glossary:outputs>>, the <<gl
 | 4     | index | uint32_t  | The output index number of the specific output to spend from the transaction. The first output is 0x00000000.
 
 **<span id="txout"></span>**
-# TxOut: A Transaction Output
+## TxOut: A Transaction Output
 
 Each <<glossary:output>> spends a certain number of <<glossary:duffs>>, placing them under control of anyone who can satisfy the provided <<glossary:pubkey script>>.
 
@@ -158,7 +160,7 @@ The sample raw transaction itemized below is the one created in the [Simple Raw 
 ```
 
 **<span id="coinbase"></span>**
-# Coinbase Input: The Input Of The First Transaction In A Block
+## Coinbase Input: The Input Of The First Transaction In A Block
 
 The first transaction in a <<glossary:block>>, called the <<glossary:coinbase transaction>>, must have exactly one input, called a <<glossary:coinbase>>. The coinbase <<glossary:input>> currently has the following format.
 
