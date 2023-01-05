@@ -49,27 +49,8 @@ Welcome to the Dash Core developer documentation. You'll find guides and documen
    :titlesonly:
 
    ref/core-ref-introduction
-
-.. toctree::
-   :maxdepth: 2
-   :titlesonly: 
-
    api-ref/core-api-ref-introduction
-
-.. toctree::
-   :maxdepth: 2
-   :titlesonly:
-
    guide/core-guide-introduction
-
-.. toctree::
-   :maxdepth: 2
-   :titlesonly: 
-
    examples/core-examples-introduction
-
-.. toctree::
-   :maxdepth: 2
-   :titlesonly: 
-
    dash-core/dash-core-wallet-introduction
+   additional-resources/core-additional-resources-introduction
