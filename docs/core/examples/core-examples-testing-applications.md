@@ -52,7 +52,7 @@ The complete set of regtest-specific arguments can be found on the [`dashd` Argu
 
 Developer networks (devnets) have some aspects of testnet and some aspects of regtest. Unlike testnet, multiple independent devnets can be created and coexist without interference. Devnets can consist of nodes running on the same computer, on a small private network, or distributed across the internet.
 
-Each devnet is identified by a name which is hardened into a "devnet genesis" block that is automatically positioned at height 1. Validation rules ensure that a <<glossary:node>> from `devnet=test1` will not accept blocks from `devnet=test2`. This is done by checking the expected devnet <<glossary:genesis block>>. Also, the devnet name is put into the sub-version field of the [`version` message](../ref/core-ref-p2p-network-control-messages.md#version). If a node connects to the wrong <<glossary:network>>, it will immediately be disconnected. 
+Each devnet is identified by a name which is hardened into a "devnet genesis" block that is automatically positioned at height 1. Validation rules ensure that a <<glossary:node>> from `devnet=test1` will not accept blocks from `devnet=test2`. This is done by checking the expected devnet <<glossary:genesis block>>. Also, the devnet name is put into the sub-version field of the [`version` message](core-ref-p2p-network-control-messages#version). If a node connects to the wrong <<glossary:network>>, it will immediately be disconnected. 
 
 The genesis block of the devnet is the same as the one from regtest. This starts the devnet with a very low <<glossary:difficulty>>, allowing quick generation of a sufficient balance to create a <<glossary:masternode>>.
 
@@ -104,7 +104,7 @@ Each network type has some unique characteristics to support development and tes
 
 > 📘 Using sporks
 >
-> To enable or disable sporks on a regtest or devnet, set `sporkaddr` and `sporkkey` in the `dash.conf` config file. Any valid Dash address / private key can be used. You can get an address using the [`getnewaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getnewaddress) and retrieve its private key using the [`dumpprivkey` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpprivkey).
+> To enable or disable sporks on a regtest or devnet, set `sporkaddr` and `sporkkey` in the `dash.conf` config file. Any valid Dash address / private key can be used. You can get an address using the [`getnewaddress` RPC](core-api-ref-remote-procedure-calls-wallet#getnewaddress) and retrieve its private key using the [`dumpprivkey` RPC](core-api-ref-remote-procedure-calls-wallet#dumpprivkey).
 
 ### Mining characteristics
 

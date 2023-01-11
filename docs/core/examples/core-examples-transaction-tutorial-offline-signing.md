@@ -130,7 +130,7 @@ yfijhy7gYY34J2U77xFKdMwfA8k5mVnSRa
 Create the raw transaction the same way we've done in the previous subsections.
 
 ``` bash
-#Outputs - inputs = transaction fee, so always double-check your math!
+## Outputs - inputs = transaction fee, so always double-check your math!
 > dash-cli -regtest createrawtransaction '''
     [
       {
