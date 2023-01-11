@@ -14,10 +14,11 @@ Name | Type | Presence | Description
 →<br>`governanceminquorum` | number (int) | Required<br>(exactly 1) | The absolute minimum number of votes needed to trigger a governance action
 →<br>`proposalfee` | number (int) | Required<br>(exactly 1) | The collateral transaction fee which must be paid to create a proposal in Dash
 →<br>`superblockcycle` | number (int) | Required<br>(exactly 1) | The number of blocks between superblocks
+→<br>`superblockmaturitywindow` | number (int) | Required<br>(exactly 1) | The superblock trigger creation window
 →<br>`lastsuperblock` | number (int) | Required<br>(exactly 1) | The block number of the last superblock
 →<br>`nextsuperblock` | number (int) | Required<br>(exactly 1) | The block number of the next superblock
 
-*Example from Dash Core 0.14.0*
+*Example from Dash Core 18.1.0*
 
 ``` bash
 dash-cli -testnet getgovernanceinfo
@@ -27,10 +28,11 @@ Result:
 ``` json
 {
   "governanceminquorum": 1,
-  "proposalfee": 5.00000000,
+  "proposalfee": 1.00000000,
   "superblockcycle": 24,
-  "lastsuperblock": 250824,
-  "nextsuperblock": 250848
+  "superblockmaturitywindow": 24,
+  "lastsuperblock": 827256,
+  "nextsuperblock": 827280
 }
 ```
 
@@ -1139,16 +1141,20 @@ Result:
 
 The `masternode outputs` RPC prints masternode compatible outputs.
 
+> ❗️ Breaking change
+>
+> Dash Core 18.1.0 changed the response format from a JSON object (Key: TXID, Value: transaction index) to the current array representation
+
 *Parameters: none*
 
 *Result---masternode outputs*
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-Result | object | Required<br>(exactly 1) | Masternode compatible outputs
-→<br>Output | string | Required<br>(1 or more) | Masternode compatible output (TXID:Index)
+Result | array | Required<br>(exactly 1) | Masternode compatible outputs
+→<br>Output | string | Required<br>(0 or more) | Masternode compatible output (TXID:Index)
 
-*Example from Dash Core 0.12.2*
+*Example from Dash Core 18.1.0*
 
 ``` bash
 dash-cli -testnet masternode outputs
@@ -1156,9 +1162,9 @@ dash-cli -testnet masternode outputs
 
 Result:
 ``` json
-{
-  "f6c83fd96bfaa47887c4587cceadeb9af6238a2c86fe36b883c4d7a6867eab0f": "1"
-}
+[
+  "f6c83fd96bfaa47887c4587cceadeb9af6238a2c86fe36b883c4d7a6867eab0f-1"
+]
 ```
 
 ### Masternode Payments
@@ -1250,10 +1256,10 @@ Name | Type | Presence | Description
 Result | object | Required<br>(exactly 1) | Masternode status info
 →<br>`outpoint` | string | Required<br>(exactly 1) | The masternode's outpoint
 →<br>`service` | string | Required<br>(exactly 1) | The IP address/port of the masternode
-→<br>`proTxHash` | string (hex) | Required<br>(exactly 1) | The masternode's ProRegTx hash
-→<br>`collateralHash` | string (hex) | Required<br>(exactly 1) | The masternode's collateral hash
-→<br>`collateralIndex` | int | Required<br>(exactly 1) | Index of the collateral
-→<br>`dmnState` | object | Required<br>(exactly 1) | Deterministic Masternode State
+→<br>`proTxHash` | string (hex) | Optional<br>(0 or 1) | The masternode's ProRegTx hash
+→<br>`collateralHash` | string (hex) | Optional<br>(0 or 1) | The masternode's collateral hash
+→<br>`collateralIndex` | int | Optional<br>(0 or 1) | Index of the collateral
+→<br>`dmnState` | object | Optional<br>(0 or 1) | Deterministic Masternode State
 → →<br>`service` | string | Required<br>(exactly 1) | The IP address/port of the masternode
 → →<br>`registeredHeight` | int | Required<br>(exactly 1) | Block height at which the masternode was registered
 → →<br>`lastPaidHeight` | int | Required<br>(exactly 1) | Block height at which the masternode was last paid
@@ -1266,7 +1272,8 @@ Result | object | Required<br>(exactly 1) | Masternode status info
 → →<br>`payoutAddress` | string | Required<br>(exactly 1) | The payout address
 → →<br>`pubKeyOperator` | string | Required<br>(exactly 1) | The operator public key
 → →<br>`operatorPayoutAddress` | string | Optional<br>(0 or 1) | The operator payout address
-→<br>`status` | string | Required<br>(1 or more) | The masternode's status
+→<br>`state` | string | Required<br>(exactly 1) | The masternode's state. Valid states are:<br>• `WAITING_FOR_PROTX`<br>• `POSE_BANNED`<br>• `REMOVED`<br>• `OPERATOR_KEY_CHANGED`<br>• `PROTX_IP_CHANGED`<br>• `READY`<br>• `ERROR`<br>• `UNKNOWN`
+→<br>`status` | string | Required<br>(exactly 1) | The masternode's status (description based on current state)
 
 *Example from Dash Core 0.13.2*
 
@@ -1724,7 +1731,11 @@ Mixing was reset
 
 ## Spork
 
-The [`spork` RPC](#spork) reads or updates spork settings on the network.
+The [`spork` RPC](#spork) shows information about the current state of sporks.
+
+> 🚧 
+>
+> Dash Core 18.1 moved spork setting functionality into a dedicated RPC, [`sporkupdate`](#sporkupdate).
 
 To display the status of sporks, use the `show` or `active` syntax.
 
@@ -1743,7 +1754,7 @@ Name | Type | Presence | Description
 `result` | object | Required<br>(exactly 1) | Object containing status
 →<br>`Spork Value` | int64_t | Required<br>(1 or more) | Spork value (epoch datetime to enable/disable)
 
-*Example from Dash Core 0.16.0*
+*Example from Dash Core 18.1.0*
 
 ``` bash
 dash-cli -testnet spork show
@@ -1754,11 +1765,11 @@ Result:
 {
   "SPORK_2_INSTANTSEND_ENABLED": 0,
   "SPORK_3_INSTANTSEND_BLOCK_FILTERING": 0,
-  "SPORK_6_NEW_SIGS": 0,
   "SPORK_9_SUPERBLOCKS_ENABLED": 0,
   "SPORK_17_QUORUM_DKG_ENABLED": 0,
-  "SPORK_19_CHAINLOCKS_ENABLED": 1,
-  "SPORK_21_QUORUM_ALL_CONNECTED": 4070908800
+  "SPORK_19_CHAINLOCKS_ENABLED": 0,
+  "SPORK_21_QUORUM_ALL_CONNECTED": 1,
+  "SPORK_23_QUORUM_POSE": 0
 }
 ```
 
@@ -1771,7 +1782,7 @@ Name | Type | Presence | Description
 `result` | object | Required<br>(exactly 1) | Object containing status
 →<br>`Spork Activation Status` | bool | Required<br>(1 or more) | Spork activation status
 
-*Example from Dash Core 0.14.0*
+*Example from Dash Core 18.1.0*
 
 ``` bash
 dash-cli -testnet spork active
@@ -1782,17 +1793,27 @@ Result:
 {
   "SPORK_2_INSTANTSEND_ENABLED": true,
   "SPORK_3_INSTANTSEND_BLOCK_FILTERING": true,
-  "SPORK_6_NEW_SIGS": true,
   "SPORK_9_SUPERBLOCKS_ENABLED": true,
   "SPORK_17_QUORUM_DKG_ENABLED": true,
   "SPORK_19_CHAINLOCKS_ENABLED": true,
-  "SPORK_21_QUORUM_ALL_CONNECTED": false
+  "SPORK_21_QUORUM_ALL_CONNECTED": true,
+  "SPORK_23_QUORUM_POSE": true
 }
 ```
 
-To update the state of a spork activation, use the `<name> [value]` syntax.
+*See also:*
 
-**Command Mode - `update`**
+* [Sporkupdate](#sporkupdate): updates the value of the provided spork.
+
+## Sporkupdate
+
+The [`sporkupdate` RPC](#sporkupdate) updates the value of the provided spork.
+
+> 📘
+>
+> Signing spork update messages requires `-sporkkey` to be set via the command line or dash.conf file.
+
+To update the state of a spork activation, use the `<name> [value]` syntax.
 
 *Parameter #1---Spork name*
 
@@ -1810,9 +1831,9 @@ Name | Type | Presence | Description
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`result` | object | Required<br>(exactly 1) | Update status (`success` or `failure`)
+`result` | string | Required<br>(exactly 1) | Update status (`success` or `null`)
 
-*Example from Dash Core 0.12.2*
+*Example from Dash Core 18.1.0*
 
 ``` bash
 dash-cli -testnet spork SPORK_2_INSTANTSEND_ENABLED 0
@@ -1820,10 +1841,12 @@ dash-cli -testnet spork SPORK_2_INSTANTSEND_ENABLED 0
 
 Result:
 ``` bash
-failure
+null
 ```
 
-*See also: none*
+*See also:*
+
+* [Spork](#spork): shows information about the current state of sporks.
 
 ## VoteRaw
 

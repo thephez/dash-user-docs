@@ -2,7 +2,7 @@
 
 ## CreateMultiSig
 
-The [`createmultisig` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#createmultisig) creates a P2SH multi-signature address.
+The [`createmultisig` RPC](core-api-ref-remote-procedure-calls-util#createmultisig) creates a P2SH multi-signature address.
 
 *Parameter #1---the number of signatures required*
 
@@ -14,7 +14,7 @@ Required | number (int) | Required<br>(exactly 1) | The minimum (*m*) number of 
 [block:callout]
 {
   "type": "danger",
-  "body": "As of Dash Core 0.17.0, using addresses with `createmultisig` is unsupported. Clients must use [`addmultisigaddress`](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#addmultisigaddress) to create multisig addresses.",
+  "body": "As of Dash Core 0.17.0, using addresses with `createmultisig` is unsupported. Clients must use [`addmultisigaddress`](core-api-ref-remote-procedure-calls-wallet#addmultisigaddress) to create multisig addresses.",
   "title": "Deprecation Warning"
 }
 [/block]
@@ -62,7 +62,7 @@ Result:
 
 *Added in Dash Core 18.0.0*
 
-The [`deriveaddresses` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#deriveaddresses) derives one or more addresses corresponding to an output [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md).
+The [`deriveaddresses` RPC](core-api-ref-remote-procedure-calls-util#deriveaddresses) derives one or more addresses corresponding to an output [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md).
 
 Examples of output descriptors are:
 
@@ -80,17 +80,11 @@ Name | Type | Presence | Description
 --- | --- | --- | ---
 `descriptor` | string | Required<br>(exactly 1) | The [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md)
 
-*Parameter #2---beginning of range*
+*Parameter #2---range*
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`begin` | number | Optional<br>(0 or 1) | If a ranged descriptor is used, this specifies the beginning of the range to import
-
-*Parameter #3---end of range*
-
-Name | Type | Presence | Description
---- | --- | --- | ---
-`end` | number | Optional<br>(0 or 1) | If a ranged descriptor is used, this specifies the end of the range to import
+`range` | number | Optional<br>(0 or 1) | If a ranged descriptor is used, this specifies the end or the range (in [begin,end] notation) to derive (e.g. "[0,2]").
 
 *Result---the derived addresses*
 
@@ -122,7 +116,7 @@ Result:
 
 ## EstimateSmartFee
 
-The [`estimatesmartfee` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#estimatesmartfee) estimates the transaction fee per kilobyte that needs to be paid for a transaction to begin confirmation within a certain number of blocks and returns the number of blocks for which the estimate is valid.
+The [`estimatesmartfee` RPC](core-api-ref-remote-procedure-calls-util#estimatesmartfee) estimates the transaction fee per kilobyte that needs to be paid for a transaction to begin confirmation within a certain number of blocks and returns the number of blocks for which the estimate is valid.
 
 *Parameter #1---how many confirmations the transaction may wait before being included*
 
@@ -185,7 +179,7 @@ Result:
 
 *Added in Dash Core 18.0.0*
 
-The [`getdescriptorinfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#getdescriptorinfo) analyses a [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md).
+The [`getdescriptorinfo` RPC](core-api-ref-remote-procedure-calls-util#getdescriptorinfo) analyses a [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md).
 
 *Parameter #1---the descriptor*
 
@@ -232,7 +226,7 @@ Result:
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.13.0*
 
-The [`signmessagewithprivkey` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#signmessagewithprivkey) signs a message with a given private key.
+The [`signmessagewithprivkey` RPC](core-api-ref-remote-procedure-calls-util#signmessagewithprivkey) signs a message with a given private key.
 
 *Parameter #1---the private key to sign with*
 
@@ -274,7 +268,7 @@ IBx8jxFjutPlcZcFdQPlA2n/B4yTrYhH43qYJURKRj7LWhSD0ERE/nnRLOnXi/gwULUcqfqOKqnqkSvu
 
 ## ValidateAddress
 
-The [`validateaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#validateaddress) returns information about the given Dash address.
+The [`validateaddress` RPC](core-api-ref-remote-procedure-calls-util#validateaddress) returns information about the given Dash address.
 [block:callout]
 {
   "type": "danger",
@@ -291,7 +285,7 @@ Address | string (base58) | Required<br>(exactly 1) | The P2PKH or P2SH address 
 [block:callout]
 {
   "type": "warning",
-  "body": "Parts of this command have been deprecated and moved to the [getaddressinfo RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getaddressinfo). Clients must transition to using getaddressinfo to access this information before upgrading to v18.0.\nThe following deprecated fields have moved to `getaddressinfo` and will only be shown here with `-deprecatedrpc=validateaddress`: `ismine`, `iswatchonly`,\n`script`, `hex`, `pubkeys`, `sigsrequired`, `pubkey`, `addresses`, `embedded`, `iscompressed`, `account`, `timestamp`, `hdkeypath`.",
+  "body": "Parts of this command have been deprecated and moved to the [getaddressinfo RPC](core-api-ref-remote-procedure-calls-wallet#getaddressinfo). Clients must transition to using getaddressinfo to access this information before upgrading to v18.0.\nThe following deprecated fields have moved to `getaddressinfo` and will only be shown here with `-deprecatedrpc=validateaddress`: `ismine`, `iswatchonly`,\n`script`, `hex`, `pubkeys`, `sigsrequired`, `pubkey`, `addresses`, `embedded`, `iscompressed`, `account`, `timestamp`, `hdkeypath`.",
   "title": "Dash Core 0.17.0 Deprecations"
 }
 [/block]
@@ -360,7 +354,7 @@ Result:
 
 # VerifyMessage
 
-The [`verifymessage` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#verifymessage) verifies a signed message.
+The [`verifymessage` RPC](core-api-ref-remote-procedure-calls-util#verifymessage) verifies a signed message.
 
 *Parameter #1---the address corresponding to the signing key*
 
@@ -372,7 +366,7 @@ Address | string (base58) | Required<br>(exactly 1) | The P2PKH address correspo
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-Signature | string (base64) | Required<br>(exactly 1) | The signature created by the signer encoded as base-64 (the format output by the [`signmessage` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#signmessage))
+Signature | string (base64) | Required<br>(exactly 1) | The signature created by the signer encoded as base-64 (the format output by the [`signmessage` RPC](core-api-ref-remote-procedure-calls-wallet#signmessage))
 
 *Parameter #3---the message*
 

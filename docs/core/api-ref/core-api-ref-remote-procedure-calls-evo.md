@@ -4,7 +4,7 @@
 
 *Added in Dash Core 0.13.0*
 
-The [`bls` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#bls) provides a set of commands to execute BLS-related actions.
+The [`bls` RPC](core-api-ref-remote-procedure-calls-evo#bls) provides a set of commands to execute BLS-related actions.
 
 ### BLS FromSecret
 
@@ -72,7 +72,7 @@ Result:
 
 *Added in Dash Core 0.13.0*
 
-The [`protx` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#protx) provides a set of commands to execute ProTx related actions.
+The [`protx` RPC](core-api-ref-remote-procedure-calls-evo#protx) provides a set of commands to execute ProTx related actions.
 
 ### ProTx Diff
 
@@ -82,13 +82,20 @@ The `protx diff` RPC calculates a diff and a proof between two masternode list.
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`baseBlock` | number (int) | Required<br>(Exactly 1) |
+`baseBlock` | number (int) | Required<br>(Exactly 1) | The starting block height
 
 *Parameter #2---end block height*
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`block` | bool | Required<br>(Exactly 1) |
+`block` | number (int) | Required<br>(Exactly 1) | The ending block height
+
+*Parameter #3---extended fields*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`extended` | boolean | Optional<br>(0 or 1) | **Added in Dash Core 18.1.0**<br>Show additional fields (e.g. `payoutAddress`) (default=`false`)
+
 
 *Result---JSON provider registration transaction details*
 
@@ -107,6 +114,8 @@ Name | Type | Presence | Description
 → →<br>`pubKeyOperator` | string (hex) | Required<br>(exactly 1) | The operator public key
 → →<br>`votingAddress` | string (hex) | Required<br>(exactly 1) | The voting address
 → →<br>`isValid` | bool | Required<br>(exactly 1) | Set to `true` if masternode is valid
+→ →<br>`payoutAddress` | string (hex) | Required<br>(exactly 1) | **Added in Dash Core 18.1.0**<br>The owner's payout address
+→ →<br>`operatorPayoutAddress` | string (hex) | Required<br>(exactly 1) | **Added in Dash Core 18.1.0**<br>The operator's payout address
 →<br>`deletedQuorums` | array | Required<br>(exactly 1) | An array of deleted quorums
 → →<br>`llmqType` | number | Required<br>(exactly 1) | The quorum type
 → →<br>`quorumHash` | string (hex) | Required<br>(exactly 1) | The hash of the quorum
@@ -115,15 +124,15 @@ Name | Type | Presence | Description
 → →<br>`llmqType` | number | Required<br>(exactly 1) | The quorum type
 → →<br>`quorumHash` | string (hex) | Required<br>(exactly 1) | The hash of the quorum
 → →<br>`signersCount` | number | Required<br>(exactly 1) | The number of signers for the quorum
-→ →<br>`signers` | string (hex) | Required<br>(exactly 1) | **Added in Dash Core 0.16.0**<br><br>Bitset representing the aggregated signers of this final commitment
+→ →<br>`signers` | string (hex) | Required<br>(exactly 1) | *Added in Dash Core 0.16.0*<br>Bitset representing the aggregated signers of this final commitment
 → →<br>`validMembersCount` | number | Required<br>(exactly 1) | The number of valid members in the quorum
-→ →<br>`validMembers` | string (hex) | Required<br>(exactly 1) | **Added in Dash Core 0.16.0**<br><br>Bitset of valid members in this commitment
+→ →<br>`validMembers` | string (hex) | Required<br>(exactly 1) | *Added in Dash Core 0.16.0*<br>Bitset of valid members in this commitment
 → →<br>`quorumPublicKey` | string (hex) | Required<br>(exactly 1) | The public key of the quorum
-→ →<br>`quorumVvecHash` | string (hex) | Required<br>(exactly 1) | **Added in Dash Core 0.16.0**<br><br>The SHA256 hash of the quorum verification vector
-→ →<br>`quorumSig` | string (hex) | Required<br>(exactly 1) | **Added in Dash Core 0.16.0**<br><br>Recovered threshold signature
-→ →<br>`membersSig` | string (hex) | Required<br>(exactly 1) | **Added in Dash Core 0.16.0**<br><br>Aggregated BLS signatures from all included commitments
+→ →<br>`quorumVvecHash` | string (hex) | Required<br>(exactly 1) | *Added in Dash Core 0.16.0*<br>The SHA256 hash of the quorum verification vector
+→ →<br>`quorumSig` | string (hex) | Required<br>(exactly 1) | *Added in Dash Core 0.16.0*<br>Recovered threshold signature
+→ →<br>`membersSig` | string (hex) | Required<br>(exactly 1) | *Added in Dash Core 0.16.0*<br>Aggregated BLS signatures from all included commitments
 →<br>`merkleRootMNList` | string (hex) | Required<br>(exactly 1) | Merkle root of the masternode list
-→<br>`merkleRootQuorums` | string (hex) | Required<br>(exactly 1) | *Added in Coinbase Transaction version 2 (Dash Core 0.14.0)*<br><br>Merkle root of the masternode list
+→<br>`merkleRootQuorums` | string (hex) | Optional<br>(0 or 1) | *Added in Coinbase Transaction version 2 (Dash Core 0.14.0)*<br>Merkle root of the masternode list.
 
 *Example from Dash Core 0.16.0*
 
@@ -364,7 +373,7 @@ Name | Type | Presence | Description
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`height` | bool | Optional<br>(0 or 1) | List ProTxs from this height (default: current chain tip).
+`height` | number (int) | Optional<br>(0 or 1) | List ProTxs from this height (default: current chain tip).
 
 *Result (if `detailed` was `false`)---provider registration transaction hash*
 
@@ -1008,7 +1017,7 @@ Result:
 
 *Added in Dash Core 0.14.0*
 
-The [`quorum` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#quorum) provides a set of commands for quorums (LLMQs).
+The [`quorum` RPC](core-api-ref-remote-procedure-calls-evo#quorum) provides a set of commands for quorums (LLMQs).
 
 ### Quorum List
 
@@ -1092,50 +1101,47 @@ Name | Type | Presence | Description
 →<br>`members` | array | Required<br>(exactly 1) | An array containing quorum member details
 → →<br>Member | object | Required<br>(1 or more) | An object describing a particular member
 → → →<br>`proTxHash` | string (hex) | Required<br>(exactly 1) | The masternode's Provider Registration transaction hash
+→ → →<br>`service` | string | Required<br>(exactly 1) | **Added in Dash Core 18.1.0**<br>The masternode's IP:Port
 → → →<br>`pubKeyOperator` | string (hex) | Required<br>(exactly 1) | *Added in Dash Core 0.15.0*<br>The masternode's Operator public key
 → → →<br>`valid` | bool | Required<br>(exactly 1) | Indicates if the member is valid
 → → →<br>`pubKeyShare` | string | Optional<br>(0 or 1) | Member public key share
 →<br>`quorumPublicKey` | string | Required<br>(exactly 1) | Quorum public key
 →<br>`secretKeyShare` | string | Optional<br>(exactly 1) | Quorum secret key share
 
-*Example from Dash Core 18.0.0*
+*Example from Dash Core 18.1.0*
 
 ```bash
 dash-cli -testnet quorum info 1 \
-  00000239f771a00b78d80dcacba7a49d2a52d61aade1610e90978c08dd6e8445 true
+  000000ebd10368ca387ce380539fad9c8ba21108a3bfd6fedeecb60d28f56ae9 true
 ```
 
 Result (truncated):
 ```json
 {
-  "height": 6024,
-  "type": "llmq_devnet",
-  "quorumHash": "00000239f771a00b78d80dcacba7a49d2a52d61aade1610e90978c08dd6e8445",
+  "height": 819240,
+  "type": "llmq_50_60",
+  "quorumHash": "000000ebd10368ca387ce380539fad9c8ba21108a3bfd6fedeecb60d28f56ae9",
   "quorumIndex": 0,
-  "minedBlock": "0000012197b7ca6360af3756c6a49c217dbbdf8b595fd55e0fcef7ffcd546044",
+  "minedBlock": "00000548588369399691ad308a3c588a7bf842a40347e23ef40655e315898146",
   "members": [
     {
-      "proTxHash": "8abb1f227473e188d0e3ff39201badd49d22f8b323f9cfdd096d109f50614b6c",
-      "pubKeyOperator": "0e61e7e684c5dcfe2864f1fdadd36aa5ec4485cfc38bfdaa65a9cf52aab8da7305b8a5a04dd7521213e41b57e060d8f2",
+      "proTxHash": "f77ec12ec8adb91a3a158c5f9cc3f7e2521d65eac6cda1e44763daa603a77570",
+      "service": "35.89.202.171:19999",
+      "pubKeyOperator": "16f8048e511e7c0c2b495a9b20030b315d75bca283b70af25d16c8809c7f2a786225c2fe47ff1c92aa8ebf586be91abc",
       "valid": true,
-      "pubKeyShare": "094f26fcbb01adebf11b810a67f808b4b65de9cfca27674231369b84cdff775cd55105fb552f2c2d63ab9f61d9487530"
-    },
-    {
-      "proTxHash": "8675ed9f95526868ce4cf88ffe5a26ccff90b7623516735219c6e16731e4288a",
-      "pubKeyOperator": "9249c6e4858c09a5c31ea59e7390dea91d3e0a31b3e97d838c0933201893d27d674bf00b3bffc57cb7021a6e7c03b44a",
-      "valid": true,
-      "pubKeyShare": "91f9b4d7213a8f1bcdea2e0784c80e3a9fc0216c8413b86d7a8d954b8cbec4e37dc1ec43dd71712f99f7d1a893933160"
+      "pubKeyShare": "12c305fdc5ec06785d2e89a8b64c291128e4a2034889e9f1539d9194954051a304d8bf1649a2d3a95aac200884e8e99d"
     },
     {"Truncated data":"..."},
     {
-      "proTxHash": "9c3173a86ef146920ad37f3b0c4f9be0f08063c1d194aaa9602d766a5de782a9",
-      "pubKeyOperator": "935bb9eae3b52bf19057f6276898519fe5549e721d564c9fcf993197a12122e220d876e08d740530177cf409750113dd",
+      "proTxHash": "2cd3833e1cef622e875096c70d6eb6c7083a250a6b26ca27edb3aa21ac05e3d1",
+      "service": "89.47.162.137:19999",
+      "pubKeyOperator": "8fc1d0cea417ed963e50d876a38bf0846b536b7e8809826e163bc9ea0f749ea8ebe00c6642e71bb84000549bda5bb1d0",
       "valid": true,
-      "pubKeyShare": "0ca7673309383783e523a318714b93843debbe4b57c51d5642c5b2a72f1947cb7c7680454934e514bf5ece919029a16b"
+      "pubKeyShare": "8662927148ed33b8f0000f1666c277e14df9838c9dce4e3fb273866603b93502e70108408f81698e0b47cb3b5aff3a30"
     }
   ],
-  "quorumPublicKey": "092bf17ce141bb46d363c7bb9e0b87985d2faece00f3f2cf5c09bb2aca3a198fb7e856cd038819ee356d191f09f9f6fc",
-  "secretKeyShare": "15df749d58605367732cc1b77f18fa1fbecc368e9dd21343eb1a3b9be3f29b71"
+  "quorumPublicKey": "18401a5c5d8d8145cea2843e0c37f10d06de642ce7665599ad35dce9f7a3027b42375a9e138e185867bfe5359fd952f2",
+  "secretKeyShare": "4d39c4c1cb856a5e2d96efffb4cf3695b57b5d0fb4e289e7b2be3b7592a6dfa6"
 }
 ```
 
@@ -2074,7 +2080,7 @@ false
 
 ### Quorum MemberOf
 
-The [`quorum` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#quorum) checks which quorums the given masternode is a member of.
+The [`quorum` RPC](core-api-ref-remote-procedure-calls-evo#quorum) checks which quorums the given masternode is a member of.
 
 *Parameter #1---proTxHash*
 
@@ -2126,9 +2132,598 @@ Result:
 
 *See also: none*
 
-### Quorum RotationInfo
+### Quorum ListExtended
 
-The `quorum rotationinfo` RPC returns  quorum rotation information. The response is a JSON representation of the data that would be returned in a [`qrinfo` message](../ref/core-ref-p2p-network-data-messages.md#qrinfo).
+The `quorum listextended` RPC returns an extended list of on-chain quorums.
+
+*Parameter #1---height*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`height` | numeric | Optional<br>(0 or 1) | The height index. Will list active quorums at tip if "height" is not specified.
+
+*Result---list extended*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`result` | object | Required<br>(exactly 1) | Object containing an extended list of on-chain quorums
+→<br>`quorumName` | array of objects | Required<br>(exactly 1) | List of quorum details per some quorum type
+→→<br>`xxxx` | object | Required<br>(exactly 1) | Quorum hash. Note: most recent quorums come first
+→→→<br>`creationHeight` | numeric | Required<br>(exactly 1) | Block height where the DKG started
+→→→<br>`quorumIndex` | numeric | Required<br>(exactly 1) | Quorum index (applicable only to rotated quorums)
+→→→<br>`minedBlockHash` | string | Required<br>(exactly 1) | Blockhash where the commitment was mined.
+→→→<br> `numValidMembers` | numeric | Required<br>(exactly 1) | The total of valid members.
+→→→<br> `healthRatio` | numeric | Required<br>(exactly 1) | The ratio of healthy members to quorum size. Range [0.0 - 1.0].
+
+*Example from Dash Core 18.2.0*
+
+```bash
+dash-cli quorum listextended 1800330
+```
+Result:
+```
+{
+  "llmq_60_75": [
+    {
+      "000000000000003892d192fe4c76865c398b117e6d28f4e5978f5fea07a392a0": {
+        "quorumIndex": 0,
+        "creationHeight": 1800288,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001e209abbe9ddf3d9d6f413ec76920de87071dd50ea90b38766": {
+        "quorumIndex": 1,
+        "creationHeight": 1800289,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000019273ab7f86e2a4e52779141a01373909cd058c48c23849bee": {
+        "quorumIndex": 2,
+        "creationHeight": 1800290,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000022b4e1fba61c99235ae6f233a76dded4c4ddc2919680cb54e8": {
+        "quorumIndex": 3,
+        "creationHeight": 1800291,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000016c2fe9dc3a0f3f66325351667b42985e46ab15a87dbe64df5": {
+        "quorumIndex": 4,
+        "creationHeight": 1800292,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000002ef4d32dc86ec7cad427bd187991c868fd4cccbf62732cbbfb": {
+        "quorumIndex": 5,
+        "creationHeight": 1800293,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000d3cdd5dce4bbe7b327112bd5b637f96cb64cf07faedf7833b": {
+        "quorumIndex": 6,
+        "creationHeight": 1800294,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "00000000000000022833d76c3ea60bb0f9cec5a9aee66012e3310561e7fff273": {
+        "quorumIndex": 7,
+        "creationHeight": 1800295,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000da0750d6d6df6c9aff6b1b37333a485c9e2a590943bf3a300": {
+        "quorumIndex": 8,
+        "creationHeight": 1800296,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "00000000000000014d22d5fff6cc3645e3144b1831425a3fd19e376b8ae1fd14": {
+        "quorumIndex": 9,
+        "creationHeight": 1800297,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 59,
+        "healthRatio": "0.98"
+      }
+    },
+    {
+      "0000000000000018193220b520572d4f9a622a6767358b2af5fd721a57dab2f0": {
+        "quorumIndex": 10,
+        "creationHeight": 1800298,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000002a94bbb787ddf45687b5982e894157884067d6c5c8ed721495": {
+        "quorumIndex": 11,
+        "creationHeight": 1800299,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000ddc0112c3d2c625127ccac4311cb8031759a8238ed9e84d8b": {
+        "quorumIndex": 12,
+        "creationHeight": 1800300,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 59,
+        "healthRatio": "0.98"
+      }
+    },
+    {
+      "000000000000002bb301832bf8d48ccf67256a7d470cb89348d3fb22bc75467d": {
+        "quorumIndex": 13,
+        "creationHeight": 1800301,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001439d25b7cec34aabd39454956ca0ef632a33ee1923b63bcb5": {
+        "quorumIndex": 14,
+        "creationHeight": 1800302,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000016ca53419e336df1f57c22e22e7347eb6ee185911eeb0eadbc": {
+        "quorumIndex": 15,
+        "creationHeight": 1800303,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 59,
+        "healthRatio": "0.98"
+      }
+    },
+    {
+      "000000000000002f80f43d095ffd11397d69414b72dc3b22ca471ac7a18aa2d0": {
+        "quorumIndex": 16,
+        "creationHeight": 1800304,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 59,
+        "healthRatio": "0.98"
+      }
+    },
+    {
+      "00000000000000207de79166196c12d914f69fa1c0895b9d51dfc66de1d670e6": {
+        "quorumIndex": 17,
+        "creationHeight": 1800305,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 59,
+        "healthRatio": "0.98"
+      }
+    },
+    {
+      "0000000000000000d71b16a4160d5c9cc7751593be3c16328ddb2eee95957f13": {
+        "quorumIndex": 18,
+        "creationHeight": 1800306,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 57,
+        "healthRatio": "0.95"
+      }
+    },
+    {
+      "0000000000000019530a9727b0a44d5551451a7d78608be53fdedcf3c9d8a443": {
+        "quorumIndex": 19,
+        "creationHeight": 1800307,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000027f61ba67222e4ab8a0c7713d0d2c38344c1f7159541ae663a": {
+        "quorumIndex": 20,
+        "creationHeight": 1800308,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "00000000000000121db16ad865fa36be61404a78bba17e372df7e12597941796": {
+        "quorumIndex": 21,
+        "creationHeight": 1800309,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 59,
+        "healthRatio": "0.98"
+      }
+    },
+    {
+      "000000000000002c024394c7e0fdc031d7904d538dd6e3688d765dd1dac62172": {
+        "quorumIndex": 22,
+        "creationHeight": 1800310,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001ca51cd8d63690283d2afa9ccb69e987c146439ecd25e8b8ae": {
+        "quorumIndex": 23,
+        "creationHeight": 1800311,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "00000000000000096c70b0cd1fed28e481f1b74076c8591450357fff57a0cd1e": {
+        "quorumIndex": 24,
+        "creationHeight": 1800312,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000028d654215c87a18e86966d25d3d57a62e02ce5bb8a16407aa9": {
+        "quorumIndex": 25,
+        "creationHeight": 1800313,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000026116f41a22ef0c5c5442ebbd31e9226ea218ebaf2bef09e68": {
+        "quorumIndex": 26,
+        "creationHeight": 1800314,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000002aa07eb158ab1a70d27a382921de2b940eab09b1d175da58f3": {
+        "quorumIndex": 27,
+        "creationHeight": 1800315,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000028f04886bb10557f2b62373bbeecc54e40b1306fc2960bf6fc": {
+        "quorumIndex": 28,
+        "creationHeight": 1800316,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001f57ef24b442689b83f459291f441f63d1d152f18669759bdf": {
+        "quorumIndex": 29,
+        "creationHeight": 1800317,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 59,
+        "healthRatio": "0.98"
+      }
+    },
+    {
+      "000000000000000b1243e19772259b34f29a57bc807ebb155fbb68791af37610": {
+        "quorumIndex": 30,
+        "creationHeight": 1800318,
+        "minedBlockHash": "0000000000000046e498ceae65713b6daf142db12ccb012fac488acbfd84aad5",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000002c406fb450d718b989b951f3c230839062d929e1af7e3cbaee": {
+        "quorumIndex": 31,
+        "creationHeight": 1800031,
+        "minedBlockHash": "000000000000002c9242df9a454e7e0aad7f7d4bf40c84c7adacc0e99c5d9a80",
+        "numValidMembers": 60,
+        "healthRatio": "1.00"
+      }
+    }
+  ],
+  "llmq_400_60": [
+    {
+      "000000000000003892d192fe4c76865c398b117e6d28f4e5978f5fea07a392a0": {
+        "creationHeight": 1800288,
+        "minedBlockHash": "00000000000000121db16ad865fa36be61404a78bba17e372df7e12597941796",
+        "numValidMembers": 400,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000002a19e055ca3767d6200b5b8a872e978610209721e8520c3916": {
+        "creationHeight": 1800000,
+        "minedBlockHash": "0000000000000008dcd194b9702bbf8fab74cf150ca6b2ec54377874839a0f60",
+        "numValidMembers": 400,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000017e56702f42874c51b1869e5225f50765cabe9f1ee0b33fa5b": {
+        "creationHeight": 1799712,
+        "minedBlockHash": "0000000000000026f22894d7d24de94e57f2683cefae3c6fdb4e043e26750711",
+        "numValidMembers": 399,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001f1672260b4edac3e5f278e55c09dc4d51e93b9a143f4bcc23": {
+        "creationHeight": 1799424,
+        "minedBlockHash": "000000000000002de4624c6476c3533bace5b8811a9ecf48ddeae624f94214c5",
+        "numValidMembers": 400,
+        "healthRatio": "1.00"
+      }
+    }
+  ],
+  "llmq_400_85": [
+    {
+      "000000000000002a19e055ca3767d6200b5b8a872e978610209721e8520c3916": {
+        "creationHeight": 1800000,
+        "minedBlockHash": "0000000000000008dcd194b9702bbf8fab74cf150ca6b2ec54377874839a0f60",
+        "numValidMembers": 397,
+        "healthRatio": "0.99"
+      }
+    },
+    {
+      "000000000000001f1672260b4edac3e5f278e55c09dc4d51e93b9a143f4bcc23": {
+        "creationHeight": 1799424,
+        "minedBlockHash": "000000000000002de4624c6476c3533bace5b8811a9ecf48ddeae624f94214c5",
+        "numValidMembers": 400,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000003972108d2bd0d2e3ef5193b2709ab9f1938d91b446d52bbf1a": {
+        "creationHeight": 1798848,
+        "minedBlockHash": "00000000000000443ccd4f40d534dbc0031a505becf13ad14d8f3c15534db40d",
+        "numValidMembers": 399,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000021318ce8dec7d7239bc4ffb407b51e7f75f89116348ab7f63d": {
+        "creationHeight": 1798272,
+        "minedBlockHash": "0000000000000025e4189f7d4ece51b344fd50f5660352e15d2af45e2476adde",
+        "numValidMembers": 399,
+        "healthRatio": "1.00"
+      }
+    }
+  ],
+  "llmq_100_67": [
+    {
+      "00000000000000096c70b0cd1fed28e481f1b74076c8591450357fff57a0cd1e": {
+        "creationHeight": 1800312,
+        "minedBlockHash": "0000000000000017553cc929c0bcd570b444f5caa46bb1c53ac9b6b4b587a6b1",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000003892d192fe4c76865c398b117e6d28f4e5978f5fea07a392a0": {
+        "creationHeight": 1800288,
+        "minedBlockHash": "000000000000000ddc0112c3d2c625127ccac4311cb8031759a8238ed9e84d8b",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000023d18e24d490138bc33061fb5d354d6a93b7e8655bb7fb5cd5": {
+        "creationHeight": 1800264,
+        "minedBlockHash": "000000000000002d698057b2a3424feaba9f5e2d2a3f8e18b0df3eda7a6d7ae1",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001410a901c3afa742d883c9fdabce4bc5ae511e5332b6ba4a2c": {
+        "creationHeight": 1800240,
+        "minedBlockHash": "000000000000001efdc8e694bd889398686a57859d2063880b9b22ff80e59992",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001e7c54a085503e8d8d50ad7255298a490db86d94d2190025b3": {
+        "creationHeight": 1800216,
+        "minedBlockHash": "000000000000002bab372f9a27d68cf1f3bf4a2c393d2228b8a60dea0d7069b0",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000012000e6134e98fdae4c5174e29fb4e92b97f72b5b31de8b22e": {
+        "creationHeight": 1800192,
+        "minedBlockHash": "00000000000000266fd7587535728e4f10a4aabdc6aeddce425166ff62498ee8",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000d7bfac2eb39c8ca7e34e406f10d34309e383bf6cd12955f33": {
+        "creationHeight": 1800168,
+        "minedBlockHash": "000000000000001ee28ea86d5682ea13ae10cfda81a5ec702def62a7190448fa",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000ec2e9281eb00e49d28794b7aa0e7bc2ca2087446f8bd950d2": {
+        "creationHeight": 1800144,
+        "minedBlockHash": "000000000000001aa3571b0b3433bf3d40e2f7065c9c62a7016cf9c6cbd1225d",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000df63557d980360d610b802fd3929444cadd2aaf052d11c80c": {
+        "creationHeight": 1800120,
+        "minedBlockHash": "000000000000000147ecaf84980dcceaee55053536c21c91906e9068641dbb8f",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000014ce6fe9b7c4c4237d21954e9f5bce96b0fa87ed6e780dea10": {
+        "creationHeight": 1800096,
+        "minedBlockHash": "00000000000000286fc19ecbb6f25c69cba2ceadc9064e5534c4efb252599ad3",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "00000000000000061da2087af9502da3b7d8a443569b93dbe130e7a5e22bdab1": {
+        "creationHeight": 1800072,
+        "minedBlockHash": "0000000000000008866e1a7ee16a99c4baf59dd311a041314c9f1a6c2bd99666",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001e63afa146c3b3af04e11b103bf431b6795af6f27fa7e93b27": {
+        "creationHeight": 1800048,
+        "minedBlockHash": "0000000000000031106ea328f2aa48fd86f689dfb84376e7f3c6f9a71c5ff8e9",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000020d38f6a522b60b098a83ae65f29fc8c0ce998aad9a551117d": {
+        "creationHeight": 1800024,
+        "minedBlockHash": "0000000000000018c126af1636f8d82fc48bf2f919992d709f423a3d71cfa9ac",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000002a19e055ca3767d6200b5b8a872e978610209721e8520c3916": {
+        "creationHeight": 1800000,
+        "minedBlockHash": "000000000000000de079e14e271ad9714ff33adc5636922ba943a65e21b90a8a",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000383e3d518a7249e65ab5b642ea01456bd920124ec4985c56a": {
+        "creationHeight": 1799976,
+        "minedBlockHash": "000000000000002738b4c991238340cfe94e08a5ca88144ffbc90272d0f5c853",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000038267cd98aa082c4e43521edc6feaff53af21a8f134c1ed05f": {
+        "creationHeight": 1799952,
+        "minedBlockHash": "00000000000000064636f2fc5338f6d34033928614487e055cd3a54e7933b8f9",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000000acb20bef7d6a0a4b4b10a276c64d631d5c86fae05a33dfe0b": {
+        "creationHeight": 1799928,
+        "minedBlockHash": "0000000000000010fc8ee7e13fc198da76b25c598a59708327f44013e4e78aa0",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000005b452484413d52b186bf8a24174bb83ae673d03c04d9b3cc1": {
+        "creationHeight": 1799904,
+        "minedBlockHash": "000000000000000cb6c4587f83021b38cab2b1be05248ae8e06525da2078101a",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000013978d488be84a2b1a9a3fd936a1be6a250e4cdd8de0e7318e": {
+        "creationHeight": 1799880,
+        "minedBlockHash": "0000000000000021d6f2991e2c47875b7aa906a63f78457a1e7ee458962ba65d",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000008cc627164e04430716df733f61dfe01795e78b4bf60051294": {
+        "creationHeight": 1799856,
+        "minedBlockHash": "0000000000000010a8367e8d02a1774d3c54b075e2016e57ce90ef8a9426fcfa",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000003497f267d65d3a29dc7d79b2925833bc92dbaf5096572427d8": {
+        "creationHeight": 1799832,
+        "minedBlockHash": "000000000000000374f39b533e45c86ad8109140412b3ac4872f88acb1505799",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "0000000000000008556be7271f9942e38cbfe85ad8423b8c134fe0edbbd2c08e": {
+        "creationHeight": 1799808,
+        "minedBlockHash": "000000000000002309807a942f1e7ec628e92283df34d67db04e82c5c3907f21",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "00000000000000276299f465ea5ecd680b4f6a6c1cf63a213f4ad98c5974ba4b": {
+        "creationHeight": 1799784,
+        "minedBlockHash": "00000000000000129cd44a7f7a824116156a325f61a7a69822ebd49c18457d11",
+        "numValidMembers": 100,
+        "healthRatio": "1.00"
+      }
+    },
+    {
+      "000000000000001d6f064000bf1258786d73dc87a8bd2bad3913483ea3b9f3aa": {
+        "creationHeight": 1799760,
+        "minedBlockHash": "000000000000001b7b5a5653a1ef67ad355321c4f2fccd93f2b4c56605fc2fea",
+        "numValidMembers": 99,
+        "healthRatio": "0.99"
+      }
+    }
+  ]
+}
+
+```
+
+*See also: none*
+
+## Quorum RotationInfo
+
+The `quorum rotationinfo` RPC returns  quorum rotation information. The response is a JSON representation of the data that would be returned in a [`qrinfo` message](core-ref-p2p-network-data-messages#qrinfo).
 
 *Parameter #1---block request hash*
 

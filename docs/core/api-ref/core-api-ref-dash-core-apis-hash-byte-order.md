@@ -18,7 +18,7 @@ The result above is also how the hash appears in the previous-header-hash part o
 0000000000000</b>ab0aaa377ca3f49b1545e2ae6b0667a08f42e72d8c24ae\
 237140e28f14f3bb7c6bcc6d536c890019edd83ccf</pre>
 
-However, Dash Core's RPCs use the byte-wise reverse for hashes, so if you want to get information about block 675,776 using the [`getblock` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblock), you need to reverse the requested hash:
+However, Dash Core's RPCs use the byte-wise reverse for hashes, so if you want to get information about block 675,776 using the [`getblock` RPC](core-api-ref-remote-procedure-calls-blockchain#getblock), you need to reverse the requested hash:
 
 ``` shell
 > dash-cli getblock \
@@ -48,6 +48,7 @@ As header hashes and TXIDs are widely used as global identifiers in other Dash s
 |---------------|---------------------|-----------------|
 | P2SH Hashes: RIPEMD160(SHA256(redeem script))  | Used in both addresses and pubkey scripts | **N/A:** RPCs use addresses which use internal byte order |
 |---------------|---------------------|-----------------|
+
 [block:callout]
 {
   "type": "info",
@@ -55,13 +56,23 @@ As header hashes and TXIDs are widely used as global identifiers in other Dash s
 }
 [/block]
 The code below may help you check byte order by generating hashes from raw hex.
-[block:code]
-{
-  "codes": [
-    {
-      "code": "from sys import byteorder\nfrom hashlib import sha256\nimport codecs\n\ndecode_hex = codecs.getdecoder('hex_codec')\nencode_hex = codecs.getencoder('hex_codec')\n\n# You can put in $data an 80-byte block header to get its header hash,\n# or a raw transaction to get its txid\ndata = decode_hex('00')[0]\ndata_hash = sha256(sha256(data).digest()).digest()\n\nprint(\"Warning: this code only tested on a little-endian x86_64 arch\")\nprint()\nprint(\"System byte order:        \", byteorder)\nprint(\"Internal-Byte-Order Hash: \", encode_hex(data_hash)[0])\nprint(\"RPC-Byte-Order Hash:      \", encode_hex(data_hash[::-1])[0])",
-      "language": "python"
-    }
-  ]
-}
-[/block]
+
+``` python
+from sys import byteorder
+from hashlib import sha256
+import codecs
+
+decode_hex = codecs.getdecoder('hex_codec')
+encode_hex = codecs.getencoder('hex_codec')
+
+# You can put in $data an 80-byte block header to get its header hash,
+# or a raw transaction to get its txid
+data = decode_hex('00')[0]
+data_hash = sha256(sha256(data).digest()).digest()
+
+print("Warning: this code only tested on a little-endian x86_64 arch")
+print()
+print("System byte order:        ", byteorder)
+print("Internal-Byte-Order Hash: ", encode_hex(data_hash)[0])
+print("RPC-Byte-Order Hash:      ", encode_hex(data_hash[::-1])[0])
+```

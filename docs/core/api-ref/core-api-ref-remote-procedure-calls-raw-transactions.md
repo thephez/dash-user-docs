@@ -1,8 +1,67 @@
 # Raw Transactions
 
+## AnalyzePSBT
+
+The analyzepsbt RPC analyzes and provides information about the current status of a PSBT and its inputs.
+
+*Parameter #1---psbt*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`psbt` | string | Required<br>(Exactly 1) | The base64-encoded partially signed transaction
+
+*Result:*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`result` | object | Required<br>(exactly 1) | A JSON object 
+→ `inputs` | array | Required<br>(exactly 1 ) | An array that contains main details about the PSBT.
+→→`has_utxo` | boolean | Required (exactly 1) | Whether a UTXO is provided
+→→`is_final` | boolean | Required (exactly 1) | Whether the input is finalized
+→→`missing` | object | Optional (0 or 1)| A JSON object that includes the data missing to complete the input.
+→→→`pubkeys` | array | Optional (0 or 1) | Array containing public key data.
+→→→→`hex` | string | Required<br>(0 or more) | Public key ID, hash160 of the public key, of a public key whose BIP 32 derivation path is missing.
+→→→`signatures` | array | Optional (0 or 1) | Array containing public key data
+→→→→`hex` | string | Required<br>(0 or more)| Public key ID, hash160 of the public key, of a public key whose signature is missing.
+→→→ `"redeemscript" : "hex"` | string | Optional<br>(0 or 1)| Hash160 of the redeemScript that is missing.
+→→ `"next" : "str"` | string | Optional<br>(0 or 1) | Role of the next person that this input needs to go to
+→ `estimated_vsize`| numeric | Optional (0 or 1)| Estimated vsize of the final signed transaction
+→ `estimated_feerate`| numeric | Optional (0 or 1) | Estimated feerate of the final signed transaction in DASH/kB. Shown only if all UTXO slots in the PSBT have been filled.
+→ `fee`| numeric | Optional (0 or 1)| The transaction fee paid. Shown only if all UTXO slots in the PSBT have been filled.
+→ `"next" : "str"` | string | Required<br>(exactly 1) | Role of the next person that this psbt needs to go to
+→ `"error" : "str"` | string | Required<br>(exactly 1) | Error message if there is one
+
+*Example from Dash Core 18.2.0*
+
+``` bash
+dash-cli -testnet analyzepsbt cHNidP8BAHcCAAAAAWtJCIbAGYsCjGxcsUXE6zsQVaIkp6EFqt7/QbaeyR4GAQAAAAD/////AgAgX6ASAAAAGXapFEhUhUJfqZUE7BY4rEIT88/J8y7ziKzAqPm+AQAAABl2qRSBHqzBTbjrtbZEhtxDQAwCJrQopIisAAAAAAAAAAA=
+```
+Result:
+```
+{
+  "inputs": [
+    {
+      "has_utxo": false,
+      "is_final": false,
+      "next": "updater"
+    }
+  ],
+  "next": "updater"
+}
+```
+
+*See also:*
+
+* [CombinePSBT](core-api-ref-remote-procedure-calls-raw-transactions#combinepsbt): combines multiple partially-signed Dash transactions into one transaction.
+* [CreatePSBT](/docs/core-api-ref-remote-procedure-calls-raw-transactions#createpsbt): creates a transaction in the Partially Signed Transaction (PST) format.
+* [DecodePSBT](/docs/core-api-ref-remote-procedure-calls-raw-transactions#decodepsbt): returns a JSON object representing the serialized, base64-encoded partially signed Dash transaction.
+* [FinalizePSBT](/docs/core-api-ref-remote-procedure-calls-raw-transactions#finalizepsbt): finalizes the inputs of a PSBT.
+* [WalletProcessPSBT](/docs/core-api-ref-remote-procedure-calls-wallet#walletprocesspsbt): updates a PSBT with input information from a wallet and then allows the signing of inputs.
+
+
 ## CombinePSBT
 
-The [`combinepsbt` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#combinepsbt) combines multiple partially-signed Dash transactions into one transaction. Implements the Combiner role. This should be used only with `createrawtransaction` and `fundrawtransaction`. 
+The [`combinepsbt` RPC](core-api-ref-remote-procedure-calls-raw-transactions#combinepsbt) combines multiple partially-signed Dash transactions into one transaction. Implements the Combiner role. This should be used only with `createrawtransaction` and `fundrawtransaction`. 
 `createpsbt` and `walletcreatefundedpsbt` should be used for new applications.
 
 *Parameter #1---txs*
@@ -38,7 +97,7 @@ cHNidP8BAFUCAAAAAQcxBA7Cdee2EvS1IyiRPzCVxbt9wFnrqry3AMUBOYvqAAAAAAD/////AQDh9QUA
 
 ## CombineRawTransaction
 
-The [`combinerawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#combinerawtransaction) combine multiple partially signed transactions into one transaction.
+The [`combinerawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#combinerawtransaction) combine multiple partially signed transactions into one transaction.
 
 The combined transaction may be another partially signed transaction or a
 fully signed transaction.
@@ -86,6 +145,7 @@ a8f027d8a77cbdcb88ac00000000
 
 *See also:*
 
+* [AnalyzePSBT](core-api-ref-remote-procedure-calls-raw-transactions#analyzepsbt): analyzes and provides information about the current status of a PSBT and its inputs.
 * [CreateRawTransaction](/docs/core-api-ref-remote-procedure-calls-raw-transactions#createrawtransaction): creates an unsigned serialized transaction that spends a previous output to a new output with a P2PKH or P2SH address. The transaction is not stored in the wallet or transmitted to the network.
 * [DecodeRawTransaction](/docs/core-api-ref-remote-procedure-calls-raw-transactions#decoderawtransaction): decodes a serialized transaction hex string into a JSON object describing the transaction.
 * [SignRawTransactionWithKey](#signrawtransactionwithkey): signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
@@ -94,7 +154,7 @@ a8f027d8a77cbdcb88ac00000000
 
 ## ConvertToPSBT
 
-The [`converttopsbt` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#converttopsbt) converts a network serialized transaction to a PSBT. This should be used only with `createrawtransaction` and `fundrawtransaction`. `createpsbt` and `walletcreatefundedpsbt` should be used for new applications.
+The [`converttopsbt` RPC](core-api-ref-remote-procedure-calls-raw-transactions#converttopsbt) converts a network serialized transaction to a PSBT. This should be used only with `createrawtransaction` and `fundrawtransaction`. `createpsbt` and `walletcreatefundedpsbt` should be used for new applications.
 
 *Parameter #1---hexstring*
 
@@ -139,7 +199,7 @@ cHNidP8BAHcCAAAAAWtJCIbAGYsCjGxcsUXE6zsQVaIkp6EFqt7/QbaeyR4GAQAAAAD/////AgAgX6AS
 
 ## CreatePSBT
 
-The [`createpsbt` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#createpsbt) creates a transaction in the Partially Signed Transaction (PST) format.
+The [`createpsbt` RPC](core-api-ref-remote-procedure-calls-raw-transactions#createpsbt) creates a transaction in the Partially Signed Transaction (PST) format.
 
 Implements the Creator role.
 
@@ -196,7 +256,7 @@ cHNidP8BAEICAAAAAXgRxzbShUlivVFKgoLyhk0RCCYLZKCYTl/tYRd+yGImAAAAAAD/////AQAAAAAA
 
 ## CreateRawTransaction
 
-The [`createrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#createrawtransaction) creates an unsigned serialized transaction that spends a previous output to a new output with a P2PKH or P2SH address. The transaction is not stored in the wallet or transmitted to the network.
+The [`createrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#createrawtransaction) creates an unsigned serialized transaction that spends a previous output to a new output with a P2PKH or P2SH address. The transaction is not stored in the wallet or transmitted to the network.
 
 *Parameter #1---Inputs*
 
@@ -269,7 +329,7 @@ acc0a8f9be010000001976a914811eacc14db8ebb5b64486dc43400c0226b428a488ac00000000
 
 ## DecodePSBT
 
-The [`decodepsbt` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#decodepsbt) returns a JSON object representing the serialized, base64-encoded partially signed Dash transaction.
+The [`decodepsbt` RPC](core-api-ref-remote-procedure-calls-raw-transactions#decodepsbt) returns a JSON object representing the serialized, base64-encoded partially signed Dash transaction.
 
 *Parameter #1---The PSBT base64 string*
 
@@ -427,7 +487,7 @@ Result:
 
 ## DecodeRawTransaction
 
-The [`decoderawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#decoderawtransaction) decodes a serialized transaction hex string into a JSON object describing the transaction.
+The [`decoderawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#decoderawtransaction) decodes a serialized transaction hex string into a JSON object describing the transaction.
 
 *Parameter #1---serialized transaction in hex*
 
@@ -617,7 +677,7 @@ Result:
 
 ## DecodeScript
 
-The [`decodescript` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#decodescript) decodes a hex-encoded P2SH redeem script.
+The [`decodescript` RPC](core-api-ref-remote-procedure-calls-raw-transactions#decodescript) decodes a hex-encoded P2SH redeem script.
 
 *Parameter #1---a hex-encoded redeem script*
 
@@ -670,7 +730,7 @@ Result:
 
 ## FinalizePSBT
 
-The [`finalizepsbt` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#finalizepsbt) finalizes the inputs of a PSBT. The PSBT produces a network serialized transaction if the transaction is fully signed. This can broadcast with `sendrawtransaction`. Otherwise, a PSBT will be created which has the `final_scriptSig` fields filled for inputs that are complete.
+The [`finalizepsbt` RPC](core-api-ref-remote-procedure-calls-raw-transactions#finalizepsbt) finalizes the inputs of a PSBT. The PSBT produces a network serialized transaction if the transaction is fully signed. This can broadcast with `sendrawtransaction`. Otherwise, a PSBT will be created which has the `final_scriptSig` fields filled for inputs that are complete.
 Implements the Finalizer and Extractor roles.
 
 *Parameter #1---psbt*
@@ -725,7 +785,7 @@ Result:
 }
 [/block]
 
-The [`fundrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#fundrawtransaction) adds inputs to a transaction until it has enough in value to meet its out value.  This will not modify existing inputs, and will add one change output to the outputs.
+The [`fundrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#fundrawtransaction) adds inputs to a transaction until it has enough in value to meet its out value.  This will not modify existing inputs, and will add one change output to the outputs.
 Note that inputs which were signed may need to be resigned after completion since in/outputs have been added.  The inputs added will not be signed, use signrawtransaction for that.
 All existing inputs must have their previous output transaction be in the wallet.
 
@@ -744,7 +804,7 @@ Name | Type | Presence | Description
 Options | Object | Optional<br>(0 or 1) | Additional options
 → <br>`changeAddress` | string | Optional<br>(0 or 1) | The address to receive the change. If not set, the address is chosen from address pool
 → <br>`changePosition` | nummeric (int) | Optional<br>(0 or 1) | The index of the change output. If not set, the change position is randomly chosen
-`includeWatching` | bool | Optional<br>(0 or 1) | Inputs from watch-only addresses are also considered. The default is `false`
+`includeWatching` | bool | Optional<br>(0 or 1) | Inputs from watch-only addresses are also considered. The default is `false` for non-watching-only wallets and `true` for watching-only wallets
 → <br>`lockUnspent` | bool | Optional<br>(0 or 1) | The selected outputs are locked after running the rpc call. The default is `false`
 → <br>`reserveChangeKey` | bool | Optional<br>(0 or 1) | **Removed in Dash Core 0.17.0**
 → <br>`feeRate` | numeric (bitcoins) | Optional<br>(0 or 1) | The specific feerate  you are willing to pay (BTC per KB). If not set, the wallet determines the fee
@@ -789,18 +849,15 @@ Result:
 
 ## GetRawTransaction
 
-The [`getrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#getrawtransaction) gets a hex-encoded serialized transaction or a JSON object describing the transaction. By default, Dash Core only stores complete transaction data for UTXOs and your own transactions, so the RPC may fail on historic transactions unless you use the non-default `txindex=1` in your Dash Core startup settings.
+The [`getrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#getrawtransaction) gets a hex-encoded serialized transaction or a JSON object describing the transaction. By default, Dash Core only stores complete transaction data for UTXOs and your own transactions, so the RPC may fail on historic transactions unless you use the non-default `txindex=1` in your Dash Core startup settings.
 
-Note: By default this function only works for mempool transactions. When called with a blockhash argument, getrawtransaction will return the transaction if the specified block is available and the transaction is found in that block. When called without a blockhash argument, getrawtransaction will return the transaction if it is in the mempool, or if -txindex is enabled and the transaction is in a block in the blockchain.
+Note: By default this function only works for mempool transactions. When called with a blockhash argument, getrawtransaction will return the transaction if the specified block is available and the transaction is found in that block. When called without a blockhash argument, getrawtransaction will return the transaction if it is in the mempool, or if `-txindex` is enabled and the transaction is in a block in the blockchain. Use the [`gettransaction` RPC](core-api-ref-remote-procedure-calls-wallet#gettransaction) for wallet transactions.
 
-As of Dash Core 18.0.0, transactions with unspent outputs will no longer be included unless -txindex is enabled.
-[block:callout]
-{
-  "type": "warning",
-  "title": "Reindex note",
-  "body": "If you begin using `txindex=1` after downloading the block chain, you must rebuild your indexes by starting Dash Core with the option  `-reindex`.  This may take several hours to complete, during which time your node will not process new blocks or transactions. This reindex only needs to be done once."
-}
-[/block]
+As of Dash Core 18.0.0, transactions with unspent outputs will no longer be included unless `-txindex` is enabled.
+
+> 🚧 Reindex note
+>
+> If you begin using `txindex=1` after downloading the block chain, you must rebuild your indexes by starting Dash Core with the option  `-reindex`.  This may take several hours to complete, during which time your node will not process new blocks or transactions. This reindex only needs to be done once.
 
 *Parameter #1---the TXID of the transaction to get*
 
@@ -876,9 +933,9 @@ Name | Type | Presence | Description
 →<br>`confirmations` | number (int) | Required<br>(exactly 1) | If the transaction has been included in a block on the local best block chain, this is how many confirmations it has.  Otherwise, this is `0`
 →<br>`time` | number (int) | Optional<br>(0 or 1) | If the transaction has been included in a block on the local best block chain, this is the block header time of that block (may be in the future)
 →<br>`blocktime` | number (int) | Optional<br>(0 or 1) | This field is currently identical to the time field described above
-→<br>`instantlock` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>If set to `true`, this transaction is locked (by InstantSend or a ChainLock)
-→<br>`instantlock_internal` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>If set to `true`, this transaction has an InstantSend lock
-→<br>`chainlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.14.0*<br><br>**Always `false` if [lite mode](../guide/core-guide-dash-features.md#lite-mode) is enabled**<br><br>If set to `true`, this transaction is in a block that is locked (not susceptible to a chain re-org)
+→<br>`instantlock` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>If set to `true`, this transaction is locked (by InstantSend or a ChainLock)
+→<br>`instantlock_internal` | bool | Required<br>(exactly 1) | **Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>If set to `true`, this transaction has an InstantSend lock
+→<br>`chainlock` | bool | Required<br>(exactly 1) | *Added in Dash Core 0.14.0*<br><br>**Always `false` if [lite mode](core-guide-dash-features#lite-mode) is enabled**<br><br>If set to `true`, this transaction is in a block that is locked (not susceptible to a chain re-org)
 
 *Examples from Dash Core 0.14.0*
 
@@ -1082,7 +1139,7 @@ Result:
 
 ## JoinPSBTs
 
-The [`joinpsbts` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#joinpsbts) joins multiple distinct PSBTs with different inputs and outputs into one PSBT with inputs and outputs from all of the PSBTs. No input in any of the PSBTs can be in more than one of the PSBTs.
+The [`joinpsbts` RPC](core-api-ref-remote-procedure-calls-raw-transactions#joinpsbts) joins multiple distinct PSBTs with different inputs and outputs into one PSBT with inputs and outputs from all of the PSBTs. No input in any of the PSBTs can be in more than one of the PSBTs.
 
 *Parameter #1---Transactions*
 
@@ -1121,7 +1178,7 @@ cHNidP8BAHoCAAAAAvisRhf3kqdGJdB8vKvQz81ze9cH6bh0RKZfFTMsXatUAAAAAAD/////eBHHNtKF
 
 ## SendRawTransaction
 
-The [`sendrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#sendrawtransaction) validates a transaction and broadcasts it to the peer-to-peer network.
+The [`sendrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#sendrawtransaction) validates a transaction and broadcasts it to the peer-to-peer network.
 [block:callout]
 {
   "type": "danger",
@@ -1224,7 +1281,7 @@ Dependencies | array | Optional<br>(0 or 1) | The previous outputs being spent b
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-SigHash | string | Optional<br>(0 or 1) | The type of signature hash to use for all of the signatures performed.  (You must use separate calls to the [`signrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#signrawtransaction) if you want to use different signature hash types for different signatures.  The allowed values are: `ALL`, `NONE`, `SINGLE`, `ALL|ANYONECANPAY`, `NONE|ANYONECANPAY`, and `SINGLE|ANYONECANPAY`
+SigHash | string | Optional<br>(0 or 1) | The type of signature hash to use for all of the signatures performed.  (You must use separate calls to the [`signrawtransaction` RPC](core-api-ref-remote-procedure-calls-raw-transactions#signrawtransactionwithkey) if you want to use different signature hash types for different signatures.  The allowed values are: `ALL`, `NONE`, `SINGLE`, `ALL|ANYONECANPAY`, `NONE|ANYONECANPAY`, and `SINGLE|ANYONECANPAY`
 
 *Result---the transaction with any signatures made*
 
@@ -1263,7 +1320,7 @@ Result:
 
 ## TestMemPoolAccept
 
-The [`testmempoolaccept` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#testmempoolaccept) returns the results of mempool acceptance tests indicating if raw transaction (serialized, hex-encoded) would be accepted by mempool.
+The [`testmempoolaccept` RPC](core-api-ref-remote-procedure-calls-raw-transactions#testmempoolaccept) returns the results of mempool acceptance tests indicating if raw transaction (serialized, hex-encoded) would be accepted by mempool.
 
 *Parameter #1---raw txs*
 
@@ -1314,13 +1371,23 @@ Result:
 
 ## UTXOUpdatePSBT
 
-The [`utxoupdatepsbt` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#utxoupdatepsbt) updates a PSBT with UTXOs retrieved from the UTXO set or the mempool.
+The [`utxoupdatepsbt` RPC](core-api-ref-remote-procedure-calls-raw-transactions#utxoupdatepsbt) updates a PSBT with  data from output descriptors, UTXOs retrieved from the UTXO set or the mempool.
 
 *Parameter #1---psbt*
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
 psbt | string | Required | A base64 string of a PSBT
+
+*Parameter #2---descriptors*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+psbt | array | Optional<br>(0 or 1) | An array of either strings or objects
+→<br>Output descriptor | string | Optional<br>(0 or 1) | An output descriptor
+→<br>Output object | object | Optional<br>(0 or 1) | An object with an output descriptor and extra information
+→ →<br>`desc` | string | Required<br>(exactly 1) | An output descriptor
+→ →<br>`range`<br>(`n` or `[n,n]`) | numeric or array | Optional<br>(0 or 1) | Up to what index HD chains should be explored (either end or [begin,end]) (default=1000)
 
 *Result---the raw transaction in base64*
 

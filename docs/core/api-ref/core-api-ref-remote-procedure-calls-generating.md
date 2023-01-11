@@ -1,71 +1,64 @@
 # Generating RPCs
 
-## Generate
-[block:callout]
-{
-  "type": "warning",
-  "title": "Limited Support",
-  "body": "Since Dash Core 0.14, this RPC is not available in the official Windows/Mac binaries. The Linux binary and binaries self-compiled (with the appropriate options) continue to support this feature. See [PR #2778](https://github.com/dashpay/dash/pull/2778) for additional details.\n\n**_Requires wallet support (unavailable on masternodes)._**"
-}
-[/block]
-The [`generate` RPC](../api-ref/core-api-ref-remote-procedure-calls-generating.md#generate) mines blocks immediately (before the RPC call returns).
+## GenerateBlock
 
-*Parameter #1---the number of blocks to generate*
+> 🚧 Limited Support
+>
+> This RPC is not available in the official Windows/Mac binaries. The Linux binary and binaries self-compiled (with the appropriate options) support this feature.
 
-Name | Type | Presence | Description
---- | --- | --- | ---
-`numblocks` | number (int) | Required<br>(exactly 1) | The number of blocks to generate.  The RPC call will not return until all blocks have been generated.
+*Added in Dash Core 18.1.0*
 
-*Parameter #2---the number of iterations*
+The [`generateblock` RPC](core-api-ref-remote-procedure-calls-generating#generateblock) mines a block with a set of ordered transactions immediately to a specified address or [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md) (before the RPC call returns).
+
+*Parameter #1---an address or descriptor*
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`maxtries` | number (int) | Required<br>(exactly 1) | The number of iterations to try (default = 1000000).
+Address/Descriptor | string | Required<br>(exactly 1) | The address or [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md) that will receive the newly generated Dash.
 
-*Result---the generated block header hashes*
+*Parameter #2---transaction(s)*
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-`result` | array | Required<br>(exactly 1) | An array containing the block header hashes of the generated blocks (may be empty if used with `generate 0`)
-→<br>Header Hashes | string (hex) | Required<br>(1 or more) | The hashes of the headers of the blocks generated in regtest mode, as hex in RPC byte order
+Transactions | array | Required<br>(exactly 1) | An array of hex strings which are either txids or raw transactions. TXIDs must reference transactions currently in the mempool. All transactions must be valid and in valid order, otherwise the block will be rejected. Array can be empty.
+→<br>Raw Transaction / TXID | string | Optional<br>(0 or more) | A raw transaction or transaction ID.
 
-*Example from Dash Core 0.12.2*
+*Result---the generated block hash*
 
-Using regtest mode, generate 2 blocks:
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`result` | object | Required<br>(exactly 1) | A JSON object containing the block header hash of the generated block
+→<br>`hash` | string (hex) | Required<br>(exactly 1) | The hash of the header of the block generated, as hex in RPC byte order
+
+*Example from Dash Core 18.1.0*
 
 ```bash
-dash-cli -regtest generate 2
+dash-cli  generateblock "yacJKd6tRz2JSn8Wfp9GKgCbuowAEBivrA" '[]'
 ```
 
 Result:
 
 ```json
-[
-  "55a4c47da8151c0823eec22c41ebc6d690a0288302179625bae9eb6f36808266",
-  "3f07b9aa4e3bcd5518610945c4a6b32699acac71b1762605ff79ba553111fc79"
-]
+{
+  "hash": "000000e219a3d47463fdfed6da30c999f02d7add2defb2f375549b357d3840af"
+}
 ```
 
 *See also*
 
-* [GenerateToAddress](/docs/core-api-ref-remote-procedure-calls-generating#generatetoaddress): mines blocks immediately to a specified address.
-* [GetBlockTemplate](/docs/core-api-ref-remote-procedure-calls-mining#getblocktemplate): gets a block template or proposal for use with mining software.
-* [GetGenerate](/docs/core-api-ref-remote-procedure-calls-removed#getgenerate): was removed in Dash Core 0.12.3.
+* [GenerateToAddress](#generatetoaddress): mines blocks to a specified address.
+* [GenerateToDescriptor](#generatetodescriptor): mines blocks to a specified descriptor.
 * [GetMiningInfo](/docs/core-api-ref-remote-procedure-calls-mining#getmininginfo): returns various mining-related information.
-* [SetGenerate](/docs/core-api-ref-remote-procedure-calls-removed#setgenerate): was removed in Dash Core 0.12.3.
 
 ## GenerateToAddress
-[block:callout]
-{
-  "type": "warning",
-  "title": "Limited Support",
-  "body": "Since Dash Core 0.14, this RPC is not available in the official Windows/Mac binaries. The Linux binary and binaries self-compiled (with the appropriate options) continue to support this feature. See [PR #2778](https://github.com/dashpay/dash/pull/2778) for additional details."
-}
-[/block]
+
+> 🚧 Limited Support
+>
+> Since Dash Core 0.14, this RPC is not available in the official Windows/Mac binaries. The Linux binary and binaries self-compiled (with the appropriate options) continue to support this feature. See [PR #2778](https://github.com/dashpay/dash/pull/2778) for additional details.
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.13.0*
 
-The [`generatetoaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-generating.md#generatetoaddress) mines blocks immediately to a specified address.
+The [`generatetoaddress` RPC](core-api-ref-remote-procedure-calls-generating#generatetoaddress) mines blocks immediately to a specified address.
 
 *Parameter #1---the number of blocks to generate*
 
@@ -112,6 +105,63 @@ Result:
 
 *See also*
 
-* [Generate](/docs/core-api-ref-remote-procedure-calls-generating#generate): mines blocks immediately (before the RPC call returns).
+* [GetMiningInfo](/docs/core-api-ref-remote-procedure-calls-mining#getmininginfo): returns various mining-related information.
+* [GetBlockTemplate](/docs/core-api-ref-remote-procedure-calls-mining#getblocktemplate): gets a block template or proposal for use with mining software.
+
+## GenerateToDescriptor
+
+> 🚧 Limited Support
+>
+> This RPC is not available in the official Windows/Mac binaries. The Linux binary and binaries self-compiled (with the appropriate options) support this feature.
+
+*Added in Dash Core 18.1.0*
+
+The [`generatetodescriptor` RPC](#generatetodescriptor) mines blocks immediately to a specified [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md).
+
+*Parameter #1---the number of blocks to generate*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+Blocks | number (int) | Required<br>(exactly 1) | The number of blocks to generate.  The RPC call will not return until all blocks have been generated or the maximum number of iterations has been reached
+
+*Parameter #2---a descriptor*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+Descriptor | string | Required<br>(exactly 1) | The [descriptor](https://github.com/dashpay/dash/blob/master/doc/descriptors.md) that will receive the newly generated Dash
+
+*Parameter #3---the maximum number of iterations to try*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+Maxtries | number (int) | Optional<br>(0 or 1) | The maximum number of iterations that are tried to create the requested number of blocks.  Default is `1000000`
+
+*Result---the generated block header hashes*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`result` | array | Required<br>(exactly 1) | An array containing the block header hashes of the generated blocks (may be empty if used with `generate 0`)
+→<br>Header Hashes | string (hex) | Required<br>(1 or more) | The hashes of the headers of the blocks generated, as hex in RPC byte order
+
+*Example from Dash Core 18.1.0*
+
+Generate 1 block with maximal 500000 iterations:
+
+```bash
+dash-cli -regtest generatetodescriptor 1 "pkh([d34db33f/84h/0h/0h]0279be667ef9dcbbac55a06295Ce870b07029Bfcdb2dce28d959f2815b16f81798)" 500000
+```
+
+Result:
+
+```json
+[
+  "0000007c599cc625ff4196ca55d73b6584ba89ccdd9836f969bf67b26b4a6376"
+]
+```
+
+*See also*
+
+* [GenerateBlock](#generateblock): mines a block with a set of ordered transactions immediately to a specified address or descriptor.
+* [GenerateToAddress](#generatetoaddress): mines blocks immediately to a specified address.
 * [GetMiningInfo](/docs/core-api-ref-remote-procedure-calls-mining#getmininginfo): returns various mining-related information.
 * [GetBlockTemplate](/docs/core-api-ref-remote-procedure-calls-mining#getblocktemplate): gets a block template or proposal for use with mining software.

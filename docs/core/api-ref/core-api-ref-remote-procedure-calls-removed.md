@@ -8,7 +8,7 @@
 }
 [/block]
 
-The [`estimatefee` RPC](../api-ref/core-api-ref-remote-procedure-calls-util.md#estimatefee) estimates the transaction fee per kilobyte that needs to be paid for a transaction to begin confirmation within a certain number of blocks.
+The `estimatefee` RPC estimates the transaction fee per kilobyte that needs to be paid for a transaction to begin confirmation within a certain number of blocks.
 
 *Parameter #1---how many blocks the transaction may wait before being included*
 
@@ -58,7 +58,7 @@ Result:
 
 ## GetPoolInfo
 
-The [`getpoolinfo` RPC](#getpoolinfo) returns an object containing CoinJoin pool related information.
+The `getpoolinfo` RPC returns an object containing CoinJoin pool related information.
 
 *Parameters: none*
 
@@ -138,7 +138,7 @@ Result:
   "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
 }
 [/block]
-The [`getreceivedbyaccount` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#getreceivedbyaccount) returns the total amount received by addresses in a particular account from transactions with the specified number of confirmations.  It does not count coinbase transactions.
+The `getreceivedbyaccount` RPC returns the total amount received by addresses in a particular account from transactions with the specified number of confirmations.  It does not count coinbase transactions.
 
 *Parameter #1---the account name*
 
@@ -183,7 +183,7 @@ Result:
 
 * [GetReceivedByAddress](/docs/core-api-ref-remote-procedure-calls-wallet#getreceivedbyaddress): returns the total amount received by the specified address in transactions with the specified number of confirmations. It does not count coinbase transactions.
 * [GetAddressesByAccount](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#getaddressesbyaccount): returns a list of every address assigned to a particular account.
-* [ListAccounts](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#listaccounts): lists accounts and their balances.
+* [ListAccounts](/docs/core-api-ref-remote-procedure-calls-removed#listaccounts): lists accounts and their balances.
 
 ## KeePass
 
@@ -194,7 +194,7 @@ Result:
 }
 [/block]
 
-The [`keepass` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#keepass) provides commands for configuring and managing KeePass authentication
+The `keepass` RPC provides commands for configuring and managing KeePass authentication
 
 *Parameter #1---Command mode*
 
@@ -299,7 +299,7 @@ setlogin: Updated credentials.
   "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
 }
 [/block]
-The [`listaccounts` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#listaccounts) lists accounts and their balances.
+The `listaccounts` RPC lists accounts and their balances.
 
 *Parameter #1---the minimum number of confirmations a transaction must have*
 
@@ -351,8 +351,8 @@ Result:
 
 * [GetAccount](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#getaccount): returns the name of the account associated with the given address.
 * [GetAddressesByAccount](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#getaddressesbyaccount): returns a list of every address assigned to a particular account.
-* [ListReceivedByAccount](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#listreceivedbyaccount): lists the total number of dash received by each account.
-* [ListReceivedByLabel](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listreceivedbylabel): lists the total number of dash received by each label.
+* [ListReceivedByAccount](/docs/core-api-ref-remote-procedure-calls-removed#listreceivedbyaccount): lists the total number of dash received by each account.
+* [ListReceivedByLabel](core-api-ref-remote-procedure-calls-wallet#listreceivedbylabel): lists the total number of dash received by each label.
 
 ## ListReceivedByAccount
 [block:callout]
@@ -368,7 +368,7 @@ Result:
   "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
 }
 [/block]
-The [`listreceivedbyaccount` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#listreceivedbyaccount) lists the total number of dash received by each account.
+The `listreceivedbyaccount` RPC lists the total number of dash received by each account.
 
 *Parameter #1---the minimum number of confirmations a transaction must have to be counted*
 
@@ -435,8 +435,8 @@ Result (edited to only show the first two results):
 *See also*
 
 * [ListReceivedByAddress](/docs/core-api-ref-remote-procedure-calls-wallet#listreceivedbyaddress): lists the total number of dash received by each address.
-* [ListReceivedByLabel](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listreceivedbylabel): lists the total number of dash received by each label.
-* [GetReceivedByAccount](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#getreceivedbyaccount): returns the total amount received by addresses in a particular account from transactions with the specified number of confirmations.  It does not count coinbase transactions.
+* [ListReceivedByLabel](core-api-ref-remote-procedure-calls-wallet#listreceivedbylabel): lists the total number of dash received by each label.
+* [GetReceivedByAccount](/docs/core-api-ref-remote-procedure-calls-removed#getreceivedbyaccount): returns the total amount received by addresses in a particular account from transactions with the specified number of confirmations.  It does not count coinbase transactions.
 * [GetReceivedByAddress](/docs/core-api-ref-remote-procedure-calls-wallet#getreceivedbyaddress): returns the total amount received by the specified address in transactions with the specified number of confirmations. It does not count coinbase transactions.
 
 ## Move
@@ -453,7 +453,7 @@ Result (edited to only show the first two results):
   "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
 }
 [/block]
-The [`move` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#move) moves a specified amount from one account in your wallet to another using an off-block-chain transaction.
+The `move` RPC moves a specified amount from one account in your wallet to another using an off-block-chain transaction.
 [block:callout]
 {
   "type": "warning",
@@ -513,8 +513,7 @@ true
 
 *See also*
 
-* [ListAccounts](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#listaccounts): lists accounts and their balances.
-* [SendFrom](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated#sendfrom): spends an amount from a local account to a dash address.
+* [ListAccounts](/docs/core-api-ref-remote-procedure-calls-removed#listaccounts): lists accounts and their balances.
 * [SendToAddress](/docs/core-api-ref-remote-procedure-calls-wallet#sendtoaddress): spends an amount to a given address.
 
 ## SendFrom
@@ -531,7 +530,7 @@ true
   "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
 }
 [/block]
-The [`sendfrom` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#sendfrom) spends an amount from a local account to a dash address.
+The `sendfrom` RPC spends an amount from a local account to a dash address.
 
 *Parameter #1---from account*
 
@@ -555,11 +554,11 @@ Amount | number (dash) | Required<br>(exactly 1) | The amount to spend in dash. 
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-Confirmations | number (int) | Optional<br>(0 or 1) | The minimum number of confirmations an incoming transaction must have for its outputs to be credited to this account's balance. Outgoing transactions are always counted, as are move transactions made with the [`move` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#move). If an account doesn't have a balance high enough to pay for this transaction, the payment will be rejected.  Use `0` to spend unconfirmed incoming payments. Default is `1`
+Confirmations | number (int) | Optional<br>(0 or 1) | The minimum number of confirmations an incoming transaction must have for its outputs to be credited to this account's balance. Outgoing transactions are always counted, as are move transactions made with the [`move` RPC](core-api-ref-remote-procedure-calls-removed#move). If an account doesn't have a balance high enough to pay for this transaction, the payment will be rejected.  Use `0` to spend unconfirmed incoming payments. Default is `1`
 [block:callout]
 {
   "type": "warning",
-  "body": "**Warning:** if account1 receives an unconfirmed payment and transfers it to account2 with the [`move` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#move), account2 will be able to spend those dash even if this parameter is set to `1` or higher."
+  "body": "**Warning:** if account1 receives an unconfirmed payment and transfers it to account2 with the [`move` RPC](core-api-ref-remote-procedure-calls-removed#move), account2 will be able to spend those dash even if this parameter is set to `1` or higher."
 }
 [/block]
 *Parameter #5---whether to add the balance from transactions locked via InstantSend*
@@ -622,7 +621,7 @@ cd64b9d55c63bf247f2eca32f978e340622107b607a46c422dabcdc20c0571fe
   "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
 }
 [/block]
-The [`signrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#signrawtransaction) signs a transaction in the serialized transaction format using private keys stored in the wallet or provided in the call.
+The `signrawtransaction` RPC signs a transaction in the serialized transaction format using private keys stored in the wallet or provided in the call.
 
 *Parameter #1---the transaction to sign*
 
@@ -653,7 +652,7 @@ Private Keys | array | Optional<br>(0 or 1) | An array holding private keys.  If
 
 Name | Type | Presence | Description
 --- | --- | --- | ---
-SigHash | string | Optional<br>(0 or 1) | The type of signature hash to use for all of the signatures performed.  (You must use separate calls to the [`signrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#signrawtransaction) if you want to use different signature hash types for different signatures.  The allowed values are: `ALL`, `NONE`, `SINGLE`, `ALL|ANYONECANPAY`, `NONE|ANYONECANPAY`, and `SINGLE|ANYONECANPAY`
+SigHash | string | Optional<br>(0 or 1) | The type of signature hash to use for all of the signatures performed.  (You must use separate calls to the [`signrawtransaction` RPC](core-api-ref-remote-procedure-calls-removed#signrawtransaction) if you want to use different signature hash types for different signatures.  The allowed values are: `ALL`, `NONE`, `SINGLE`, `ALL|ANYONECANPAY`, `NONE|ANYONECANPAY`, and `SINGLE|ANYONECANPAY`
 
 *Result---the transaction with any signatures made*
 
@@ -690,4 +689,55 @@ Result:
 * [CreateRawTransaction](/docs/core-api-ref-remote-procedure-calls-raw-transactions#createrawtransaction): creates an unsigned serialized transaction that spends a previous output to a new output with a P2PKH or P2SH address. The transaction is not stored in the wallet or transmitted to the network.
 * [DecodeRawTransaction](/docs/core-api-ref-remote-procedure-calls-raw-transactions#decoderawtransaction): decodes a serialized transaction hex string into a JSON object describing the transaction.
 * [SendRawTransaction](/docs/core-api-ref-remote-procedure-calls-raw-transactions#sendrawtransaction): validates a transaction and broadcasts it to the peer-to-peer network.
-* [SignRawTransactionWithKey](#signrawtransactionwithkey): signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
+* [SignRawTransactionWithKey](/docs/core-api-ref-remote-procedure-calls-raw-transactions#signrawtransactionwithkey): signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
+
+# Generate
+[block:callout]
+{
+  "type": "danger",
+  "body": "**Warning:** **_Removed in Dash Core 18.1.0_**"
+}
+[/block]
+The [`generate` RPC](core-api-ref-remote-procedure-calls-generating#generate) mines blocks immediately (before the RPC call returns).
+
+*Parameter #1---the number of blocks to generate*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`numblocks` | number (int) | Required<br>(exactly 1) | The number of blocks to generate.  The RPC call will not return until all blocks have been generated.
+
+*Parameter #2---the number of iterations*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`maxtries` | number (int) | Required<br>(exactly 1) | The number of iterations to try (default = 1000000).
+
+*Result---the generated block header hashes*
+
+Name | Type | Presence | Description
+--- | --- | --- | ---
+`result` | array | Required<br>(exactly 1) | An array containing the block header hashes of the generated blocks (may be empty if used with `generate 0`)
+→<br>Header Hashes | string (hex) | Required<br>(1 or more) | The hashes of the headers of the blocks generated in regtest mode, as hex in RPC byte order
+
+*Example from Dash Core 0.12.2*
+
+Using regtest mode, generate 2 blocks:
+
+```bash
+dash-cli -regtest generate 2
+```
+
+Result:
+
+```json
+[
+  "55a4c47da8151c0823eec22c41ebc6d690a0288302179625bae9eb6f36808266",
+  "3f07b9aa4e3bcd5518610945c4a6b32699acac71b1762605ff79ba553111fc79"
+]
+```
+
+*See also*
+
+* [GenerateToAddress](/docs/core-api-ref-remote-procedure-calls-generating#generatetoaddress): mines blocks immediately to a specified address.
+* [GetBlockTemplate](/docs/core-api-ref-remote-procedure-calls-mining#getblocktemplate): gets a block template or proposal for use with mining software.
+* [GetMiningInfo](/docs/core-api-ref-remote-procedure-calls-mining#getmininginfo): returns various mining-related information.

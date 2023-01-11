@@ -2,7 +2,7 @@
 
 ## Debug
 
-The [`debug` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#debug) changes the debug category from the console.
+The [`debug` RPC](core-api-ref-remote-procedure-calls-control#debug) changes the debug category from the console.
 [block:callout]
 {
   "type": "danger",
@@ -35,7 +35,7 @@ Debug mode: net+mempool
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.14.0*
 
-The [`getmemoryinfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#getmemoryinfo) returns information about memory usage.
+The [`getmemoryinfo` RPC](core-api-ref-remote-procedure-calls-control#getmemoryinfo) returns information about memory usage.
 
 *Parameter #1---mode*
 
@@ -85,7 +85,7 @@ Result:
 
 *Added in Dash Core 18.0.0*
 
-The [`getrpcinfo` RPC](getrpcinfo) returns details about the RPC server.
+The [`getrpcinfo` RPC](#getrpcinfo) returns details about the RPC server.
 
 *Parameters: none*
 
@@ -128,7 +128,7 @@ Result:
 
 ## Help
 
-The [`help` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#help) lists all available public RPC commands, or gets help for the specified RPC.  Commands which are unavailable will not be listed, such as wallet RPCs if wallet support is disabled.
+The [`help` RPC](core-api-ref-remote-procedure-calls-control#help) lists all available public RPC commands, or gets help for the specified RPC.  Commands which are unavailable will not be listed, such as wallet RPCs if wallet support is disabled.
 
 *Parameter #1---the name of the RPC to get help for*
 
@@ -150,7 +150,7 @@ Name | Type | Presence | Description
 
 *Example from Dash Core 0.17.0*
 
-Command to get help about the [`help` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#help):
+Command to get help about the [`help` RPC](core-api-ref-remote-procedure-calls-control#help):
 
 ```bash
 dash-cli -testnet help help
@@ -177,7 +177,7 @@ Result:
 
 ## Logging
 
-The [`logging` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#logging) gets and sets the logging configuration
+The [`logging` RPC](core-api-ref-remote-procedure-calls-control#logging) gets and sets the logging configuration
 [block:callout]
 {
   "type": "danger",
@@ -304,7 +304,7 @@ Result:
 
 ## Stop
 
-The [`stop` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#stop) safely shuts down the Dash Core server.
+The [`stop` RPC](core-api-ref-remote-procedure-calls-control#stop) safely shuts down the Dash Core server.
 
 *Parameters: none*
 
@@ -330,7 +330,7 @@ Dash Core server stopping
 
 ## Uptime
 
-The [`uptime` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#uptime) returns the total uptime of the server.
+The [`uptime` RPC](core-api-ref-remote-procedure-calls-control#uptime) returns the total uptime of the server.
 
 *Parameters: none*
 
