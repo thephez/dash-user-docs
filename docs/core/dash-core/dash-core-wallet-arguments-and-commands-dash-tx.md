@@ -14,7 +14,7 @@ Usage:
 
 ```
   -?
-       This help message
+       Print this help message and exit
 
   -create
        Create new, empty TX.
