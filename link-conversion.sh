@@ -6,6 +6,13 @@ find . -iname "*.md" -exec sed -i 's~](core-ref-block-chain-serialized-blocks~](
 find . -iname "*.md" -exec sed -i 's~](core-ref-transactions-raw-transaction-format~](\.\./ref/core-ref-transactions-raw-transaction-format.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-ref-transactions-special-transactions~](\.\./ref/core-ref-transactions-special-transactions.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-protocol-versions~](\.\./ref/core-ref-p2p-network-protocol-versions.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-control-messages~](\.\./ref/core-ref-p2p-network-control-messages.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-data-messages~](\.\./ref/core-ref-p2p-network-data-messages.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-governance-messages~](\.\./ref/core-ref-p2p-network-governance-messages.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-instantsend-messages~](\.\./ref/core-ref-p2p-network-instantsend-messages.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-masternode-messages~](\.\./ref/core-ref-p2p-network-masternode-messages.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-privatesend-messages~](\.\./ref/core-ref-p2p-network-privatesend-messages.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-ref-p2p-network-quorum-messages~](\.\./ref/core-ref-p2p-network-quorum-messages.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-ref-transactions-opcodes~](\.\./ref/core-ref-transactions-opcodes.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-ref-wallets~](\.\./ref/core-ref-wallets.md~g' {} +
 
@@ -29,22 +36,37 @@ find . -iname "*.md" -exec sed -i 's~](core-guide-wallets-wallet-files~](\.\./gu
 
 # API Reference
 find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-call-quick-reference~](\.\./api-ref/core-api-ref-remote-procedure-call-quick-reference.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-address-index~](\.\./api-ref/core-api-ref-remote-procedure-calls-address-index.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-address-index~](\.\./api-ref/core-api-ref-remote-procedure-calls-address-index.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-blockchain~](\.\./api-ref/core-api-ref-remote-procedure-calls-blockchain.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-blockchain~](\.\./api-ref/core-api-ref-remote-procedure-calls-blockchain.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-control~](\.\./api-ref/core-api-ref-remote-procedure-calls-control.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-control~](\.\./api-ref/core-api-ref-remote-procedure-calls-control.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-dash~](\.\./api-ref/core-api-ref-remote-procedure-calls-dash.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-dash~](\.\./api-ref/core-api-ref-remote-procedure-calls-dash.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-evo~](\.\./api-ref/core-api-ref-remote-procedure-calls-evo.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-evo~](\.\./api-ref/core-api-ref-remote-procedure-calls-evo.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-generating~](\.\./api-ref/core-api-ref-remote-procedure-calls-generating.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-generating~](\.\./api-ref/core-api-ref-remote-procedure-calls-generating.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-mining~](\.\./api-ref/core-api-ref-remote-procedure-calls-mining.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-mining~](\.\./api-ref/core-api-ref-remote-procedure-calls-mining.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-network~](\.\./api-ref/core-api-ref-remote-procedure-calls-network.md~g' {} +
-find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-raw-transactions~](\.\./api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-network~](\.\./api-ref/core-api-ref-remote-procedure-calls-network.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-raw-transactions~](\.\./api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-raw-transactions~](\.\./api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-removed~](\.\./api-ref/core-api-ref-remote-procedure-calls-removed.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-removed~](\.\./api-ref/core-api-ref-remote-procedure-calls-removed.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-util~](\.\./api-ref/core-api-ref-remote-procedure-calls-util.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-util~](\.\./api-ref/core-api-ref-remote-procedure-calls-util.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-wallet-deprecated~](\.\./api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-wallet-deprecated~](\.\./api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-wallet~](\.\./api-ref/core-api-ref-remote-procedure-calls-wallet.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-wallet~](\.\./api-ref/core-api-ref-remote-procedure-calls-wallet.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-zmq~](\.\./api-ref/core-api-ref-remote-procedure-calls-zmq.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-zmq~](\.\./api-ref/core-api-ref-remote-procedure-calls-zmq.md~g' {} +
 
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-http-rest-requests~](\.\./api-ref/core-api-ref-http-rest-requests.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-http-rest-requests~](\.\./api-ref/core-api-ref-http-rest-requests.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-api-ref-zmq~](\.\./api-ref/core-api-ref-zmq.md~g' {} +
 
 # Dash Core
