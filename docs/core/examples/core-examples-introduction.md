@@ -12,6 +12,7 @@ Once installed, you'll have access to three programs: `dashd`, `dash-qt`, and `d
 
 ```{toctree}
 :maxdepth: 2
+:caption: Examples
 
 core-examples-configuration-file
 core-examples-testing-applications
