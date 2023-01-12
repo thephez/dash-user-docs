@@ -2721,7 +2721,7 @@ Result:
 
 *See also: none*
 
-## Quorum RotationInfo
+### Quorum RotationInfo
 
 The `quorum rotationinfo` RPC returns  quorum rotation information. The response is a JSON representation of the data that would be returned in a [`qrinfo` message](core-ref-p2p-network-data-messages#qrinfo).
 
