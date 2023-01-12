@@ -1,3 +1,5 @@
+# CompactSize Unsigned Integers
+
 The <<glossary:raw transaction>> format and several peer-to-peer network messages use a type of variable-length integer to indicate the number of bytes in a following piece of data.
 
 Dash Core code and this document refers to these variable length integers as compactSize. Many other documents refer to them as var_int or varInt, but this risks conflation with other variable-length integer encodings---such as the CVarInt class used in Dash Core for serializing data to disk.  Because it's used in the transaction format, the format of compactSize unsigned integers is part of the <<glossary:consensus rules>>.
