@@ -1,3 +1,4 @@
+```{eval-rst}
 .. meta::
    :description: The Dash Documentation offers information and guides on Dash, the open source peer-to-peer cryptocurrency with a strong focus on the payments industry. 
    :keywords: dash, cryptocurrency, blockchain, documentation, guide, masternodes, mining, wallets, merchants, governance, instantsend, coinjoin, privatesend, x11, instant, private, secure, digital cash
@@ -24,13 +25,13 @@ Welcome to the Dash Core developer documentation. You'll find guides and documen
 
     .. grid-item-card:: ⚙ Core Docs
         :margin: 2 2 auto auto
-        :link-type: url
-        :link: https://dashcore.readme.io
+        :link-type: ref
+        :link: reference-index
         
         Find technical details about the Dash Core blockchain, along with protocol and API reference material.
         
         +++
-        `Click to begin <https://dashcore.readme.io>`__
+        :ref:`Click to begin <reference-index>`
 
     .. grid-item-card:: 🚀 Platform Docs
          :margin: 2 2 auto auto
@@ -54,3 +55,4 @@ Welcome to the Dash Core developer documentation. You'll find guides and documen
    examples/core-examples-introduction
    dash-core/dash-core-wallet-introduction
    additional-resources/core-additional-resources-introduction
+```
