@@ -31,7 +31,7 @@ The following sections provide details of the command line arguments for each of
 
 ### dashd
 
-See [here](dash-core-wallet-arguments-and-commands-dashd) for all option details.
+See [here](../dash-core/dash-core-wallet-arguments-and-commands-dashd.md) for all option details.
 
 ```bash 
 Usage:
@@ -49,7 +49,7 @@ Usage:
 
 ### dash-cli
 
-See [here](dash-core-wallet-arguments-and-commands-dash-cli) for all option details.
+See [here](../dash-core/dash-core-wallet-arguments-and-commands-dash-cli.md) for all option details.
 
 ```bash
 Usage:

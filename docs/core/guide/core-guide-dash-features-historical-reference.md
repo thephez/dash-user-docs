@@ -11,7 +11,7 @@
 [block:callout]
 {
   "type": "warning",
-  "body": "**Please see [here for details of the current InstantSend design](core-guide-dash-features-instantsend).**"
+  "body": "**Please see [here for details of the current InstantSend design](../guide/core-guide-dash-features-instantsend.md).**"
 }
 [/block]
 Dash Core's InstantSend feature provides a way to lock transaction inputs and enable secure, instantaneous transactions. Since Dash Core 0.13.0, any qualifying transaction is automatically upgraded to InstantSend by the network without a need for the sending wallet to explicitly request it. For these simple transactions (those containing 4 or fewer inputs), the previous requirement for a special InstantSend transaction fee was also removed. The criteria for determining eligibility can be found in the lists of limitations below.
@@ -40,14 +40,14 @@ The following video provides an overview with a good introduction to the details
 
 | **InstantSend Client** | **Direction**  | **Peers**   | **Description** |
 | --- | :---: | --- | --- |
-| [`inv` message](core-ref-p2p-network-data-messages#inv) (ix)          | → |                         | Client sends inventory for transaction lock request
-|                             | ← | [`getdata` message](core-ref-p2p-network-data-messages#getdata) (ix)  | Peer responds with request for transaction lock request
+| [`inv` message](../ref/core-ref-p2p-network-data-messages.md#inv) (ix)          | → |                         | Client sends inventory for transaction lock request
+|                             | ← | [`getdata` message](../ref/core-ref-p2p-network-data-messages.md#getdata) (ix)  | Peer responds with request for transaction lock request
 | `ix` message                | → |                         | Client sends InstantSend transaction lock request
-|                             | ← | [`inv` message](core-ref-p2p-network-data-messages#inv) (txlvote) | Masternodes in the [quorum](core-guide-dash-features-masternode-quorums#quorum-configuration) respond with votes
-| [`getdata` message](core-ref-p2p-network-data-messages#getdata) (txlvote) | → |                         | Client requests vote
+|                             | ← | [`inv` message](../ref/core-ref-p2p-network-data-messages.md#inv) (txlvote) | Masternodes in the [quorum](../guide/core-guide-dash-features-masternode-quorums.md#quorum-configuration) respond with votes
+| [`getdata` message](../ref/core-ref-p2p-network-data-messages.md#getdata) (txlvote) | → |                         | Client requests vote
 |                             | ← | `txlvote` message       | Peer responds with vote
 
-Once an InstantSend lock has been requested, the `instantsend` field of various RPCs (e.g. the [`getmempoolentry` RPC](core-api-ref-remote-procedure-calls-blockchain#getmempoolentry)) is set to `true`. Then, if a sufficient number of votes approve the transaction lock, the InstantSend transaction is approved the `instantlock` field of the RPC is set to `true`.
+Once an InstantSend lock has been requested, the `instantsend` field of various RPCs (e.g. the [`getmempoolentry` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getmempoolentry)) is set to `true`. Then, if a sufficient number of votes approve the transaction lock, the InstantSend transaction is approved the `instantlock` field of the RPC is set to `true`.
 
 If an InstantSend transaction is a valid transaction but does not receive a transaction lock, it reverts to being a standard transaction.
 

@@ -4,7 +4,7 @@
 
 *Added in Dash Core 0.13.0*
 
-The [`bls` RPC](core-api-ref-remote-procedure-calls-evo#bls) provides a set of commands to execute BLS-related actions.
+The [`bls` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#bls) provides a set of commands to execute BLS-related actions.
 
 ### BLS FromSecret
 
@@ -72,7 +72,7 @@ Result:
 
 *Added in Dash Core 0.13.0*
 
-The [`protx` RPC](core-api-ref-remote-procedure-calls-evo#protx) provides a set of commands to execute ProTx related actions.
+The [`protx` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#protx) provides a set of commands to execute ProTx related actions.
 
 ### ProTx Diff
 
@@ -1017,7 +1017,7 @@ Result:
 
 *Added in Dash Core 0.14.0*
 
-The [`quorum` RPC](core-api-ref-remote-procedure-calls-evo#quorum) provides a set of commands for quorums (LLMQs).
+The [`quorum` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#quorum) provides a set of commands for quorums (LLMQs).
 
 ### Quorum List
 
@@ -2080,7 +2080,7 @@ false
 
 ### Quorum MemberOf
 
-The [`quorum` RPC](core-api-ref-remote-procedure-calls-evo#quorum) checks which quorums the given masternode is a member of.
+The [`quorum` RPC](../api-ref/core-api-ref-remote-procedure-calls-evo.md#quorum) checks which quorums the given masternode is a member of.
 
 *Parameter #1---proTxHash*
 
@@ -2723,7 +2723,7 @@ Result:
 
 ### Quorum RotationInfo
 
-The `quorum rotationinfo` RPC returns  quorum rotation information. The response is a JSON representation of the data that would be returned in a [`qrinfo` message](core-ref-p2p-network-data-messages#qrinfo).
+The `quorum rotationinfo` RPC returns  quorum rotation information. The response is a JSON representation of the data that would be returned in a [`qrinfo` message](../ref/core-ref-p2p-network-data-messages.md#qrinfo).
 
 *Parameter #1---block request hash*
 
