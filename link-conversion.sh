@@ -18,6 +18,8 @@ find . -iname "*.md" -exec sed -i 's~](core-ref-wallets~](\.\./ref/core-ref-wall
 
 
 # Guide
+find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features)~](\.\./guide/core-guide-dash-features.md)~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features#~](\.\./guide/core-guide-dash-features.md#~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features-chainlocks~](\.\./guide/core-guide-dash-features-chainlocks.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features-governance~](\.\./guide/core-guide-dash-features-governance.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features-historical-reference~](\.\./guide/core-guide-dash-features-historical-reference.md~g' {} +
@@ -28,13 +30,18 @@ find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features-masternode-sync~
 find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features-privatesend~](\.\./guide/core-guide-dash-features-privatesend.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-guide-dash-features-proof-of-service~](\.\./guide/core-guide-dash-features-proof-of-service.md~g' {} +
 
+find . -iname "*.md" -exec sed -i 's~](core-guide-mining-block-prototypes#~](\.\./guide/core-guide-mining-block-prototypes.md#~g' {} +
+
+find . -iname "*.md" -exec sed -i 's~](core-guide-transactions)~](\.\./guide/core-guide-transactions.md)~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-guide-transactions-locktime-and-sequence-number~](\.\./guide/core-guide-transactions-locktime-and-sequence-number.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-guide-p2p-network-initial-block-download~](\.\./guide/core-guide-p2p-network-initial-block-download.md~g' {} +
 
+find . -iname "*.md" -exec sed -i 's~](core-guide-wallets)~](\.\./guide/core-guide-wallets.md)~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-guide-wallets-wallet-files~](\.\./guide/core-guide-wallets-wallet-files.md~g' {} +
 
 
 # API Reference
+find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls)~](\.\./api-ref/core-api-ref-remote-procedure-calls.md)~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-call-quick-reference~](\.\./api-ref/core-api-ref-remote-procedure-call-quick-reference.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-remote-procedure-calls-address-index~](\.\./api-ref/core-api-ref-remote-procedure-calls-address-index.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-api-ref-remote-procedure-calls-address-index~](\.\./api-ref/core-api-ref-remote-procedure-calls-address-index.md~g' {} +
@@ -69,13 +76,15 @@ find . -iname "*.md" -exec sed -i 's~](/docs/core-api-ref-http-rest-requests~](\
 find . -iname "*.md" -exec sed -i 's~](core-api-ref-http-rest-requests~](\.\./api-ref/core-api-ref-http-rest-requests.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-api-ref-zmq~](\.\./api-ref/core-api-ref-zmq.md~g' {} +
 
-# Dash Core
 
+# Dash Core
 find . -iname "*.md" -exec sed -i 's~](dash-core-wallet-arguments-and-commands-dashd~](\.\./dash-core/dash-core-wallet-arguments-and-commands-dashd.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](dash-core-wallet-arguments-and-commands-dash-cli~](\.\./dash-core/dash-core-wallet-arguments-and-commands-dash-cli.md~g' {} +
 
-# Example
 
+# Example
+find . -iname "*.md" -exec sed -i 's~](core-examples-introduction)~](\.\./examples/core-examples-introduction.md)~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-example-p2p-network-parsing-a-merkleblock~](\.\./examples/core-examples-p2p-network-parsing-a-merkleblock.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](core-examples-p2p-network-creating-a-bloom-filter~](\.\./examples/core-examples-p2p-network-creating-a-bloom-filter.md~g' {} +
+find . -iname "*.md" -exec sed -i 's~](core-examples-transaction-tutorial#simple-raw-transaction~](\.\./examples/core-examples-transaction-tutorial-simple-raw-transaction.md~g' {} +
 find . -iname "*.md" -exec sed -i 's~](/docs/core-examples-transaction-tutorial-complex-raw-transaction~](\.\./examples/core-examples-transaction-tutorial-complex-raw-transaction.md~g' {} +
