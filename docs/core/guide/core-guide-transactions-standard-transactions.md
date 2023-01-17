@@ -8,7 +8,7 @@ Besides making it more difficult for someone to attack Dash for free by broadcas
 
 As of Dash Core 0.12.2, the standard pubkey script types are:
 
-# Pay To Public Key Hash (P2PKH)
+## Pay To Public Key Hash (P2PKH)
 
 <<glossary:P2PKH>> is the most common form of pubkey script used to send a transaction to one or multiple Dash <<glossary:addresses>>.
 
@@ -17,7 +17,7 @@ Pubkey script: OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
 Signature script: <sig> <pubkey>
 ```
 
-# Pay To Script Hash (P2SH)
+## Pay To Script Hash (P2SH)
 
 <<glossary:P2SH>> is used to send a transaction to a script hash. Each of the standard pubkey scripts can be used as a P2SH redeem script, but in practice only the multisig pubkey script makes sense until more transaction types are made standard.
 
@@ -26,7 +26,7 @@ Pubkey script: OP_HASH160 <Hash160(redeemScript)> OP_EQUAL
 Signature script: <sig> [sig] [sig...] <redeemScript>
 ```
 
-# Multisig
+## Multisig
 
 Although P2SH multisig is now generally used for multisig transactions, this base script can be used to require multiple signatures before a UTXO can be spent.
 
@@ -49,7 +49,7 @@ Redeem script: <OP_2> <A pubkey> <B pubkey> <C pubkey> <OP_3> OP_CHECKMULTISIG
 Signature script: OP_0 <A sig> <C sig> <redeemScript>
 ```
 
-# Pubkey
+## Pubkey
 
 Pubkey <<glossary:outputs>> are a simplified form of the P2PKH pubkey script, but they aren’t as secure as P2PKH, so they generally aren’t used in new transactions anymore.
 
@@ -58,7 +58,7 @@ Pubkey script: <pubkey> OP_CHECKSIG
 Signature script: <sig>
 ```
 
-# Null Data
+## Null Data
 
 Null data transactions (relayed and mined by default in Bitcoin Core 0.9.0 and later) add arbitrary data to a provably unspendable pubkey script that full <<glossary:nodes>> don't have to store in their UTXO database. It is preferable to use null data transactions over transactions that bloat the UTXO database because they cannot be automatically pruned; however, it is usually even more preferable to store data outside transactions if possible.
 
