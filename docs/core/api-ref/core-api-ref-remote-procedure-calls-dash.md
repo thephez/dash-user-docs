@@ -631,12 +631,11 @@ Result (truncated):
 ### GObject Prepare
 
 The `gobject prepare` RPC prepares a governance object by signing and creating a collateral transaction.
-[block:callout]
-{
-  "type": "success",
-  "body": "Note: Dash Core v18.0.0 added support for directing proposal payouts to P2SH addresses such as multisig."
-}
-[/block]
+
+> 👍 
+> 
+> Note: Dash Core v18.0.0 added support for directing proposal payouts to P2SH addresses such as multisig.
+
 *Parameter #1---parent hash*
 
 Name | Type | Presence | Description
@@ -1045,13 +1044,11 @@ The [`masternode` RPC](#masternode) provides a set of commands for managing mast
 ### Masternode Count
 
 The `masternode count` RPC prints the number of all known masternodes.
-[block:callout]
-{
-  "type": "warning",
-  "title": "Dash Core 0.17.0 change",
-  "body": "The previously deprecated `mode` parameter was removed in Dash Core 0.17.0. Information regarding the previous functionality is available in [an older version of the documentation](https://dashcore.readme.io/v0.16.0/docs/core-api-ref-remote-procedure-calls-dash#masternode-count)."
-}
-[/block]
+
+> 🚧 Dash Core 0.17.0 change
+>
+> The previously deprecated `mode` parameter was removed in Dash Core 0.17.0. Information regarding the previous functionality is available in [an older version of the documentation](https://dashcore.readme.io/v0.16.0/docs/core-api-ref-remote-procedure-calls-dash#masternode-count).
+
 *Parameters: none*
 
 *Result---number of known masternodes*
@@ -1077,13 +1074,11 @@ Result:
 ```
 
 ### Masternode Current
-[block:callout]
-{
-  "type": "danger",
-  "title": "Deprecated in Dash Core 0.17.0",
-  "body": "This RPC has been deprecated and will be removed in a future version of Dash Core"
-}
-[/block]
+
+>❗️ Deprecated in Dash Core 0.17.0
+>
+> This RPC has been deprecated and will be removed in a future version of Dash Core
+
 The `masternode current` RPC prints info on current masternode winner to be paid the next block (calculated locally).
 
 *Parameters: none*
@@ -1168,12 +1163,11 @@ Result:
 ```
 
 ### Masternode Payments
-[block:callout]
-{
-  "type": "success",
-  "body": "Added in Dash Core 0.17.0"
-}
-[/block]
+
+> 👍 
+> 
+> Added in Dash Core 0.17.0
+
 The `masternode payments` RPC prints an array of deterministic masternodes and their payments for the specified block.
 
 By default, payment information is returned for only the chain tip. More block winners can be requested via the optional `count` parameter.
@@ -1308,13 +1302,11 @@ Result:
 ```
 
 ### Masternode Winner
-[block:callout]
-{
-  "type": "danger",
-  "body": "This RPC has been deprecated and will be removed in a future version of Dash Core",
-  "title": "Deprecated in Dash Core 0.17.0"
-}
-[/block]
+
+>❗️ Deprecated in Dash Core 0.17.0
+>
+> This RPC has been deprecated and will be removed in a future version of Dash Core
+
 The `masternode winner` RPC prints info on the next masternode winner to vote for.
 
 *Parameters: none*

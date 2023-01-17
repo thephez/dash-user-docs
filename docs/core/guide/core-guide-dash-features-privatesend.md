@@ -90,12 +90,10 @@ _**Step 3 - Queue**_
   * The masternode sends a [`dsq` message](../ref/core-ref-p2p-network-privatesend-messages.md#dsq) with the ready bit set once it has received valid [`dsa` messages](../ref/core-ref-p2p-network-privatesend-messages.md#dsa) from either:
     1. The maximum number of clients (20)
     2. Greater than the minimum number of clients (3) and the timeout has been reached ([30 seconds](https://github.com/dashpay/dash/blob/v0.16.x/src/privatesend/privatesend.h#L23))
-[block:callout]
-{
-  "type": "warning",
-  "body": "Clients must respond to the Queue ready within 30 seconds or risk forfeiting the collateral they provided in the [`dsa` message](../ref/core-ref-p2p-network-privatesend-messages.md#dsa) (Step 1) ([Dash Core Reference](https://github.com/dashpay/dash/blob/v0.16.x/src/privatesend/privatesend.h#L23))"
-}
-[/block]
+
+> 🚧
+>
+> Clients must respond to the Queue ready within 30 seconds or risk forfeiting the collateral they provided in the [`dsa` message](../ref/core-ref-p2p-network-privatesend-messages.md#dsa) (Step 1) ([Dash Core Reference](https://github.com/dashpay/dash/blob/v0.16.x/src/privatesend/privatesend.h#L23))
 
 _**Step 4 - Inputs**_
 

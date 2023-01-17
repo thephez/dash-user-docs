@@ -778,12 +778,10 @@ Result:
 
 
 ## FundRawTransaction
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 The [`fundrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#fundrawtransaction) adds inputs to a transaction until it has enough in value to meet its out value.  This will not modify existing inputs, and will add one change output to the outputs.
 Note that inputs which were signed may need to be resigned after completion since in/outputs have been added.  The inputs added will not be signed, use signrawtransaction for that.
@@ -1179,12 +1177,11 @@ cHNidP8BAHoCAAAAAvisRhf3kqdGJdB8vKvQz81ze9cH6bh0RKZfFTMsXatUAAAAAAD/////eBHHNtKF
 ## SendRawTransaction
 
 The [`sendrawtransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#sendrawtransaction) validates a transaction and broadcasts it to the peer-to-peer network.
-[block:callout]
-{
-  "type": "danger",
-  "body": "Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details."
-}
-[/block]
+
+>❗️
+>
+> Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details.
+
 *Parameter #1---a serialized transaction to broadcast*
 
 Name | Type | Presence | Description
@@ -1244,12 +1241,11 @@ Result:
 * [SignRawTransactionWithKey](#signrawtransactionwithkey): signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
 
 ## SignRawTransactionWithKey
-[block:callout]
-{
-  "type": "success",
-  "body": "Add in Dash Core 0.17.0"
-}
-[/block]
+
+> 👍 
+> 
+> Added in Dash Core 0.17.0
+
 The [`signrawtransactionwithkey` RPC](#signrawtransactionwithkey) signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
 
 *Parameter #1---the transaction to sign*

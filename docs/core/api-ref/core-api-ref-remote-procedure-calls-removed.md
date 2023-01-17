@@ -1,12 +1,10 @@
 # Removed RPCs
 
 ## EstimateFee
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 0.17.0._**"
-}
-[/block]
+
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 0.17.0._**
 
 The `estimatefee` RPC estimates the transaction fee per kilobyte that needs to be paid for a transaction to begin confirmation within a certain number of blocks.
 
@@ -17,13 +15,11 @@ Name | Type | Presence | Description
 Blocks | number (int) | Required<br>(exactly 1) | The maximum number of blocks a transaction should have to wait before it is predicted to be included in a block. Has to be between 2 and 25 blocks
 
 *Result---the fee the transaction needs to pay per kilobyte*
-[block:callout]
-{
-  "type": "danger",
-  "body": "If the node doesn't have enough information to make an estimate, the value `-1` will be returned.",
-  "title": "Inability to estimate"
-}
-[/block]
+
+>❗️ Inability to estimate
+>
+> If the node doesn't have enough information to make an estimate, the value `-1` will be returned.
+
 Name | Type | Presence | Description
 --- | --- | --- | ---
 `result` | number (Dash) | Required<br>(exactly 1) | The estimated fee the transaction should pay in order to be included within the specified number of blocks.  
@@ -125,19 +121,15 @@ Result:
 *See also:*
 
 ## GetReceivedByAccount
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
-}
-[/block]
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.0.0_**
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
+
 The `getreceivedbyaccount` RPC returns the total amount received by addresses in a particular account from transactions with the specified number of confirmations.  It does not count coinbase transactions.
 
 *Parameter #1---the account name*
@@ -187,12 +179,9 @@ Result:
 
 ## KeePass
 
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
-}
-[/block]
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.0.0_**
 
 The `keepass` RPC provides commands for configuring and managing KeePass authentication
 
@@ -283,22 +272,16 @@ setlogin: Updated credentials.
 
 *See also: none*
 
-
-
 ## ListAccounts
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
-}
-[/block]
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.0.0_**
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
+
 The `listaccounts` RPC lists accounts and their balances.
 
 *Parameter #1---the minimum number of confirmations a transaction must have*
@@ -355,19 +338,15 @@ Result:
 * [ListReceivedByLabel](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listreceivedbylabel): lists the total number of dash received by each label.
 
 ## ListReceivedByAccount
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
-}
-[/block]
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.0.0_**
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
+
 The `listreceivedbyaccount` RPC lists the total number of dash received by each account.
 
 *Parameter #1---the minimum number of confirmations a transaction must have to be counted*
@@ -440,26 +419,21 @@ Result (edited to only show the first two results):
 * [GetReceivedByAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getreceivedbyaddress): returns the total amount received by the specified address in transactions with the specified number of confirmations. It does not count coinbase transactions.
 
 ## Move
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
-}
-[/block]
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
-The `move` RPC moves a specified amount from one account in your wallet to another using an off-block-chain transaction.
-[block:callout]
-{
-  "type": "warning",
-  "body": "**Warning:** it's possible to move more funds than are in an account, giving the sending account a negative balance and giving the receiving account a balance that may exceed the number of dash in the wallet (or the number of dash in existence)."
-}
-[/block]
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.0.0_**
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
+
+The [`move` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#move) moves a specified amount from one account in your wallet to another using an off-block-chain transaction.
+
+> 🚧
+>
+> **Warning:** it's possible to move more funds than are in an account, giving the sending account a negative balance and giving the receiving account a balance that may exceed the number of dash in the wallet (or the number of dash in existence).
+
 *Parameter #1---from account*
 
 Name | Type | Presence | Description
@@ -517,19 +491,15 @@ true
 * [SendToAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#sendtoaddress): spends an amount to a given address.
 
 ## SendFrom
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
-}
-[/block]
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.0.0_**
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
+
 The `sendfrom` RPC spends an amount from a local account to a dash address.
 
 *Parameter #1---from account*
@@ -555,12 +525,11 @@ Amount | number (dash) | Required<br>(exactly 1) | The amount to spend in dash. 
 Name | Type | Presence | Description
 --- | --- | --- | ---
 Confirmations | number (int) | Optional<br>(0 or 1) | The minimum number of confirmations an incoming transaction must have for its outputs to be credited to this account's balance. Outgoing transactions are always counted, as are move transactions made with the [`move` RPC](../api-ref/core-api-ref-remote-procedure-calls-removed.md#move). If an account doesn't have a balance high enough to pay for this transaction, the payment will be rejected.  Use `0` to spend unconfirmed incoming payments. Default is `1`
-[block:callout]
-{
-  "type": "warning",
-  "body": "**Warning:** if account1 receives an unconfirmed payment and transfers it to account2 with the [`move` RPC](../api-ref/core-api-ref-remote-procedure-calls-removed.md#move), account2 will be able to spend those dash even if this parameter is set to `1` or higher."
-}
-[/block]
+
+> 🚧 
+>
+> **Warning:** if account1 receives an unconfirmed payment and transfers it to account2 with the [`move` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#move), account2 will be able to spend those dash even if this parameter is set to `1` or higher.
+
 *Parameter #5---whether to add the balance from transactions locked via InstantSend*
 
 Name | Type | Presence | Description
@@ -614,13 +583,11 @@ cd64b9d55c63bf247f2eca32f978e340622107b607a46c422dabcdc20c0571fe
 * [SendMany](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#sendmany): creates and broadcasts a transaction which sends outputs to multiple addresses.
 
 ## SignRawTransaction
-[block:callout]
-{
-  "type": "danger",
-  "title": "",
-  "body": "**Warning:** **_Removed in Dash Core 18.0.0_**"
-}
-[/block]
+
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.0.0_**
+
 The `signrawtransaction` RPC signs a transaction in the serialized transaction format using private keys stored in the wallet or provided in the call.
 
 *Parameter #1---the transaction to sign*
@@ -692,13 +659,12 @@ Result:
 * [SignRawTransactionWithKey](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#signrawtransactionwithkey): signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
 
 # Generate
-[block:callout]
-{
-  "type": "danger",
-  "body": "**Warning:** **_Removed in Dash Core 18.1.0_**"
-}
-[/block]
-The [`generate` RPC](../api-ref/core-api-ref-remote-procedure-calls-generating.md#generate) mines blocks immediately (before the RPC call returns).
+
+>❗️
+>
+> **Warning:** **_Removed in Dash Core 18.1.0_**
+
+The `generate` RPC mines blocks immediately (before the RPC call returns).
 
 *Parameter #1---the number of blocks to generate*
 

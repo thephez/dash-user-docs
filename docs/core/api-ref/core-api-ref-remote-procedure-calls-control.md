@@ -3,12 +3,11 @@
 ## Debug
 
 The [`debug` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#debug) changes the debug category from the console.
-[block:callout]
-{
-  "type": "danger",
-  "body": "Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details."
-}
-[/block]
+
+>❗️
+>
+> Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details.
+
 *Parameter #1---debug category*
 
 Name | Type | Presence | Description
@@ -178,12 +177,11 @@ Result:
 ## Logging
 
 The [`logging` RPC](../api-ref/core-api-ref-remote-procedure-calls-control.md#logging) gets and sets the logging configuration
-[block:callout]
-{
-  "type": "danger",
-  "body": "Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details."
-}
-[/block]
+
+>❗️
+>
+> Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details.
+
 *Parameter #1---include categories*
 
 Name | Type | Presence | Description

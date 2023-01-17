@@ -7,12 +7,11 @@ Receiving notifications from Dash Core is important for a variety of use-cases. 
 Further information regarding ZMQ support may be found in the [ZMQ API Reference](../api-ref/core-api-ref-zmq.md).
 
 ## Enabling Dash Core ZMQ Notifications
-[block:callout]
-{
-  "type": "info",
-  "body": "This requires a Dash Core full node or masternode"
-}
-[/block]
+
+> 📘
+>
+> This requires a Dash Core full node or masternode
+
 In the [`dash.conf` configuration file](core-examples-configuration-file), add the following [ZMQ notifications](../api-ref/core-api-ref-zmq.md#available-notifications) and assign the address that Dash Core should listen on. The notifications selected here relate to InstantSend and ChainLocks.
 
 ```
@@ -37,13 +36,11 @@ The JavaScript zeromq package is available from [npmjs.com](https://www.npmjs.co
 ```shell
 npm install zeromq@5
 ```
-[block:callout]
-{
-  "type": "warning",
-  "title": "ZeroMQ Version",
-  "body": "Version 5 of the zeromq package should be used for compatibility reasons."
-}
-[/block]
+
+> 🚧 ZeroMQ Version
+>
+> Version 5 of the zeromq package should be used for compatibility reasons.
+
 ### 2. Subscribe to ZeroMQ Messages
 
 Create a file with the following contents. Then run it by typing `node <your-filename.js>` from the command line:

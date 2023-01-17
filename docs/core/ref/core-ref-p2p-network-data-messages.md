@@ -561,8 +561,8 @@ Sending the [`mempool` message](../ref/core-ref-p2p-network-data-messages.md#mem
 > 📘 InstantSend and ChainLock Synchronization
 >
 > Dash Core 0.15.0 expanded the mempool message to include syncing of [InstantSend Lock](../ref/core-ref-p2p-network-instantsend-messages.md#islock) inventories. Additionally, nodes now attempt to sync their mempool with peers at startup by default (limited to peers using protocol version 70216 or higher). This allows nodes to more quickly detect any double-spend attempts as well as show InstantSend lock status correctly for transactions received while offline.
-
-Dash Core 0.17.0 expanded the mempool message to include syncing of [ChainLock](../ref/core-ref-p2p-network-instantsend-messages.md#clsig) inventories. This allows nodes to more quickly show ChainLock status correctly after being offline.
+>
+>Dash Core 0.17.0 expanded the mempool message to include syncing of [ChainLock](../ref/core-ref-p2p-network-instantsend-messages.md#clsig) inventories. This allows nodes to more quickly show ChainLock status correctly after being offline.
 
 The `inv` response to the [`mempool` message](../ref/core-ref-p2p-network-data-messages.md#mempool) is, at best, one node's view of the network---not a complete list of every <<glossary:unconfirmed transaction>> on the network. Here are some additional reasons the list might not be complete:
 

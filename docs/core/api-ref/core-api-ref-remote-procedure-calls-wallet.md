@@ -1,12 +1,9 @@
 # Wallet RPCs
 
-[block:callout]
-{
-  "type": "danger",
-  "body": "RPCs that require wallet support are **not available on masternodes** for security reasons. Such RPCs are designated with a \"_Requires wallet support_\" message.",
-  "title": "Wallet Support"
-}
-[/block]
+>❗️ Wallet Support
+>
+> RPCs that require wallet support are **not available on masternodes** for security reasons. Such RPCs are designated with a "_Requires wallet support_" message.
+
 ## AbandonTransaction
 
 *Added in Bitcoin Core 0.12.0*
@@ -69,12 +66,10 @@ true
 *See also: none*
 
 ## AddMultiSigAddress
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`addmultisigaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#addmultisigaddress) adds a P2SH multisig address to the wallet.
 
@@ -136,12 +131,10 @@ Result:
 * [DecodeScript](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#decodescript): decodes a hex-encoded P2SH redeem script.
 
 ## BackupWallet
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`backupwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#backupwallet) safely copies `wallet.dat` to the specified file, which can be a directory or a path with filename.
 
@@ -169,19 +162,15 @@ dash-cli -testnet backupwallet /tmp/backup.dat
 * [ImportWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importwallet): imports private keys from a file in wallet dump file format (see the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet)). These keys will be added to the keys currently in the wallet.  This call may need to rescan all or parts of the block chain for transactions affecting the newly-added keys, which may take several minutes.
 
 ## CreateWallet
-[block:callout]
-{
-  "type": "success",
-  "body": "Added in Dash Core 0.17.0"
-}
-[/block]
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+> 👍 
+> 
+> Added in Dash Core 0.17.0
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
+
 The [`createwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#createwallet) creates and loads a new wallet.
 
 *Parameter #1---wallet name*
@@ -242,12 +231,10 @@ Result:
   "warning": ""
 }
 ```
-[block:callout]
-{
-  "type": "info",
-  "body": "In the example above, a new directory named `new-wallet` was created in the current data directory (`~/.dashcore/testnet3/`). This new directory contains the wallet.dat file and other related wallet files for the new wallet."
-}
-[/block]
+> 📘 
+>
+> In the example above, a new directory named `new-wallet` was created in the current data directory (`~/.dashcore/testnet3/`). This new directory contains the wallet.dat file and other related wallet files for the new wallet.
+
 *See also*
 
 * [LoadWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#loadwallet): loads a wallet from a wallet file or directory.
@@ -285,12 +272,10 @@ Result (truncated for security reasons):
 *See also: none*
 
 ## DumpPrivKey
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
 
 The [`dumpprivkey` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpprivkey) returns the wallet-import-format (WIP) private key corresponding to an address. (But does not remove it from the wallet.)
 
@@ -324,12 +309,10 @@ cQZZ4awQvcXXyES3CmUJqSgeTobQm9t9nyUr337kvUtsWsnvvMyw
 * [DumpWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet): creates or overwrites a file with all wallet keys in a human-readable format.
 
 ## DumpWallet
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
 
 The [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet) creates or overwrites a file with all wallet keys in a human-readable format.
 
@@ -396,20 +379,18 @@ cTGSKYaQTQabnjNSwCqpjYXiucVujTXiwp9dzmJV9cNAiayAJusi 2018-12-14T17:24:37Z change
 * [ImportWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importwallet): imports private keys from a file in wallet dump file format (see the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet)). These keys will be added to the keys currently in the wallet.  This call may need to rescan all or parts of the block chain for transactions affecting the newly-added keys, which may take several minutes.
 
 ## EncryptWallet
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). 
+
 
 The [`encryptwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#encryptwallet) encrypts the wallet with a passphrase.  This is only to enable encryption for the first time. After encryption is enabled, you will need to enter the passphrase to use private keys.
-[block:callout]
-{
-  "type": "warning",
-  "body": "**Warning:** if using this RPC on the command line, remember that your shell probably saves your command lines (including the value of the passphrase parameter). In addition, there is no RPC to completely disable encryption. If you want to return to an unencrypted wallet, you must create a new wallet and restore your data from a backup made with the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet)."
-}
-[/block]
+
+> 🚧
+>
+> **Warning:** if using this RPC on the command line, remember that your shell probably saves your command lines (including the value of the passphrase parameter). In addition, there is no RPC to completely disable encryption. If you want to return to an unencrypted wallet, you must create a new wallet and restore your data from a backup made with the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet).
+
 *Parameter #1---a passphrase*
 
 Name | Type | Presence | Description
@@ -444,19 +425,15 @@ HD). You need to make a new backup.
 * [WalletPassphraseChange](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#walletpassphrasechange): changes the wallet passphrase from 'old passphrase' to 'new passphrase'.
 
 ## GetAddressInfo
-[block:callout]
-{
-  "type": "success",
-  "body": "Added in Dash Core 0.17.0"
-}
-[/block]
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+> 👍
+> 
+> Added in Dash Core 0.17.0
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
+
 The [`getaddressinfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getaddressinfo) returns information about the given Dash address. Note: Some information requires the address to be in the wallet.
 
 *Parameter #1---a P2PKH or P2SH address*
@@ -561,12 +538,9 @@ Result:
 
 ## GetAddressesByLabel
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`getaddressesbylabel` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getaddressesbylabel) returns a list of every address assigned to a particular label.
 
@@ -608,12 +582,10 @@ Result:
 * [GetBalance](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getbalance): gets the balance in decimal dash across all accounts or for a particular account.
 
 ## GetBalance
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`getbalance` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getbalance) gets the total _available balance_ in Dash. The _available balance_ is what the wallet considers currently spendable, and is thus affected by options which limit spendability such as `-spendzeroconfchange`.
 
@@ -732,12 +704,10 @@ Result:
 * [GetReceivedByAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getreceivedbyaddress): returns the total amount received by the specified address in transactions with the specified number of confirmations. It does not count coinbase transactions.
 
 ## GetNewAddress
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`getnewaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getnewaddress) returns a new Dash address for receiving payments. If `label` is specified, the address is added to the address book so payments received with the address will be associated with `label`.
 
@@ -774,12 +744,10 @@ yPuNTqCGzXtU3eEV5jHvhhJkzEPyJLmVkb
 * [GetBalance](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getbalance): gets the balance in decimal dash across all accounts or for a particular account.
 
 ## GetRawChangeAddress
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`getrawchangeaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getrawchangeaddress) returns a new Dash address for receiving change. This is for use with raw transactions, not normal use.
 
@@ -809,12 +777,11 @@ yXBr9BiJmugTzHPgByDmvjJMAkvhTmXVJ8
 * [GetAccountAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet-deprecated.md#getaccountaddress): returns the current Dash address for receiving payments to this account. If the account doesn't exist, it creates both the account and a new address for receiving payment.  Once a payment has been received to an address, future calls to this RPC for the same account will return a different address.
 
 ## GetReceivedByAddress
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
+
 ![Warning icon](https://dash-docs.github.io/img/icons/icon_warning.svg) Note: This RPC only returns a balance for addresses contained in the local wallet.
 
 The [`getreceivedbyaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getreceivedbyaddress) returns the total amount received by the specified address in transactions with the specified number of confirmations. It does not count coinbase transactions.
@@ -879,12 +846,9 @@ Result:
 
 ## GetReceivedByLabel
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`getreceivedbylabel` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getreceivedbylabel) returns the total amount received by addresses with <label> in transactions with specified minimum number of confirmations.
 
@@ -933,20 +897,17 @@ Result:
 * [ListLabels](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listlabels): lists labels.
 
 ## GetTransaction
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`gettransaction` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#gettransaction) gets detailed information about an in-wallet transaction.
-[block:callout]
-{
-  "type": "danger",
-  "body": "Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details."
-}
-[/block]
+
+>❗️
+>
+> Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details.
+
 *Parameter #1---a transaction identifier (TXID)*
 
 Name | Type | Presence | Description
@@ -1039,12 +1000,10 @@ Result:
 * [GetRawTransaction](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#getrawtransaction): gets a hex-encoded serialized transaction or a JSON object describing the transaction. By default, Dash Core only stores complete transaction data for UTXOs and your own transactions, so the RPC may fail on historic transactions unless you use the non-default `txindex=1` in your Dash Core startup settings.
 
 ## GetUnconfirmedBalance
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`getunconfirmedbalance` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getunconfirmedbalance) returns the wallet's total unconfirmed balance.
 
@@ -1073,12 +1032,10 @@ Result (no unconfirmed incoming payments):
 * [GetBalance](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getbalance): gets the balance in decimal dash across all accounts or for a particular account.
 
 ## GetWalletInfo
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`getwalletinfo` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getwalletinfo) provides information about the wallet.
 
@@ -1144,12 +1101,10 @@ Result:
 * [ListTransactions](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listtransactions): returns the most recent transactions that affect the wallet.
 
 ## ImportAddress
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**)
 
 The [`importaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importaddress) adds an address or pubkey script to the wallet without the associated private key, allowing you to watch for transactions affecting that address or pubkey script without being able to spend any of its outputs.
 
@@ -1247,12 +1202,10 @@ dash-cli importelectrumwallet /tmp/electrum-export.csv
 *See also: none*
 
 ## ImportMulti
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**).   Wallet must be unlocked."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Wallet must be unlocked.
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.14.0*
 
@@ -1336,12 +1289,10 @@ Result (scriptPubKey import failed because `internal` was not set to `true`):
 * [ImportWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importwallet): imports private keys from a file in wallet dump file format (see the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet)). These keys will be added to the keys currently in the wallet.  This call may need to rescan all or parts of the block chain for transactions affecting the newly-added keys, which may take several minutes.
 
 ## ImportPrivKey
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**).   Wallet must be unlocked."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Wallet must be unlocked.
 
 The [`importprivkey` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importprivkey) adds a private key to your wallet. The key should be formatted in the wallet import format created by the [`dumpprivkey` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpprivkey).
 
@@ -1392,12 +1343,10 @@ dash-cli -testnet importprivkey \
 * [ImportWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importwallet): imports private keys from a file in wallet dump file format (see the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet)). These keys will be added to the keys currently in the wallet.  This call may need to rescan all or parts of the block chain for transactions affecting the newly-added keys, which may take several minutes.
 
 ## ImportPrunedFunds
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.13.0*
 
@@ -1485,12 +1434,10 @@ dash-cli -testnet importpubkey \
 * [ImportWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importwallet): imports private keys from a file in wallet dump file format (see the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet)). These keys will be added to the keys currently in the wallet.  This call may need to rescan all or parts of the block chain for transactions affecting the newly-added keys, which may take several minutes.
 
 ## ImportWallet
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
 
 The [`importwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importwallet) imports private keys from a file in wallet dump file format (see the [`dumpwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpwallet)). These keys will be added to the keys currently in the wallet.  This call may need to rescan all or parts of the block chain for transactions affecting the newly-added keys, which may take several minutes.
 
@@ -1522,12 +1469,10 @@ dash-cli -testnet importwallet /tmp/dump.txt
 * [ImportPrivKey](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#importprivkey): adds a private key to your wallet. The key should be formatted in the wallet import format created by the [`dumpprivkey` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#dumpprivkey).
 
 ## KeyPoolRefill
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
 
 The [`keypoolrefill` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#keypoolrefill) fills the cache of unused pre-generated keys (the keypool).
 
@@ -1597,12 +1542,10 @@ Result:
 * [ListAddressGroupings](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listaddressgroupings): lists groups of addresses that may have had their common ownership made public by common use as inputs in the same transaction or from being used as change from a previous transaction.
 
 ## ListAddressGroupings
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). 
 
 The [`listaddressgroupings` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listaddressgroupings) lists groups of addresses that may have had their common ownership made public by common use as inputs in the same transaction or from being used as change from a previous transaction.
 
@@ -1654,12 +1597,9 @@ Result (edited to only three results):
 
 ## ListLabels
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). 
 
 The [`listlabels` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listlabels) returns the list of all labels, or labels that are assigned to addresses with a specific purpose.
 
@@ -1699,12 +1639,10 @@ Result:
 * [ListReceivedByLabel](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listreceivedbylabel): lists the total number of Dash received by each label.
 
 ## ListLockUnspent
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). 
 
 The [`listlockunspent` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listlockunspent) returns a list of temporarily unspendable (locked) outputs.
 
@@ -1741,12 +1679,10 @@ Result:
 * [LockUnspent](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#lockunspent): temporarily locks or unlocks specified transaction outputs. A locked transaction output will not be chosen by automatic coin selection when spending dash. Locks are stored in memory only, so nodes start with zero locked outputs and the locked output list is always cleared when a node stops or fails.
 
 ## ListReceivedByAddress
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). 
 
 The [`listreceivedbyaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listreceivedbyaddress) lists the total number of dash received by each address.
 
@@ -1840,12 +1776,11 @@ Result (edit to show only two entries):
 * [GetReceivedByAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getreceivedbyaddress): returns the total amount received by the specified address in transactions with the specified number of confirmations. It does not count coinbase transactions.
 
 ## ListReceivedByLabel
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). 
+
 The [`listreceivedbylabel` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listreceivedbylabel) lists the total number of Dash received by each label.
 
 *Parameter #1---the minimum number of confirmations a transaction must have to be counted*
@@ -1919,20 +1854,17 @@ Result:
 * [GetReceivedByAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getreceivedbyaddress): returns the total amount received by the specified address in transactions with the specified number of confirmations. It does not count coinbase transactions.
 
 ## ListSinceBlock
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 The [`listsinceblock` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listsinceblock) gets all transactions affecting the wallet which have occurred since a particular block, plus the header hash of a block at a particular depth.
-[block:callout]
-{
-  "type": "danger",
-  "body": "Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details."
-}
-[/block]
+
+>❗️ 
+>
+> Breaking change(s) in Dash Core 18.0. See parameter and/or response information for details.
+
 *Parameter #1---a block header hash*
 
 Name | Type | Presence | Description
@@ -2056,12 +1988,10 @@ Result (edited to show only two payments):
 * [ListReceivedByAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listreceivedbyaddress): lists the total number of dash received by each address.
 
 ## ListTransactions
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 The [`listtransactions` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listtransactions) returns the most recent transactions that affect the wallet. If a label name is provided, this will return only incoming transactions paying to addresses with the specified label.
 
@@ -2364,12 +2294,11 @@ Result:
 * [GetWalletInfo](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getwalletinfo): provides information about the wallet.
 
 ## LoadWallet
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
+
 The [`loadwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#loadwallet) loads a wallet from a wallet file or directory. Note that all wallet command-line options used when starting dashd will be applied to the new wallet (eg -zapwallettxes, upgradewallet, rescan, etc).
 
 *Parameter #1---wallet name*
@@ -2412,12 +2341,10 @@ Result:
 * [UnloadWallet](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#unloadwallet): unloads the specified wallet.
 
 ## LockUnspent
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 The [`lockunspent` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#lockunspent) temporarily locks or unlocks specified transaction outputs. A locked transaction output will not be chosen by automatic coin selection when spending dash. Locks are stored in memory only, so nodes start with zero locked outputs and the locked output list is always cleared when a node stops or fails.
 
@@ -2530,12 +2457,10 @@ Result:
 * [ListUnspent](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listunspent): returns an array of unspent transaction outputs belonging to this wallet.
 
 ## RemovePrunedFunds
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 *Added in Dash Core 0.12.3 / Bitcoin Core 0.13.0*
 
@@ -2611,12 +2536,11 @@ Result:
 * [AbortRescan](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#abortrescan): stops current wallet rescan.
 
 ## ScanTXOutset
-[block:callout]
-{
-  "type": "danger",
-  "body": "Experimental warning: this call may be removed or changed in future releases."
-}
-[/block]
+
+>❗️
+>
+> Experimental warning: this call may be removed or changed in future releases.
+
 The [`scantxoutset` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#scantxoutset) scans the unspent transaction output set for entries that match certain output descriptors.
 
 *Parameter #1---action*
@@ -2695,22 +2619,19 @@ Result:
 * [ListUnspent](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#listunspent): returns an array of unspent transaction outputs belonging to this wallet.
 
 ## SendMany
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
 
 The [`sendmany` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#sendmany) creates and broadcasts a transaction which sends outputs to multiple addresses.
 
 *Parameter #1---unused parameter*
-[block:callout]
-{
-  "type": "warning",
-  "body": "Note that this parameter has been removed in v0.17. To use this RPC with a \"fromaccount\" parameter, restart dashd with `-deprecatedrpc=accounts`."
-}
-[/block]
+
+> 🚧 
+>
+> Note that this parameter has been removed in v0.17. To use this RPC with a "fromaccount" parameter, restart dashd with `-deprecatedrpc=accounts`.
+
 Name | Type | Presence | Description
 --- | --- | --- | ---
 Unused | string | Required<br>(exactly 1) | **Deprecated: (previously account) will be removed in a later version of Dash Core**<br><br>Must be set to `""` for backwards compatibility. 
@@ -2833,12 +2754,10 @@ Result:
 * [SendToAddress](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#sendtoaddress): spends an amount to a given address.
 
 ## SendToAddress
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
 
 The [`sendtoaddress` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#sendtoaddress) spends an amount to a given address.
 
@@ -2977,12 +2896,11 @@ ba4bbe29fa06b67d6f3f3a73e381627e66abe22e217ce329aefad41ea72c3922
 * [SendMany](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#sendmany): creates and broadcasts a transaction which sends outputs to multiple addresses.
 
 ## SetLabel
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
+
 The [`setlabel` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#setlabel) sets the label associated with the given address.
 
 *Parameter #1---a Dash address*
@@ -3069,12 +2987,10 @@ dash-cli -testnet setcoinjoinrounds 4
 * [SetCoinJoinAmount](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#setcoinjoinamount): sets the amount of DASH to be processed with CoinJoin
 
 ## SetTxFee
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 The [`settxfee` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#settxfee) sets the transaction fee per kilobyte paid by transactions created by this wallet.
 
@@ -3154,12 +3070,10 @@ Result:
 
 
 ## SignMessage
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet or an unencrypted wallet.
 
 The [`signmessage` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#signmessage) signs a message with the private key of an address.
 
@@ -3200,12 +3114,11 @@ H4XULzfHCf16In2ECk9Ta9QxQPq639zQto2JA3OLlo3JbUdrClvJ89+A1z+Z9POd6l8LJhn1jGpQYF8m
 * [VerifyMessage](../api-ref/core-api-ref-remote-procedure-calls-util.md#verifymessage): verifies a signed message.
 
 ## SignRawTransactionWithWallet
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet.
+
 The [`signrawtransactionwithwallet` RPC](#signrawtransactionwithwallet) signs a transaction in the serialized transaction format using private keys stored in the wallet.
 
 *Parameter #1---the transaction to sign*
@@ -3268,12 +3181,11 @@ Result:
 * [SignRawTransactionWithKey](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#signrawtransactionwithkey): signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
 
 ## UnloadWallet
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
+
 The [`unloadwallet` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#unloadwallet) unloads the wallet referenced by the request endpoint otherwise unloads the wallet specified in the argument. Specifying the wallet name on a wallet endpoint is invalid.
 
 *Parameter #1---wallet name*
@@ -3308,12 +3220,9 @@ null
 
 ## UpgradeToHD
 
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**)"
-}
-[/block]
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**).
 
 The [`upgradetohd` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#upgradetohd) upgrades non-HD wallets to HD.
 
@@ -3425,12 +3334,10 @@ Result:
 ```
 
 ## WalletLock
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an unlocked wallet.
 
 The [`walletlock` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#walletlock) removes the wallet encryption key from memory, locking the wallet. After calling this method, you will need to call `walletpassphrase` again before being able to call any methods which require the wallet to be unlocked.
 
@@ -3457,21 +3364,17 @@ dash-cli -testnet walletlock
 * [WalletPassphraseChange](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#walletpassphrasechange): changes the wallet passphrase from 'old passphrase' to 'new passphrase'.
 
 ## WalletPassphrase
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an encrypted wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an encrypted wallet.
+
 
 The [`walletpassphrase` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#walletpassphrase) stores the wallet decryption key in memory for the indicated number of seconds. Issuing the `walletpassphrase` command while the wallet is already unlocked will set a new unlock time that overrides the old one.
 
-[block:callout]
-{
-  "type": "warning",
-  "body": "**Warning:** if using this RPC on the command line, remember that your shell probably saves your command lines (including the value of the passphrase parameter)."
-}
-[/block]
+> 🚧 
+>
+> **Warning:** if using this RPC on the command line, remember that your shell probably saves your command lines (including the value of the passphrase parameter).
 
 *Parameter #1---the passphrase*
 
@@ -3522,21 +3425,18 @@ dash-cli -testnet walletpassphrase test 600 true
 * [WalletLock](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#walletlock): removes the wallet encryption key from memory, locking the wallet. After calling this method, you will need to call `walletpassphrase` again before being able to call any methods which require the wallet to be unlocked.
 
 ## WalletPassphraseChange
-[block:callout]
-{
-  "type": "info",
-  "body": "Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an encrypted wallet."
-}
-[/block]
+
+> 📘 
+>
+> Requires <<glossary:wallet>> support (**unavailable on masternodes**). Requires an encrypted wallet.
+
 
 The [`walletpassphrasechange` RPC](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#walletpassphrasechange) changes the wallet passphrase from 'old passphrase' to 'new passphrase'.
 
-[block:callout]
-{
-  "type": "warning",
-  "body": "**Warning:** if using this RPC on the command line, remember that your shell probably saves your command lines (including the value of the passphrase parameter)."
-}
-[/block]
+> 🚧 
+>
+> **Warning:** if using this RPC on the command line, remember that your shell probably saves your command lines (including the value of the passphrase parameter).
+
 
 *Parameter #1---the current passphrase*
 

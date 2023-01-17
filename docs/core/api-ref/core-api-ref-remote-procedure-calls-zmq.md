@@ -1,12 +1,11 @@
 # ZeroMQ (ZMQ) RPCs
 
 ## GetZmqNotifications
-[block:callout]
-{
-  "type": "success",
-  "body": "Added in Dash Core 0.17.0"
-}
-[/block]
+
+> 👍 
+> 
+> Added in Dash Core 0.17.0
+
 The [`getzmqnotifications` RPC](../api-ref/core-api-ref-remote-procedure-calls-blockchain.md#getblockchaininfo) returns information about the active ZeroMQ notifications.
 
 *Parameters: none*
