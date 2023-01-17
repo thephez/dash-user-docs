@@ -658,7 +658,7 @@ Result:
 * [SendRawTransaction](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#sendrawtransaction): validates a transaction and broadcasts it to the peer-to-peer network.
 * [SignRawTransactionWithKey](../api-ref/core-api-ref-remote-procedure-calls-raw-transactions.md#signrawtransactionwithkey): signs inputs for a transaction in the serialized transaction format using private keys provided in the call.
 
-# Generate
+## Generate
 
 >❗️
 >

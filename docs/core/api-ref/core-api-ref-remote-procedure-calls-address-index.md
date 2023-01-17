@@ -49,7 +49,7 @@ Result:
 * [GetBalance](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getbalance): gets the balance in decimal dash across all accounts or for a particular account.
 * [GetUnconfirmedBalance](../api-ref/core-api-ref-remote-procedure-calls-wallet.md#getunconfirmedbalance): returns the wallet's total unconfirmed balance.
 
-# GetAddressDeltas
+## GetAddressDeltas
 
 > 📘
 >
@@ -119,7 +119,7 @@ Result:
 ]
 ```
 
-# GetAddressMempool
+## GetAddressMempool
 
 > 📘
 >
@@ -170,7 +170,7 @@ Result:
 ]
 ```
 
-# GetAddressTxids
+## GetAddressTxids
 
 > 📘
 >
@@ -221,7 +221,7 @@ Result:
 ]
 ```
 
-# GetAddressUtxos
+## GetAddressUtxos
 
 > 📘
 >

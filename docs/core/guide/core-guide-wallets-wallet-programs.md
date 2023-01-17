@@ -10,7 +10,7 @@ This leaves us with three necessary, but separable, parts of a wallet system: a 
 >
 > Note: we speak about distributing public keys generically. In many cases, P2PKH or P2SH hashes will be distributed instead of public keys, with the actual public keys only being distributed when the outputs they control are spent.
 
-# Full-Service Wallets
+## Full-Service Wallets
 
 The simplest wallet is a program which performs all three functions: it generates <<glossary:private keys>>, derives the corresponding <<glossary:public keys>>, helps distribute those public keys as necessary, monitors for outputs spent to those public keys, creates and signs transactions spending those outputs, and broadcasts the signed transactions.
 
