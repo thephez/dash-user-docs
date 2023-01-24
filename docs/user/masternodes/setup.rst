@@ -29,7 +29,7 @@ Before you begin
 ================
 
 This guide assumes you are setting up a single mainnet masternode for
-the first time. If you are updating a masternode, see  :ref:`here
+the first time. If you are updating a masternode, see  :hoverxref:`here
 <masternode-update>` instead. You will need:
 
 - 1000 Dash

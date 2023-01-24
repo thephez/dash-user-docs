@@ -47,7 +47,7 @@ have been modified to support InstantSend:
 Block Hashing Algorithm
 -----------------------
 
-Dash uses the X11 algorithm in place of SHA256 used in Bitcoin. It’s important
+Dash uses the :term:`X11` algorithm in place of SHA256 used in Bitcoin. It’s important
 to note, however, that this only affects the hashing of the block itself. All
 other internals utilize SHA256 hashes (transactions, merkle root, etc.), which
 allows for most existing libraries to work in the Dash ecosystem. 
