@@ -87,6 +87,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx_copybutton',
     'sphinx_design',
+    'hoverxref.extension'
 ]
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
