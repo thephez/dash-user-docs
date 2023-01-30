@@ -100,7 +100,7 @@ html_theme = "pydata_sphinx_theme"
 #
 html_theme_options = {
     "external_links": [
-        {"name": "Core docs", "url": "https://dashcore.readme.io/"},
+        {"name": "Core docs", "url": "https://dash-docs-core.readthedocs.io/en/stable/docs/reference/introduction.html"},
         {"name": "Platform docs", "url": "https://dashplatform.readme.io"},
         {"name": "Dash.org", "url": "https://www.dash.org"},
     ],
