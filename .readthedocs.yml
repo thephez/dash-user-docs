@@ -10,6 +10,9 @@ build:
    tools:
       python: "3.10"
 
+formats:
+  - htmlzip
+
 python:
    install:
       - requirements: requirements.txt
