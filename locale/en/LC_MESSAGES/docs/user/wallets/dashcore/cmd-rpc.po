@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dash latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 15:21-0500\n"
+"POT-Creation-Date: 2023-05-04 12:28-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
-#: ../../docs/user/wallets/dashcore/cmd-rpc.rst:1
+#: ../../docs/user/wallets/dashcore/cmd-rpc.rst:-1
 msgid "Dash Core wallet startup arguments and RPC command reference"
 msgstr ""
 
-#: ../../docs/user/wallets/dashcore/cmd-rpc.rst:1
+#: ../../docs/user/wallets/dashcore/cmd-rpc.rst:-1
 msgid "dash, core, wallet, arguments, commands, RPC"
 msgstr ""
 
@@ -150,7 +150,16 @@ msgstr ""
 msgid "RPC commands"
 msgstr ""
 
-#: ../../docs/user/wallets/dashcore/cmd-rpc.rst:54
+#: ../../docs/user/wallets/dashcore/cmd-rpc.rst:55
+msgid ""
+"Wallet-related RPCs require using the ``-rpcwallet`` option when more "
+"than one wallet file is loaded. This is to ensure the RPC command is "
+"executed using the correct wallet. See the `Core developer documentation "
+"<https://dashcore.readme.io/docs/core-api-ref-remote-procedure-calls"
+"#multi-wallet-support>`__ for additional information."
+msgstr ""
+
+#: ../../docs/user/wallets/dashcore/cmd-rpc.rst:60
 msgid ""
 "Detailed documentation for all available RPC commands is accessible via "
 "the `Dash Core developer documentation RPC page "
