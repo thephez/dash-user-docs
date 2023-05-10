@@ -36,7 +36,7 @@ learning about :ref:`safety <safety>` or joining one of the many
 
    <div id="myDiv"></div>
 
-   <iframe width="100%" height="300" src="//jsfiddle.net/macloo/bvwvd0ao/embedded/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+   <iframe width="100%" height="500" src="//jsfiddle.net/macloo/bvwvd0ao/embedded/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 
 .. grid:: 1 3 3 3
