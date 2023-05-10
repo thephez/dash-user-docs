@@ -32,6 +32,13 @@ users may be interested in getting started with an appropriate
 learning about :ref:`safety <safety>` or joining one of the many 
 :ref:`Dash community sites <information>`.
 
+.. raw:: html
+
+   <div id="myDiv"></div>
+
+   <iframe width="100%" height="300" src="//jsfiddle.net/macloo/bvwvd0ao/embedded/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+
 .. grid:: 1 3 3 3
 
     .. grid-item-card:: 👤 User Docs
