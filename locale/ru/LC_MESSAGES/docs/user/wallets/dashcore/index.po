@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2021, Dash Core Group, Inc
+# Copyright (C) 2023, Dash Core Group, Inc
 # This file is distributed under the same license as the Dash package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Tikhon Skudarnov <semargsemarg@gmail.com>, 2022
 # Max Aronych <taofgoar@protonmail.com>, 2022
+# VONCAN, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Dash latest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 13:54-0500\n"
+"POT-Creation-Date: 2023-09-26 10:05-0400\n"
 "PO-Revision-Date: 2022-12-27 18:57+0000\n"
-"Last-Translator: Max Aronych <taofgoar@protonmail.com>, 2022\n"
-"Language-Team: Russian (https://www.transifex.com/dash/teams/37570/ru/)\n"
+"Last-Translator: VONCAN, 2023\n"
+"Language-Team: Russian (https://app.transifex.com/dash/teams/37570/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,7 +53,7 @@ msgstr "InstantSend"
 
 #: ../../docs/user/wallets/dashcore/index.rst:22
 msgid "CoinJoin"
-msgstr ""
+msgstr "CoinJoin"
 
 #: ../../docs/user/wallets/dashcore/index.rst:23
 msgid "Wallet encryption"

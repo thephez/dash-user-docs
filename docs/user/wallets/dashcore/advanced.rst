@@ -45,40 +45,36 @@ affecting the locked UTXOs.
    Locking UTXOs in Dash Core wallet
 
 
+.. _dashcore-testnet:
+
+Running Dash Testnet
+====================
+
+It is recommended to run Dash Core on testnet for your experimentations. 
+To start on testnet via the command line, do the following:
+
+For Linux::
+
+  ./dash-qt -testnet
+
+For Mac (run from Applications/Dash-Qt.app/Contents/MacOS)::
+
+  Dash-Qt -testnet
+
+Note: You may need to allow an app from an unknown developer before running this. 
+Cmd+Click on the application and click **Open**.
+
+Now, open Mac Terminal and run::
+
+  cd /Applications/Dash-Qt.app/Contents/MacOS
+  ./Dash-Qt -testnet
+
+You may top up your testnet wallet by `accessing the faucet <http://faucet.testnet.networks.dash.org/>`_.
+
 .. _dashcore-hd:
 
 HD Wallets
 ==========
-
-.. _dashcore-hd-default:
-
-Enable HD Wallet Creation
--------------------------
-
-Dash Core includes an implementation of BIP39/BIP44 compatible hierarchical
-deterministic (HD) key generation. We will use the Windows GUI wallet in this
-example, but the commands are similar if using ``dash-qt`` or ``dashd`` on other
-operating systems. Enter the following command to configure Dash Core to
-generate HD wallets by default::
-
-  dash-qt.exe -usehd
-
-To make this configuration persist between restarts, add ``usehd=1`` to the
-``dash.conf`` file.
-
-
-View HD wallet information
---------------------------
-
-Open the console from **Window > Console** or issue the following RPC command
-from ``dash-cli`` to view the mnemonic seed::
-
-  dumphdinfo
-
-Dash Core will display the HD seed in both hexadecimal and BIP39 mnemonic
-formats. It will also display the mnemonic passphrase if one was used when
-creating the wallet.
-
 
 .. _dashcore-hd-upgrade:
 
@@ -105,6 +101,17 @@ or ``dash-cli``::
 
   help upgradetohd
 
+View HD wallet information
+--------------------------
+
+Open the console from **Window > Console** or issue the following RPC command
+from ``dash-cli`` to view the mnemonic seed::
+
+  dumphdinfo
+
+Dash Core will display the HD seed in both hexadecimal and BIP39 mnemonic
+formats. It will also display the mnemonic passphrase if one was used when
+creating the wallet.
 
 .. _dashcore-hd-restore:
 
@@ -127,6 +134,22 @@ Note that the wallet passphrase is different to the mnemonic passphrase, which
 is often also referred to as the "25th word" or "extension word". The wallet
 passphrase encrypts the wallet file itself, while the mnemonic passphrase is
 used to specify different derivation branches from the same mnemonic seed.
+
+.. _dashcore-hd-default:
+
+Enable HD Wallet Creation By Default
+------------------------------------
+
+Dash Core includes an implementation of BIP39/BIP44 compatible hierarchical
+deterministic (HD) key generation. We will use the Windows GUI wallet in this
+example, but the commands are similar if using ``dash-qt`` or ``dashd`` on other
+operating systems. Enter the following command to configure Dash Core to
+generate HD wallets by default::
+
+  dash-qt.exe -usehd
+
+To make this configuration persist between restarts, add ``usehd=1`` to the
+``dash.conf`` file.
 
 .. _dashcore-multisig:
 
