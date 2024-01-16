@@ -97,7 +97,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx_copybutton',
     'sphinx_design',
-    'sphinx_search.extension',
+    # 'sphinx_search.extension',
     'sphinx.ext.intersphinx',
 ]
 
@@ -275,4 +275,4 @@ texinfo_documents = [
 
 def setup(app):
     app.add_js_file('js/lang.js')
-    app.add_js_file('js/pydata-search-close.js')
+    # app.add_js_file('js/pydata-search-close.js')
