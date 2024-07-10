@@ -102,9 +102,6 @@ To begin masternode setup, run ``dashmate setup`` to start the interactive wizar
 
    dashmate setup
 
-Set Network and Node type
--------------------------
-
 .. dropdown:: Set Network and Node type
    :open:
 
@@ -131,9 +128,6 @@ Set Network and Node type
 
    If registering a new masternode, jump to the :ref:`defining keys and addresses
    <dashmate-define-keys-addresses>` section next.
-
-Import existing Core data
--------------------------
 
 .. dropdown:: Import existing Core data
    :open:
@@ -166,10 +160,7 @@ Import existing Core data
 
 .. _dashmate-define-keys-addresses:
 
-Define Keys and Addresses
--------------------------
-
-.. dropdown::
+.. dropdown:: Define Keys and Addresses
    :open:
 
    .. figure:: img/4-wallet-for-keys.png
@@ -225,10 +216,7 @@ Define Keys and Addresses
 
 .. _dashmate-configure-communication:
 
-Configure communication
------------------------
-
-.. dropdown::
+.. dropdown:: Configure communication
    :open:
 
    Dashmate will automatically detect the external IP address and select the
@@ -241,10 +229,7 @@ Configure communication
 
       Enter connection information
 
-Register the masternode
------------------------
-
-.. dropdown::
+.. dropdown:: Register the masternode
    :open:
 
    Copy the provided protx command and run it using dash-cli or the Dash Core
@@ -264,10 +249,7 @@ Register the masternode
 
 .. _dashmate-enable-ssl:
 
-Enable SSL
-----------
-
-.. dropdown::
+.. dropdown:: Enable SSL
    :open:
 
    .. note:: The following step only applies to evonodes. Regular masternodes do not
