@@ -30,11 +30,14 @@ for Ubuntu 22.04 x64 LTS, but the steps should be similar for other Linux distri
 Install dependencies
 --------------------
 
-Install and configure Docker::
-   
-   curl -fsSL https://get.docker.com -o get-docker.sh && sh ./get-docker.sh
-   sudo usermod -aG docker $USER
-   newgrp docker
+.. dropdown:: Install and configure Docker
+   :open:
+
+   ::
+      
+      curl -fsSL https://get.docker.com -o get-docker.sh && sh ./get-docker.sh
+      sudo usermod -aG docker $USER
+      newgrp docker
 
 .. _dashmate-install:
 
@@ -66,17 +69,18 @@ Node package
 .. warning:: This installation option is not recommended for mainnet masternodes. Please install
             packages from the `GitHub releases page <https://github.com/dashpay/platform/releases/latest>`__.
 
+.. dropdown:: Node.js dashmate install
 
-To install the NodeJS package, it is necessary to install NodeJS first. We recommend
-installing it using `nvm <https://github.com/nvm-sh/nvm#readme>`__::
+   To install the NodeJS package, it is necessary to install NodeJS first. We recommend
+   installing it using `nvm <https://github.com/nvm-sh/nvm#readme>`__::
 
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-  source ~/.bashrc
-  nvm install 20
+     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+     source ~/.bashrc
+     nvm install 20
 
-Once NodeJS has been installed, use npm to install dashmate::
+   Once NodeJS has been installed, use npm to install dashmate::
 
-   npm install -g dashmate
+      npm install -g dashmate
 
 .. _dashmate-wizard-walkthrough:
 
@@ -101,181 +105,199 @@ To begin masternode setup, run ``dashmate setup`` to start the interactive wizar
 Set Network and Node type
 -------------------------
 
-.. figure:: img/1-dashmate-setup.png
-   :align: center
-   :width: 90%
+.. dropdown:: Set Network and Node type
+   :open:
 
-   Select the testnet network preset
+   .. figure:: img/1-dashmate-setup.png
+      :align: center
+      :width: 90%
 
-.. figure:: img/2-select-node-type.png
-   :align: center
-   :width: 90%
+      Select the testnet network preset
 
-   Create an Evolution masternode
+   .. figure:: img/2-select-node-type.png
+      :align: center
+      :width: 90%
 
-Select **No** to register a new masternode or **Yes** to import information
-about an existing masternode.
+      Create an Evolution masternode
 
-.. figure:: img/3-already-registered.png
-   :align: center
-   :width: 90%
+   Select **No** to register a new masternode or **Yes** to import information
+   about an existing masternode.
 
-   Set up a new masternode
+   .. figure:: img/3-already-registered.png
+      :align: center
+      :width: 90%
 
-If registering a new masternode, jump to the :ref:`defining keys and addresses
-<dashmate-define-keys-addresses>` section next.
+      Set up a new masternode
+
+   If registering a new masternode, jump to the :ref:`defining keys and addresses
+   <dashmate-define-keys-addresses>` section next.
 
 Import existing Core data
 -------------------------
 
-.. note:: The following step only applies when migrating an existing masternode into dashmate.
+.. dropdown:: Import existing Core data
+   :open:
 
-If you chose to import an existing masternode in the previous step, you will be prompted for the
-location of your existing installation. 
+   .. note:: The following step only applies when migrating an existing masternode into dashmate.
 
-.. figure:: img/4a-import-existing-data.png
-   :align: center
-   :width: 90%
+   If you chose to import an existing masternode in the previous step, you will be prompted for the
+   location of your existing installation. 
 
-   Import existing data
+   .. figure:: img/4a-import-existing-data.png
+      :align: center
+      :width: 90%
 
-.. figure:: img/4b-import-existing-data-path.png
-   :align: center
-   :width: 90%
+      Import existing data
 
-   Enter existing Core data directory
+   .. figure:: img/4b-import-existing-data-path.png
+      :align: center
+      :width: 90%
 
-.. figure:: img/4c-import-existing-data-complete.png
-   :align: center
-   :width: 90%
+      Enter existing Core data directory
 
-   Core data import complete
+   .. figure:: img/4c-import-existing-data-complete.png
+      :align: center
+      :width: 90%
 
-Once the Core data has been imported, jump to the :ref:`configure communication
-<dashmate-configure-communication>` section.
+      Core data import complete
+
+   Once the Core data has been imported, jump to the :ref:`configure communication
+   <dashmate-configure-communication>` section.
 
 .. _dashmate-define-keys-addresses:
 
 Define Keys and Addresses
 -------------------------
 
-.. figure:: img/4-wallet-for-keys.png
-   :align: center
-   :width: 90%
+.. dropdown::
+   :open:
 
-   Store masternode keys in Dash Core
+   .. figure:: img/4-wallet-for-keys.png
+      :align: center
+      :width: 90%
 
-Enter the requested information from your :hoverxref:`collateral funding
-transaction <evonode-send-collateral>`. You can find these values using Dash Core's
-:hoverxref:`masternode outputs <evonode-mn-outputs>` command.
+      Store masternode keys in Dash Core
 
-.. figure:: img/5b-collateral-info-completed.png
-   :align: center
-   :width: 90%
+   Enter the requested information from your :hoverxref:`collateral funding
+   transaction <evonode-send-collateral>`. You can find these values using Dash Core's
+   :hoverxref:`masternode outputs <evonode-mn-outputs>` command.
 
-   Enter collateral transaction information
+   .. figure:: img/5b-collateral-info-completed.png
+      :align: center
+      :width: 90%
 
-Enter the owner, voting, and payout addresses you :hoverxref:`generated using
-Dash Core <evonode-get-addresses>` or your selected wallet.
+      Enter collateral transaction information
 
-.. figure:: img/6b-mn-addresses-completed.png
-   :align: center
-   :width: 90%
+   Enter the owner, voting, and payout addresses you :hoverxref:`generated using
+   Dash Core <evonode-get-addresses>` or your selected wallet.
 
-   Enter masternode addresses
+   .. figure:: img/6b-mn-addresses-completed.png
+      :align: center
+      :width: 90%
 
-Enter an operator BLS private key. You can enter one you have created (e.g.
-:hoverxref:`using Dash Core <evonode-bls-generation>`) or received from a hosting
-provider. Optionally, use the one automatically generated by dashmate.
+      Enter masternode addresses
 
-If a portion of the masternode rewards are intended to go to the operator
-directly, set the reward share percentage also.
+   Enter an operator BLS private key. You can enter one you have created (e.g.
+   :hoverxref:`using Dash Core <evonode-bls-generation>`) or received from a hosting
+   provider. Optionally, use the one automatically generated by dashmate.
 
-.. figure:: img/7-bls-operator-key.png
-   :align: center
-   :width: 90%
+   If a portion of the masternode rewards are intended to go to the operator
+   directly, set the reward share percentage also.
 
-   Enter operator information
+   .. figure:: img/7-bls-operator-key.png
+      :align: center
+      :width: 90%
 
-.. note:: The following step only applies to Evolution masternodes. Regular masternodes 
-          do not require a Platform node key since they do not host Platform services.
+      Enter operator information
 
-Enter a Platform node key. You can enter one :hoverxref:`you have created
-<evonode-generate-platform-node-id>` or received from a hosting provider.
-Optionally, use the one automatically generated by dashmate.
+   .. note:: The following step only applies to Evolution masternodes. Regular masternodes 
+            do not require a Platform node key since they do not host Platform services.
 
-.. figure:: img/8-ed25519-platform-key.png
-   :align: center
-   :width: 90%
+   Enter a Platform node key. You can enter one :hoverxref:`you have created
+   <evonode-generate-platform-node-id>` or received from a hosting provider.
+   Optionally, use the one automatically generated by dashmate.
 
-   Enter the Platform node key
+   .. figure:: img/8-ed25519-platform-key.png
+      :align: center
+      :width: 90%
+
+      Enter the Platform node key
 
 .. _dashmate-configure-communication:
 
 Configure communication
 -----------------------
 
-Dashmate will automatically detect the external IP address and select the
-default ports for the network you are setting up. You can modify these values if
-necessary for a specific reason, but typically the defaults should be used.
+.. dropdown::
+   :open:
 
-.. figure:: img/9-ip-and-ports.png
-   :align: center
-   :width: 90%
+   Dashmate will automatically detect the external IP address and select the
+   default ports for the network you are setting up. You can modify these values if
+   necessary for a specific reason, but typically the defaults should be used.
 
-   Enter connection information
+   .. figure:: img/9-ip-and-ports.png
+      :align: center
+      :width: 90%
+
+      Enter connection information
 
 Register the masternode
 -----------------------
 
-Copy the provided protx command and run it using dash-cli or the Dash Core
-console. Do note that your payout address must have a balance for the
-registration process to be successful, so remember to send some DASH
-to this address before you begin registration.
+.. dropdown::
+   :open:
 
-Select **Yes** after the command has been run successfully. If you
-receive an error, select **No** to go back through the previous steps and review
-details.
+   Copy the provided protx command and run it using dash-cli or the Dash Core
+   console. Do note that your payout address must have a balance for the
+   registration process to be successful, so remember to send some DASH
+   to this address before you begin registration.
 
-.. figure:: img/10b-protx-command-successful.png
-   :align: center
-   :width: 90%
+   Select **Yes** after the command has been run successfully. If you
+   receive an error, select **No** to go back through the previous steps and review
+   details.
 
-   Run the registration command
+   .. figure:: img/10b-protx-command-successful.png
+      :align: center
+      :width: 90%
+
+      Run the registration command
 
 .. _dashmate-enable-ssl:
 
 Enable SSL
 ----------
 
-.. note:: The following step only applies to evonodes. Regular masternodes do not
-   require an SSL certificate since they do not host Platform services.
+.. dropdown::
+   :open:
 
-Dash Platform requires SSL for communication. Dashmate provides several options
-for obtaining the required SSL certificate.
+   .. note:: The following step only applies to evonodes. Regular masternodes do not
+      require an SSL certificate since they do not host Platform services.
 
-.. warning:: Self-signed certificates cannot be used on mainnet. When setting
-   up a mainnet evonode, **ZeroSSL** and **File on disk** are the only options available.
+   Dash Platform requires SSL for communication. Dashmate provides several options
+   for obtaining the required SSL certificate.
 
-.. figure:: img/11a-ssl-config-zerossl.png
-   :align: center
-   :width: 90%
+   .. warning:: Self-signed certificates cannot be used on mainnet. When setting
+      up a mainnet evonode, **ZeroSSL** and **File on disk** are the only options available.
 
-   Configure SSL
+   .. figure:: img/11a-ssl-config-zerossl.png
+      :align: center
+      :width: 90%
 
-Once the configuration is complete, a summary showing the network and type of
-node configured is displayed. This summary includes important parameters and
-information on how to proceed.
+      Configure SSL
 
-.. warning::
+   Once the configuration is complete, a summary showing the network and type of
+   node configured is displayed. This summary includes important parameters and
+   information on how to proceed.
 
-   The BLS operator private key and Platform Node key must be backed up and kept secure.
+   .. warning::
 
-.. figure:: img/12-configuration-complete.png
-   :align: center
-   :width: 95%
+      The BLS operator private key and Platform Node key must be backed up and kept secure.
 
-   Configuration complete! 🎉
+   .. figure:: img/12-configuration-complete.png
+      :align: center
+      :width: 95%
+
+      Configuration complete! 🎉
 
 Start the node
 --------------
