@@ -4,7 +4,7 @@
 # Command to get latest dashmate amd64 download URL
 LATEST_URL=$(curl -s \
   -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/dashpay/platform/releases/latest | \
+  https://api.github.com/repos/dashpay/platform/releases/tags/v1.1.0 | \
   jq -r '.assets[] | select(.name | test("^dashmate.*amd64\\.deb$")) | .browser_download_url')
 
 if [[ $? -ne 0 || -z "$LATEST_URL" ]]; then
