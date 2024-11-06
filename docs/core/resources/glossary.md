@@ -83,9 +83,9 @@ ChainLocks are a feature enabling near instant consensus on the valid chain. Cha
 See also:
 
 * [ChainLocks (Core Guide)](../guide/dash-features-chainlocks.md)
-* [ChainLocks Overview (User docs)](inv:user:std#chainlocks)
+* [ChainLocks Overview (User docs)](chainlocks)
 * [DIP-8: ChainLocks](https://github.com/dashpay/dips/blob/master/dip-0008.md)
-* [ChainLock integration developer info](inv:user:std#integration-chainlocks)
+* [ChainLock integration developer info](integration-chainlocks)
 
 ## Change output
 
@@ -282,9 +282,9 @@ InstantSend is a service that allows for near-instant transactions. Through this
 See also:
 
 * [InstantSend (Core Guide)](../guide/dash-features-instantsend.md)
-* [InstantSend Overview (User docs)](inv:user:std#instantsend)
+* [InstantSend Overview (User docs)](instantsend)
 * [DIP-10: LLMQ InstantSend](https://github.com/dashpay/dips/blob/master/dip-0010.md)
-* [InstantSend integration developer info](inv:user:std#integration-instantsend)
+* [InstantSend integration developer info](integration-instantsend)
 
 ## Internal byte order
 
