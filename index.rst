@@ -74,3 +74,4 @@ learning about :ref:`safety <safety>` or joining one of the many
    :maxdepth: 3
    
    docs/user/index
+   docs/core/index
