@@ -8,7 +8,7 @@ NEW_VERSION=$(curl -s \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/dashpay/dash/releases/latest | \
   jq -r '.tag_name' | sed 's/^v//')
-
+NEW_VERSION=2222.22.222
 if [[ $? -ne 0 || -z "$NEW_VERSION" ]]; then
   echo "Error: Unexpected response when retrieving the current Dash Core version. Received: $NEW_VERSION"
 else
