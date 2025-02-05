@@ -112,6 +112,11 @@ language: examples in Python and JavaScript are included.
 - Repository: https://github.com/dashpay/dashj
 - Example application: https://github.com/tomasz-ludek/pocket-of-dash
 
+.. note::
+   
+   The kotlin-platform library (https://github.com/dashpay/kotlin-platform)
+   provides Dash Platform functionality. It only runs on Android and Mac systems.
+
 Objective-C: Dash-Sync
 ----------------------
 

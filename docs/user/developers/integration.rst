@@ -385,3 +385,17 @@ technologies.
 - :ref:`Receiving ZMQ notifications <examples-receiving-zmq-notifications>`
 - `DIP0008: ChainLocks <https://github.com/dashpay/dips/blob/master/dip-0008.md>`__
 - `Product Brief: Dash Core v0.14 Release <https://blog.dash.org/product-brief-dash-core-release-v0-14-0-now-on-testnet-8f5f4ad45c96>`__
+
+Dash Platform
+=============
+
+Android
+-------
+
+For Android native apps using SPV, use the DashJ SDK (https://github.com/dashpay/dashj) for Dash
+Core chain support and the Kotlin-Platform SDK (https://github.com/dashpay/kotlin-platform) for Dash
+Platform functionality.
+
+.. note::
+
+   If setup = Non-native SPV, then DashJS (not finished)
