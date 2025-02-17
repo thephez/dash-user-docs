@@ -8,7 +8,7 @@ NEW_VERSION=$(curl -s \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/dashpay/dash/releases/latest | \
   jq -r '.tag_name' | sed 's/^v//')
-
+NEW_VERSION=1.2.3
 # Check if curl or jq failed, or if NEW_VERSION is null or empty
 if [[ $? -ne 0 || -z "$NEW_VERSION" || "$NEW_VERSION" == "null" ]]; then
   echo "Error: Unexpected response when retrieving the current Dash Core version. Ignoring update."
