@@ -1,4 +1,5 @@
 # docs/_ext/llms_full.py
+import os
 from pathlib import Path
 from sphinx.util import logging
 from sphinx.environment.adapters.toctree import TocTree
@@ -11,7 +12,8 @@ def _make_llms_file(app, exception):
 
     env     = app.builder.env
     builder = app.builder
-    baseurl = app.config.html_baseurl.rstrip("/") + "/"
+    # Use environment variable or default to localhost for local builds
+    baseurl = os.getenv("HTML_BASEURL", "https://docs.dash.org/en/stable/")
 
     # Traverse from the root document using the toctree adapter
     toctree = TocTree(env)
