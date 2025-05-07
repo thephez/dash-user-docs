@@ -20,8 +20,12 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-import os
+import os, sys, pathlib
 import subprocess
+
+# Add path for custom extension
+sys.path.append(str(pathlib.Path(__file__).parent / "_ext"))
+
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # Clone the DIPs repository and process DIPs so they are rendered properly
@@ -113,6 +117,7 @@ extensions = [
     'sphinx_design',
     'sphinxcontrib.googleanalytics',
     'sphinx.ext.intersphinx',
+    'llms_full',
 ]
 
 hoverxref_role_types = {
