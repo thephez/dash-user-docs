@@ -2,6 +2,7 @@
 *.db
 *.exe
 _build
+_ext/__pycache__/
 *.sublime-project
 *.sublime-workspace
 **/.DS_Store
