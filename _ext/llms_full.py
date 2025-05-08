@@ -1,8 +1,8 @@
-# docs/_ext/llms_full.py
 import os
 from pathlib import Path
 from sphinx.util import logging
 from sphinx.environment.adapters.toctree import TocTree
+from docutils.nodes import NodeVisitor
 
 logger = logging.getLogger(__name__)
 
@@ -12,12 +12,10 @@ def _make_llms_file(app, exception):
 
     env     = app.builder.env
     builder = app.builder
-    # Use environment variable or default to localhost for local builds
-    baseurl = os.getenv("HTML_BASEURL", "https://docs.dash.org/en/stable/")
+    baseurl = os.getenv("HTML_BASEURL", "https://docs.dash.org/en/stable/").rstrip("/") + "/"
 
-    # Traverse from the root document using the toctree adapter
     toctree = TocTree(env)
-    seen    = set()
+    seen = set()
     ordered_docnames = []
 
     def walk(docname):
@@ -31,15 +29,16 @@ def _make_llms_file(app, exception):
                 if ref and ref in env.all_docs:
                     walk(ref)
 
-    root_doc = app.config.master_doc
-    walk(root_doc)
+    walk(app.config.master_doc)
 
-    # Fall back on any missing docs
     for docname in sorted(env.all_docs):
         if docname not in seen:
             ordered_docnames.append(docname)
 
-    lines = []
+    links = []
+    md_dir = Path(builder.outdir) / "llms-md"
+    md_dir.mkdir(exist_ok=True)
+
     for docname in ordered_docnames:
         if docname.endswith("/genindex") or docname.endswith("/search"):
             continue
@@ -50,11 +49,53 @@ def _make_llms_file(app, exception):
 
         title = title_node.astext().strip()
         uri   = baseurl + builder.get_target_uri(docname)
-        lines.append(f"[{title}]({uri})")
+        links.append(f"[{title}]({uri})")
 
+        try:
+            doctree = env.get_doctree(docname)
+            body = extract_text(doctree)
+        except Exception as e:
+            logger.warning(f"Skipping .md for {docname} (error reading doctree): {e}")
+            continue
+
+        # --- Write Markdown with frontmatter ---
+        md_path = md_dir / (docname.replace("/", "_") + ".md")
+        frontmatter = f"""---
+title: "{title}"
+url: "{uri}"
+source: "{docname}"
+---
+
+"""
+        md_path.write_text(frontmatter + body.strip() + "\n", encoding="utf-8")
+
+    # Write index file
     out_path = Path(builder.outdir) / "llms-full.txt"
-    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    logger.info(f"[llms_full] Wrote llms-full.txt with {len(lines)} entries (ToC order)")
+    out_path.write_text("\n".join(links) + "\n", encoding="utf-8")
+
+    logger.info(f"[llms_full] Wrote llms-full.txt with {len(links)} entries (ToC order)")
+    logger.info(f"[llms_full] Wrote {len(links)} per-page .md files to: {md_dir.relative_to(builder.outdir)}")
+
+def extract_text(doctree):
+    class Visitor(NodeVisitor):
+        def __init__(self, document):
+            super().__init__(document)
+            self.text = []
+
+        def visit_Text(self, node):
+            self.text.append(node.astext())
+
+        def unknown_visit(self, node):
+            pass
+
+    visitor = Visitor(doctree)
+    doctree.walk(visitor)
+    return " ".join(visitor.text)
 
 def setup(app):
     app.connect("build-finished", _make_llms_file)
+    return {
+        "version": "1.0",
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }
